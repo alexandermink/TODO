@@ -10,4 +10,6 @@ import UIKit
 
 protocol TaskProtocol {
     func addTask(id: Int, name: String, date: Date)
+    func getTasksFromRealm()
+    func deleteTask(indexPathTask: Int)
 }

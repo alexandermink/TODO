@@ -1,5 +1,5 @@
 //
-//  MainTableViewCell.swift
+//  GeneralTableViewCell.swift
 //  TODO
 //
 //  Created by Александр Минк on 19.10.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTableViewCell: UITableViewCell {
+class GeneralTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tasksIconImageView: UIImageView!
     @IBOutlet weak var tasksNameLabel: UILabel!

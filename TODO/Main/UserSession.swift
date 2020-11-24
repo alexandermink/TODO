@@ -8,11 +8,28 @@
 
 import Foundation
 
-class UserSession: Codable {
+class UserSession{
     
-    var tasks: [Task] = [Task()]
+//    private let tasksCaretaker = TasksCaretaker()
+//
+//    var tasks: [Task]{
+//        didSet{
+//            tasksCaretaker.save(tasks: tasks)
+//        }
+//    }
+//
+//    init() {
+//        self.tasks = tasksCaretaker.load()
+//    }
+    
+    var tasks: [Task] = []
     
     init() { }
+    
+    init(tasksRealm: [Task]) {
+        
+        self.tasks = tasksRealm
+    }
     
     
 }
