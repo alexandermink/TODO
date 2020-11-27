@@ -19,18 +19,18 @@ class GeneralTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        main.addTask(id: 1, name: "Задание1", date: Date())
-//        main.addTask(id: 2, name: "Задание2", date: Date())
-//        main.addTask(id: 3, name: "Задание3", date: Date())
-        self.main.getTasksFromRealm()
-        self.tableView.reloadData()
         
+        self.main.getTasksFromRealm()
     }
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.main.userSession.tasks.count
+        return self.main.userSession.tasks[section].sectionTasks.count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return main.userSession.tasks.count
     }
 
     
@@ -38,12 +38,13 @@ class GeneralTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! GeneralTableViewCell
         
         
+        
         cell.selectedBackgroundView = {
             let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.size.width, height: cell.frame.size.height))
             view.backgroundColor = hexStringToUIColor(hex: "#fcdab7")
             return view
         }()
-        cell.tasksNameLabel.text = main.userSession.tasks[indexPath.row].name
+        cell.tasksNameLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
         cell.tasksIconImageView.image = UIImage(systemName: "pencil.circle.fill")
          
 
@@ -57,8 +58,17 @@ class GeneralTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if self.main.userSession.tasks[section].sectionTasks.count != 0 {
+            return self.main.userSession.tasks[section].sectionName
+        } else {
+            return ""
+        }
+    }
+    
     @IBAction func addNewTask(_ sender: UIBarButtonItem) {
-        main.addTask(id: main.userSession.tasks.count, name: "Задание по плюсику id:\(main.userSession.tasks.count + 1)", date: Date())
+        let realm = try! Realm()
+        self.main.addTask(section: "Section 3", id: realm.objects(TaskRealm.self).count, name: "Задание по плюсику id:\(realm.objects(TaskRealm.self).count)", date: Date())
         self.tableView.reloadData()
     }
     

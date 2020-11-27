@@ -22,14 +22,17 @@ class UserSession{
 //        self.tasks = tasksCaretaker.load()
 //    }
     
-    var tasks: [Task] = []
+    
+    
+    var tasks: [TasksStruct] = []
     
     init() { }
     
-    init(tasksRealm: [Task]) {
+    init(tasksRealm: [TasksStruct]) {
         
         self.tasks = tasksRealm
     }
+    
     
     
 }

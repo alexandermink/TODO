@@ -34,3 +34,36 @@ class TaskRealm: Object {
         return "id"
     }
 }
+
+struct TasksStruct: Comparable {
+    static func < (lhs: TasksStruct, rhs: TasksStruct) -> Bool {
+        return lhs.sectionName < rhs.sectionName
+    }
+    
+    static func == (lhs: TasksStruct, rhs: TasksStruct) -> Bool {
+        return lhs.sectionName == rhs.sectionName
+    }
+    
+    var sectionName: String = ""
+    var sectionTasks: [Task] = []
+    
+    init() { }
+    
+    init(section: String, tasks: [Task]) {
+        self.sectionName = section
+        self.sectionTasks = tasks
+    }
+    
+    mutating func addTaskInSection(task: Task) {
+        self.sectionTasks.append(task)
+    }
+}
+
+class TasksStructRealm: Object {
+    @objc var sectionName: String = ""
+    let sectionTasks = List<TaskRealm>()
+    
+    override class func primaryKey() -> String? {
+        return "sectionName"
+    }
+}
