@@ -100,8 +100,19 @@ extension Main: TaskProtocol {
         self.userSession.tasks = self.userSession.tasks.sorted()
     }
     
-    func deleteTask(indexPathTask: Int) {
+    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) {
         
+        let realm = try! Realm()
+        
+        let deleteTask = realm.objects(TaskRealm.self).filter("id = \(self.userSession.tasks[indexPathSectionTask].sectionTasks[indexPathRowTask].id)").first
+        
+        try! realm.write {
+            if let delTask = deleteTask {
+                realm.delete(delTask)
+            }
+        }
+        
+        self.userSession.tasks[indexPathSectionTask].sectionTasks.remove(at: indexPathRowTask)
         
 //        let realm = try! Realm()
 //        let object = realm.objects(TaskRealm.self).filter("id = \(self.userSession.tasks[indexPathTask].id)").first

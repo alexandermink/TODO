@@ -12,5 +12,5 @@ protocol TaskProtocol {
     func addSection(section: String)
     func addTask(section: String, id: Int, name: String, date: Date)
     func getTasksFromRealm()
-    func deleteTask(indexPathTask: Int)
+    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int)
 }

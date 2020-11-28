@@ -53,9 +53,15 @@ class GeneralTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.main.deleteTask(indexPathTask: indexPath.row)
+            self.main.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
+            
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            if self.main.userSession.tasks[indexPath.section].sectionTasks.isEmpty {
+                self.main.userSession.tasks.remove(at: indexPath.section)
+            }
         }
+        self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -68,7 +74,8 @@ class GeneralTableViewController: UITableViewController {
     
     @IBAction func addNewTask(_ sender: UIBarButtonItem) {
         let realm = try! Realm()
-        self.main.addTask(section: "Section 3", id: realm.objects(TaskRealm.self).count, name: "Задание по плюсику id:\(realm.objects(TaskRealm.self).count)", date: Date())
+        let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id").last?.value(forKey: "id") ?? 0) as! Int + 1
+        self.main.addTask(section: "Section 2", id: id, name: "Задание по плюсику id:\(id)", date: Date())
         self.tableView.reloadData()
     }
     
