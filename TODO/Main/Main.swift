@@ -11,10 +11,12 @@ import RealmSwift
 
 class Main {
     
+    static let instance = Main()
+    
     
     var userSession: UserSession = UserSession()
     
-    init() { }
+    private init() { }
     
 }
 
@@ -40,9 +42,15 @@ extension Main: TaskProtocol {
         
     }
     
-    func addTask(section: String, id: Int, name: String, date: Date) {
+    func addTask(section: String, name: String) {
+        
+        
         
         let realm = try! Realm()
+        
+        let id = realm.objects(TaskRealm.self).count + 1
+        let date = Date()
+        
         if realm.objects(TasksStructRealm.self).filter("sectionName = '\(section)'").isEmpty {
             self.addSection(section: section)
         }
@@ -100,6 +108,19 @@ extension Main: TaskProtocol {
         self.userSession.tasks = self.userSession.tasks.sorted()
     }
     
+    func getCategoriesFromRealm() -> [String] {
+        
+        let realm = try! Realm()
+        
+        let objects = realm.objects(TasksStructRealm.self).sorted(byKeyPath: "sectionName", ascending: true)
+        var categories: [String] = []
+        for item in objects{
+            categories.append(item.value(forKey: "sectionName") as! String)
+        }
+        
+        return categories
+    }
+    
     func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) {
         
         let realm = try! Realm()
@@ -113,15 +134,6 @@ extension Main: TaskProtocol {
         }
         
         self.userSession.tasks[indexPathSectionTask].sectionTasks.remove(at: indexPathRowTask)
-        
-//        let realm = try! Realm()
-//        let object = realm.objects(TaskRealm.self).filter("id = \(self.userSession.tasks[indexPathTask].id)").first
-//        try! realm.write {
-//            if let obj = object {
-//                realm.delete(obj)
-//            }
-//        }
-//        self.userSession.tasks.remove(at: indexPathTask)
     }
     
 }

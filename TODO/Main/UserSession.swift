@@ -10,20 +10,6 @@ import Foundation
 
 class UserSession{
     
-//    private let tasksCaretaker = TasksCaretaker()
-//
-//    var tasks: [Task]{
-//        didSet{
-//            tasksCaretaker.save(tasks: tasks)
-//        }
-//    }
-//
-//    init() {
-//        self.tasks = tasksCaretaker.load()
-//    }
-    
-    
-    
     var tasks: [TasksStruct] = []
     
     init() { }

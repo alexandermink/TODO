@@ -19,6 +19,7 @@
 		96600B5C253D058200F3FDC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96600B5A253D058200F3FDC1 /* LaunchScreen.storyboard */; };
 		96600B70253D0BCC00F3FDC1 /* GeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96600B6F253D0BCC00F3FDC1 /* GeneralTableViewController.swift */; };
 		96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96600B71253D0BE400F3FDC1 /* GeneralTableViewCell.swift */; };
+		9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9664687525A6967300443B81 /* NewTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		96600B5D253D058200F3FDC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96600B6F253D0BCC00F3FDC1 /* GeneralTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableViewController.swift; sourceTree = "<group>"; };
 		96600B71253D0BE400F3FDC1 /* GeneralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableViewCell.swift; sourceTree = "<group>"; };
+		9664687525A6967300443B81 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		96600B67253D083D00F3FDC1 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				9664687425A6963100443B81 /* NewTask */,
 				96600B68253D085B00F3FDC1 /* General */,
 			);
 			path = Screen;
@@ -151,6 +154,14 @@
 				96600B71253D0BE400F3FDC1 /* GeneralTableViewCell.swift */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		9664687425A6963100443B81 /* NewTask */ = {
+			isa = PBXGroup;
+			children = (
+				9664687525A6967300443B81 /* NewTaskViewController.swift */,
+			);
+			path = NewTask;
 			sourceTree = "<group>";
 		};
 		B14F78C458E538A5C6BD1EF2 /* Pods */ = {
@@ -281,6 +292,7 @@
 				96600B50253D057E00F3FDC1 /* AppDelegate.swift in Sources */,
 				96600B70253D0BCC00F3FDC1 /* GeneralTableViewController.swift in Sources */,
 				96552943253D8C490013F834 /* Main.swift in Sources */,
+				9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */,
 				9655293B253D86CF0013F834 /* Task.swift in Sources */,
 				96552941253D89760013F834 /* UserSession.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,

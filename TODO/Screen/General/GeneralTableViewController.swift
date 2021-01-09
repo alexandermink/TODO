@@ -13,24 +13,36 @@ private let reuseIdentifier = "GeneralCell"
 
 class GeneralTableViewController: UITableViewController {
     
-    private let main = Main()
+    let realm = try! Realm()
     
+    var realmTokenTasks: NotificationToken? = nil
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.main.getTasksFromRealm()
+        
+        Main.instance.getTasksFromRealm()
+        
+        self.realmTokenTasks = realm.objects(TaskRealm.self).observe({ (result) in
+            switch result {
+            case .update(_, deletions: _, insertions: _, modifications: _):
+                self.tableView.reloadData()
+            case .initial(_): break
+            case .error(_): break
+            }
+        })
+        
     }
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.main.userSession.tasks[section].sectionTasks.count
+        return Main.instance.userSession.tasks[section].sectionTasks.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return main.userSession.tasks.count
+        return Main.instance.userSession.tasks.count
     }
 
     
@@ -44,7 +56,7 @@ class GeneralTableViewController: UITableViewController {
             view.backgroundColor = hexStringToUIColor(hex: "#fcdab7")
             return view
         }()
-        cell.tasksNameLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
+        cell.tasksNameLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
         cell.tasksIconImageView.image = UIImage(systemName: "pencil.circle.fill")
          
 
@@ -53,31 +65,29 @@ class GeneralTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.main.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
+            Main.instance.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
             
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             
-            if self.main.userSession.tasks[indexPath.section].sectionTasks.isEmpty {
-                self.main.userSession.tasks.remove(at: indexPath.section)
+            if Main.instance.userSession.tasks[indexPath.section].sectionTasks.isEmpty {
+                Main.instance.userSession.tasks.remove(at: indexPath.section)
             }
         }
         self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if self.main.userSession.tasks[section].sectionTasks.count != 0 {
-            return self.main.userSession.tasks[section].sectionName
+        if Main.instance.userSession.tasks[section].sectionTasks.count != 0 {
+            return Main.instance.userSession.tasks[section].sectionName
         } else {
             return ""
         }
     }
     
-    @IBAction func addNewTask(_ sender: UIBarButtonItem) {
-        let realm = try! Realm()
-        let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id").last?.value(forKey: "id") ?? 0) as! Int + 1
-        self.main.addTask(section: "Section 2", id: id, name: "Задание по плюсику id:\(id)", date: Date())
+    override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
+    
     
     
     
