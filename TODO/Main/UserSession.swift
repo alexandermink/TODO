@@ -15,6 +15,12 @@ class UserSession{
     init() { }
     
     init(tasksRealm: [TasksStruct]) {
+         
+        
+        
+        
+        
+        
         
         self.tasks = tasksRealm
     }
