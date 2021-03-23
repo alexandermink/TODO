@@ -35,6 +35,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         newSectionTextField.text = sections?[0]
     }
 
+    
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
         let section: String? = newSectionTextField.text
