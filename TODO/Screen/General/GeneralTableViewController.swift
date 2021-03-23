@@ -14,15 +14,14 @@ private let reuseIdentifier = "GeneralCell"
 class GeneralTableViewController: UITableViewController {
     
     let realm = try! Realm()
-    
     var realmTokenTasks: NotificationToken? = nil
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+                
         Main.instance.getTasksFromRealm()
+        Main.instance.addSection(section: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
+        Main.instance.addSection(section: "Базовая секция № 1")
         
         self.realmTokenTasks = realm.objects(TaskRealm.self).observe({ (result) in
             switch result {
@@ -32,9 +31,7 @@ class GeneralTableViewController: UITableViewController {
             case .error(_): break
             }
         })
-        
     }
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
