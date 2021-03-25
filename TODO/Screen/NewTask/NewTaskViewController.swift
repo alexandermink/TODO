@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -29,10 +30,11 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         newSectionTextField.inputView = pickerView
         newSectionTextField.textAlignment = .center
-        newSectionTextField.placeholder = "Select category"
+        newSectionTextField.placeholder = "Select categories"
+        print(sections!)
         newSectionTextField.text = sections?[0]
     }
-    
+
     
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
