@@ -38,11 +38,14 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
-        let section: String? = newSectionTextField.text
-        let name: String? = newTaskNameTextField.text
+        let sectionName: String? = newSectionTextField.text
+        let taskName: String? = newTaskNameTextField.text
         
-        if (section != "") && (name != "") {
-            Main.instance.addTask(section: section!, name: name!)
+        if (sectionName != "") && (taskName != "") {
+            Main.instance.addTask(section: sectionName!, name: taskName!)
+            self.dismiss(animated: true, completion: nil)
+        } else if (sectionName != "") && (taskName == "") {
+            Main.instance.addSection(section: sectionName!)
             self.dismiss(animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "Empty fields", message: nil, preferredStyle: .alert)

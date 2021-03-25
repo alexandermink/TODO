@@ -33,13 +33,14 @@ extension Main: TaskProtocol {
         let taskArray = TasksStructRealm()
         taskArray.sectionName = section
         try! realm.write {
-            realm.add(taskArray, update: Realm.UpdatePolicy.modified)
+            realm.add(taskArray, update: .modified)
         }
     }
     
     func addTask(section: String, name: String) {
         let realm = try! Realm()
-        let id = realm.objects(TaskRealm.self).count + 1
+        
+        let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.value(forKey: "id") as? Int ?? 0) + 1
         let date = Date()
         if realm.objects(TasksStructRealm.self).filter("sectionName = '\(section)'").isEmpty {
             self.addSection(section: section)
@@ -108,5 +109,28 @@ extension Main: TaskProtocol {
             }
         }
         self.userSession.tasks[indexPathSectionTask].sectionTasks.remove(at: indexPathRowTask)
+    }
+    
+    // на входе String с именем удалаяемой категории
+    func deleteSection(delSectionName: String) {
+        
+        // TODO: сделать каскадное удаление в Realm (в официале не реализовано, есть рабочий кусок по ссылке)
+        // https://gist.github.com/verebes1/02950e46fff91456f2ad359b3f3ec3d9
+        let realm = try! Realm()
+        let delSection = realm.objects(TasksStructRealm.self).filter("sectionName = '\(delSectionName)'").first
+        print("delSection_______=\(String(describing: delSection))")
+        try! realm.write{
+            if let realmDelSection = delSection {
+                realm.delete(realmDelSection)
+            }
+        }
+        var delIndex: Int = -1
+        for section in self.userSession.tasks {
+            if section.sectionName == delSectionName {
+                delIndex = self.userSession.tasks.firstIndex(of: section)!
+                break
+            }
+        }
+        self.userSession.tasks.remove(at: delIndex)
     }
 }
