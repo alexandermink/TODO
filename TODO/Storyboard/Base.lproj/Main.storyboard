@@ -74,7 +74,7 @@
                     <navigationItem key="navigationItem" title="Задачи" id="DqW-FK-ZAH">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="qZ4-dG-obl">
                             <connections>
-                                <segue destination="ubX-Ga-cpC" kind="presentation" modalPresentationStyle="automatic" id="eoS-yl-HCh"/>
+                                <action selector="newTaskBarButton:" destination="Kwy-8I-tLy" id="tu5-Pz-CgM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -86,13 +86,13 @@
         <!--New Task View Controller-->
         <scene sceneID="eiX-dc-rMr">
             <objects>
-                <viewController id="ubX-Ga-cpC" customClass="NewTaskViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewTaskViewController" id="ubX-Ga-cpC" customClass="NewTaskViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hjq-lY-3KT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Выберите секцию" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i92-ID-HFb">
-                                <rect key="frame" x="57" y="41" width="300" height="34"/>
+                                <rect key="frame" x="57" y="51" width="300" height="34"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="UbE-oz-0MZ"/>
@@ -106,7 +106,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Название" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dlz-B1-Ioh">
-                                <rect key="frame" x="57" y="91" width="300" height="34"/>
+                                <rect key="frame" x="57" y="101" width="300" height="34"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="jcW-uJ-I8Y"/>
@@ -120,7 +120,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Описание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NVN-78-ahE">
-                                <rect key="frame" x="57" y="141" width="300" height="34"/>
+                                <rect key="frame" x="57" y="151" width="300" height="34"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="dp7-Lk-3Qy"/>
@@ -135,7 +135,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Напоминание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lzH-kE-MRA">
-                                <rect key="frame" x="57" y="191" width="300" height="34"/>
+                                <rect key="frame" x="57" y="201" width="300" height="34"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="nZQ-c2-Vq9"/>
@@ -149,7 +149,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAX-LJ-Jn1">
-                                <rect key="frame" x="57" y="241" width="300" height="34"/>
+                                <rect key="frame" x="57" y="251" width="300" height="34"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="VrK-Ba-hNI"/>
@@ -160,7 +160,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubY-mg-Yn0">
-                                <rect key="frame" x="57" y="291" width="300" height="34"/>
+                                <rect key="frame" x="57" y="301" width="300" height="34"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Lsh-LI-SaZ"/>
@@ -171,7 +171,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbr-by-CPT">
-                                <rect key="frame" x="57" y="341" width="300" height="34"/>
+                                <rect key="frame" x="57" y="351" width="300" height="34"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="HYL-Om-c5h"/>
@@ -182,7 +182,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaN-qU-Hq0">
-                                <rect key="frame" x="327" y="3" width="60" height="30"/>
+                                <rect key="frame" x="327" y="13" width="60" height="30"/>
                                 <state key="normal" title="Создать">
                                     <color key="titleColor" systemColor="systemIndigoColor"/>
                                 </state>
