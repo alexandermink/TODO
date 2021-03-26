@@ -91,7 +91,7 @@ class GeneralTableViewController: UITableViewController {
     @IBAction func newTaskBarButton(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
-        router.push(vc: destinationVC)
+        router.present(vc: destinationVC)
     }
     
     

@@ -24,4 +24,8 @@ class BaseRouter{
     final func dismiss(animated : Bool = true, completion: (() -> Void)? = nil) {
         viewController.dismiss(animated: animated, completion: completion)
     }
+    
+    final func present(vc: UIViewController, animated : Bool = true, completion: (() -> Void)? = nil) {
+        viewController.present(vc, animated: animated, completion: completion)
+    }
 }

@@ -27,9 +27,12 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var coverButton: UIButton!
     
     var sections: [String]?
+    var router: BaseRouter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        router = BaseRouter(viewController: self)
+        
         membersButton.layer.cornerRadius = 5
         checkListButton.layer.cornerRadius = 5
         coverButton.layer.cornerRadius = 5
@@ -49,7 +52,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         if (section != "") && (name != "") {
             Main.instance.addTask(section: section!, name: name!)
-            self.dismiss(animated: true, completion: nil)
+            router.dismiss(animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "Empty fields", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
