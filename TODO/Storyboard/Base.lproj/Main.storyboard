@@ -91,7 +91,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaN-qU-Hq0">
+                                <rect key="frame" x="309" y="10" width="46" height="30"/>
+                                <state key="normal" title="Create"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0cj-pu-VLo"/>
                                     <constraint firstAttribute="width" constant="100" id="Vse-PL-aOR"/>
