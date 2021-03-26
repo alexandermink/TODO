@@ -74,7 +74,7 @@
                     <navigationItem key="navigationItem" title="Задачи" id="DqW-FK-ZAH">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="qZ4-dG-obl">
                             <connections>
-                                <segue destination="ubX-Ga-cpC" kind="presentation" modalPresentationStyle="automatic" id="eoS-yl-HCh"/>
+                                <action selector="newTaskBarButton:" destination="Kwy-8I-tLy" id="tu5-Pz-CgM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -86,17 +86,17 @@
         <!--New Task View Controller-->
         <scene sceneID="eiX-dc-rMr">
             <objects>
-                <viewController id="ubX-Ga-cpC" customClass="NewTaskViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewTaskViewController" id="ubX-Ga-cpC" customClass="NewTaskViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hjq-lY-3KT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaN-qU-Hq0">
-                                <rect key="frame" x="294" y="20" width="100" height="30"/>
+
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0cj-pu-VLo"/>
                                     <constraint firstAttribute="width" constant="100" id="Vse-PL-aOR"/>
                                 </constraints>
+
                                 <state key="normal" title="Создать">
                                     <color key="titleColor" systemColor="systemIndigoColor"/>
                                 </state>

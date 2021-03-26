@@ -15,9 +15,11 @@ class GeneralTableViewController: UITableViewController {
     
     let realm = try! Realm()
     var realmTokenTasks: NotificationToken? = nil
+    var router: BaseRouter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        router = BaseRouter(viewController: self)
                 
         Main.instance.getTasksFromRealm()
         Main.instance.addSection(section: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
@@ -86,6 +88,11 @@ class GeneralTableViewController: UITableViewController {
     }
     
     
+    @IBAction func newTaskBarButton(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
+        router.push(vc: destinationVC)
+    }
     
     
     

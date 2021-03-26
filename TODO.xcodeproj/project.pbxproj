@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15469273260E4C44007D8238 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15469272260E4C44007D8238 /* BaseRouter.swift */; };
 		5DD6E90D260CF36300B352F4 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6E90C260CF36300B352F4 /* ToolBar.swift */; };
 		875DEC27DBB556E1B9DD43A7 /* Pods_TODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF261960F9984306264C1D /* Pods_TODO.framework */; };
 		9655293B253D86CF0013F834 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9655293A253D86CF0013F834 /* Task.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15469272260E4C44007D8238 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		5DD6E90C260CF36300B352F4 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		72F18A26507E7F4027B94B8E /* Pods-TODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TODO.release.xcconfig"; path = "Target Support Files/Pods-TODO/Pods-TODO.release.xcconfig"; sourceTree = "<group>"; };
 		7AAF261960F9984306264C1D /* Pods_TODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +79,7 @@
 			children = (
 				96552940253D89760013F834 /* UserSession.swift */,
 				96552942253D8C490013F834 /* Main.swift */,
+				15469272260E4C44007D8238 /* BaseRouter.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */,
 				9655293B253D86CF0013F834 /* Task.swift in Sources */,
 				96552941253D89760013F834 /* UserSession.swift in Sources */,
+				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
 				5DD6E90D260CF36300B352F4 /* ToolBar.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,
 				96600B52253D057E00F3FDC1 /* SceneDelegate.swift in Sources */,
