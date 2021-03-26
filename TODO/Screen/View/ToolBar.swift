@@ -27,7 +27,7 @@ class ToolBar {
 
 extension UIViewController {
     
-    func createToolBarVacDays() -> UIToolbar {
+    func createToolBarCategories() -> UIToolbar {
         let toolBar = ToolBar.configDoneButton()
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.toolBarDoneAction))
         let deleteButton = UIBarButtonItem(title: "Удалить", style: .done, target: self, action: #selector(NewTaskViewController.toolBarDeleteAction))
