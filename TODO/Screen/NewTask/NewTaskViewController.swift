@@ -18,15 +18,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             let daysPicker = UIPickerView()
             daysPicker.delegate = self
             newSectionTextField.inputView = daysPicker
-            newSectionTextField.inputAccessoryView = createToolBarVacDays()
+            newSectionTextField.inputAccessoryView = createToolBarCategories()
         }
     }
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
-    
-//    let pickerView = UIPickerView()
     
     var sections: [String]?
     
@@ -37,14 +35,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         coverButton.layer.cornerRadius = 5
         
         sections = Main.instance.getCategoriesFromRealm()
-       
-//        pickerView.dataSource = self
-//        pickerView.delegate = self
-        
-//        newSectionTextField.inputView = pickerView
         newSectionTextField.textAlignment = .center
-//        newSectionTextField.inputAccessoryView = createToolBarVacDays()
-//        newSectionTextField.placeholder = "Select categories"
         print(sections!)
         newSectionTextField.text = sections?[0]
     }
