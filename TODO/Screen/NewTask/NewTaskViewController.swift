@@ -47,12 +47,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
-        let section: String? = newSectionTextField.text
-        let name: String? = newTaskNameTextField.text
+        let sectionName: String? = newSectionTextField.text
+        let taskName: String? = newTaskNameTextField.text
         
         if (section != "") && (name != "") {
             Main.instance.addTask(section: section!, name: name!)
             router.dismiss(animated: true, completion: nil)
+
         } else {
             let alert = UIAlertController(title: "Empty fields", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
