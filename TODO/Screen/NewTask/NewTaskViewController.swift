@@ -13,40 +13,47 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     
     
-    @IBOutlet weak var newSectionTextField: UITextField!
+    @IBOutlet weak var newSectionTextField: UITextField! {
+        didSet{
+            let daysPicker = UIPickerView()
+            daysPicker.delegate = self
+            newSectionTextField.inputView = daysPicker
+            newSectionTextField.inputAccessoryView = createToolBarCategories()
+        }
+    }
     @IBOutlet weak var newTaskNameTextField: UITextField!
-    
-    let pickerView = UIPickerView()
+    @IBOutlet weak var membersButton: UIButton!
+    @IBOutlet weak var checkListButton: UIButton!
+    @IBOutlet weak var coverButton: UIButton!
     
     var sections: [String]?
+    var router: BaseRouter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        router = BaseRouter(viewController: self)
+        
+        membersButton.layer.cornerRadius = 5
+        checkListButton.layer.cornerRadius = 5
+        coverButton.layer.cornerRadius = 5
         
         sections = Main.instance.getCategoriesFromRealm()
-       
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        
-        newSectionTextField.inputView = pickerView
         newSectionTextField.textAlignment = .center
-        newSectionTextField.placeholder = "Select categories"
         print(sections!)
         newSectionTextField.text = sections?[0]
     }
 
+    // MARK: - ACTIONS
     
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
         let sectionName: String? = newSectionTextField.text
         let taskName: String? = newTaskNameTextField.text
         
-        if (sectionName != "") && (taskName != "") {
-            Main.instance.addTask(section: sectionName!, name: taskName!)
-            self.dismiss(animated: true, completion: nil)
-        } else if (sectionName != "") && (taskName == "") {
-            Main.instance.addSection(section: sectionName!)
-            self.dismiss(animated: true, completion: nil)
+        if (section != "") && (name != "") {
+            Main.instance.addTask(section: section!, name: name!)
+            router.dismiss(animated: true, completion: nil)
+
         } else {
             let alert = UIAlertController(title: "Empty fields", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
@@ -54,6 +61,17 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
     }
     
+    @objc func toolBarDeleteAction() {
+        print("Нажата кнопка удалить категорию")
+        view.endEditing(true)
+    }
+    
+    @objc func toolBarDoneAction() {
+        print("Нажата кнопка готово")
+        view.endEditing(true)
+    }
+    
+    // MARK: - TABLE
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -69,7 +87,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         newSectionTextField.text = sections?[row]
-        newSectionTextField.resignFirstResponder()
+//        newSectionTextField.resignFirstResponder() // убрал это, чтобы автоматически не закрывался пикер, при выборе поля
     }
 
 }
