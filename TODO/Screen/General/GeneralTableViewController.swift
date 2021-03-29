@@ -98,6 +98,17 @@ class GeneralTableViewController: UITableViewController {
         router.present(vc: destinationVC)
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let destinationVC = TaskDetailViewController()
+        let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+//        destinationVC.taskName = object.sectionName
+        destinationVC.taskName = object.name
+        destinationVC.taskDate = object.date
+        router.present(vc: destinationVC)
+        
+    }
+    
     
     
     //Функция для преобразования hex кода в UIColor

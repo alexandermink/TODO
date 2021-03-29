@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		15469273260E4C44007D8238 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15469272260E4C44007D8238 /* BaseRouter.swift */; };
+		156EBB112611D08200BDC565 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156EBB102611D08200BDC565 /* TaskDetailViewController.swift */; };
 		5DD6E90D260CF36300B352F4 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6E90C260CF36300B352F4 /* ToolBar.swift */; };
 		875DEC27DBB556E1B9DD43A7 /* Pods_TODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF261960F9984306264C1D /* Pods_TODO.framework */; };
 		9655293B253D86CF0013F834 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9655293A253D86CF0013F834 /* Task.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		15469272260E4C44007D8238 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		156EBB102611D08200BDC565 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		5DD6E90C260CF36300B352F4 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		72F18A26507E7F4027B94B8E /* Pods-TODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TODO.release.xcconfig"; path = "Target Support Files/Pods-TODO/Pods-TODO.release.xcconfig"; sourceTree = "<group>"; };
 		7AAF261960F9984306264C1D /* Pods_TODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		156EBB0F2611D04700BDC565 /* TaskDetail */ = {
+			isa = PBXGroup;
+			children = (
+				156EBB102611D08200BDC565 /* TaskDetailViewController.swift */,
+			);
+			path = TaskDetail;
+			sourceTree = "<group>";
+		};
 		2E46F49551EA1EB8B481FCA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +167,7 @@
 				5DD6E90B260CF34F00B352F4 /* View */,
 				9664687425A6963100443B81 /* NewTask */,
 				96600B68253D085B00F3FDC1 /* General */,
+				156EBB0F2611D04700BDC565 /* TaskDetail */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -308,6 +319,7 @@
 				96552943253D8C490013F834 /* Main.swift in Sources */,
 				9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */,
 				9655293B253D86CF0013F834 /* Task.swift in Sources */,
+				156EBB112611D08200BDC565 /* TaskDetailViewController.swift in Sources */,
 				96552941253D89760013F834 /* UserSession.swift in Sources */,
 				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
 				5DD6E90D260CF36300B352F4 /* ToolBar.swift in Sources */,
