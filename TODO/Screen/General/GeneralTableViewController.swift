@@ -34,6 +34,12 @@ class GeneralTableViewController: UITableViewController {
             }
         })
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+ 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -83,9 +89,7 @@ class GeneralTableViewController: UITableViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
+    
     
     
     @IBAction func newTaskBarButton(_ sender: UIBarButtonItem) {

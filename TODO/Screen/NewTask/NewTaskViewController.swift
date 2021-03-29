@@ -15,8 +15,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @IBOutlet weak var newSectionTextField: UITextField! {
         didSet{
-            let daysPicker = UIPickerView()
-            daysPicker.delegate = self
             newSectionTextField.inputView = daysPicker
             newSectionTextField.inputAccessoryView = createToolBarCategories()
         }
@@ -28,9 +26,15 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     var sections: [String]?
     var router: BaseRouter!
+    let daysPicker = UIPickerView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        daysPicker.delegate = self
+        daysPicker.selectedRow(inComponent: 0)
+//        print(daysPicker.selectedRow(inComponent: 0))
+        
         router = BaseRouter(viewController: self)
         
         membersButton.layer.cornerRadius = 5
@@ -50,8 +54,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         let sectionName: String? = newSectionTextField.text
         let taskName: String? = newTaskNameTextField.text
         
-        if (section != "") && (name != "") {
-            Main.instance.addTask(section: section!, name: name!)
+        if (sectionName != "") && (taskName != "") {
+            Main.instance.addTask(section: sectionName!, name: taskName!)
             router.dismiss(animated: true, completion: nil)
 
         } else {
@@ -62,6 +66,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @objc func toolBarDeleteAction() {
+        Main.instance.deleteSection(delSectionName: newSectionTextField.text ?? "")
+        
         print("Нажата кнопка удалить категорию")
         view.endEditing(true)
     }
@@ -87,6 +93,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         newSectionTextField.text = sections?[row]
+        print(daysPicker.selectedRow(inComponent: 0))
+//        Main.instance.deleteSection(delSectionName: row)
 //        newSectionTextField.resignFirstResponder() // убрал это, чтобы автоматически не закрывался пикер, при выборе поля
     }
 
