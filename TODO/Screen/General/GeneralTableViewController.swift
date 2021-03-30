@@ -15,7 +15,7 @@ class GeneralTableViewController: UITableViewController {
     
     let realm = try! Realm()
     var realmTokenTasks: NotificationToken? = nil
-    var router: BaseRouter!
+    var router: BaseRouter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,7 +95,7 @@ class GeneralTableViewController: UITableViewController {
     @IBAction func newTaskBarButton(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
-        router.present(vc: destinationVC)
+        router?.present(vc: destinationVC)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,7 +105,7 @@ class GeneralTableViewController: UITableViewController {
 //        destinationVC.taskName = object.sectionName
         destinationVC.taskName = object.name
         destinationVC.taskDate = object.date
-        router.present(vc: destinationVC)
+        router?.present(vc: destinationVC)
         
     }
     

@@ -25,7 +25,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var coverButton: UIButton!
     
     var sections: [String]?
-    var router: BaseRouter!
+    var router: BaseRouter?
     let daysPicker = UIPickerView()
     
     
@@ -56,7 +56,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         if (sectionName != "") && (taskName != "") {
             Main.instance.addTask(section: sectionName!, name: taskName!)
-            router.dismiss(animated: true, completion: nil)
+            router?.dismiss(animated: true, completion: nil)
 
         } else {
             let alert = UIAlertController(title: "Empty fields", message: nil, preferredStyle: .alert)

@@ -9,23 +9,23 @@
 import Foundation
 import UIKit
 
-class BaseRouter{
+final class BaseRouter{
     
-    var viewController: UIViewController!
+    var viewController: UIViewController
     
     init(viewController: UIViewController){
         self.viewController = viewController
     }
     
-    final func push(vc: UIViewController, animated : Bool = true) {
+    func push(vc: UIViewController, animated : Bool = true) {
         viewController.navigationController?.pushViewController(vc, animated: animated)
     }
     
-    final func dismiss(animated : Bool = true, completion: (() -> Void)? = nil) {
+    func dismiss(animated : Bool = true, completion: (() -> Void)? = nil) {
         viewController.dismiss(animated: animated, completion: completion)
     }
     
-    final func present(vc: UIViewController, animated : Bool = true, completion: (() -> Void)? = nil) {
+    func present(vc: UIViewController, animated : Bool = true, completion: (() -> Void)? = nil) {
         viewController.present(vc, animated: animated, completion: completion)
     }
 }
