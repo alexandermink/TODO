@@ -13,8 +13,8 @@ class Main {
     
     static let instance = Main()
     
-    
     var userSession: UserSession = UserSession()
+    var notificationDate: String?
     
     private init() { }
     

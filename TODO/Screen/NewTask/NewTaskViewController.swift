@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
 class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -15,10 +16,15 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @IBOutlet weak var newSectionTextField: UITextField! {
         didSet{
-            newSectionTextField.inputView = daysPicker
-            newSectionTextField.inputAccessoryView = createToolBarCategories()
+            newSectionTextField.inputView = categoryPicker
+            newSectionTextField.inputAccessoryView = makeToolBarCategories()
         }
     }
+    @IBOutlet weak var notificationTF: UITextField! {didSet {
+        notificationTF.inputAccessoryView = makeToolBarNotifications()
+        notificationTF.inputView = notificationPicker
+        if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
+    }}
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
@@ -26,25 +32,28 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     var sections: [String]?
     var router: BaseRouter?
-    let daysPicker = UIPickerView()
+    let categoryPicker = UIPickerView()
+    let notificationPicker = UIDatePicker()
+    let dateFormatter111 = DateFormatter()
+    var calendar = Calendar.current
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        daysPicker.delegate = self
-        daysPicker.selectedRow(inComponent: 0)
-//        print(daysPicker.selectedRow(inComponent: 0))
-        
+        categoryPicker.delegate = self
+        categoryPicker.selectedRow(inComponent: 0)
+        dateFormatter111.timeZone = .autoupdatingCurrent
+        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
+        calendar.timeZone = .autoupdatingCurrent
         router = BaseRouter(viewController: self)
-        
         membersButton.layer.cornerRadius = 5
         checkListButton.layer.cornerRadius = 5
         coverButton.layer.cornerRadius = 5
-        
         sections = Main.instance.getCategoriesFromRealm()
         newSectionTextField.textAlignment = .center
-        print(sections!)
-        newSectionTextField.text = sections?[0]
+        print(sections ?? "секции отсутствуют")
+        newSectionTextField.text = sections?[0]        
     }
 
     // MARK: - ACTIONS
@@ -63,18 +72,61 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        sendNotificationRequest(
+            content: self.makeNotificationContent(),
+            trigger: self.makeIntervalNotificationTrigger()
+        )
     }
     
-    @objc func toolBarDeleteAction() {
+    @objc func deleteCategoryAction() {
         Main.instance.deleteSection(delSectionName: newSectionTextField.text ?? "")
-        
         print("Нажата кнопка удалить категорию")
         view.endEditing(true)
     }
     
-    @objc func toolBarDoneAction() {
-        print("Нажата кнопка готово")
+    @objc func chooseCategoryAction() {
+        print("Нажата кнопка 'Готово' выбора категории")
         view.endEditing(true)
+    }
+    
+    @objc func chooseNotificationAction() {
+        notificationTF.text = dateFormatter111.string(from: notificationPicker.date)
+        Main.instance.notificationDate = dateFormatter111.date(from: notificationTF.text!)?.localString()
+        print("Нажата кнопка 'Готово' выбора даты уведомления")
+        print(Main.instance.notificationDate ?? "синглтон с типом String")
+        view.endEditing(true)
+    }
+    
+    func makeNotificationContent() -> UNNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = newTaskNameTextField.text ?? ""
+        content.badge = 1
+        return content
+    }
+    
+    func makeIntervalNotificationTrigger() -> UNNotificationTrigger {
+        return UNTimeIntervalNotificationTrigger(
+            timeInterval: 10,
+            repeats: false
+        )
+    }
+    
+    func sendNotificationRequest(
+        content: UNNotificationContent,
+        trigger: UNNotificationTrigger) {
+        
+        let request = UNNotificationRequest(
+            identifier: "notification",
+            content: content,
+            trigger: trigger
+        )
+        
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     // MARK: - TABLE
@@ -93,9 +145,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         newSectionTextField.text = sections?[row]
-        print(daysPicker.selectedRow(inComponent: 0))
+        print(categoryPicker.selectedRow(inComponent: 0))
 //        Main.instance.deleteSection(delSectionName: row)
-//        newSectionTextField.resignFirstResponder() // убрал это, чтобы автоматически не закрывался пикер, при выборе поля
     }
 
 }
