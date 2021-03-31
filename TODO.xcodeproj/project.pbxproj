@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15469273260E4C44007D8238 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15469272260E4C44007D8238 /* BaseRouter.swift */; };
 		156EBB112611D08200BDC565 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156EBB102611D08200BDC565 /* TaskDetailViewController.swift */; };
+		5DBD9042261458DA00732A50 /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBD9041261458DA00732A50 /* String+ext.swift */; };
 		5DD6E90D260CF36300B352F4 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6E90C260CF36300B352F4 /* ToolBar.swift */; };
 		875DEC27DBB556E1B9DD43A7 /* Pods_TODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF261960F9984306264C1D /* Pods_TODO.framework */; };
 		9655293B253D86CF0013F834 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9655293A253D86CF0013F834 /* Task.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		15469272260E4C44007D8238 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		156EBB102611D08200BDC565 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		5DBD9041261458DA00732A50 /* String+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ext.swift"; sourceTree = "<group>"; };
 		5DD6E90C260CF36300B352F4 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		72F18A26507E7F4027B94B8E /* Pods-TODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TODO.release.xcconfig"; path = "Target Support Files/Pods-TODO/Pods-TODO.release.xcconfig"; sourceTree = "<group>"; };
 		7AAF261960F9984306264C1D /* Pods_TODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,14 @@
 				7AAF261960F9984306264C1D /* Pods_TODO.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5DBD9040261458B500732A50 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5DBD9041261458DA00732A50 /* String+ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		5DD6E90B260CF34F00B352F4 /* View */ = {
@@ -123,6 +133,7 @@
 		96600B4E253D057E00F3FDC1 /* TODO */ = {
 			isa = PBXGroup;
 			children = (
+				5DBD9040261458B500732A50 /* Extensions */,
 				96552944253D93E30013F834 /* Protocol */,
 				9655293F253D896C0013F834 /* Main */,
 				96600B67253D083D00F3FDC1 /* Screen */,
@@ -315,6 +326,7 @@
 			files = (
 				96552946253D94010013F834 /* TaskProtocol.swift in Sources */,
 				96600B50253D057E00F3FDC1 /* AppDelegate.swift in Sources */,
+				5DBD9042261458DA00732A50 /* String+ext.swift in Sources */,
 				96600B70253D0BCC00F3FDC1 /* GeneralTableViewController.swift in Sources */,
 				96552943253D8C490013F834 /* Main.swift in Sources */,
 				9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */,

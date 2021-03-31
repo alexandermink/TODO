@@ -27,16 +27,26 @@ class ToolBar {
 
 extension UIViewController {
     
-    func createToolBarCategories() -> UIToolbar {
+    func makeToolBarCategories() -> UIToolbar {
         let toolBar = ToolBar.configDoneButton()
-        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.toolBarDoneAction))
-        let deleteButton = UIBarButtonItem(title: "Удалить", style: .done, target: self, action: #selector(NewTaskViewController.toolBarDeleteAction))
+        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.chooseCategoryAction))
+        let deleteButton = UIBarButtonItem(title: "Удалить", style: .done, target: self, action: #selector(NewTaskViewController.deleteCategoryAction))
         doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 22), for: .normal)
         doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 18), for: .highlighted)
         deleteButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 22), for: .normal)
         deleteButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 18), for: .highlighted)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([flexSpace, deleteButton, doneButton], animated: true)
+        return toolBar
+    }
+    
+    func makeToolBarNotifications() -> UIToolbar {
+        let toolBar = ToolBar.configDoneButton()
+        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.chooseNotificationAction))
+        doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 22), for: .normal)
+        doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 18), for: .highlighted)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([flexSpace, doneButton], animated: true)
         return toolBar
     }
 }
