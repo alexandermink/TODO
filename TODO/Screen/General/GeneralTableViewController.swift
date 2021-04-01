@@ -102,7 +102,6 @@ class GeneralTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let destinationVC = TaskDetailViewController()
         let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-//        destinationVC.taskName = object.sectionName
         destinationVC.taskName = object.name
         destinationVC.taskDate = object.date
         router?.present(vc: destinationVC)
