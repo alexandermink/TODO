@@ -93,7 +93,7 @@ class GeneralTableViewController: UITableViewController {
     
     
     @IBAction func newTaskBarButton(_ sender: UIBarButtonItem) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
         router?.present(vc: destinationVC)
     }
@@ -102,7 +102,6 @@ class GeneralTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let destinationVC = TaskDetailViewController()
         let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-//        destinationVC.taskName = object.sectionName
         destinationVC.taskName = object.name
         destinationVC.taskDate = object.date
         router?.present(vc: destinationVC)
