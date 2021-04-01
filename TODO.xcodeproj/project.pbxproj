@@ -10,6 +10,7 @@
 		15469273260E4C44007D8238 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15469272260E4C44007D8238 /* BaseRouter.swift */; };
 		156EBB112611D08200BDC565 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156EBB102611D08200BDC565 /* TaskDetailViewController.swift */; };
 		15F9973B2615DC29003FFD71 /* RouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9973A2615DC29003FFD71 /* RouterFactory.swift */; };
+		15F9973E2615E17E003FFD71 /* NewTaskStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15F9973D2615E17E003FFD71 /* NewTaskStoryboard.storyboard */; };
 		5DBD9042261458DA00732A50 /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBD9041261458DA00732A50 /* String+ext.swift */; };
 		5DD6E90D260CF36300B352F4 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6E90C260CF36300B352F4 /* ToolBar.swift */; };
 		875DEC27DBB556E1B9DD43A7 /* Pods_TODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF261960F9984306264C1D /* Pods_TODO.framework */; };
@@ -31,6 +32,7 @@
 		15469272260E4C44007D8238 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		156EBB102611D08200BDC565 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		15F9973A2615DC29003FFD71 /* RouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterFactory.swift; sourceTree = "<group>"; };
+		15F9973D2615E17E003FFD71 /* NewTaskStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewTaskStoryboard.storyboard; sourceTree = "<group>"; };
 		5DBD9041261458DA00732A50 /* String+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ext.swift"; sourceTree = "<group>"; };
 		5DD6E90C260CF36300B352F4 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		72F18A26507E7F4027B94B8E /* Pods-TODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TODO.release.xcconfig"; path = "Target Support Files/Pods-TODO/Pods-TODO.release.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				9664687525A6967300443B81 /* NewTaskViewController.swift */,
+				15F9973D2615E17E003FFD71 /* NewTaskStoryboard.storyboard */,
 			);
 			path = NewTask;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96600B5C253D058200F3FDC1 /* LaunchScreen.storyboard in Resources */,
+				15F9973E2615E17E003FFD71 /* NewTaskStoryboard.storyboard in Resources */,
 				96600B59253D058200F3FDC1 /* Assets.xcassets in Resources */,
 				96600B57253D057E00F3FDC1 /* Main.storyboard in Resources */,
 			);
