@@ -39,12 +39,15 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
         dateFormatter111.timeZone = .autoupdatingCurrent
-        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
+//        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
+        dateFormatter111.dateFormat = "dd.MM.yyyy, HH:mm"
         calendar.timeZone = .autoupdatingCurrent
         router = BaseRouter(viewController: self)
         membersButton.layer.cornerRadius = 5
@@ -53,7 +56,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         sections = Main.instance.getCategoriesFromRealm()
         newSectionTextField.textAlignment = .center
         print(sections ?? "секции отсутствуют")
-        newSectionTextField.text = sections?[0]        
+        newSectionTextField.text = sections?[0]
     }
 
     // MARK: - ACTIONS
@@ -93,7 +96,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         notificationTF.text = dateFormatter111.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTF.text!)?.localString()
         print("Нажата кнопка 'Готово' выбора даты уведомления")
-        print(Main.instance.notificationDate ?? "синглтон с типом String")
+        print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
+        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
         view.endEditing(true)
     }
     
@@ -105,8 +109,11 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func makeIntervalNotificationTrigger() -> UNNotificationTrigger {
+        let ttt = dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970 // выбранное время
+        let ggg = Date().timeIntervalSince1970 // текущее время
+        let rrr = ttt - ggg // интервал в секундах между выбранным и текущим
         return UNTimeIntervalNotificationTrigger(
-            timeInterval: 10,
+            timeInterval: rrr,
             repeats: false
         )
     }
