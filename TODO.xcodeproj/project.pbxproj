@@ -163,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				96600B5A253D058200F3FDC1 /* LaunchScreen.storyboard */,
-				96600B55253D057E00F3FDC1 /* Main.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -193,6 +192,7 @@
 			children = (
 				96600B6F253D0BCC00F3FDC1 /* GeneralTableViewController.swift */,
 				96600B71253D0BE400F3FDC1 /* GeneralTableViewCell.swift */,
+				96600B55253D057E00F3FDC1 /* Main.storyboard */,
 			);
 			path = General;
 			sourceTree = "<group>";
