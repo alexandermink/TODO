@@ -68,12 +68,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         if (sectionName != "") && (taskName != "") {
             Main.instance.addTask(section: sectionName!, name: taskName!)
             router?.dismiss(animated: true, completion: nil)
-
-        } else {
-            let alert = UIAlertController(title: "Empty fields", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
+        
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
             trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970*2)
@@ -118,5 +114,4 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print(categoryPicker.selectedRow(inComponent: 0))
 //        Main.instance.deleteSection(delSectionName: row)
     }
-
 }
