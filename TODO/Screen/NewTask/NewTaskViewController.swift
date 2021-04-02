@@ -12,8 +12,6 @@ import UserNotifications
 
 class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    
-    
     @IBOutlet weak var newSectionTextField: UITextField! {
         didSet{
             newSectionTextField.inputView = categoryPicker
@@ -36,6 +34,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let notificationPicker = UIDatePicker()
     let dateFormatter111 = DateFormatter()
     var calendar = Calendar.current
+    let notificationService = NotificationService()
     
     
     
@@ -75,9 +74,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        sendNotificationRequest(
-            content: self.makeNotificationContent(),
-            trigger: self.makeIntervalNotificationTrigger()
+        notificationService.sendNotificationRequest(
+            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970*2)
         )
     }
     
@@ -95,45 +94,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @objc func chooseNotificationAction() {
         notificationTF.text = dateFormatter111.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTF.text!)?.localString()
-        print("Нажата кнопка 'Готово' выбора даты уведомления")
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
         view.endEditing(true)
-    }
-    
-    func makeNotificationContent() -> UNNotificationContent {
-        let content = UNMutableNotificationContent()
-        content.title = newTaskNameTextField.text ?? ""
-        content.badge = 1
-        return content
-    }
-    
-    func makeIntervalNotificationTrigger() -> UNNotificationTrigger {
-        let ttt = dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970 // выбранное время
-        let ggg = Date().timeIntervalSince1970 // текущее время
-        let rrr = ttt - ggg // интервал в секундах между выбранным и текущим
-        return UNTimeIntervalNotificationTrigger(
-            timeInterval: rrr,
-            repeats: false
-        )
-    }
-    
-    func sendNotificationRequest(
-        content: UNNotificationContent,
-        trigger: UNNotificationTrigger) {
-        
-        let request = UNNotificationRequest(
-            identifier: "notification",
-            content: content,
-            trigger: trigger
-        )
-        
-        let center = UNUserNotificationCenter.current()
-        center.add(request) { error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
     }
     
     // MARK: - TABLE
