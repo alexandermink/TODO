@@ -27,6 +27,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
+    @IBOutlet weak var stackWiew: UIStackView!
+    @IBOutlet weak var stackWidthConstr: NSLayoutConstraint!
+    @IBOutlet weak var stackRowsHeight: NSLayoutConstraint!
     
     var sections: [String]?
     var router: BaseRouter?
@@ -56,6 +59,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         newSectionTextField.textAlignment = .center
         print(sections ?? "секции отсутствуют")
         newSectionTextField.text = sections?[0]
+        
+        stackWidthConstr.constant = view.frame.width/1.6
+        stackRowsHeight.constant = view.frame.height/24
+        stackWiew.spacing = view.frame.height/40
     }
 
     // MARK: - ACTIONS
