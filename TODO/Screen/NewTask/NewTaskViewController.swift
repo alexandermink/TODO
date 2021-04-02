@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIColorPickerViewControllerDelegate {
     
     @IBOutlet weak var newSectionTextField: UITextField! {
         didSet{
@@ -75,6 +75,19 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970*2)
         )
     }
+    
+    @IBAction func pickColorButtonTapped(_ sender: UIButton) {
+        let colorPickerVC = UIColorPickerViewController()
+        colorPickerVC.delegate = self
+        present(colorPickerVC, animated: true)
+    }
+        
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        let color = viewController.selectedColor
+        view.backgroundColor = color
+    }
+    
+    
     
     @objc func deleteCategoryAction() {
         Main.instance.deleteSection(delSectionName: newSectionTextField.text ?? "")
