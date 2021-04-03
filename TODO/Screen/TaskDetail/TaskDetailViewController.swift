@@ -10,8 +10,12 @@ import UIKit
 
 class TaskDetailViewController: UIViewController{
     
+    var taskNameTitleLabel: UILabel!
     var taskNameLabel: UILabel!
+    var taskDateTitleLabel: UILabel!
     var taskDateLabel: UILabel!
+    var taskDetailTitleLabel: UILabel!
+    var taskDetailLabel: UILabel!
     
     var taskName: String?
     var taskDate: Date?
@@ -21,34 +25,78 @@ class TaskDetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        dateFormatter.dateFormat = "dd-MM-yyyy hh:mm:ss"
+        dateFormatter.dateFormat = "dd-MM-yyyy"
         let formattedDate = dateFormatter.string(from: taskDate!)
         
+        taskNameTitleLabel = UILabel()
+        taskNameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskNameTitleLabel.text = "Название:"
+        taskNameTitleLabel.textColor = .black
+        taskNameTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskNameTitleLabel)
         
         taskNameLabel = UILabel()
         taskNameLabel.translatesAutoresizingMaskIntoConstraints = false
         taskNameLabel.text = taskName
-        taskNameLabel.textColor = .black
-        taskNameLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        taskNameLabel.textColor = .systemOrange
+        taskNameLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskNameLabel)
+        
+        taskDateTitleLabel = UILabel()
+        taskDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskDateTitleLabel.text = "Дата регистрации задачи:"
+        taskDateTitleLabel.textColor = .black
+        taskDateTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskDateTitleLabel)
         
         taskDateLabel = UILabel()
         taskDateLabel.translatesAutoresizingMaskIntoConstraints = false
         taskDateLabel.text = formattedDate
-        taskDateLabel.textColor = .black
-        taskDateLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        taskDateLabel.textColor = .systemOrange
+        taskDateLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDateLabel)
+        
+        taskDetailTitleLabel = UILabel()
+        taskDetailTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskDetailTitleLabel.text = "Описание задачи:"
+        taskDetailTitleLabel.textColor = .black
+        taskDetailTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskDetailTitleLabel)
+        
+        taskDetailLabel = UILabel()
+        taskDetailLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskDetailLabel.text = "Заглушка описания задачи. Повседневная практика показывает, что выбранный нами инновационный путь напрямую зависит от ключевых компонентов планируемого обновления."
+        taskDetailLabel.numberOfLines = 10
+        taskDetailLabel.textAlignment = .left
+        taskDetailLabel.textColor = .systemOrange
+        taskDetailLabel.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskDetailLabel)
         
         constrainsInit()
     }
     
     func constrainsInit(){
         NSLayoutConstraint.activate([
-            taskNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            
+            taskNameTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 64),
+            taskNameTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            taskNameLabel.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 24),
             taskNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            taskDateLabel.topAnchor.constraint(equalTo: taskNameLabel.topAnchor, constant: 50),
-            taskDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            taskDateTitleLabel.topAnchor.constraint(equalTo: taskNameLabel.topAnchor, constant: 40),
+            taskDateTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 24),
+            taskDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            taskDetailTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 40),
+            taskDetailTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            taskDetailLabel.topAnchor.constraint(equalTo: taskDetailTitleLabel.topAnchor, constant: 24),
+            taskDetailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taskDetailLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            taskDetailLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 12)
             
         ])
     }
