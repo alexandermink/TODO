@@ -10,9 +10,7 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    
+class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIColorPickerViewControllerDelegate {
     
     @IBOutlet weak var newSectionTextField: UITextField! {
         didSet{
@@ -29,6 +27,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
+    @IBOutlet weak var stackWiew: UIStackView!
+    @IBOutlet weak var stackWidthConstr: NSLayoutConstraint!
+    @IBOutlet weak var stackRowsHeight: NSLayoutConstraint!
     
     var sections: [String]?
     var router: BaseRouter?
@@ -36,6 +37,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let notificationPicker = UIDatePicker()
     let dateFormatter111 = DateFormatter()
     var calendar = Calendar.current
+    let notificationService = NotificationService()
     
     
     
@@ -57,6 +59,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         newSectionTextField.textAlignment = .center
         print(sections ?? "секции отсутствуют")
         newSectionTextField.text = sections?[0]
+        
+        stackWidthConstr.constant = view.frame.width/1.6
+        stackRowsHeight.constant = view.frame.height/24
+        stackWiew.spacing = view.frame.height/40
     }
 
     // MARK: - ACTIONS
@@ -69,17 +75,26 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         if (sectionName != "") && (taskName != "") {
             Main.instance.addTask(section: sectionName!, name: taskName!)
             router?.dismiss(animated: true, completion: nil)
-
-        } else {
-            let alert = UIAlertController(title: "Empty fields", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        sendNotificationRequest(
-            content: self.makeNotificationContent(),
-            trigger: self.makeIntervalNotificationTrigger()
+        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
+        
+        notificationService.sendNotificationRequest(
+            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970*2)
         )
     }
+    
+    @IBAction func pickColorButtonTapped(_ sender: UIButton) {
+        let colorPickerVC = UIColorPickerViewController()
+        colorPickerVC.delegate = self
+        present(colorPickerVC, animated: true)
+    }
+        
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        let color = viewController.selectedColor
+        view.backgroundColor = color
+    }
+    
+    
     
     @objc func deleteCategoryAction() {
         Main.instance.deleteSection(delSectionName: newSectionTextField.text ?? "")
@@ -95,45 +110,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @objc func chooseNotificationAction() {
         notificationTF.text = dateFormatter111.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTF.text!)?.localString()
-        print("Нажата кнопка 'Готово' выбора даты уведомления")
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
         view.endEditing(true)
-    }
-    
-    func makeNotificationContent() -> UNNotificationContent {
-        let content = UNMutableNotificationContent()
-        content.title = newTaskNameTextField.text ?? ""
-        content.badge = 1
-        return content
-    }
-    
-    func makeIntervalNotificationTrigger() -> UNNotificationTrigger {
-        let ttt = dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970 // выбранное время
-        let ggg = Date().timeIntervalSince1970 // текущее время
-        let rrr = ttt - ggg // интервал в секундах между выбранным и текущим
-        return UNTimeIntervalNotificationTrigger(
-            timeInterval: rrr,
-            repeats: false
-        )
-    }
-    
-    func sendNotificationRequest(
-        content: UNNotificationContent,
-        trigger: UNNotificationTrigger) {
-        
-        let request = UNNotificationRequest(
-            identifier: "notification",
-            content: content,
-            trigger: trigger
-        )
-        
-        let center = UNUserNotificationCenter.current()
-        center.add(request) { error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
     }
     
     // MARK: - TABLE
@@ -155,5 +134,4 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print(categoryPicker.selectedRow(inComponent: 0))
 //        Main.instance.deleteSection(delSectionName: row)
     }
-
 }

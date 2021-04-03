@@ -1,14 +1,17 @@
 //
-//  ToolBar.swift
+//  ToolBarBuilders.swift
 //  TODO
 //
-//  Created by Vit K on 25.03.2021.
+//  Created by Vit K on 02.04.2021.
 //  Copyright © 2021 Alexander Mink. All rights reserved.
 //
 
 import UIKit
 
-class ToolBar {
+class ToolBarBuilder {
+    
+    static let size1 = 22
+    static let size2 = 18
     
     static func setAttributedString(textSize: CGFloat) -> [NSAttributedString.Key: Any]{
         let doneBtn: [NSAttributedString.Key: Any]
@@ -28,23 +31,23 @@ class ToolBar {
 extension UIViewController {
     
     func makeToolBarCategories() -> UIToolbar {
-        let toolBar = ToolBar.configDoneButton()
+        let toolBar = ToolBarBuilder.configDoneButton()
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.chooseCategoryAction))
         let deleteButton = UIBarButtonItem(title: "Удалить", style: .done, target: self, action: #selector(NewTaskViewController.deleteCategoryAction))
-        doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 22), for: .normal)
-        doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 18), for: .highlighted)
-        deleteButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 22), for: .normal)
-        deleteButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 18), for: .highlighted)
+        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
+        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size2)), for: .highlighted)
+        deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
+        deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size2)), for: .highlighted)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([flexSpace, deleteButton, doneButton], animated: true)
         return toolBar
     }
     
     func makeToolBarNotifications() -> UIToolbar {
-        let toolBar = ToolBar.configDoneButton()
+        let toolBar = ToolBarBuilder.configDoneButton()
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.chooseNotificationAction))
-        doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 22), for: .normal)
-        doneButton.setTitleTextAttributes(ToolBar.setAttributedString(textSize: 18), for: .highlighted)
+        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
+        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .highlighted)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([flexSpace, doneButton], animated: true)
         return toolBar

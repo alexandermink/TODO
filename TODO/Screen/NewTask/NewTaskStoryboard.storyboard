@@ -27,15 +27,12 @@
                                     <action selector="createNewTaskButton:" destination="ZIG-J0-Jce" eventType="touchUpInside" id="ddH-ZH-Chx"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-Dh-4XR">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-Dh-4XR">
                                 <rect key="frame" x="57" y="299" width="300" height="298"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Выберите секцию" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="twg-EY-wp1">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="GEi-iT-4bK"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -47,9 +44,6 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Название" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-wz-RRO">
                                         <rect key="frame" x="0.0" y="44" width="300" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="mvY-cb-bOF"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -62,19 +56,18 @@
                                         <rect key="frame" x="0.0" y="88" width="300" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="akn-aP-Uxd"/>
                                             <constraint firstAttribute="height" constant="34" id="cAf-ke-gn6"/>
                                         </constraints>
                                         <state key="normal" title="Обложка">
                                             <color key="titleColor" systemColor="systemIndigoColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pickColorButtonTapped:" destination="ZIG-J0-Jce" eventType="touchUpInside" id="dcp-W7-9OC"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Описание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2tT-nH-U0R">
                                         <rect key="frame" x="0.0" y="132" width="300" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="us8-Xl-yX2"/>
-                                        </constraints>
                                         <color key="textColor" systemColor="systemBlueColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -87,9 +80,6 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Напоминание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ws-xw-BHA">
                                         <rect key="frame" x="0.0" y="176" width="300" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="inQ-xJ-Rz8"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -101,10 +91,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeI-TI-3Ap">
                                         <rect key="frame" x="0.0" y="220" width="300" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="XDg-KZ-ZwP"/>
-                                            <constraint firstAttribute="height" constant="34" id="j3g-k9-vOV"/>
-                                        </constraints>
                                         <state key="normal" title="Участники">
                                             <color key="titleColor" systemColor="systemIndigoColor"/>
                                         </state>
@@ -112,15 +98,14 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVR-cd-gGp">
                                         <rect key="frame" x="0.0" y="264" width="300" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="Dpu-46-HS3"/>
-                                            <constraint firstAttribute="width" constant="300" id="U1s-JR-aKw"/>
-                                        </constraints>
                                         <state key="normal" title="Чек лист">
                                             <color key="titleColor" systemColor="systemIndigoColor"/>
                                         </state>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="MMj-u8-8QQ"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="B9L-pa-vsv"/>
@@ -140,6 +125,9 @@
                         <outlet property="newSectionTextField" destination="twg-EY-wp1" id="OOy-5L-sEB"/>
                         <outlet property="newTaskNameTextField" destination="gRX-wz-RRO" id="nk9-sN-u2g"/>
                         <outlet property="notificationTF" destination="2ws-xw-BHA" id="MvX-Gr-IWx"/>
+                        <outlet property="stackRowsHeight" destination="cAf-ke-gn6" id="zAy-bZ-o05"/>
+                        <outlet property="stackWidthConstr" destination="MMj-u8-8QQ" id="WoO-4b-3OT"/>
+                        <outlet property="stackWiew" destination="ZG6-Dh-4XR" id="5vM-5I-bYA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paz-JO-ksn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
