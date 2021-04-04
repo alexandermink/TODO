@@ -121,6 +121,7 @@
                     <connections>
                         <outlet property="checkListButton" destination="VVR-cd-gGp" id="fL7-gp-sKH"/>
                         <outlet property="coverButton" destination="3VI-PW-BYs" id="Iro-TD-ffN"/>
+                        <outlet property="descriptionTextField" destination="2tT-nH-U0R" id="Nli-dk-0Nj"/>
                         <outlet property="membersButton" destination="BeI-TI-3Ap" id="0AK-jm-x4F"/>
                         <outlet property="newSectionTextField" destination="twg-EY-wp1" id="OOy-5L-sEB"/>
                         <outlet property="newTaskNameTextField" destination="gRX-wz-RRO" id="nk9-sN-u2g"/>

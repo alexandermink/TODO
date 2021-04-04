@@ -19,6 +19,7 @@ class TaskDetailViewController: UIViewController{
     
     var taskName: String?
     var taskDate: Date?
+    var taskDescription: String?
     
     let dateFormatter = DateFormatter()
     
@@ -65,9 +66,9 @@ class TaskDetailViewController: UIViewController{
         
         taskDetailLabel = UILabel()
         taskDetailLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskDetailLabel.text = "Заглушка описания задачи. Повседневная практика показывает, что выбранный нами инновационный путь напрямую зависит от ключевых компонентов планируемого обновления."
+        taskDetailLabel.text = taskDescription
         taskDetailLabel.numberOfLines = 10
-        taskDetailLabel.textAlignment = .left
+        taskDetailLabel.textAlignment = .natural
         taskDetailLabel.textColor = .systemOrange
         taskDetailLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDetailLabel)
