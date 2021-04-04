@@ -14,11 +14,13 @@ struct Task {
     var id: Int = -1
     var name: String = ""
     var date: Date = Date()
+    var descriptionDetail: String = ""
     
-    init(id: Int, name: String, date: Date) {
+    init(id: Int, name: String, date: Date, descriptionDetail: String) {
         self.id = id
         self.name = name
         self.date = date
+        self.descriptionDetail = descriptionDetail
     }
     
     init() { }
@@ -29,6 +31,7 @@ class TaskRealm: Object {
     @objc var id: Int = -1
     @objc var name: String = ""
     @objc var date: Date = Date()
+    @objc var descriptionDetail: String = ""
     
     override class func primaryKey() -> String? {
         return "id"

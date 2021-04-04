@@ -37,7 +37,7 @@ extension Main: TaskProtocol {
         }
     }
     
-    func addTask(section: String, name: String) {
+    func addTask(section: String, name: String, descriptionDetail: String) {
         let realm = try! Realm()
         
         let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.value(forKey: "id") as? Int ?? 0) + 1
@@ -48,16 +48,17 @@ extension Main: TaskProtocol {
         if !self.userSession.tasks.isEmpty {
             for i in 0..<self.userSession.tasks.count {
                 if self.userSession.tasks[i].sectionName == section {
-                    self.userSession.tasks[i].sectionTasks.append(Task(id: id, name: name, date: date))
+                    self.userSession.tasks[i].sectionTasks.append(Task(id: id, name: name, date: date, descriptionDetail: descriptionDetail))
                 }
             }
         } else {
-            self.userSession.tasks.append(TasksStruct(section: section, tasks: [Task(id: id, name: name, date: date)]))
+            self.userSession.tasks.append(TasksStruct(section: section, tasks: [Task(id: id, name: name, date: date, descriptionDetail: descriptionDetail)]))
         }
         let taskRealm = TaskRealm()
         taskRealm.id = id
         taskRealm.name = name
         taskRealm.date = date
+        taskRealm.descriptionDetail = descriptionDetail
         try! realm.write {
             let tTaskSection = realm.objects(TasksStructRealm.self).filter("sectionName = '\(section)'").first
             tTaskSection?.sectionTasks.append(taskRealm)
@@ -80,6 +81,7 @@ extension Main: TaskProtocol {
                             tTask.id = tasksArrayRealm[i].sectionTasks[j].value(forKey: "id") as! Int
                             tTask.name = tasksArrayRealm[i].sectionTasks[j].value(forKey: "name") as! String
                             tTask.date = tasksArrayRealm[i].sectionTasks[j].value(forKey: "date") as! Date
+                            tTask.descriptionDetail = tasksArrayRealm[i].sectionTasks[j].value(forKey: "descriptionDetail") as! String
                             tTaskArray.sectionTasks.append(tTask)
                         }
                     }
