@@ -31,6 +31,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var stackWiew: UIStackView!
     @IBOutlet weak var stackWidthConstr: NSLayoutConstraint!
     @IBOutlet weak var stackRowsHeight: NSLayoutConstraint!
+    @IBOutlet weak var descriptionTextField: UITextField!
     
     var sections: [String]?
     var router: BaseRouter?
@@ -76,6 +77,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         if !sectionName.isEmpty && !taskName.isEmpty {
             //            Main.instance.addTask(section: sectionName!, name: taskName!)
             try? Main.instance.addTask(sectionName: sectionName, name: taskName, backgroundColor: nil, taskDescription: nil, notificationDate: nil)
+        /*let sectionName: String? = newSectionTextField.text
+        let taskName: String? = newTaskNameTextField.text
+        let description: String? = descriptionTextField.text
+        
+        if (sectionName != "") && (taskName != "") && (description != ""){
+            Main.instance.addTask(section: sectionName!, name: taskName!, descriptionDetail: description!)
+          */
             router?.dismiss(animated: true, completion: nil)
         } else { showAlert(title: "Ошибка", message: "Заполните поля") }
         

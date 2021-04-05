@@ -109,6 +109,8 @@ class GeneralTableViewController: UITableViewController {
         let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
         destinationVC.taskName = object.name
 //        destinationVC.taskDate = object.date
+        //destinationVC.taskDate = object.date
+        //destinationVC.taskDescription = object.descriptionDetail
         router?.present(vc: destinationVC)
         
     }
