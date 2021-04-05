@@ -19,7 +19,7 @@
 		9655293B253D86CF0013F834 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9655293A253D86CF0013F834 /* Task.swift */; };
 		96552941253D89760013F834 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96552940253D89760013F834 /* UserSession.swift */; };
 		96552943253D8C490013F834 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96552942253D8C490013F834 /* Main.swift */; };
-		96552946253D94010013F834 /* TaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96552945253D94010013F834 /* TaskProtocol.swift */; };
+		96552946253D94010013F834 /* LocalDataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96552945253D94010013F834 /* LocalDataBaseService.swift */; };
 		96600B50253D057E00F3FDC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96600B4F253D057E00F3FDC1 /* AppDelegate.swift */; };
 		96600B52253D057E00F3FDC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96600B51253D057E00F3FDC1 /* SceneDelegate.swift */; };
 		96600B57253D057E00F3FDC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96600B55253D057E00F3FDC1 /* Main.storyboard */; };
@@ -28,6 +28,7 @@
 		96600B70253D0BCC00F3FDC1 /* GeneralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96600B6F253D0BCC00F3FDC1 /* GeneralTableViewController.swift */; };
 		96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96600B71253D0BE400F3FDC1 /* GeneralTableViewCell.swift */; };
 		9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9664687525A6967300443B81 /* NewTaskViewController.swift */; };
+		96663008261A6F25000CF25F /* TaskRealmConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96663007261A6F25000CF25F /* TaskRealmConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +46,7 @@
 		9655293A253D86CF0013F834 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		96552940253D89760013F834 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		96552942253D8C490013F834 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		96552945253D94010013F834 /* TaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProtocol.swift; sourceTree = "<group>"; };
+		96552945253D94010013F834 /* LocalDataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBaseService.swift; sourceTree = "<group>"; };
 		96600B4C253D057E00F3FDC1 /* TODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96600B4F253D057E00F3FDC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96600B51253D057E00F3FDC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		96600B6F253D0BCC00F3FDC1 /* GeneralTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableViewController.swift; sourceTree = "<group>"; };
 		96600B71253D0BE400F3FDC1 /* GeneralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableViewCell.swift; sourceTree = "<group>"; };
 		9664687525A6967300443B81 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		96663007261A6F25000CF25F /* TaskRealmConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealmConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				5D32F3CC2616DD1E008C1A58 /* Builders */,
 				5D32F3D22616E43D008C1A58 /* NotificationService.swift */,
+				96663007261A6F25000CF25F /* TaskRealmConverter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -125,7 +128,7 @@
 		96552944253D93E30013F834 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				96552945253D94010013F834 /* TaskProtocol.swift */,
+				96552945253D94010013F834 /* LocalDataBaseService.swift */,
 				15F9973A2615DC29003FFD71 /* RouterFactory.swift */,
 			);
 			path = Protocol;
@@ -345,7 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96552946253D94010013F834 /* TaskProtocol.swift in Sources */,
+				96552946253D94010013F834 /* LocalDataBaseService.swift in Sources */,
 				96600B50253D057E00F3FDC1 /* AppDelegate.swift in Sources */,
 				5DBD9042261458DA00732A50 /* String+ext.swift in Sources */,
 				96600B70253D0BCC00F3FDC1 /* GeneralTableViewController.swift in Sources */,
@@ -361,6 +364,7 @@
 				96600B52253D057E00F3FDC1 /* SceneDelegate.swift in Sources */,
 				5D32F3D32616E43D008C1A58 /* NotificationService.swift in Sources */,
 				15F9973B2615DC29003FFD71 /* RouterFactory.swift in Sources */,
+				96663008261A6F25000CF25F /* TaskRealmConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

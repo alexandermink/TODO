@@ -13,12 +13,21 @@ struct Task {
     
     var id: Int = -1
     var name: String = ""
-    var date: Date = Date()
+    var backgroundColor: UIColor? = UIColor()
+    var taskDescription: String? = ""
+    var creationDate: Date = Date()
+    var notificationDate: String? = ""
+    // TODO: сделать авторизацию
+//    var members: [String]?
     
-    init(id: Int, name: String, date: Date) {
+    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?) {
         self.id = id
         self.name = name
-        self.date = date
+        self.backgroundColor = backgroundColor
+        self.taskDescription = taskDescription
+        self.creationDate = creationDate
+        self.notificationDate = notificationDate
+//        self.members = members
     }
     
     init() { }
@@ -29,18 +38,27 @@ class TaskRealm: Object {
     @objc var id: Int = -1
     @objc var name: String = ""
     @objc var date: Date = Date()
+    @objc var backgroundColor: UIColor = UIColor()
+    @objc var taskDescription: String? = ""
+    @objc var creationDate: Date = Date()
+    @objc var notificationDate: String? = ""
+//    var members = List<String>()
     
     override class func primaryKey() -> String? {
         return "id"
     }
+    
+    override class func ignoredProperties() -> [String] {
+        return ["backgroundColor"]
+    }
 }
 
-struct TasksStruct: Comparable {
-    static func < (lhs: TasksStruct, rhs: TasksStruct) -> Bool {
+struct SectionTask: Comparable {
+    static func < (lhs: SectionTask, rhs: SectionTask) -> Bool {
         return lhs.sectionName < rhs.sectionName
     }
     
-    static func == (lhs: TasksStruct, rhs: TasksStruct) -> Bool {
+    static func == (lhs: SectionTask, rhs: SectionTask) -> Bool {
         return lhs.sectionName == rhs.sectionName
     }
     
@@ -49,8 +67,8 @@ struct TasksStruct: Comparable {
     
     init() { }
     
-    init(section: String, tasks: [Task]) {
-        self.sectionName = section
+    init(sectionName: String, tasks: [Task]) {
+        self.sectionName = sectionName
         self.sectionTasks = tasks
     }
     
@@ -59,7 +77,7 @@ struct TasksStruct: Comparable {
     }
 }
 
-class TasksStructRealm: Object {
+class SectionTaskRealm: Object {
     @objc var sectionName: String = ""
     let sectionTasks = List<TaskRealm>()
     

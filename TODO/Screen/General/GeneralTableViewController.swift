@@ -20,14 +20,15 @@ class GeneralTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         router = BaseRouter(viewController: self)
-                
-        Main.instance.getTasksFromRealm()
-        Main.instance.addSection(section: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
-        Main.instance.addSection(section: "Базовая секция № 1")
+             
+        try? Main.instance.updateTasksFromRealm()
+        try! Main.instance.addSection(sectionName: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
+        try! Main.instance.addSection(sectionName: "Базовая секция № 1")
         
         self.realmTokenTasks = realm.objects(TaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
+                try? Main.instance.updateTasksFromRealm()
                 self.tableView.reloadData()
             case .initial(_): break
             case .error(_): break
@@ -74,7 +75,7 @@ class GeneralTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            Main.instance.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
+            try? Main.instance.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
             
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             
@@ -107,7 +108,7 @@ class GeneralTableViewController: UITableViewController {
         let destinationVC = TaskDetailViewController()
         let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
         destinationVC.taskName = object.name
-        destinationVC.taskDate = object.date
+//        destinationVC.taskDate = object.date
         router?.present(vc: destinationVC)
         
     }
