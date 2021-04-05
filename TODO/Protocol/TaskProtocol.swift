@@ -9,10 +9,10 @@
 import UIKit
 
 protocol TaskProtocol {
-    func addSection(section: String)
-    func addTask(section: String, name: String, descriptionDetail: String)
-    func getTasksFromRealm()
-    func getCategoriesFromRealm() -> [String]
-    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int)
-    func deleteSection(delSectionName: String)
+    func addSection(sectionName: String) throws
+    func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?) throws
+    func updateTasksFromRealm() throws
+    func getSectionsFromRealm() throws -> [String]
+    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws
+    func deleteSection(delSectionName: String) throws
 }

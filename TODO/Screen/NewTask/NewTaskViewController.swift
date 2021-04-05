@@ -12,17 +12,18 @@ import UserNotifications
 
 class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIColorPickerViewControllerDelegate {
     
-    @IBOutlet weak var newSectionTextField: UITextField! {
+    @IBOutlet weak var newSectionTextField: UITextField? {
         didSet{
-            newSectionTextField.inputView = categoryPicker
-            newSectionTextField.inputAccessoryView = makeToolBarCategories()
+            newSectionTextField?.inputView = categoryPicker
+            newSectionTextField?.inputAccessoryView = makeToolBarCategories()
         }
     }
-    @IBOutlet weak var notificationTF: UITextField! {didSet {
-        notificationTF.inputAccessoryView = makeToolBarNotifications()
-        notificationTF.inputView = notificationPicker
-        if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
-    }}
+    @IBOutlet weak var notificationTF: UITextField? {
+        didSet {
+            notificationTF?.inputAccessoryView = makeToolBarNotifications()
+            notificationTF?.inputView = notificationPicker
+            if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
+}}
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
@@ -49,39 +50,46 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
         dateFormatter111.timeZone = .autoupdatingCurrent
-//        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
+        //        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
         dateFormatter111.dateFormat = "dd.MM.yyyy, HH:mm"
         calendar.timeZone = .autoupdatingCurrent
         router = BaseRouter(viewController: self)
         membersButton.layer.cornerRadius = 5
         checkListButton.layer.cornerRadius = 5
         coverButton.layer.cornerRadius = 5
-        sections = Main.instance.getCategoriesFromRealm()
-        newSectionTextField.textAlignment = .center
+        sections = try? Main.instance.getSectionsFromRealm()
+        newSectionTextField?.textAlignment = .center
         print(sections ?? "секции отсутствуют")
-        newSectionTextField.text = sections?[0]
+        newSectionTextField?.text = sections?[0]
         
         stackWidthConstr.constant = view.frame.width/1.6
         stackRowsHeight.constant = view.frame.height/24
         stackWiew.spacing = view.frame.height/40
     }
-
+    
     // MARK: - ACTIONS
     
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
-        let sectionName: String? = newSectionTextField.text
+        let sectionName: String = newSectionTextField?.text ?? ""
+        let taskName: String = newTaskNameTextField.text ?? ""
+        
+        if !sectionName.isEmpty && !taskName.isEmpty {
+            //            Main.instance.addTask(section: sectionName!, name: taskName!)
+            try? Main.instance.addTask(sectionName: sectionName, name: taskName, backgroundColor: nil, taskDescription: nil, notificationDate: nil)
+        /*let sectionName: String? = newSectionTextField.text
         let taskName: String? = newTaskNameTextField.text
         let description: String? = descriptionTextField.text
         
         if (sectionName != "") && (taskName != "") && (description != ""){
             Main.instance.addTask(section: sectionName!, name: taskName!, descriptionDetail: description!)
+          */
             router?.dismiss(animated: true, completion: nil)
         } else { showAlert(title: "Ошибка", message: "Заполните поля") }
         
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970*2)
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
         )
     }
     
@@ -90,7 +98,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         colorPickerVC.delegate = self
         present(colorPickerVC, animated: true)
     }
-        
+    
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         let color = viewController.selectedColor
         view.backgroundColor = color
@@ -99,7 +107,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     
     @objc func deleteCategoryAction() {
-        Main.instance.deleteSection(delSectionName: newSectionTextField.text ?? "")
+        try? Main.instance.deleteSection(delSectionName: newSectionTextField?.text ?? "")
         print("Нажата кнопка удалить категорию")
         view.endEditing(true)
     }
@@ -110,8 +118,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @objc func chooseNotificationAction() {
-        notificationTF.text = dateFormatter111.string(from: notificationPicker.date)
-        Main.instance.notificationDate = dateFormatter111.date(from: notificationTF.text!)?.localString()
+        notificationTF?.text = dateFormatter111.string(from: notificationPicker.date)
+        Main.instance.notificationDate = dateFormatter111.date(from: notificationTF?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
         view.endEditing(true)
@@ -132,8 +140,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        newSectionTextField.text = sections?[row]
+        newSectionTextField?.text = sections?[row]
         print(categoryPicker.selectedRow(inComponent: 0))
-//        Main.instance.deleteSection(delSectionName: row)
+        
+        try? Main.instance.deleteSection(delSectionName: sections![row])
     }
 }
