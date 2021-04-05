@@ -135,6 +135,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         newSectionTextField?.text = sections?[row]
         print(categoryPicker.selectedRow(inComponent: 0))
         
-        //        try? Main.instance.deleteSection(delSectionName: sections![row])
+        try? Main.instance.deleteSection(delSectionName: sections![row])
     }
 }
