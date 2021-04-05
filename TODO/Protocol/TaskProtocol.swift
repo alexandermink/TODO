@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LocalDataBaseService {
+protocol TaskProtocol {
     func addSection(sectionName: String) throws
     func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?) throws
     func updateTasksFromRealm() throws
