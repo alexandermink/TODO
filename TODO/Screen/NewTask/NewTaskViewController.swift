@@ -12,16 +12,16 @@ import UserNotifications
 
 class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIColorPickerViewControllerDelegate {
     
-    @IBOutlet weak var newSectionTextField: UITextField? {
+    @IBOutlet weak var newSectionTextField: UITextField! {
         didSet{
-            newSectionTextField?.inputView = categoryPicker
-            newSectionTextField?.inputAccessoryView = makeToolBarCategories()
+            newSectionTextField.inputView = categoryPicker
+            newSectionTextField.inputAccessoryView = makeToolBarCategories()
         }
     }
-    @IBOutlet weak var notificationTF: UITextField? {
+    @IBOutlet weak var notificationTF: UITextField! {
         didSet {
-            notificationTF?.inputAccessoryView = makeToolBarNotifications()
-            notificationTF?.inputView = notificationPicker
+            notificationTF.inputAccessoryView = makeToolBarNotifications()
+            notificationTF.inputView = notificationPicker
             if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
 }}
     @IBOutlet weak var newTaskNameTextField: UITextField!
@@ -40,6 +40,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let dateFormatter111 = DateFormatter()
     var calendar = Calendar.current
     let notificationService = NotificationService()
+    var selectedBackgroundColor: UIColor? = UIColor()
     
     
     
@@ -71,26 +72,35 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
-        let sectionName: String = newSectionTextField?.text ?? ""
-        let taskName: String = newTaskNameTextField.text ?? ""
+//        let sectionName: String = newSectionTextField?.text ?? ""
+//        let taskName: String = newTaskNameTextField.text ?? ""
+//
+//        if !sectionName.isEmpty && !taskName.isEmpty {
+//            //            Main.instance.addTask(section: sectionName!, name: taskName!)
+//            try? Main.instance.addTask(sectionName: sectionName, name: taskName, backgroundColor: nil, taskDescription: nil, notificationDate: nil)
+//        /*let sectionName: String? = newSectionTextField.text
+//        let taskName: String? = newTaskNameTextField.text
+//        let description: String? = descriptionTextField.text
+//
+//        if (sectionName != "") && (taskName != "") && (description != ""){
+//            Main.instance.addTask(section: sectionName!, name: taskName!, descriptionDetail: description!)
+//          */
+//            router?.dismiss(animated: true, completion: nil)
+//        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
+//
+//        notificationService.sendNotificationRequest(
+//            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+//            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
+////        )
         
-        if !sectionName.isEmpty && !taskName.isEmpty {
-            //            Main.instance.addTask(section: sectionName!, name: taskName!)
-            try? Main.instance.addTask(sectionName: sectionName, name: taskName, backgroundColor: nil, taskDescription: nil, notificationDate: nil)
-        /*let sectionName: String? = newSectionTextField.text
-        let taskName: String? = newTaskNameTextField.text
-        let description: String? = descriptionTextField.text
-        
-        if (sectionName != "") && (taskName != "") && (description != ""){
-            Main.instance.addTask(section: sectionName!, name: taskName!, descriptionDetail: description!)
-          */
+        // TODO: сделать правильную проверку
+        if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
+            try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTF.text)
             router?.dismiss(animated: true, completion: nil)
-        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
+        } else {
+            showAlert(title: "Ошибка", message: "Заполните поля")
+        }
         
-        notificationService.sendNotificationRequest(
-            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
-        )
     }
     
     @IBAction func pickColorButtonTapped(_ sender: UIButton) {
@@ -100,8 +110,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
-        view.backgroundColor = color
+        selectedBackgroundColor = viewController.selectedColor
     }
     
     
@@ -142,7 +151,5 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         newSectionTextField?.text = sections?[row]
         print(categoryPicker.selectedRow(inComponent: 0))
-        
-        try? Main.instance.deleteSection(delSectionName: sections![row])
     }
 }

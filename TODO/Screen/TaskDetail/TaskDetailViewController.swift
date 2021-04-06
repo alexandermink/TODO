@@ -17,17 +17,18 @@ class TaskDetailViewController: UIViewController{
     var taskDetailTitleLabel: UILabel!
     var taskDetailLabel: UILabel!
     
-    var taskName: String?
-    var taskDate: Date?
-    var taskDescription: String?
+    var task: Task? = Task()
+//    var taskName: String?
+//    var taskDate: Date?
+//    var taskDescription: String?
     
-    let dateFormatter = DateFormatter()
+    //let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let formattedDate = dateFormatter.string(from: taskDate!)
+        //dateFormatter.dateFormat = "dd-MM-yyyy"
+        //let formattedDate = dateFormatter.string(from: taskDate!)
         
         taskNameTitleLabel = UILabel()
         taskNameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +39,7 @@ class TaskDetailViewController: UIViewController{
         
         taskNameLabel = UILabel()
         taskNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskNameLabel.text = taskName
+        taskNameLabel.text = task?.name
         taskNameLabel.textColor = .systemOrange
         taskNameLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskNameLabel)
@@ -52,7 +53,7 @@ class TaskDetailViewController: UIViewController{
         
         taskDateLabel = UILabel()
         taskDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskDateLabel.text = formattedDate
+        taskDateLabel.text = task?.notificationDate
         taskDateLabel.textColor = .systemOrange
         taskDateLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDateLabel)
@@ -66,7 +67,7 @@ class TaskDetailViewController: UIViewController{
         
         taskDetailLabel = UILabel()
         taskDetailLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskDetailLabel.text = taskDescription
+        taskDetailLabel.text = task?.taskDescription
         taskDetailLabel.numberOfLines = 10
         taskDetailLabel.textAlignment = .natural
         taskDetailLabel.textColor = .systemOrange
