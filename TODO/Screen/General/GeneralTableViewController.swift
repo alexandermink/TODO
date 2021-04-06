@@ -105,14 +105,10 @@ class GeneralTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let destinationVC = TaskDetailViewController()
+        let destinationViewController = TaskDetailViewController()
         let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-//        destinationVC.taskName = object.name
-//        destinationVC.taskDate = object.creationDate
-//        destinationVC.taskDate = object.date
-//        //destinationVC.taskDescription = object.descriptionDetail
-        destinationVC.task = object
-        router?.present(vc: destinationVC)
+        destinationViewController.task = object
+        router?.present(vc: destinationViewController)
         
     }
     

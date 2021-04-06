@@ -18,17 +18,10 @@ class TaskDetailViewController: UIViewController{
     var taskDetailLabel: UILabel!
     
     var task: Task? = Task()
-//    var taskName: String?
-//    var taskDate: Date?
-//    var taskDescription: String?
-    
-    //let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        //dateFormatter.dateFormat = "dd-MM-yyyy"
-        //let formattedDate = dateFormatter.string(from: taskDate!)
         
         taskNameTitleLabel = UILabel()
         taskNameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -46,14 +39,19 @@ class TaskDetailViewController: UIViewController{
         
         taskDateTitleLabel = UILabel()
         taskDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskDateTitleLabel.text = "Дата регистрации задачи:"
+        taskDateTitleLabel.text = "Дата уведомления задачи:"
         taskDateTitleLabel.textColor = .black
         taskDateTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDateTitleLabel)
         
         taskDateLabel = UILabel()
         taskDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskDateLabel.text = task?.notificationDate
+        if task?.notificationDate != ""{
+            taskDateLabel.text = task?.notificationDate
+        } else {
+            taskDateLabel.text = "Дата уведомления не назначена"
+        }
+//        taskDateLabel.text = task?.notificationDate
         taskDateLabel.textColor = .systemOrange
         taskDateLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDateLabel)
@@ -69,7 +67,7 @@ class TaskDetailViewController: UIViewController{
         taskDetailLabel.translatesAutoresizingMaskIntoConstraints = false
         taskDetailLabel.text = task?.taskDescription
         taskDetailLabel.numberOfLines = 10
-        taskDetailLabel.textAlignment = .natural
+        taskDetailLabel.textAlignment = .left
         taskDetailLabel.textColor = .systemOrange
         taskDetailLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDetailLabel)
@@ -81,19 +79,19 @@ class TaskDetailViewController: UIViewController{
         NSLayoutConstraint.activate([
             
             taskNameTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 64),
-            taskNameTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taskNameTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskNameLabel.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 24),
-            taskNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taskNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDateTitleLabel.topAnchor.constraint(equalTo: taskNameLabel.topAnchor, constant: 40),
-            taskDateTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taskDateTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 24),
-            taskDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taskDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDetailTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 40),
-            taskDetailTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taskDetailTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDetailLabel.topAnchor.constraint(equalTo: taskDetailTitleLabel.topAnchor, constant: 24),
             taskDetailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
