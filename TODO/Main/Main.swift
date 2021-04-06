@@ -21,7 +21,7 @@ class Main {
     
 }
 
-extension Main: TaskProtocol {
+extension Main: LocalDataBaseService {
     
     func addSection(sectionName: String) throws {
 

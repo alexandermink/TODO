@@ -1,14 +1,14 @@
 //
-//  TaskProtocol.swift
+//  LocalDataBaseService.swift
 //  TODO
 //
-//  Created by Александр Минк on 19.10.2020.
-//  Copyright © 2020 Alexander Mink. All rights reserved.
+//  Created by Александр Минк on 06.04.2021.
+//  Copyright © 2021 Alexander Mink. All rights reserved.
 //
 
 import UIKit
 
-protocol TaskProtocol {
+protocol LocalDataBaseService {
     func addSection(sectionName: String) throws
     func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?) throws
     func updateTasksFromRealm() throws
