@@ -29,6 +29,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             newTaskNameTextField.delegate = self
         }
     }
+  
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
@@ -49,9 +50,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var calendar = Calendar.current
     let notificationService = NotificationService()
     var selectedBackgroundColor: UIColor? = UIColor()
-    
-    
-    
     
     
     override func viewDidLoad() {
@@ -97,13 +95,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
 //
         notificationService.sendNotificationRequest(
-            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+            content: notificationService.makeNotificationContent(str: newTaskNameTF.text ?? ""),
             trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
         )
         
         // TODO: сделать правильную проверку
-        if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
-            try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTF.text)
+        if newSectionTextField.text != "" && newTaskNameTF.text != "" {
+            try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTF.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTF.text, notificationDate: notificationTF.text)
             router?.dismiss(animated: true, completion: nil)
         } else {
             showAlert(title: "Ошибка", message: "Заполните поля")
@@ -115,6 +113,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         let colorPickerVC = UIColorPickerViewController()
         colorPickerVC.delegate = self
         present(colorPickerVC, animated: true)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {

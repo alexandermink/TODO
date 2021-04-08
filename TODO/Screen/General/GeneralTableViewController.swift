@@ -17,17 +17,23 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var backLayer: Roundinng!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var newTaskButton: UIBarButtonItem!
-    
+    @IBOutlet weak var angleRingView: UIView!
+    @IBOutlet weak var mapImageView: UIImageView!
+    @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
 
+    
     let realm = try! Realm()
     var realmTokenTasks: NotificationToken? = nil
     var router: BaseRouter?
     let main = Main.instance
     var task = Task()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
+        
         router = BaseRouter(viewController: self)
              
         try? main.updateTasksFromRealm()
@@ -47,6 +53,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.mapImageView.frame = .init(x: -view.frame.width*2.4, y: 0, width: view.frame.width*2, height: view.frame.width)
+        UIView.animate(withDuration: 120, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
+            self.mapImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
+        }, completion: nil)
+        
         self.tableView.reloadData()
     }
     
@@ -76,6 +87,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
         
         cell.notificationLabel.textColor = .systemYellow
+        cell.descriptionLabel.textColor = .backgroundColor
         return cell
     }
     
@@ -154,5 +166,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         newTaskButton.setTitleTextAttributes(
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
+        mapWidthConstraint.constant = view.frame.width*3.2
+        mapHeightConstraint.constant = view.frame.width*1.6
     }
 }
