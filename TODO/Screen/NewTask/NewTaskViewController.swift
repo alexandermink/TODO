@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIColorPickerViewControllerDelegate {
+class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIColorPickerViewControllerDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var newSectionTextField: UITextField! {
         didSet{
@@ -24,14 +24,22 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             notificationTF.inputView = notificationPicker
             if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
 }}
-    @IBOutlet weak var newTaskNameTextField: UITextField!
+    @IBOutlet weak var newTaskNameTextField: UITextField!{
+        didSet{
+            newTaskNameTextField.delegate = self
+        }
+    }
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
     @IBOutlet weak var stackWiew: UIStackView!
     @IBOutlet weak var stackWidthConstr: NSLayoutConstraint!
     @IBOutlet weak var stackRowsHeight: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField!{
+        didSet{
+            descriptionTextField.delegate = self
+        }
+    }
     
     var sections: [String]?
     var router: BaseRouter?
@@ -113,7 +121,15 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         selectedBackgroundColor = viewController.selectedColor
     }
     
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return self.textLimit(existingText: textField.text, newText: string, limit: 50)
+    }
+            
+    private func textLimit(existingText: String?, newText: String, limit: Int) -> Bool {
+        let text = existingText ?? ""
+        let isAtLimit = text.count + newText.count <= limit
+        return isAtLimit
+    }
     
     @objc func deleteCategoryAction() {
         try? Main.instance.deleteSection(delSectionName: newSectionTextField?.text ?? "")
