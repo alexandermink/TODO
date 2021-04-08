@@ -27,6 +27,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var newTaskNameTextField: UITextField!{
         didSet{
             newTaskNameTextField.delegate = self
+            newTaskNameTextField.inputAccessoryView = makeToolBarTaskName()
         }
     }
   
@@ -39,6 +40,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var descriptionTextField: UITextField!{
         didSet{
             descriptionTextField.delegate = self
+            descriptionTextField.inputAccessoryView = makeToolBarTaskName()
         }
     }
     
@@ -95,13 +97,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
 //
         notificationService.sendNotificationRequest(
-            content: notificationService.makeNotificationContent(str: newTaskNameTF.text ?? ""),
+            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
             trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
         )
         
         // TODO: сделать правильную проверку
-        if newSectionTextField.text != "" && newTaskNameTF.text != "" {
-            try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTF.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTF.text, notificationDate: notificationTF.text)
+        if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
+            try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTF.text)
             router?.dismiss(animated: true, completion: nil)
         } else {
             showAlert(title: "Ошибка", message: "Заполните поля")

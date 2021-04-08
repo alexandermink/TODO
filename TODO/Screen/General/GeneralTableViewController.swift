@@ -54,7 +54,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.mapImageView.frame = .init(x: -view.frame.width*2.4, y: 0, width: view.frame.width*2, height: view.frame.width)
-        UIView.animate(withDuration: 120, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
+        UIView.animate(withDuration: 240, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
             self.mapImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
         }, completion: nil)
         
