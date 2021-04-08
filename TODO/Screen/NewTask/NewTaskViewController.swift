@@ -88,10 +88,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //            router?.dismiss(animated: true, completion: nil)
 //        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
 //
-//        notificationService.sendNotificationRequest(
-//            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-//            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
-////        )
+        notificationService.sendNotificationRequest(
+            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
+        )
         
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {

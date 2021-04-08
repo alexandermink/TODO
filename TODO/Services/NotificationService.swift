@@ -31,7 +31,7 @@ class NotificationService {
         content: UNNotificationContent,
         trigger: UNNotificationTrigger) {
         let request = UNNotificationRequest(
-            identifier: "notification",
+            identifier: UUID().uuidString, // для формирования уникальных строк
             content: content,
             trigger: trigger
         )
