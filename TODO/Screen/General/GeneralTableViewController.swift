@@ -33,12 +33,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
-
-        mapWidthConstraint.constant = view.frame.width*3.2
-        mapHeightConstraint.constant = view.frame.width*1.6
-        
-        print(mapWidthConstraint.constant)
-        
         
         router = BaseRouter(viewController: self)
              
@@ -172,5 +166,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         newTaskButton.setTitleTextAttributes(
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
+        mapWidthConstraint.constant = view.frame.width*3.2
+        mapHeightConstraint.constant = view.frame.width*1.6
     }
 }

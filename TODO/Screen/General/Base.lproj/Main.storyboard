@@ -130,7 +130,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-aQ-yaO">
-                                <rect key="frame" x="0.0" y="34" width="1600" height="800"/>
+                                <rect key="frame" x="-40" y="34" width="1600" height="800"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1600" id="Ztc-YD-zR9"/>
@@ -232,7 +232,7 @@
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="jd0-ou-lju" secondAttribute="trailing" id="Thx-Nk-f8v"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="32" id="YwB-Op-4JW"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="hPa-VJ-bCE" secondAttribute="bottom" constant="32" id="dx7-Nk-uDo"/>
-                            <constraint firstItem="MGk-aQ-yaO" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="hr2-RN-Dkj"/>
+                            <constraint firstItem="MGk-aQ-yaO" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-40" id="hr2-RN-Dkj"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="32" id="lVm-zZ-wx6"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="nUR-EV-gOM"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="nkn-cV-d0N" secondAttribute="trailing" constant="24" id="qjh-ro-Oix"/>
