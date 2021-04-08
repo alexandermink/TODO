@@ -10,8 +10,10 @@ import UIKit
 
 class GeneralTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var tasksIconImageView: UIImageView!
-    @IBOutlet weak var tasksNameLabel: UILabel!
+//    @IBOutlet weak var tasksIconImageView: UIImageView!
+//    @IBOutlet weak var tasksNameLabel: UILabel!
     
-    
+    @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var notificationLabel: UILabel!
 }

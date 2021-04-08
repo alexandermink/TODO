@@ -130,7 +130,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         notificationTF?.text = dateFormatter111.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTF?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
-        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
+//        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
         view.endEditing(true)
     }
     
