@@ -8,7 +8,7 @@
 
 import UIKit
 
- class Roundinng: UIView {
+ class Rounding: UIView {
     
     override class var layerClass: AnyClass {
           return CAShapeLayer.self

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,11 +12,11 @@
             <objects>
                 <viewController storyboardIdentifier="NewTaskViewController" id="ZIG-J0-Jce" customClass="NewTaskViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hwd-mr-lNl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hb3-NG-4sk">
-                                <rect key="frame" x="294" y="64" width="100" height="30"/>
+                                <rect key="frame" x="480" y="20" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8OG-t0-9Hj"/>
                                     <constraint firstAttribute="width" constant="100" id="m9f-o0-sdX"/>
@@ -28,7 +27,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-Dh-4XR">
-                                <rect key="frame" x="57" y="299" width="300" height="298"/>
+                                <rect key="frame" x="150" y="151" width="300" height="298"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Выберите секцию" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="twg-EY-wp1">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
@@ -125,7 +124,7 @@
                         <outlet property="membersButton" destination="BeI-TI-3Ap" id="0AK-jm-x4F"/>
                         <outlet property="newSectionTextField" destination="twg-EY-wp1" id="OOy-5L-sEB"/>
                         <outlet property="newTaskNameTextField" destination="gRX-wz-RRO" id="iLZ-y5-s9k"/>
-                        <outlet property="notificationTF" destination="2ws-xw-BHA" id="MvX-Gr-IWx"/>
+                        <outlet property="notificationTextField" destination="2ws-xw-BHA" id="MvX-Gr-IWx"/>
                         <outlet property="stackRowsHeight" destination="cAf-ke-gn6" id="zAy-bZ-o05"/>
                         <outlet property="stackWidthConstr" destination="MMj-u8-8QQ" id="WoO-4b-3OT"/>
                         <outlet property="stackWiew" destination="ZG6-Dh-4XR" id="5vM-5I-bYA"/>
