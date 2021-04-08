@@ -129,7 +129,23 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-VJ-bCE">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-aQ-yaO">
+                                <rect key="frame" x="0.0" y="34" width="1600" height="800"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1600" id="Ztc-YD-zR9"/>
+                                    <constraint firstAttribute="height" constant="800" id="vT2-Cm-vCQ"/>
+                                </constraints>
+                            </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soF-1w-Gup">
+                                <rect key="frame" x="-40" y="84" width="400" height="400"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="2Gz-d9-5uo"/>
+                                    <constraint firstAttribute="height" constant="400" id="e4C-rU-wBh"/>
+                                </constraints>
+                            </view>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-VJ-bCE">
                                 <rect key="frame" x="32" y="81" width="256" height="455"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="R4c-y0-lxd">
                                     <rect key="frame" x="0.0" y="0.0" width="256" height="455"/>
@@ -207,12 +223,16 @@
                         <viewLayoutGuide key="safeArea" id="aJG-we-1F9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="MGk-aQ-yaO" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-15" id="2HJ-BR-HKS"/>
+                            <constraint firstItem="soF-1w-Gup" firstAttribute="centerX" secondItem="VXl-KW-F5K" secondAttribute="centerX" id="FuI-PF-1VS"/>
+                            <constraint firstItem="soF-1w-Gup" firstAttribute="centerY" secondItem="VXl-KW-F5K" secondAttribute="centerY" id="GVK-gz-WYe"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="hPa-VJ-bCE" secondAttribute="trailing" constant="32" id="Mpt-Pg-y1S"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="top" secondItem="aJG-we-1F9" secondAttribute="top" id="Nqv-ao-xYX"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="nkn-cV-d0N" secondAttribute="bottom" constant="24" id="Sn3-eM-E6V"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="jd0-ou-lju" secondAttribute="trailing" id="Thx-Nk-f8v"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="32" id="YwB-Op-4JW"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="hPa-VJ-bCE" secondAttribute="bottom" constant="32" id="dx7-Nk-uDo"/>
+                            <constraint firstItem="MGk-aQ-yaO" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="hr2-RN-Dkj"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="32" id="lVm-zZ-wx6"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="nUR-EV-gOM"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="nkn-cV-d0N" secondAttribute="trailing" constant="24" id="qjh-ro-Oix"/>
@@ -228,8 +248,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="angleRingView" destination="soF-1w-Gup" id="cvc-Pc-UJv"/>
                         <outlet property="backLayer" destination="n4a-mQ-BJW" id="HCq-wd-61L"/>
                         <outlet property="blurView" destination="hPa-VJ-bCE" id="Jiz-mV-HDn"/>
+                        <outlet property="mapHeightConstraint" destination="vT2-Cm-vCQ" id="kws-AX-07l"/>
+                        <outlet property="mapImageView" destination="MGk-aQ-yaO" id="OKX-Z6-5To"/>
+                        <outlet property="mapWidthConstraint" destination="Ztc-YD-zR9" id="0dY-k5-hp9"/>
                         <outlet property="newTaskButton" destination="Thb-en-nUn" id="o6o-RF-BZP"/>
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
                     </connections>
@@ -281,6 +305,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="888" width="1200" height="900"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
