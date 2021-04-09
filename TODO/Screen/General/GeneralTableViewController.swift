@@ -14,7 +14,7 @@ private let reuseIdentifier = "GeneralCell"
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var backLayer: Roundinng!
+    @IBOutlet weak var backLayer: Rounding!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var newTaskButton: UIBarButtonItem!
     @IBOutlet weak var angleRingView: UIView!
@@ -24,7 +24,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 
     
     let realm = try! Realm()
-    var realmTokenTasks: NotificationToken? = nil
+//    var realmTokenTasks: NotificationToken? = nil
+    var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let main = Main.instance
     var task = Task()
@@ -40,7 +41,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 //        try! main.addSection(sectionName: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
         try! main.addSection(sectionName: "Базовая секция № 1")
         
-        self.realmTokenTasks = realm.objects(TaskRealm.self).observe({ (result) in
+        self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
                 try? self.main.updateTasksFromRealm()
@@ -54,9 +55,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.mapImageView.frame = .init(x: -view.frame.width*2.4, y: 0, width: view.frame.width*2, height: view.frame.width)
-        UIView.animate(withDuration: 240, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
-            self.mapImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
-        }, completion: nil)
+//        UIView.animate(withDuration: 240, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
+//            self.mapImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
+//        }, completion: nil)
         
         self.tableView.reloadData()
     }
@@ -85,6 +86,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         cell.taskNameLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
         cell.descriptionLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
         cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
+        
+        // Настроить передачу цвета, разные типы UIColor
+//        cell.contentView.backgroundColor = main.userSession.tasks[indexPath.row].sectionTasks[indexPath.row].backgroundColor
         
         cell.notificationLabel.textColor = .systemYellow
         cell.descriptionLabel.textColor = .backgroundColor

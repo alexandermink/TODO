@@ -9,13 +9,30 @@
 import UIKit
 
 extension UIView {
-    func applyGradient(colours: [UIColor], startX: Double, startY: Double, endX: Double, endY: Double) -> CAGradientLayer {
+    func applyGradient(colours: [UIColor], startX: Double, startY: Double, endX: Double, endY: Double){
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.startPoint = CGPoint(x: startX, y: startY)
         gradient.endPoint = CGPoint(x: endX, y: endY)
         gradient.frame = self.bounds
         gradient.colors = colours.map { $0.cgColor }
         self.layer.insertSublayer(gradient, at: 0)
-        return gradient
+        //return gradient
+    }
+    
+    func addTapGestureToHideKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        addGestureRecognizer(tapGesture)
+    }
+
+    var topSuperview: UIView? {
+        var view = superview
+        while view?.superview != nil {
+            view = view!.superview
+        }
+        return view
+    }
+
+    @objc func dismissKeyboard() {
+        topSuperview?.endEditing(true)
     }
 }

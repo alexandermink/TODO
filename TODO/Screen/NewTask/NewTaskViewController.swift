@@ -18,31 +18,20 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             newSectionTextField.inputAccessoryView = makeToolBarCategories()
         }
     }
-    @IBOutlet weak var notificationTF: UITextField! {
+    @IBOutlet weak var notificationTextField: UITextField! {
         didSet {
-            notificationTF.inputAccessoryView = makeToolBarNotifications()
-            notificationTF.inputView = notificationPicker
+            notificationTextField.inputAccessoryView = makeToolBarNotifications()
+            notificationTextField.inputView = notificationPicker
             if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
 }}
-    @IBOutlet weak var newTaskNameTextField: UITextField!{
-        didSet{
-            newTaskNameTextField.delegate = self
-            newTaskNameTextField.inputAccessoryView = makeToolBarTaskName()
-        }
-    }
-  
+    @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
     @IBOutlet weak var stackWiew: UIStackView!
     @IBOutlet weak var stackWidthConstr: NSLayoutConstraint!
     @IBOutlet weak var stackRowsHeight: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTextField: UITextField!{
-        didSet{
-            descriptionTextField.delegate = self
-            descriptionTextField.inputAccessoryView = makeToolBarTaskName()
-        }
-    }
+    @IBOutlet weak var descriptionTextField: UITextField!
     
     var sections: [String]?
     var router: BaseRouter?
@@ -74,6 +63,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         stackWidthConstr.constant = view.frame.width/1.6
         stackRowsHeight.constant = view.frame.height/24
         stackWiew.spacing = view.frame.height/40
+        
+        // Скрытие клавиатуры по нажатию на свободное место
+        view.addTapGestureToHideKeyboard()
     }
     
     // MARK: - ACTIONS
@@ -103,7 +95,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
-            try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTF.text)
+            try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text)
             router?.dismiss(animated: true, completion: nil)
         } else {
             showAlert(title: "Ошибка", message: "Заполните поля")
@@ -147,8 +139,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @objc func chooseNotificationAction() {
-        notificationTF?.text = dateFormatter111.string(from: notificationPicker.date)
-        Main.instance.notificationDate = dateFormatter111.date(from: notificationTF?.text ?? "")?.localString()
+        notificationTextField?.text = dateFormatter111.string(from: notificationPicker.date)
+        Main.instance.notificationDate = dateFormatter111.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
 //        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
         view.endEditing(true)
