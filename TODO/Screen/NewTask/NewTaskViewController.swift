@@ -90,7 +90,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")!.timeIntervalSince1970+59 )
         )
         
         // TODO: сделать правильную проверку
