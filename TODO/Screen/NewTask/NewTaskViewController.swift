@@ -89,10 +89,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //            router?.dismiss(animated: true, completion: nil)
 //        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
 //
-        notificationService.sendNotificationRequest(
-            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")!.timeIntervalSince1970+59 )
-        )
         
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
@@ -144,6 +140,12 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
 //        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
+        
+        notificationService.sendNotificationRequest(
+            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")!.timeIntervalSince1970+60 )
+        )
+        
         view.endEditing(true)
     }
     
