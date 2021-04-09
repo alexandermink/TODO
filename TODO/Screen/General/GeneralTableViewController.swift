@@ -148,6 +148,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
+        try! Main.instance.addSection(sectionName: "Базовая секция № 1")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
         router?.present(vc: destinationVC)

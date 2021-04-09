@@ -67,6 +67,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // Скрытие клавиатуры по нажатию на свободное место
         view.addTapGestureToHideKeyboard()
     }
+
     
     // MARK: - ACTIONS
     
