@@ -140,7 +140,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
 //        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
 
-        guard !intervalTime else {return showAlert(title: "Ошибка", message: "Выберите время больше текущего")}
+//        guard !intervalTime else {return showAlert(title: "Ошибка", message: "Выберите время больше текущего")}
 
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
