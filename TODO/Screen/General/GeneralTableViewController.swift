@@ -34,8 +34,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
-        
-        router = BaseRouter(viewController: self)
              
         try? main.updateTasksFromRealm()
 //        try! main.addSection(sectionName: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
@@ -151,7 +149,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         try! Main.instance.addSection(sectionName: "Базовая секция № 1")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
-        router?.present(vc: destinationVC)
+        router?.push(vc: destinationVC, animated: true)
     }
     
     //MARK: - SET VIEW SCREEN
