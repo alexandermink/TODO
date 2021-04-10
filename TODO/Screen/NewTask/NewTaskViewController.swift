@@ -12,18 +12,14 @@ import UserNotifications
 
 class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIColorPickerViewControllerDelegate, UITextFieldDelegate{
     
-    @IBOutlet weak var newSectionTextField: UITextField! {
-        didSet{
+    @IBOutlet weak var newSectionTextField: UITextField! {didSet{
             newSectionTextField.inputView = categoryPicker
-            newSectionTextField.inputAccessoryView = makeToolBarCategories()
-        }
-    }
-    @IBOutlet weak var notificationTextField: UITextField! {
-        didSet {
+            newSectionTextField.inputAccessoryView = makeToolBarCategories()}}
+    @IBOutlet weak var notificationTextField: UITextField! {didSet{
             notificationTextField.inputAccessoryView = makeToolBarNotifications()
             notificationTextField.inputView = notificationPicker
-            if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
-}}
+            notificationPicker.minimumDate = minDate
+            if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
@@ -41,6 +37,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var calendar = Calendar.current
     let notificationService = NotificationService()
     var selectedBackgroundColor: UIColor? = UIColor()
+    let minDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date())
+    var intervalTime = true
     
     
     override func viewDidLoad() {
@@ -48,6 +46,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
         dateFormatter111.timeZone = .autoupdatingCurrent
+//        notificationPicker.minimumDate = minDate
         //        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
         dateFormatter111.dateFormat = "dd.MM.yyyy, HH:mm"
         calendar.timeZone = .autoupdatingCurrent
@@ -140,10 +139,12 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
 //        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
-        
+
+        guard !intervalTime else {return showAlert(title: "Ошибка", message: "Выберите время больше текущего")}
+
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")!.timeIntervalSince1970+60 )
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
         )
         
         view.endEditing(true)
