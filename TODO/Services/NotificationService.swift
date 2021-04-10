@@ -9,6 +9,8 @@
 import UIKit
 
 class NotificationService {
+    
+//    let vc = NewTaskViewController()
 
     func makeNotificationContent(str: String) -> UNNotificationContent {
         let content = UNMutableNotificationContent()
@@ -21,6 +23,7 @@ class NotificationService {
         let pickedTime = doub // подставить выбранное в picker время
         let curentTime = Date().timeIntervalSince1970 // текущее время
         let interval = pickedTime - curentTime // интервал в секундах между выбранным и текущим
+        
         return UNTimeIntervalNotificationTrigger(
             timeInterval: interval,
             repeats: false
