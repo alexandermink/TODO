@@ -10,21 +10,29 @@ import UIKit
 
 final class BaseRouter: RouterFactory{
         
-    var viewController: UIViewController
+    weak var viewController: UIViewController?
     
     init(viewController: UIViewController){
         self.viewController = viewController
     }
     
     func push(vc: UIViewController, animated: Bool = true) {
-        viewController.navigationController?.pushViewController(vc, animated: animated)
+        viewController?.navigationController?.pushViewController(vc, animated: animated)
     }
     
     func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
-        viewController.dismiss(animated: animated, completion: completion)
+        viewController?.dismiss(animated: animated, completion: completion)
     }
     
     func present(vc: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
-        viewController.present(vc, animated: animated, completion: completion)
+        viewController?.present(vc, animated: animated, completion: completion)
+    }
+    
+//    func pop(vc: UIViewController, animated: Bool = true){
+//        viewController?.navigationController?.popToViewController(vc, animated: animated)
+//    }
+//    
+    func pop(animated: Bool = true){
+        viewController?.navigationController?.popViewController(animated: animated)
     }
 }

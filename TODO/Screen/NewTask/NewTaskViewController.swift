@@ -58,6 +58,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         newSectionTextField?.textAlignment = .center
         print(sections ?? "секции отсутствуют")
         newSectionTextField?.text = sections?[0]
+        navigationController?.navigationBar.barTintColor = .darkBrown
+        view.backgroundColor = UIColor.lightGray
+        view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         stackWidthConstr.constant = view.frame.width/1.6
         stackRowsHeight.constant = view.frame.height/24
@@ -92,7 +95,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
             try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text)
-            router?.dismiss(animated: true, completion: nil)
+            router?.pop(animated: true)
         } else {
             showAlert(title: "Ошибка", message: "Заполните поля")
         }

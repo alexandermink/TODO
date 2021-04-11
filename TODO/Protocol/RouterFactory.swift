@@ -12,4 +12,6 @@ protocol RouterFactory {
     func push(vc: UIViewController, animated : Bool)
     func dismiss(animated: Bool, completion: (() -> Void)?)
     func present(vc: UIViewController, animated: Bool, completion: (() -> Void)?)
+    func pop(animated: Bool)
+//    func pop(vc: UIViewController, animated : Bool)
 }

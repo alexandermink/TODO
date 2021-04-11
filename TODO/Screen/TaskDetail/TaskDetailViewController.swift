@@ -96,7 +96,6 @@ class TaskDetailViewController: UIViewController{
             taskDetailTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDetailLabel.topAnchor.constraint(equalTo: taskDetailTitleLabel.topAnchor, constant: 24),
-//            taskDetailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             taskDetailLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             taskDetailLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 4)
             
