@@ -24,7 +24,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 
     
     let realm = try! Realm()
-//    var realmTokenTasks: NotificationToken? = nil
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let main = Main.instance
@@ -84,7 +83,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         cell.taskNameLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
         cell.descriptionLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
         cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
-        cell.taskNameLabel.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
+        cell.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
         // Настроить передачу цвета, разные типы UIColor
 //            main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
 //        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor

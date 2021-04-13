@@ -37,6 +37,11 @@ extension UIColor {
             alpha: CGFloat(1.0)
         )
     }
+    
+    func toString() -> String {
+        let color = self.cgColor
+        return CIColor(cgColor: color).stringRepresentation
+    }
 }
 
 //extension Numeric {
