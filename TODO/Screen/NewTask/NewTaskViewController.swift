@@ -94,7 +94,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
             try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text)
-            router?.pop(animated: true)
+            router?.dismiss(animated: true, completion: nil)
         } else {
             showAlert(title: "Ошибка", message: "Заполните поля")
         }
