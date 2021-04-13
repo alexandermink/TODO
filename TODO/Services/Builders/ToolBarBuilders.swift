@@ -16,7 +16,7 @@ class ToolBarBuilder {
     static func setAttributedString(textSize: CGFloat) -> [NSAttributedString.Key: Any]{
         let doneBtn: [NSAttributedString.Key: Any]
         doneBtn = [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: textSize),
-         NSAttributedString.Key.foregroundColor: UIColor.systemIndigo]
+         NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
         return doneBtn
     }
     
