@@ -37,8 +37,7 @@ struct Task {
 class TaskRealm: Object {
     @objc var id: Int = -1
     @objc var name: String = ""
-    @objc var date: Date = Date()
-    @objc var backgroundColor: UIColor? = UIColor.clear
+    @objc var backgroundColor: String? = ""
     @objc var taskDescription: String? = ""
     @objc var creationDate: Date = Date()
     @objc var notificationDate: String? = ""
@@ -46,10 +45,6 @@ class TaskRealm: Object {
     
     override class func primaryKey() -> String? {
         return "id"
-    }
-    
-    override class func ignoredProperties() -> [String] {
-        return ["backgroundColor"]
     }
 }
 

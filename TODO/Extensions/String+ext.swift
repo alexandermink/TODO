@@ -18,6 +18,10 @@ extension String {
         let dateString = dateFormatter.string(from: date as Date)
         return dateString
     }
+    
+    var floatValue: Float {
+        return (self as NSString).floatValue
+    }
 }
 
 extension Date { // для локализации времени (оно приходит по всему миру в базовом часовом поясе)

@@ -17,7 +17,7 @@ class TaskRealmConverter {
         
         taskRealm.id = task.id
         taskRealm.name = task.name
-        taskRealm.backgroundColor = task.backgroundColor ?? UIColor()
+        taskRealm.backgroundColor = task.backgroundColor?.toString()
         taskRealm.taskDescription = task.taskDescription
         taskRealm.creationDate = task.creationDate
         taskRealm.notificationDate = task.notificationDate
@@ -31,7 +31,16 @@ class TaskRealmConverter {
         
         task.id = taskRealm.value(forKey: "id") as! Int
         task.name = taskRealm.value(forKey: "name") as! String
-        task.backgroundColor = taskRealm.value(forKey: "backgroundColor") as? UIColor
+        
+        let backgroundColor: String = taskRealm.value(forKey: "backgroundColor") as? String ?? ""
+        let colorComponents: [String] = backgroundColor.components(separatedBy: " ")
+        let tempBackgroundColor: UIColor = UIColor(cgColor: CGColor(
+            red: CGFloat(colorComponents[0].floatValue),
+            green: CGFloat(colorComponents[1].floatValue),
+            blue: CGFloat(colorComponents[2].floatValue),
+            alpha: CGFloat(colorComponents[3].floatValue))
+        )
+        task.backgroundColor = tempBackgroundColor
         task.taskDescription = taskRealm.value(forKey: "taskDescription") as? String
         task.creationDate = taskRealm.value(forKey: "creationDate") as! Date
         task.notificationDate = taskRealm.value(forKey: "notificationDate") as? String
