@@ -13,7 +13,7 @@ struct Task {
     
     var id: Int = -1
     var name: String = ""
-    var backgroundColor: UIColor? = UIColor()
+    var backgroundColor: UIColor? = UIColor.clear
     var taskDescription: String? = ""
     var creationDate: Date = Date()
     var notificationDate: String? = ""
@@ -38,7 +38,7 @@ class TaskRealm: Object {
     @objc var id: Int = -1
     @objc var name: String = ""
     @objc var date: Date = Date()
-    @objc var backgroundColor: UIColor = UIColor()
+    @objc var backgroundColor: UIColor? = UIColor.clear
     @objc var taskDescription: String? = ""
     @objc var creationDate: Date = Date()
     @objc var notificationDate: String? = ""

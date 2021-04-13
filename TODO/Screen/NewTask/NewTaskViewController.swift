@@ -28,6 +28,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var stackWidthConstr: NSLayoutConstraint!
     @IBOutlet weak var stackRowsHeight: NSLayoutConstraint!
     @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var backLayer: Rounding!
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var mapImageView: UIImageView!
+    @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
+    
     
     var sections: [String]?
     var router: BaseRouter?
@@ -43,29 +50,21 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViewScreen()
+        paralaxEffect(view: mapImageView, magnitude: 50)
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
         dateFormatter111.timeZone = .autoupdatingCurrent
-//        notificationPicker.minimumDate = minDate
         //        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
         dateFormatter111.dateFormat = "dd.MM.yyyy, HH:mm"
         calendar.timeZone = .autoupdatingCurrent
         router = BaseRouter(viewController: self)
-        membersButton.layer.cornerRadius = 5
-        checkListButton.layer.cornerRadius = 5
-        coverButton.layer.cornerRadius = 5
         sections = try? Main.instance.getSectionsFromRealm()
         newSectionTextField?.textAlignment = .center
-        print(sections ?? "секции отсутствуют")
         newSectionTextField?.text = sections?[0]
-        navigationController?.navigationBar.barTintColor = .darkBrown
-        view.backgroundColor = UIColor.lightGray
-        view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        
-        stackWidthConstr.constant = view.frame.width/1.6
-        stackRowsHeight.constant = view.frame.height/24
-        stackWiew.spacing = view.frame.height/40
-        
+//        stackWidthConstr.constant = view.frame.width/1.6
+//        stackRowsHeight.constant = view.frame.height/24
+//        stackWiew.spacing = view.frame.height/40
         // Скрытие клавиатуры по нажатию на свободное место
         view.addTapGestureToHideKeyboard()
     }
@@ -95,7 +94,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
             try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text)
-            router?.pop(animated: true)
+            router?.dismiss(animated: true, completion: nil)
         } else {
             showAlert(title: "Ошибка", message: "Заполните поля")
         }
@@ -141,23 +140,17 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         notificationTextField?.text = dateFormatter111.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
-//        print(dateFormatter111.date(from: Main.instance.notificationDate!)!.timeIntervalSince1970, "🍏🍏🍏")
-
 //        guard !intervalTime else {return showAlert(title: "Ошибка", message: "Выберите время больше текущего")}
-
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
             trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
         )
-        
         view.endEditing(true)
     }
     
-    // MARK: - TABLE
+    // MARK: - PICKER
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return sections?.count ?? 0
@@ -170,5 +163,33 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         newSectionTextField?.text = sections?[row]
         print(categoryPicker.selectedRow(inComponent: 0))
+    }
+    
+    func setViewScreen() {
+        view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+        blurView.layer.cornerRadius = 24
+        blurView.layer.borderWidth = 1
+        blurView.layer.borderColor = UIColor.darkGray.cgColor
+        
+        navigationController?.navigationBar.barTintColor = .darkBrown
+        createButton.setTitle("Создать", for: .normal)
+        mapWidthConstraint.constant = view.frame.width*3.2
+        mapHeightConstraint.constant = view.frame.width*1.6
+    }
+    
+    func paralaxEffect(view: UIView, magnitude: Double) {
+        let xAxis = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        xAxis.minimumRelativeValue = -magnitude
+        xAxis.maximumRelativeValue = magnitude
+        
+        let yAxis = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        yAxis.minimumRelativeValue = -magnitude
+        yAxis.maximumRelativeValue = magnitude
+        
+        let effectGroup = UIMotionEffectGroup()
+        effectGroup.motionEffects = [xAxis, yAxis]
+        
+        view.addMotionEffect(effectGroup)
     }
 }
