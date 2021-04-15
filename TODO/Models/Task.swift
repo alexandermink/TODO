@@ -17,6 +17,7 @@ struct Task {
     var taskDescription: String? = ""
     var creationDate: Date = Date()
     var notificationDate: String? = ""
+    var notificationID: String? = ""
     // TODO: сделать авторизацию
 //    var members: [String]?
     

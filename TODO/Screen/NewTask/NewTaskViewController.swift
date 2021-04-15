@@ -43,8 +43,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let dateFormatter111 = DateFormatter()
     var calendar = Calendar.current
     let notificationService = NotificationService()
-    var selectedBackgroundColor: UIColor? = UIColor()
-    let minDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date())
+    var selectedBackgroundColor: UIColor? = UIColor.clear
+    let minDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())
     var intervalTime = true
     
     

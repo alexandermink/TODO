@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
         }
+        UIApplication.shared.applicationIconBadgeNumber = 0
         return true
     }
 

@@ -13,9 +13,10 @@ class NotificationService {
 //    let vc = NewTaskViewController()
 
     func makeNotificationContent(str: String) -> UNNotificationContent {
+        Main.instance.notifBadgeCount += 1
         let content = UNMutableNotificationContent()
         content.title = str
-        content.badge = 1
+        content.badge = NSNumber(value: Main.instance.notifBadgeCount)
         return content
     }
 
@@ -33,6 +34,7 @@ class NotificationService {
     func sendNotificationRequest(
         content: UNNotificationContent,
         trigger: UNNotificationTrigger) {
+                
         let request = UNNotificationRequest(
             identifier: UUID().uuidString, // для формирования уникальных строк
             content: content,

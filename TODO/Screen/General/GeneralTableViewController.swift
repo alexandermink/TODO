@@ -164,7 +164,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         let action = UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
             self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = defaults.colorForKey(key: "myColr")
         }
-        print(self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor as Any)
         return action
     }
     

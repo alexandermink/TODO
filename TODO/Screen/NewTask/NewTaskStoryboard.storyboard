@@ -52,7 +52,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XR-lr7">
-                                <rect key="frame" x="-200" y="64" width="800" height="400"/>
+                                <rect key="frame" x="-400" y="64" width="800" height="400"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="Gr4-Vs-1iC"/>
@@ -70,7 +70,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmk-Yg-Ide">
                                                     <rect key="frame" x="0.0" y="0.0" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="FJE-zk-9rG"/>
                                                     </constraints>
@@ -92,7 +92,7 @@
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qam-ja-2eV">
                                                     <rect key="frame" x="0.0" y="58.5" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="tfw-uX-0mO"/>
                                                     </constraints>
@@ -114,7 +114,7 @@
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uq1-n1-pMT">
                                                     <rect key="frame" x="0.0" y="117" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="iG9-RS-spn"/>
                                                     </constraints>
@@ -135,7 +135,7 @@
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Gc-9y-VoR">
                                                     <rect key="frame" x="0.0" y="175.5" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="clN-GK-bqU"/>
                                                     </constraints>
@@ -157,7 +157,7 @@
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJq-kl-yaL">
                                                     <rect key="frame" x="0.0" y="233.5" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="JnA-TH-PnN"/>
                                                     </constraints>
@@ -179,7 +179,7 @@
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6k-a9-onX">
                                                     <rect key="frame" x="0.0" y="292" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="YHP-Ds-Wea"/>
                                                     </constraints>
@@ -197,7 +197,7 @@
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BoR-1z-MgW">
                                                     <rect key="frame" x="0.0" y="350.5" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="wUP-o1-nSp"/>
                                                     </constraints>
@@ -215,7 +215,7 @@
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dac-Eq-dqL">
                                                     <rect key="frame" x="0.0" y="409" width="256" height="1"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="N4V-CR-FvH"/>
                                                     </constraints>
@@ -253,7 +253,7 @@
                         <constraints>
                             <constraint firstItem="wNf-XR-lr7" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="-30" id="2wh-SF-xsm"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="trailing" secondItem="Hb3-NG-4sk" secondAttribute="trailing" constant="20" id="5nr-jn-A3I"/>
-                            <constraint firstItem="wNf-XR-lr7" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" constant="-200" id="6bI-YG-l9t"/>
+                            <constraint firstItem="wNf-XR-lr7" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" constant="-400" id="6bI-YG-l9t"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="trailing" secondItem="Nod-Z1-L7u" secondAttribute="trailing" constant="24" id="8qM-4i-TQQ"/>
                             <constraint firstItem="Nod-Z1-L7u" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" constant="24" id="KNR-1w-OTT"/>
                             <constraint firstItem="Hb3-NG-4sk" firstAttribute="top" secondItem="B9L-pa-vsv" secondAttribute="top" constant="20" id="NuH-Ol-uQM"/>
