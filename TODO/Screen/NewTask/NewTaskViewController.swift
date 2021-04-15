@@ -51,7 +51,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
-        paralaxEffect(view: mapImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
         dateFormatter111.timeZone = .autoupdatingCurrent
@@ -176,20 +176,5 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         createButton.setTitle("Создать", for: .normal)
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.6
-    }
-    
-    func paralaxEffect(view: UIView, magnitude: Double) {
-        let xAxis = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
-        xAxis.minimumRelativeValue = -magnitude
-        xAxis.maximumRelativeValue = magnitude
-        
-        let yAxis = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
-        yAxis.minimumRelativeValue = -magnitude
-        yAxis.maximumRelativeValue = magnitude
-        
-        let effectGroup = UIMotionEffectGroup()
-        effectGroup.motionEffects = [xAxis, yAxis]
-        
-        view.addMotionEffect(effectGroup)
     }
 }

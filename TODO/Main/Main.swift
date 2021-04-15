@@ -16,7 +16,7 @@ class Main {
     var userSession: UserSession = UserSession()
     var notificationDate: String?
     var taskRealmConverter = TaskRealmConverter()
-    var colo: UIColor?
+    var rowBGCcolor: UIColor?
     var notifID: String?
     var notifBadgeCount = 0
 

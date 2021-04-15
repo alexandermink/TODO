@@ -28,15 +28,12 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var router: BaseRouter?
     let main = Main.instance
     var task = Task()
-    var defaults = UserDefaults.standard
-//    let mapShape = AnimationMap()
-//    let layerAnimation = LayerAnimation()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
-        paralaxEffect(view: mapImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         try? main.updateTasksFromRealm()
 //        try! main.addSection(sectionName: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
         try! main.addSection(sectionName: "Базовая секция № 1")
@@ -54,10 +51,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.mapImageView.frame = .init(x: -view.frame.width*2.4, y: 0, width: view.frame.width*2, height: view.frame.width)
-//        UIView.animate(withDuration: 240, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
-//            self.mapImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
-//        }, completion: nil)
         self.tableView.reloadData()
     }
     
@@ -136,8 +129,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     //MARK: - ВЫБОР ЦВЕТА СВАЙП ЯЧЕЙКИ
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-//        main.colo = viewController.selectedColor
-        defaults.setColor(color: viewController.selectedColor, forKey: "myColr")
+        main.rowBGCcolor = viewController.selectedColor
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -155,14 +147,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let colorPickerVC = UIColorPickerViewController()
             colorPickerVC.delegate = self
             self.present(colorPickerVC, animated: true)
-            self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = defaults.colorForKey(key: "myColr")
+            self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = main.rowBGCcolor
         }
         return action
     }
     
     func okAction(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
-            self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = defaults.colorForKey(key: "myColr")
+            self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = main.rowBGCcolor
         }
         return action
     }
@@ -196,20 +188,5 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
              NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.6
-    }
-    
-    func paralaxEffect(view: UIView, magnitude: Double) {
-        let xAxis = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
-        xAxis.minimumRelativeValue = -magnitude
-        xAxis.maximumRelativeValue = magnitude
-        
-        let yAxis = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
-        yAxis.minimumRelativeValue = -magnitude
-        yAxis.maximumRelativeValue = magnitude
-        
-        let effectGroup = UIMotionEffectGroup()
-        effectGroup.motionEffects = [xAxis, yAxis]
-        
-        view.addMotionEffect(effectGroup)
     }
 }
