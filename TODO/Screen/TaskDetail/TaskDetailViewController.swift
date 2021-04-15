@@ -53,7 +53,7 @@ class TaskDetailViewController: UIViewController{
         
         taskCreationDateLabel = UILabel()
         taskCreationDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskCreationDateLabel.text = task?.creationDate.debugDescription
+        taskCreationDateLabel.text = task?.creationDate.localString()
         taskCreationDateLabel.textColor = .systemYellow
         taskCreationDateLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskCreationDateLabel)

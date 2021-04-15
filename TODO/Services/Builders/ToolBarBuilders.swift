@@ -34,12 +34,16 @@ extension UIViewController {
         let toolBar = ToolBarBuilder.configDoneButton()
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.chooseCategoryAction))
         let deleteButton = UIBarButtonItem(title: "Удалить", style: .done, target: self, action: #selector(NewTaskViewController.deleteCategoryAction))
+        let keyb = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "keyboard24"), style: .done, target: self, action: #selector(NewTaskViewController.changePickerAndKeyboard))
+        keyb.tintColor = .systemYellow
+        
+        
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size2)), for: .highlighted)
         deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
         deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size2)), for: .highlighted)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.setItems([flexSpace, deleteButton, doneButton], animated: true)
+        toolBar.setItems([flexSpace, deleteButton, doneButton, keyb], animated: true)
         return toolBar
     }
     
@@ -53,9 +57,9 @@ extension UIViewController {
         return toolBar
     }
     
-    func makeToolBarTaskName() -> UIToolbar {
+    func makeToolBarCategoryKB() -> UIToolbar {
         let toolBar = ToolBarBuilder.configDoneButton()
-        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.dismissKeyboard))
+        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.changePickerAndKeyboard))
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .highlighted)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
