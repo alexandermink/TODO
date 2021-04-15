@@ -44,8 +44,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var calendar = Calendar.current
     let notificationService = NotificationService()
     var selectedBackgroundColor: UIColor? = UIColor.clear
-    let minDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())
-    var intervalTime = true
+    let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     
     
     override func viewDidLoad() {
@@ -90,7 +89,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //            router?.dismiss(animated: true, completion: nil)
 //        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
 //
-        
+        guard Main.instance.notificationDateInterval != 1.0 else {return showAlert(title: "Ошибка", message: "Выберите время больше текущего")}
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
             try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text)
@@ -98,7 +97,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         } else {
             showAlert(title: "Ошибка", message: "Заполните поля")
         }
-        
     }
     
     @IBAction func pickColorButtonTapped(_ sender: UIButton) {
@@ -140,7 +138,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         notificationTextField?.text = dateFormatter111.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter111.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
-//        guard !intervalTime else {return showAlert(title: "Ошибка", message: "Выберите время больше текущего")}
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
             trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
@@ -149,7 +146,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     // MARK: - PICKER
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -165,6 +161,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print(categoryPicker.selectedRow(inComponent: 0))
     }
     
+    // MARK: - SET VIEW SCREEN
     func setViewScreen() {
         view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)

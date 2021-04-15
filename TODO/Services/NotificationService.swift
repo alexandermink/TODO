@@ -24,7 +24,14 @@ class NotificationService {
         let pickedTime = doub // подставить выбранное в picker время
         let curentTime = Date().timeIntervalSince1970 // текущее время
         let interval = pickedTime - curentTime // интервал в секундах между выбранным и текущим
-        
+        Main.instance.notificationDateInterval = interval
+        guard interval > 0 else {
+            Main.instance.notificationDateInterval = 1
+            return UNTimeIntervalNotificationTrigger(
+                timeInterval: 1,
+                repeats: false
+            )
+        }
         return UNTimeIntervalNotificationTrigger(
             timeInterval: interval,
             repeats: false

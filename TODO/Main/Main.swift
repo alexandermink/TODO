@@ -19,6 +19,7 @@ class Main {
     var rowBGCcolor: UIColor?
     var notifID: String?
     var notifBadgeCount = 0
+    var notificationDateInterval = 0.0
 
     private init() { }
     
