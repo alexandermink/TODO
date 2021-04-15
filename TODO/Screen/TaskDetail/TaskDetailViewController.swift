@@ -11,7 +11,9 @@ import UIKit
 class TaskDetailViewController: UIViewController{
     
     var taskNameTitleLabel: UILabel!
-    var taskNameLabel: UILabel!
+    var taskNameTextView: UITextView!
+    var taskCreationDateTitleLabel: UILabel!
+    var taskCreationDateLabel: UILabel!
     var taskDateTitleLabel: UILabel!
     var taskDateLabel: UILabel!
     var taskDetailTitleLabel: UILabel!
@@ -31,13 +33,30 @@ class TaskDetailViewController: UIViewController{
         taskNameTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskNameTitleLabel)
         
-        taskNameLabel = UILabel()
-        taskNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskNameLabel.text = task?.name
-        taskNameLabel.textColor = .systemYellow
-        taskNameLabel.numberOfLines = 2
-        taskNameLabel.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskNameLabel)
+        taskNameTextView = UITextView()
+        taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
+        taskNameTextView.text = task?.name
+        taskNameTextView.backgroundColor = UIColor.clear
+        taskNameTextView.isEditable = true
+        taskNameTextView.isScrollEnabled = true
+        taskNameTextView.textColor = .systemYellow
+        taskNameTextView.contentInsetAdjustmentBehavior = .automatic
+        taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskNameTextView)
+        
+        taskCreationDateTitleLabel = UILabel()
+        taskCreationDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskCreationDateTitleLabel.text = "Дата регестрации задачи:"
+        taskCreationDateTitleLabel.textColor = .systemGray
+        taskCreationDateTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskCreationDateTitleLabel)
+        
+        taskCreationDateLabel = UILabel()
+        taskCreationDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskCreationDateLabel.text = task?.creationDate.debugDescription
+        taskCreationDateLabel.textColor = .systemYellow
+        taskCreationDateLabel.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskCreationDateLabel)
         
         taskDateTitleLabel = UILabel()
         taskDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +89,11 @@ class TaskDetailViewController: UIViewController{
         taskDetailTextView.contentInsetAdjustmentBehavior = .automatic
         taskDetailTextView.isEditable = true
         taskDetailTextView.isScrollEnabled = true
-        taskDetailTextView.text = task?.taskDescription
+        if task?.taskDescription != ""{
+            taskDetailTextView.text = task?.taskDescription
+        } else {
+            taskDetailTextView.text = "Напишите описание задачи"
+        }
         taskDetailTextView.textAlignment = .left
         taskDetailTextView.textColor = .systemYellow
         taskDetailTextView.font = UIFont(name: "HelveticaNeue", size: 17)
@@ -86,14 +109,21 @@ class TaskDetailViewController: UIViewController{
             taskNameTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
             taskNameTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskNameLabel.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 24),
-            taskNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
-            taskNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 4),
+            taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 24),
+            taskNameTextView.bottomAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 2),
+            taskNameTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            taskNameTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 4),
             
-            taskDateTitleLabel.topAnchor.constraint(equalTo: taskNameLabel.topAnchor, constant: 40),
+            taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 48),
+            taskCreationDateTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            
+            taskCreationDateLabel.topAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 30),
+            taskCreationDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            
+            taskDateTitleLabel.topAnchor.constraint(equalTo: taskCreationDateLabel.topAnchor, constant: 48),
             taskDateTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 24),
+            taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 30),
             taskDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDetailTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 40),
