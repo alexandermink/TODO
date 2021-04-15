@@ -13,9 +13,10 @@ class NotificationService {
 //    let vc = NewTaskViewController()
 
     func makeNotificationContent(str: String) -> UNNotificationContent {
+        Main.instance.notifBadgeCount += 1
         let content = UNMutableNotificationContent()
         content.title = str
-        content.badge = 1
+        content.badge = NSNumber(value: Main.instance.notifBadgeCount)
         return content
     }
 
@@ -23,7 +24,14 @@ class NotificationService {
         let pickedTime = doub // подставить выбранное в picker время
         let curentTime = Date().timeIntervalSince1970 // текущее время
         let interval = pickedTime - curentTime // интервал в секундах между выбранным и текущим
-        
+        Main.instance.notificationDateInterval = interval
+        guard interval > 0 else {
+            Main.instance.notificationDateInterval = 1
+            return UNTimeIntervalNotificationTrigger(
+                timeInterval: 1,
+                repeats: false
+            )
+        }
         return UNTimeIntervalNotificationTrigger(
             timeInterval: interval,
             repeats: false
@@ -33,6 +41,7 @@ class NotificationService {
     func sendNotificationRequest(
         content: UNNotificationContent,
         trigger: UNNotificationTrigger) {
+                
         let request = UNNotificationRequest(
             identifier: UUID().uuidString, // для формирования уникальных строк
             content: content,
