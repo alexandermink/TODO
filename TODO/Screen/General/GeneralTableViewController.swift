@@ -27,17 +27,15 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let main = Main.instance
-    var task = Task()
     
-
+    
+    //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         try? main.updateTasksFromRealm()
-//        try! main.addSection(sectionName: "") // чтобы pickerView изначально загружался с пустой категорией и текстом placeholder'а
         try! main.addSection(sectionName: "Базовая секция № 1")
-        
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
@@ -55,7 +53,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - TABLE
- 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return main.userSession.tasks[section].sectionTasks.count
     }
@@ -64,7 +61,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         return main.userSession.tasks.count
     }
 
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! GeneralTableViewCell
         cell.selectedBackgroundView = {
@@ -87,6 +83,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
             try? main.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             if main.userSession.tasks[indexPath.section].sectionTasks.isEmpty {
@@ -127,7 +124,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - ВЫБОР ЦВЕТА СВАЙП ЯЧЕЙКИ
-    
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         main.rowBGCcolor = viewController.selectedColor
     }
@@ -156,11 +152,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         let action = UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
             self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = main.rowBGCcolor
         }
+        main.rowBGCcolor = .clear
         return action
     }
     
     //MARK: - ACTIONS
-    
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
         try! Main.instance.addSection(sectionName: "Базовая секция № 1")
@@ -170,7 +166,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - SET VIEW SCREEN
-    
     func setViewScreen() {
         view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)

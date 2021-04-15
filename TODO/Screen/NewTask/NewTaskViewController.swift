@@ -21,12 +21,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             notificationPicker.minimumDate = minDate
             if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
     @IBOutlet weak var newTaskNameTextField: UITextField!
-    @IBOutlet weak var membersButton: UIButton!
     @IBOutlet weak var checkListButton: UIButton!
-    @IBOutlet weak var coverButton: UIButton!
-    @IBOutlet weak var stackWiew: UIStackView!
-    @IBOutlet weak var stackWidthConstr: NSLayoutConstraint!
-    @IBOutlet weak var stackRowsHeight: NSLayoutConstraint!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var backLayer: Rounding!
@@ -34,37 +29,40 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var mapImageView: UIImageView!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fakeKB: UITextField! {
+        didSet{
+            fakeKB.inputAccessoryView = makeToolBarCategoryKB()
+        }
+    }
+    
     
     
     var sections: [String]?
     var router: BaseRouter?
     let categoryPicker = UIPickerView()
     let notificationPicker = UIDatePicker()
-    let dateFormatter111 = DateFormatter()
+    let dateFormatter = DateFormatter()
     var calendar = Calendar.current
     let notificationService = NotificationService()
     var selectedBackgroundColor: UIColor? = UIColor.clear
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
+    var isKeyboard = false
     
     
+    //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
-        dateFormatter111.timeZone = .autoupdatingCurrent
-        //        dateFormatter111.dateFormat = "dd, MMMM yyyy HH:mm"
-        dateFormatter111.dateFormat = "dd.MM.yyyy, HH:mm"
+        dateFormatter.timeZone = .autoupdatingCurrent
+        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         calendar.timeZone = .autoupdatingCurrent
         router = BaseRouter(viewController: self)
         sections = try? Main.instance.getSectionsFromRealm()
         newSectionTextField?.textAlignment = .center
         newSectionTextField?.text = sections?[0]
-//        stackWidthConstr.constant = view.frame.width/1.6
-//        stackRowsHeight.constant = view.frame.height/24
-//        stackWiew.spacing = view.frame.height/40
-        // Скрытие клавиатуры по нажатию на свободное место
         view.addTapGestureToHideKeyboard()
     }
 
@@ -134,13 +132,32 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         view.endEditing(true)
     }
     
+    @objc func changePickerAndKeyboard() {
+        print("Нажата кнопка Клавиатура")
+        view.endEditing(true)
+        if !isKeyboard {
+            newSectionTextField.resignFirstResponder()
+            newSectionTextField.isHidden = true
+            fakeKB.isHidden = false
+            fakeKB.becomeFirstResponder()
+            isKeyboard = true
+        } else {
+            fakeKB.resignFirstResponder()
+            fakeKB.isHidden = true
+            newSectionTextField.isHidden = false
+            newSectionTextField.becomeFirstResponder()
+            isKeyboard = false
+        }
+        newSectionTextField.text = fakeKB.text
+    }
+    
     @objc func chooseNotificationAction() {
-        notificationTextField?.text = dateFormatter111.string(from: notificationPicker.date)
-        Main.instance.notificationDate = dateFormatter111.date(from: notificationTextField?.text ?? "")?.localString()
+        notificationTextField?.text = dateFormatter.string(from: notificationPicker.date)
+        Main.instance.notificationDate = dateFormatter.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter111.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
         )
         view.endEditing(true)
     }
