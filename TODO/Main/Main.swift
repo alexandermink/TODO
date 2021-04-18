@@ -81,6 +81,22 @@ extension Main: LocalDataBaseService {
         userSession.tasks = userSession.tasks.sorted()
     }
     
+    func updateTask(task: Task) throws {
+        let realm = try Realm()
+        
+        let objectRealm = TaskRealm()
+        objectRealm.id = task.id
+        objectRealm.name = task.name
+        objectRealm.backgroundColor = task.backgroundColor?.toString()
+        objectRealm.taskDescription = task.taskDescription
+        objectRealm.creationDate = task.creationDate
+        objectRealm.notificationDate = task.notificationDate
+        
+        try realm.write {
+            realm.add(objectRealm, update: .modified)
+        }
+    }
+    
     func getSectionsFromRealm() throws -> [String] {
         let realm = try Realm()
         var sections: [String] = []

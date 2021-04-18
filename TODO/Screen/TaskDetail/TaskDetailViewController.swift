@@ -18,6 +18,7 @@ class TaskDetailViewController: UIViewController{
     var taskDateLabel: UILabel!
     var taskDetailTitleLabel: UILabel!
     var taskDetailTextView: UITextView!
+//    var taskDetailEditButton: UIButton!
     
     var task: Task? = Task()
     
@@ -25,6 +26,9 @@ class TaskDetailViewController: UIViewController{
         super.viewDidLoad()
         view.backgroundColor = UIColor.lightGray
         view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        
+//        taskDetailEditButton = UIButton()
+//        taskDetailEditButton.translatesAutoresizingMaskIntoConstraints = false
         
         taskNameTitleLabel = UILabel()
         taskNameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
