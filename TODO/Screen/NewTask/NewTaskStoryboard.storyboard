@@ -59,6 +59,14 @@
                                     <constraint firstAttribute="width" constant="800" id="gOE-0f-O5R"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds1" translatesAutoresizingMaskIntoConstraints="NO" id="pvO-vw-zfT">
+                                <rect key="frame" x="0.0" y="-6" width="2600" height="800"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="2600" id="K6h-M2-c3p"/>
+                                    <constraint firstAttribute="height" constant="800" id="bAr-0F-KR5"/>
+                                </constraints>
+                            </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOL-GF-LPa">
                                 <rect key="frame" x="32" y="126" width="256" height="410"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iDW-QO-9WQ">
@@ -268,7 +276,9 @@
                             <constraint firstItem="Nod-Z1-L7u" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" constant="24" id="KNR-1w-OTT"/>
                             <constraint firstItem="Hb3-NG-4sk" firstAttribute="top" secondItem="B9L-pa-vsv" secondAttribute="top" constant="20" id="NuH-Ol-uQM"/>
                             <constraint firstItem="Nod-Z1-L7u" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="24" id="P09-Ch-ois"/>
+                            <constraint firstItem="pvO-vw-zfT" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" id="UvD-10-Kog"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="bottom" secondItem="dOL-GF-LPa" secondAttribute="bottom" constant="32" id="WJu-nJ-Gw5"/>
+                            <constraint firstItem="pvO-vw-zfT" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="-100" id="Yv6-pe-xIt"/>
                             <constraint firstItem="dOL-GF-LPa" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="32" id="Zke-w1-res"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="trailing" secondItem="dOL-GF-LPa" secondAttribute="trailing" constant="32" id="klY-No-mYn"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="bottom" secondItem="Nod-Z1-L7u" secondAttribute="bottom" constant="24" id="lBA-Vy-D3z"/>
@@ -280,6 +290,10 @@
                         <outlet property="backLayer" destination="tHY-5W-5Qd" id="1Kh-zX-ZXK"/>
                         <outlet property="blurView" destination="dOL-GF-LPa" id="u7G-0b-FjP"/>
                         <outlet property="checkListButton" destination="VVR-cd-gGp" id="fL7-gp-sKH"/>
+                        <outlet property="cloudsHeightConstraint" destination="bAr-0F-KR5" id="OSf-7j-IER"/>
+                        <outlet property="cloudsImageView" destination="pvO-vw-zfT" id="ChX-uB-cVR"/>
+                        <outlet property="cloudsWidthConstraint" destination="K6h-M2-c3p" id="u8m-VH-rmc"/>
+                        <outlet property="coverButton" destination="3VI-PW-BYs" id="ccv-17-9oo"/>
                         <outlet property="createButton" destination="Hb3-NG-4sk" id="cTb-JV-dD3"/>
                         <outlet property="descriptionTextField" destination="2tT-nH-U0R" id="4S1-4x-ChS"/>
                         <outlet property="fakeKB" destination="ItF-RI-4pU" id="REC-Ao-BuI"/>
@@ -322,6 +336,7 @@
     </scenes>
     <resources>
         <image name="888" width="1200" height="900"/>
+        <image name="clouds1" width="2039" height="552"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -10,28 +10,45 @@ import UIKit
 
 class TaskDetailViewController: UIViewController{
     
-    var taskNameTitleLabel: UILabel!
+    var taskNameTitleLabel = UILabel()
     var taskNameTextView: UITextView!
-    var taskCreationDateTitleLabel: UILabel!
-    var taskCreationDateLabel: UILabel!
-    var taskDateTitleLabel: UILabel!
-    var taskDateLabel: UILabel!
-    var taskDetailTitleLabel: UILabel!
+    var taskCreationDateTitleLabel = UILabel()
+    var taskCreationDateLabel = UILabel()
+    var taskDateTitleLabel = UILabel()
+    var taskDateLabel = UILabel()
+    var taskDetailTitleLabel = UILabel()
     var taskDetailTextView: UITextView!
     
+    
     var task: Task? = Task()
+    let dateFormatter = DateFormatter()
+    
+    
+    func makeTF(lab: UILabel, text: String, color: UIColor) -> UILabel {
+        var label = lab
+        label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = text
+        label.font = UIFont(name: "HelveticaNeue", size: 17)
+        label.textColor = color
+        view.addSubview(label)
+        return label
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateFormatter.timeZone = .autoupdatingCurrent
+        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         view.backgroundColor = UIColor.lightGray
         view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
-        taskNameTitleLabel = UILabel()
-        taskNameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskNameTitleLabel.text = "Название:"
-        taskNameTitleLabel.textColor = .systemGray
-        taskNameTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskNameTitleLabel)
+        taskNameTitleLabel = makeTF(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
+        taskCreationDateTitleLabel = makeTF(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
+        taskDateTitleLabel = makeTF(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
+        taskCreationDateLabel = makeTF(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
+        taskDateLabel = makeTF(lab: self.taskDateLabel, text: task?.notificationDate ?? Date().localString(), color: .systemYellow)
+        guard task?.notificationDate != "" else { return taskDateLabel.text = "Дата уведомления не назначена"}
+        taskDetailTitleLabel = makeTF(lab: self.taskDetailTitleLabel, text: "Описание задачи:", color: .systemGray)
         
         taskNameTextView = UITextView()
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,45 +60,6 @@ class TaskDetailViewController: UIViewController{
         taskNameTextView.contentInsetAdjustmentBehavior = .automatic
         taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskNameTextView)
-        
-        taskCreationDateTitleLabel = UILabel()
-        taskCreationDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskCreationDateTitleLabel.text = "Дата регестрации задачи:"
-        taskCreationDateTitleLabel.textColor = .systemGray
-        taskCreationDateTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskCreationDateTitleLabel)
-        
-        taskCreationDateLabel = UILabel()
-        taskCreationDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskCreationDateLabel.text = task?.creationDate.localString()
-        taskCreationDateLabel.textColor = .systemYellow
-        taskCreationDateLabel.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskCreationDateLabel)
-        
-        taskDateTitleLabel = UILabel()
-        taskDateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskDateTitleLabel.text = "Дата уведомления задачи:"
-        taskDateTitleLabel.textColor = .systemGray
-        taskDateTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskDateTitleLabel)
-        
-        taskDateLabel = UILabel()
-        taskDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        if task?.notificationDate != ""{
-            taskDateLabel.text = task?.notificationDate
-        } else {
-            taskDateLabel.text = "Дата уведомления не назначена"
-        }
-        taskDateLabel.textColor = .systemYellow
-        taskDateLabel.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskDateLabel)
-        
-        taskDetailTitleLabel = UILabel()
-        taskDetailTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskDetailTitleLabel.text = "Описание задачи:"
-        taskDetailTitleLabel.textColor = .systemGray
-        taskDetailTitleLabel.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskDetailTitleLabel)
         
         taskDetailTextView = UITextView()
         taskDetailTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,7 +75,6 @@ class TaskDetailViewController: UIViewController{
         taskDetailTextView.textAlignment = .left
         taskDetailTextView.textColor = .systemYellow
         taskDetailTextView.font = UIFont(name: "HelveticaNeue", size: 17)
-
         view.addSubview(taskDetailTextView)
         
         constrainsInit()
@@ -136,5 +113,4 @@ class TaskDetailViewController: UIViewController{
             
         ])
     }
-    
 }

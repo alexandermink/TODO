@@ -22,6 +22,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
     @IBOutlet weak var newTaskNameTextField: UITextField!
     @IBOutlet weak var checkListButton: UIButton!
+    @IBOutlet weak var coverButton: UIButton!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var backLayer: Rounding!
@@ -34,7 +35,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             fakeKB.inputAccessoryView = makeToolBarCategoryKB()
         }
     }
-    
+    @IBOutlet weak var cloudsImageView: UIImageView!
+    @IBOutlet weak var cloudsWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
     
     
     var sections: [String]?
@@ -64,6 +67,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         newSectionTextField?.textAlignment = .center
         newSectionTextField?.text = sections?[0]
         view.addTapGestureToHideKeyboard()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 180, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
+            self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
+        }, completion: nil)
     }
 
     
@@ -109,6 +119,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         selectedBackgroundColor = viewController.selectedColor
+        coverButton.backgroundColor = viewController.selectedColor
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -190,5 +201,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         createButton.setTitle("Создать", for: .normal)
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.6
+        self.cloudsImageView.frame = .init(x: -view.frame.width*4, y: 40, width: view.frame.width*2, height: view.frame.width)
+        cloudsWidthConstraint.constant = view.frame.width*5.0
+        cloudsHeightConstraint.constant = view.frame.width*1.6
     }
 }

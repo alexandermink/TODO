@@ -11,7 +11,16 @@ import RealmSwift
 
 private let reuseIdentifier = "GeneralCell"
 
+protocol GeneralTableViewControllerDelegat: AnyObject {
+    func didTapMenuButton()
+}
+
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIColorPickerViewControllerDelegate {
+    
+    enum MenuState {
+        case opened
+        case closed
+    }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backLayer: Rounding!
@@ -21,18 +30,40 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
-
+    @IBOutlet weak var cloudsImageView: UIImageView!
+    @IBOutlet weak var cloudsWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsStackLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsStack: UIStackView!
+    @IBOutlet weak var trashView: UIImageView!
+    
     
     let realm = try! Realm()
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let main = Main.instance
+    weak var delegat: GeneralTableViewControllerDelegat?
+    private var menuState: MenuState = .closed
     
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        addPanGesture(view: tableView)
+//        fileViewOrigin = tableView.bounds
+//        view.bringSubviewToFront(tableView)
+//
+//        addPanGesture(view: backLayer)
+//        fileViewOrigin = backLayer.bounds
+//        view.bringSubviewToFront(backLayer)
+//
+//        addPanGesture(view: blurView)
+//        fileViewOrigin = blurView.bounds
+//        view.bringSubviewToFront(blurView)
+        
         setViewScreen()
+        cloudsImageView.isHidden = true
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         try? main.updateTasksFromRealm()
         try! main.addSection(sectionName: "Базовая секция № 1")
@@ -49,6 +80,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIView.animate(withDuration: 180, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
+            self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
+        }, completion: nil)
         self.tableView.reloadData()
     }
     
@@ -157,6 +191,39 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - ACTIONS
+    @objc func didTapMenuButton() {
+        delegat?.didTapMenuButton()
+        print("did tap menu")
+        switch menuState {
+        case .closed:
+            self.cloudsImageView.isHidden = false
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
+                self.view.frame.origin.x = self.view.frame.size.width - 80
+                self.blurView.backgroundColor = .black
+                self.backLayer.backgroundColor = .backgroundColor
+                self.blurView.alpha = 0.5
+                self.navigationItem.leftBarButtonItem?.title = "Скрыть"
+            } completion: { [weak self] done in
+                if done {
+                    self?.menuState = .opened
+                }
+            }
+        case .opened:
+            self.cloudsImageView.isHidden = true
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
+                self.view.frame.origin.x = 0
+                self.blurView.backgroundColor = .clear
+                self.backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+                self.blurView.alpha = 0.9
+                self.navigationItem.leftBarButtonItem?.title = "Настройки"
+            } completion: { [weak self] done in
+                if done {
+                    self?.menuState = .closed
+                }
+            }
+        }
+    }
+    
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
         try! Main.instance.addSection(sectionName: "Базовая секция № 1")
@@ -182,6 +249,57 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
         mapWidthConstraint.constant = view.frame.width*3.2
-        mapHeightConstraint.constant = view.frame.width*1.6
+        mapHeightConstraint.constant = view.frame.width*1.8
+        settingsStackLeadingConstraint.constant = -view.frame.width/2
+        self.cloudsImageView.frame = .init(x: -view.frame.width*4, y: 0, width: view.frame.width*2, height: view.frame.width)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Настройки", style: .done, target: self, action: #selector(didTapMenuButton))
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
+        cloudsWidthConstraint.constant = view.frame.width*5.2
+        cloudsHeightConstraint.constant = view.frame.width*2
     }
+    
+    
+    
+    
+    
+    
+//    var fileViewOrigin: CGRect!
+//
+//    func addPanGesture(view: UIView) {
+//        let pan = UIPanGestureRecognizer(target: self, action: #selector(GeneralTableViewController.handlePan(sender:)))
+//        view.addGestureRecognizer(pan)
+//    }
+//
+//    @objc func handlePan(sender: UIPanGestureRecognizer) {
+//        let fileView = sender.view!
+//        switch sender.state {
+//        case .began, .changed:
+//            moveViewWithPan(view: fileView, sender: sender)
+//        case .ended:
+//            if fileView.frame.intersects(trashView.frame) {
+//                deleteView(view: fileView)
+//            } else { returnViewToOrigin(view: fileView) }
+//        default: break
+//        }
+//    }
+//
+//    func moveViewWithPan(view: UIView, sender: UIPanGestureRecognizer) {
+//        let translation = sender.translation(in: view)
+//        view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+//        sender.setTranslation(CGPoint.zero, in: view)
+//    }
+//
+//    func returnViewToOrigin(view: UIView) {
+//        UIView.animate(withDuration: 0.3, animations: {
+//            view.bounds = self.fileViewOrigin
+//        })
+//    }
+//
+//    func deleteView(view: UIView) {
+//        UIView.animate(withDuration: 0.3, animations: {
+//            view.alpha = 0.0
+//        })
+//    }
 }
