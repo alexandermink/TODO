@@ -48,7 +48,7 @@ class TaskDetailViewController: UIViewController{
         taskDateTitleLabel = makeTF(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         taskCreationDateLabel = makeTF(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
         taskDateLabel = makeTF(lab: self.taskDateLabel, text: task?.notificationDate ?? Date().localString(), color: .systemYellow)
-        guard task?.notificationDate != "" else { return taskDateLabel.text = "Дата уведомления не назначена"}
+        if taskDateLabel.text == "" { taskDateLabel.text = "дата уведомления не назначена" }
         taskDetailTitleLabel = makeTF(lab: self.taskDetailTitleLabel, text: "Описание задачи:", color: .systemGray)
 
         
