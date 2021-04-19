@@ -41,14 +41,14 @@ class TaskDetailViewController: UIViewController{
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         view.backgroundColor = UIColor.lightGray
-        view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         taskNameTitleLabel = makeTF(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         taskCreationDateTitleLabel = makeTF(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
         taskDateTitleLabel = makeTF(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         taskCreationDateLabel = makeTF(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
         taskDateLabel = makeTF(lab: self.taskDateLabel, text: task?.notificationDate ?? Date().localString(), color: .systemYellow)
-        guard task?.notificationDate != "" else { return taskDateLabel.text = "Дата уведомления не назначена"}
+        if taskDateLabel.text == "" { taskDateLabel.text = "дата уведомления не назначена" }
         taskDetailTitleLabel = makeTF(lab: self.taskDetailTitleLabel, text: "Описание задачи:", color: .systemGray)
 
         

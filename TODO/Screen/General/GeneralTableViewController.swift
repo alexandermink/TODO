@@ -27,15 +27,19 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var newTaskButton: UIBarButtonItem!
     @IBOutlet weak var mapImageView: UIImageView!
+    @IBOutlet weak var boatImageView: UIImageView!
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var boatWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var boatHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cloudsImageView: UIImageView!
     @IBOutlet weak var cloudsWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsStackLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsStack: UIStackView!
     @IBOutlet weak var trashView: UIImageView!
+    @IBOutlet weak var navSeparatorView: UIView!
     
     
     let realm = try! Realm()
@@ -65,6 +69,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         setViewScreen()
         cloudsImageView.isHidden = true
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         try? main.updateTasksFromRealm()
         try! main.addSection(sectionName: "Базовая секция № 1")
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
@@ -111,7 +116,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 //            main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
 //        self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
         cell.notificationLabel.textColor = .systemYellow
-        cell.descriptionLabel.textColor = .backgroundColor
+        cell.descriptionLabel.textColor = .vitBackground
         return cell
     }
     
@@ -135,7 +140,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? { // хедеры
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20))
-        view.backgroundColor = UIColor.systemYellow
+        view.backgroundColor = UIColor.alexeyBackground
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowRadius = 8
         view.layer.shadowOpacity = 0.8
@@ -143,7 +148,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         let lbl = UILabel(frame: CGRect(x: 15, y: 5, width: view.frame.width - 10, height: 20))
         lbl.textAlignment = .center
         lbl.font = UIFont.boldSystemFont(ofSize: 17)
-        lbl.textColor = .backgroundColor
+        lbl.textColor = .vitBackground
         lbl.text = main.userSession.tasks[section].sectionName
         view.addSubview(lbl)
         return view
@@ -200,7 +205,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
                 self.view.frame.origin.x = self.view.frame.size.width - 80
                 self.blurView.backgroundColor = .black
-                self.backLayer.backgroundColor = .backgroundColor
+                self.backLayer.backgroundColor = .vitBackground
                 self.blurView.alpha = 0.5
                 self.navigationItem.leftBarButtonItem?.title = "Скрыть"
             } completion: { [weak self] done in
@@ -214,7 +219,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 self.view.frame.origin.x = 0
                 self.blurView.backgroundColor = .clear
                 self.backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-                self.blurView.alpha = 0.9
+                self.blurView.alpha = 0.8
                 self.navigationItem.leftBarButtonItem?.title = "Настройки"
             } completion: { [weak self] done in
                 if done {
@@ -234,30 +239,38 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - SET VIEW SCREEN
     func setViewScreen() {
-        view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         
-        navigationController?.navigationBar.barTintColor = .darkBrown
+//        navigationController?.navigationBar.barTintColor = .vitDarkBrown
+        navigationController?.navigationBar.barTintColor = .alexeyFog
         newTaskButton.title = "Новая задача"
         newTaskButton.setTitleTextAttributes(
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-             NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
+             NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
         newTaskButton.setTitleTextAttributes(
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-             NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
+             NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .highlighted)
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.8
+        
+        boatWidthConstraint.constant = view.frame.width*1.8
+        boatHeightConstraint.constant = view.frame.width*1.8
+        
         settingsStackLeadingConstraint.constant = -view.frame.width/2
         self.cloudsImageView.frame = .init(x: -view.frame.width*4, y: 0, width: view.frame.width*2, height: view.frame.width)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Настройки", style: .done, target: self, action: #selector(didTapMenuButton))
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-             NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
+             NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
         cloudsWidthConstraint.constant = view.frame.width*5.2
         cloudsHeightConstraint.constant = view.frame.width*2
+        navSeparatorView.backgroundColor = .alexeyBackground
+//        navSeparatorView.backgroundColor = .systemYellow
     }
     
     
