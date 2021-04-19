@@ -10,6 +10,7 @@ import UIKit
 
 class TaskDetailViewController: UIViewController{
     
+    var doneButton: UIButton!
     var taskNameTitleLabel = UILabel()
     var taskNameTextView: UITextView!
     var taskCreationDateTitleLabel = UILabel()
@@ -18,11 +19,10 @@ class TaskDetailViewController: UIViewController{
     var taskDateLabel = UILabel()
     var taskDetailTitleLabel = UILabel()
     var taskDetailTextView: UITextView!
-//    var taskDetailEditButton: UIButton!
-    
     
     var task: Task? = Task()
     let dateFormatter = DateFormatter()
+    var router: BaseRouter?
     
     
     func makeTF(lab: UILabel, text: String, color: UIColor) -> UILabel {
@@ -38,19 +38,23 @@ class TaskDetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        router = BaseRouter(viewController: self)
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         view.backgroundColor = UIColor.lightGray
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         taskNameTitleLabel = makeTF(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
-        taskCreationDateTitleLabel = makeTF(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
-        taskDateTitleLabel = makeTF(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
-        taskCreationDateLabel = makeTF(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
-        taskDateLabel = makeTF(lab: self.taskDateLabel, text: task?.notificationDate ?? Date().localString(), color: .systemYellow)
-        if taskDateLabel.text == "" { taskDateLabel.text = "дата уведомления не назначена" }
-        taskDetailTitleLabel = makeTF(lab: self.taskDetailTitleLabel, text: "Описание задачи:", color: .systemGray)
-
+        
+        doneButton = UIButton(type: .system)
+        doneButton.setTitle("Готово", for: .normal)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.tintColor = .systemYellow
+        doneButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(doneButton)
+        doneButton.addTarget(self,
+                             action: #selector(handleDoneTouchUpInside),
+                             for: .touchUpInside)
         
         taskNameTextView = UITextView()
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +66,18 @@ class TaskDetailViewController: UIViewController{
         taskNameTextView.contentInsetAdjustmentBehavior = .automatic
         taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskNameTextView)
+        
+        taskCreationDateTitleLabel = makeTF(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
+        
+        taskCreationDateLabel = makeTF(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
+        
+        taskDateTitleLabel = makeTF(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
+        
+        taskDateLabel = makeTF(lab: self.taskDateLabel, text: task?.notificationDate ?? Date().localString(), color: .systemYellow)
+        
+        if taskDateLabel.text == "" { taskDateLabel.text = "дата уведомления не назначена" }
+        
+        taskDetailTitleLabel = makeTF(lab: self.taskDetailTitleLabel, text: "Описание задачи:", color: .systemGray)
         
         taskDetailTextView = UITextView()
         taskDetailTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,38 +96,49 @@ class TaskDetailViewController: UIViewController{
         view.addSubview(taskDetailTextView)
         
         constrainsInit()
+        
+        view.addTapGestureToHideKeyboard()
+        
+    }
+    
+    @objc func handleDoneTouchUpInside(){
+        try? Main.instance.updateTask(task: task!)
+        router?.dismiss(animated: true, completion: nil)
     }
     
     func constrainsInit(){
         NSLayoutConstraint.activate([
             
-            taskNameTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            doneButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
+            doneButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
+            
+            taskNameTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             taskNameTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 24),
             taskNameTextView.bottomAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 2),
             taskNameTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
-            taskNameTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 4),
+            taskNameTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
             
             taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 48),
             taskCreationDateTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskCreationDateLabel.topAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 30),
+            taskCreationDateLabel.topAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 28),
             taskCreationDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDateTitleLabel.topAnchor.constraint(equalTo: taskCreationDateLabel.topAnchor, constant: 48),
+            taskDateTitleLabel.topAnchor.constraint(equalTo: taskCreationDateLabel.topAnchor, constant: 36),
             taskDateTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 30),
+            taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 28),
             taskDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDetailTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 40),
+            taskDetailTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 36),
             taskDetailTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDetailTextView.topAnchor.constraint(equalTo: taskDetailTitleLabel.topAnchor, constant: 24),
-            taskDetailTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 16),
+            taskDetailTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
             taskDetailTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
-            taskDetailTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 4)
+            taskDetailTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12)
             
         ])
     }

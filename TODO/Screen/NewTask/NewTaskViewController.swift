@@ -20,7 +20,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             notificationTextField.inputView = notificationPicker
             notificationPicker.minimumDate = minDate
             if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
-    @IBOutlet weak var newTaskNameTextField: UITextField!
+    @IBOutlet weak var newTaskNameTextField: UITextField! {didSet{
+        newTaskNameTextField.delegate = self}}
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -123,7 +124,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return self.textLimit(existingText: textField.text, newText: string, limit: 50)
+        return self.textLimit(existingText: textField.text, newText: string, limit: 200)
     }
             
     private func textLimit(existingText: String?, newText: String, limit: Int) -> Bool {
