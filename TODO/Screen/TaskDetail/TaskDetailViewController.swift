@@ -18,6 +18,7 @@ class TaskDetailViewController: UIViewController{
     var taskDateLabel = UILabel()
     var taskDetailTitleLabel = UILabel()
     var taskDetailTextView: UITextView!
+//    var taskDetailEditButton: UIButton!
     
     
     var task: Task? = Task()
@@ -49,6 +50,7 @@ class TaskDetailViewController: UIViewController{
         taskDateLabel = makeTF(lab: self.taskDateLabel, text: task?.notificationDate ?? Date().localString(), color: .systemYellow)
         guard task?.notificationDate != "" else { return taskDateLabel.text = "Дата уведомления не назначена"}
         taskDetailTitleLabel = makeTF(lab: self.taskDetailTitleLabel, text: "Описание задачи:", color: .systemGray)
+
         
         taskNameTextView = UITextView()
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
