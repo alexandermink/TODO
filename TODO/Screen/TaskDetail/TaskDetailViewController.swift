@@ -41,7 +41,7 @@ class TaskDetailViewController: UIViewController{
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         view.backgroundColor = UIColor.lightGray
-        view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         taskNameTitleLabel = makeTF(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         taskCreationDateTitleLabel = makeTF(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)

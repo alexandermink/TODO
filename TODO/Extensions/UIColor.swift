@@ -12,8 +12,11 @@ extension UIColor {
     static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
-    static let backgroundColor = UIColor.rgb(r: 31, g: 33, b: 36)
-    static let darkBrown = UIColor.rgb(r: 79, g: 52, b: 11)
+    static let vitBackground = UIColor.rgb(r: 31, g: 33, b: 36)
+    static let vitDarkBrown = UIColor.rgb(r: 79, g: 52, b: 11)
+    
+    static let alexeyBackground = UIColor.rgb(r: 82, g: 149, b: 139)
+    static let alexeyFog = UIColor.rgb(r: 185, g: 196, b: 201)
     
     
     static func hexStringToUIColor (hex:String) -> UIColor {
@@ -43,82 +46,6 @@ extension UIColor {
         return CIColor(cgColor: color).stringRepresentation
     }
 }
-
-//extension Numeric {
-//    var data: Data {
-//        var bytes = self
-//        return Data(bytes: &bytes, count: MemoryLayout<Self>.size)
-//    }
-//}
-//extension Data {
-//    func object<T>() -> T { withUnsafeBytes{$0.load(as: T.self)} }
-//    var color: UIColor { .init(data: self) }
-//}
-//extension UIColor {
-//    convenience init(data: Data) {
-//        let size = MemoryLayout<CGFloat>.size
-//        self.init(red:   data.subdata(in: size*0..<size*1).object(),
-//                  green: data.subdata(in: size*1..<size*2).object(),
-//                  blue:  data.subdata(in: size*2..<size*3).object(),
-//                  alpha: data.subdata(in: size*3..<size*4).object())
-//    }
-//    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)? {
-//        var (red, green, blue, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
-//        return getRed(&red, green: &green, blue: &blue, alpha: &alpha) ?
-//        (red, green, blue, alpha) : nil
-//    }
-//    var data: Data? {
-//        guard let rgba = rgba else { return nil }
-//        return rgba.red.data + rgba.green.data + rgba.blue.data + rgba.alpha.data
-//    }
-//}
-//extension UserDefaults {
-//    func set(_ color: UIColor?, forKey defaultName: String) {
-//        guard let data = color?.data else {
-//            removeObject(forKey: defaultName)
-//            return
-//        }
-//        set(data, forKey: defaultName)
-//    }
-//    func color(forKey defaultName: String) -> UIColor? {
-//        data(forKey: defaultName)?.color
-//    }
-//}
-//extension UserDefaults {
-//    var backgroundColor: UIColor? {
-//        get { color(forKey: "backgroundColor") }
-//        set { set(newValue, forKey: "backgroundColor") }
-//    }
-//}
-
-//extension UserDefaults {
-//
-//    func color(forKey key: String) -> UIColor? {
-//
-//        guard let colorData = data(forKey: key) else { return nil }
-//
-//        do {
-//            return try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: colorData)
-//        } catch let error {
-//            print("color error \(error.localizedDescription)")
-//            return nil
-//        }
-//
-//    }
-//
-//    func set(_ value: UIColor?, forKey key: String) {
-//
-//        guard let color = value else { return }
-//        do {
-//            let data = try NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false)
-//            set(data, forKey: key)
-//        } catch let error {
-//            print("error color key data not saved \(error.localizedDescription)")
-//        }
-//
-//    }
-//
-//}
 
 extension UserDefaults {
     func colorForKey(key: String) -> UIColor? {

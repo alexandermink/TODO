@@ -191,13 +191,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     // MARK: - SET VIEW SCREEN
     func setViewScreen() {
-        view.applyGradient(colours: [.darkBrown, .backgroundColor], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         
-        navigationController?.navigationBar.barTintColor = .darkBrown
+        navigationController?.navigationBar.barTintColor = .vitDarkBrown
         createButton.setTitle("Создать", for: .normal)
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.6

@@ -66,12 +66,20 @@
                                     <constraint firstAttribute="height" constant="400" id="nc3-gE-14H"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-aQ-yaO">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-aQ-yaO">
                                 <rect key="frame" x="-300" y="19" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1200" id="Ztc-YD-zR9"/>
                                     <constraint firstAttribute="height" constant="600" id="vT2-Cm-vCQ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="o6O-du-MmM">
+                                <rect key="frame" x="-220" y="89" width="1200" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="600" id="7dA-cL-Eeg"/>
+                                    <constraint firstAttribute="width" constant="1200" id="cJi-ix-jvU"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds1" translatesAutoresizingMaskIntoConstraints="NO" id="K5D-Zk-kQF">
@@ -82,7 +90,7 @@
                                     <constraint firstAttribute="height" constant="800" id="dm0-rI-SGx"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-tH-h0f">
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-tH-h0f">
                                 <rect key="frame" x="-100" y="204" width="160" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I96-XS-tnX">
@@ -119,7 +127,7 @@
                                     <constraint firstAttribute="width" constant="160" id="jai-Wv-LvD"/>
                                 </constraints>
                             </stackView>
-                            <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-VJ-bCE">
+                            <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-VJ-bCE">
                                 <rect key="frame" x="32" y="81" width="256" height="455"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="R4c-y0-lxd">
                                     <rect key="frame" x="0.0" y="0.0" width="256" height="455"/>
@@ -194,7 +202,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WyF-1P-IdP">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WyF-1P-IdP">
                                 <rect key="frame" x="-100" y="467" width="80" height="80.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
@@ -226,7 +234,9 @@
                             <constraint firstItem="WyF-1P-IdP" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-100" id="mOt-42-AmA"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="nUR-EV-gOM"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="nkn-cV-d0N" secondAttribute="trailing" constant="24" id="qjh-ro-Oix"/>
+                            <constraint firstItem="o6O-du-MmM" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="40" id="tJs-Am-sKF"/>
                             <constraint firstItem="nkn-cV-d0N" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="24" id="xdw-Yx-sCr"/>
+                            <constraint firstItem="o6O-du-MmM" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-220" id="xtp-Wy-JA0"/>
                             <constraint firstItem="nkn-cV-d0N" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="24" id="y3O-PZ-Y9F"/>
                         </constraints>
                     </view>
@@ -240,6 +250,9 @@
                     <connections>
                         <outlet property="backLayer" destination="n4a-mQ-BJW" id="HCq-wd-61L"/>
                         <outlet property="blurView" destination="hPa-VJ-bCE" id="Jiz-mV-HDn"/>
+                        <outlet property="boatHeightConstraint" destination="7dA-cL-Eeg" id="mNx-3c-YeN"/>
+                        <outlet property="boatImageView" destination="o6O-du-MmM" id="hOe-Vr-wJ3"/>
+                        <outlet property="boatWidthConstraint" destination="cJi-ix-jvU" id="UUu-eE-YqM"/>
                         <outlet property="cloudsHeightConstraint" destination="dm0-rI-SGx" id="h8Y-zJ-5ro"/>
                         <outlet property="cloudsImageView" destination="K5D-Zk-kQF" id="rgg-Vd-FUw"/>
                         <outlet property="cloudsWidthConstraint" destination="bHv-5Y-DDT" id="Owk-k4-rcq"/>
@@ -247,6 +260,7 @@
                         <outlet property="mapImageView" destination="MGk-aQ-yaO" id="URC-8m-WPH"/>
                         <outlet property="mapView" destination="sAg-gp-Xj3" id="Tpa-ne-bJi"/>
                         <outlet property="mapWidthConstraint" destination="Ztc-YD-zR9" id="0dY-k5-hp9"/>
+                        <outlet property="navSeparatorView" destination="jd0-ou-lju" id="gZS-D9-TFK"/>
                         <outlet property="newTaskButton" destination="Thb-en-nUn" id="o6o-RF-BZP"/>
                         <outlet property="settingsStack" destination="bgD-tH-h0f" id="9cv-t6-Eet"/>
                         <outlet property="settingsStackLeadingConstraint" destination="XdY-nB-zJf" id="EiR-dQ-0l1"/>
@@ -279,6 +293,7 @@
     </scenes>
     <resources>
         <image name="888" width="1200" height="900"/>
+        <image name="boat2" width="1651" height="1416"/>
         <image name="clouds1" width="2039" height="552"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="secondaryLabelColor">
