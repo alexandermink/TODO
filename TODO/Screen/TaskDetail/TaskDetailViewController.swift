@@ -17,8 +17,8 @@ class TaskDetailViewController: UIViewController{
     var taskCreationDateLabel = UILabel()
     var taskDateTitleLabel = UILabel()
     var taskDateLabel = UILabel()
-    var taskDetailTitleLabel = UILabel()
-    var taskDetailTextView: UITextView!
+    var taskDescriptionTitleLabel = UILabel()
+    var taskDescriptionTextView: UITextView!
     
     var task: Task? = Task()
     let dateFormatter = DateFormatter()
@@ -77,23 +77,23 @@ class TaskDetailViewController: UIViewController{
         
         if taskDateLabel.text == "" { taskDateLabel.text = "дата уведомления не назначена" }
         
-        taskDetailTitleLabel = makeTF(lab: self.taskDetailTitleLabel, text: "Описание задачи:", color: .systemGray)
+        taskDescriptionTitleLabel = makeTF(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
-        taskDetailTextView = UITextView()
-        taskDetailTextView.translatesAutoresizingMaskIntoConstraints = false
-        taskDetailTextView.backgroundColor = UIColor.clear
-        taskDetailTextView.contentInsetAdjustmentBehavior = .automatic
-        taskDetailTextView.isEditable = true
-        taskDetailTextView.isScrollEnabled = true
+        taskDescriptionTextView = UITextView()
+        taskDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        taskDescriptionTextView.backgroundColor = UIColor.clear
+        taskDescriptionTextView.contentInsetAdjustmentBehavior = .automatic
+        taskDescriptionTextView.isEditable = true
+        taskDescriptionTextView.isScrollEnabled = true
         if task?.taskDescription != ""{
-            taskDetailTextView.text = task?.taskDescription
+            taskDescriptionTextView.text = task?.taskDescription
         } else {
-            taskDetailTextView.text = "Напишите описание задачи"
+            taskDescriptionTextView.text = "Напишите описание задачи"
         }
-        taskDetailTextView.textAlignment = .left
-        taskDetailTextView.textColor = .systemYellow
-        taskDetailTextView.font = UIFont(name: "HelveticaNeue", size: 17)
-        view.addSubview(taskDetailTextView)
+        taskDescriptionTextView.textAlignment = .left
+        taskDescriptionTextView.textColor = .systemYellow
+        taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
+        view.addSubview(taskDescriptionTextView)
         
         constrainsInit()
         
@@ -102,7 +102,10 @@ class TaskDetailViewController: UIViewController{
     }
     
     @objc func handleDoneTouchUpInside(){
-        try? Main.instance.updateTask(task: task!)
+        task?.name = taskNameTextView.text
+        task?.taskDescription = taskDescriptionTextView.text
+        guard let task = task else { return }
+        try? Main.instance.updateTask(task: task)
         router?.dismiss(animated: true, completion: nil)
     }
     
@@ -132,13 +135,13 @@ class TaskDetailViewController: UIViewController{
             taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 28),
             taskDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDetailTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 36),
-            taskDetailTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            taskDescriptionTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 36),
+            taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDetailTextView.topAnchor.constraint(equalTo: taskDetailTitleLabel.topAnchor, constant: 24),
-            taskDetailTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
-            taskDetailTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
-            taskDetailTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12)
+            taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 24),
+            taskDescriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+            taskDescriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            taskDescriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12)
             
         ])
     }
