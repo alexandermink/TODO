@@ -188,11 +188,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func okAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
-            self.tableView.cellForRow(at: indexPath)?.contentView.backgroundColor = main.rowBGCcolor
+        return UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
+            var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+            task.backgroundColor = main.rowBGCcolor
+            main.rowBGCcolor = .clear
+            try? Main.instance.updateTask(task: task)
+            tableView.reloadData()
         }
-        main.rowBGCcolor = .clear
-        return action
     }
     
     //MARK: - ACTIONS
