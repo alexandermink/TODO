@@ -66,7 +66,7 @@
                                     <constraint firstAttribute="height" constant="400" id="nc3-gE-14H"/>
                                 </constraints>
                             </view>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-aQ-yaO">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-aQ-yaO">
                                 <rect key="frame" x="-300" y="19" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -74,7 +74,7 @@
                                     <constraint firstAttribute="height" constant="600" id="vT2-Cm-vCQ"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="o6O-du-MmM">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="o6O-du-MmM">
                                 <rect key="frame" x="-220" y="89" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -90,36 +90,38 @@
                                     <constraint firstAttribute="height" constant="800" id="dm0-rI-SGx"/>
                                 </constraints>
                             </imageView>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-tH-h0f">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-tH-h0f">
                                 <rect key="frame" x="-100" y="204" width="160" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I96-XS-tnX">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="53.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="Здесь">
+                                        <state key="normal" title="Тема Виталия">
                                             <color key="titleColor" systemColor="systemYellowColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="vitThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="IqL-gz-aIT"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aty-Ra-ylf">
-                                        <rect key="frame" x="0.0" y="40" width="160" height="40"/>
+                                        <rect key="frame" x="0.0" y="53.5" width="160" height="53"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="будет">
+                                        <state key="normal" title="Тема Алексея">
                                             <color key="titleColor" systemColor="systemYellowColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="alexeyThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="Mw7-Zc-Qg5"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enm-Ra-Moz">
-                                        <rect key="frame" x="0.0" y="80" width="160" height="40"/>
+                                        <rect key="frame" x="0.0" y="106.5" width="160" height="53.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="какое-то">
+                                        <state key="normal" title="Тема Александра">
                                             <color key="titleColor" systemColor="systemYellowColor"/>
                                         </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ig5-0O-MGD">
-                                        <rect key="frame" x="0.0" y="120" width="160" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="меню">
-                                            <color key="titleColor" systemColor="systemYellowColor"/>
-                                        </state>
+                                        <connections>
+                                            <action selector="alexandrThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="CEL-I7-Ezp"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -266,6 +268,7 @@
                         <outlet property="settingsStackLeadingConstraint" destination="XdY-nB-zJf" id="EiR-dQ-0l1"/>
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
                         <outlet property="trashView" destination="WyF-1P-IdP" id="bdr-8V-EsH"/>
+                        <outlet property="vitThemeButton" destination="I96-XS-tnX" id="6VR-EF-Q4j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjY-Fx-tBw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

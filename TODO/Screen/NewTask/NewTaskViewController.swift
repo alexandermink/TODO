@@ -134,6 +134,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @objc func deleteCategoryAction() {
         try? Main.instance.deleteSection(delSectionName: newSectionTextField?.text ?? "")
+        newSectionTextField?.text = ""
+        try? Main.instance.addSection(sectionName: "Базовая секция № 1")
+        sections = try? Main.instance.getSectionsFromRealm()
         print("Нажата кнопка удалить категорию")
         view.endEditing(true)
     }
