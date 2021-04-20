@@ -16,12 +16,13 @@ class TaskDetailViewController: UIViewController{
     var taskCreationDateTitleLabel = UILabel()
     var taskCreationDateLabel = UILabel()
     var taskDateTitleLabel = UILabel()
-    var taskDateLabel = UILabel()
+    var taskDateTextField: UITextField!
     var taskDescriptionTitleLabel = UILabel()
     var taskDescriptionTextView: UITextView!
     
     var task: Task? = Task()
     let dateFormatter = DateFormatter()
+    var notificationPicker = UIDatePicker()
     var router: BaseRouter?
     
     
@@ -73,9 +74,17 @@ class TaskDetailViewController: UIViewController{
         
         taskDateTitleLabel = makeTF(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         
-        taskDateLabel = makeTF(lab: self.taskDateLabel, text: task?.notificationDate ?? Date().localString(), color: .systemYellow)
-        
-        if taskDateLabel.text == "" { taskDateLabel.text = "дата уведомления не назначена" }
+        taskDateTextField = UITextField()
+        taskDateTextField.translatesAutoresizingMaskIntoConstraints = false
+        taskDateTextField.text = task?.notificationDate
+        taskDateTextField.textColor = .systemYellow
+        taskDateTextField.font = UIFont(name: "HelveticaNeue", size: 17)
+        taskDateTextField.inputView = notificationPicker
+        taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
+        taskDateTextField.clearsOnBeginEditing = true
+        if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
+        view.addSubview(taskDateTextField)
+        if taskDateTextField.text == "" { taskDateTextField.text = "Дата уведомления не назначена" }
         
         taskDescriptionTitleLabel = makeTF(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
@@ -104,9 +113,25 @@ class TaskDetailViewController: UIViewController{
     @objc func handleDoneTouchUpInside(){
         task?.name = taskNameTextView.text
         task?.taskDescription = taskDescriptionTextView.text
+        if taskDateTextField.text == "Дата уведомления не назначена" {
+            task?.notificationDate = ""
+        } else {
+            task?.notificationDate = taskDateTextField.text
+        }
         guard let task = task else { return }
         try? Main.instance.updateTask(task: task)
         router?.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func chooseNotificationAction() {
+        taskDateTextField?.text = dateFormatter.string(from: notificationPicker.date)
+        Main.instance.notificationDate = dateFormatter.date(from: taskDateTextField?.text ?? "")?.localString()
+        print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
+//        notificationService.sendNotificationRequest(
+//            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+//            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+//        )
+        view.endEditing(true)
     }
     
     func constrainsInit(){
@@ -132,10 +157,10 @@ class TaskDetailViewController: UIViewController{
             taskDateTitleLabel.topAnchor.constraint(equalTo: taskCreationDateLabel.topAnchor, constant: 36),
             taskDateTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDateLabel.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 28),
-            taskDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            taskDateTextField.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 28),
+            taskDateTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
-            taskDescriptionTitleLabel.topAnchor.constraint(equalTo: taskDateLabel.topAnchor, constant: 36),
+            taskDescriptionTitleLabel.topAnchor.constraint(equalTo: taskDateTextField.topAnchor, constant: 36),
             taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 24),
