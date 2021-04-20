@@ -20,6 +20,9 @@ class Main {
     var notifID: String?
     var notifBadgeCount = 0
     var notificationDateInterval = 0.0
+    var colorSchemeVit1: UIColor = .systemYellow
+    var colorSchemeVit2: UIColor = .vitDarkBrown
+    
 
     private init() { }
     
