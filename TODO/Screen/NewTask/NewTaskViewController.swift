@@ -42,7 +42,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var boatWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var boatHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backLayerBottomConstraint: NSLayoutConstraint!
     
     
     var sections: [String]?
@@ -61,8 +62,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        boatImageView.isHidden = true
         setViewScreen()
-        changeState()
+        changeState(state: Main.instance.state ?? "1")
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         categoryPicker.delegate = self
@@ -204,8 +206,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     //MARK: - CHANGE STATE SETTINGS
-    func changeState() {
-//        self.currentTheme = state
+    func changeState(state: String) {
+        self.currentTheme = state
         switch Main.instance.state {
         case "1":
             mapImageView.isHidden = false
@@ -286,5 +288,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         cloudsHeightConstraint.constant = view.frame.width*1.6
         boatWidthConstraint.constant = view.frame.width*1.8
         boatHeightConstraint.constant = view.frame.width*1.8
+        stackBottomConstraint.constant = view.frame.height/4
+        backLayerBottomConstraint.constant = view.frame.height/4 - 8
     }
 }
