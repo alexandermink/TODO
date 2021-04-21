@@ -16,12 +16,14 @@ class Main {
     var userSession: UserSession = UserSession()
     var notificationDate: String?
     var taskRealmConverter = TaskRealmConverter()
-    var rowBGCcolor: UIColor?
+    var rowBGCcolor: UIColor = .clear
     var notifID: String?
     var notifBadgeCount = 0
     var notificationDateInterval = 0.0
-    var colorSchemeVit1: UIColor = .systemYellow
-    var colorSchemeVit2: UIColor = .vitDarkBrown
+    var state: String? {
+        get {return UserDefaults.standard.string(forKey: "k")}
+        set {UserDefaults.standard.set(newValue, forKey: "k")}
+    }
     
 
     private init() { }

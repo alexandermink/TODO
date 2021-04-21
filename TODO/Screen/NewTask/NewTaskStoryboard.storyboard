@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nod-Z1-L7u" customClass="Shadow" customModule="TODO" customModuleProvider="target">
-                                <rect key="frame" x="24" y="118" width="272" height="426"/>
+                                <rect key="frame" x="24" y="118" width="272" height="359"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHY-5W-5Qd" customClass="Rounding" customModule="TODO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="272" height="426"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="359"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="radius">
@@ -59,6 +59,14 @@
                                     <constraint firstAttribute="width" constant="800" id="gOE-0f-O5R"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="ez6-jK-pZ1">
+                                <rect key="frame" x="-220" y="134" width="1200" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1200" id="RF5-Db-YM1"/>
+                                    <constraint firstAttribute="height" constant="600" id="RLA-db-Tpo"/>
+                                </constraints>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds1" translatesAutoresizingMaskIntoConstraints="NO" id="pvO-vw-zfT">
                                 <rect key="frame" x="0.0" y="-6" width="2600" height="800"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -68,13 +76,13 @@
                                 </constraints>
                             </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOL-GF-LPa">
-                                <rect key="frame" x="32" y="126" width="256" height="410"/>
+                                <rect key="frame" x="32" y="126" width="256" height="343"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iDW-QO-9WQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="256" height="410"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="256" height="343"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-Dh-4XR">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="410"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="343"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmk-Yg-Ide">
                                                     <rect key="frame" x="0.0" y="0.0" width="256" height="1"/>
@@ -94,7 +102,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите секцию" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="twg-EY-wp1">
-                                                    <rect key="frame" x="0.0" y="1.5" width="256" height="56"/>
+                                                    <rect key="frame" x="0.0" y="1" width="256" height="56"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="56" id="csN-DT-E5f"/>
@@ -109,14 +117,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qam-ja-2eV">
-                                                    <rect key="frame" x="0.0" y="58.5" width="256" height="1"/>
+                                                    <rect key="frame" x="0.0" y="57" width="256" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="tfw-uX-0mO"/>
                                                     </constraints>
                                                 </view>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-wz-RRO">
-                                                    <rect key="frame" x="0.0" y="60" width="256" height="56"/>
+                                                    <rect key="frame" x="0.0" y="58" width="256" height="56"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="56" id="WEq-1j-Wgw"/>
@@ -131,14 +139,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uq1-n1-pMT">
-                                                    <rect key="frame" x="0.0" y="117" width="256" height="1"/>
+                                                    <rect key="frame" x="0.0" y="114" width="256" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="iG9-RS-spn"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3VI-PW-BYs">
-                                                    <rect key="frame" x="0.0" y="118.5" width="256" height="56"/>
+                                                    <rect key="frame" x="0.0" y="115" width="256" height="56"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="56" id="XYP-j9-gaZ"/>
@@ -152,14 +160,14 @@
                                                     </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Gc-9y-VoR">
-                                                    <rect key="frame" x="0.0" y="175.5" width="256" height="1"/>
+                                                    <rect key="frame" x="0.0" y="171" width="256" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="clN-GK-bqU"/>
                                                     </constraints>
                                                 </view>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Описание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2tT-nH-U0R">
-                                                    <rect key="frame" x="0.0" y="177" width="256" height="56"/>
+                                                    <rect key="frame" x="0.0" y="172" width="256" height="56"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="56" id="oYY-X2-HPp"/>
@@ -174,14 +182,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJq-kl-yaL">
-                                                    <rect key="frame" x="0.0" y="233.5" width="256" height="1"/>
+                                                    <rect key="frame" x="0.0" y="228" width="256" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="JnA-TH-PnN"/>
                                                     </constraints>
                                                 </view>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Напоминание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ws-xw-BHA">
-                                                    <rect key="frame" x="0.0" y="235.5" width="256" height="56"/>
+                                                    <rect key="frame" x="0.0" y="246" width="256" height="22"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="56" id="wI9-0y-Ebg"/>
@@ -196,32 +204,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6k-a9-onX">
-                                                    <rect key="frame" x="0.0" y="292" width="256" height="1"/>
+                                                    <rect key="frame" x="0.0" y="285" width="256" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="YHP-Ds-Wea"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeI-TI-3Ap">
-                                                    <rect key="frame" x="0.0" y="294" width="256" height="56"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="56" id="rgd-5D-Nvk"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                    <state key="normal" title="Участники">
-                                                        <color key="titleColor" systemColor="systemYellowColor"/>
-                                                    </state>
-                                                </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BoR-1z-MgW">
-                                                    <rect key="frame" x="0.0" y="350.5" width="256" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="wUP-o1-nSp"/>
-                                                    </constraints>
-                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVR-cd-gGp">
-                                                    <rect key="frame" x="0.0" y="352.5" width="256" height="56"/>
+                                                    <rect key="frame" x="0.0" y="286" width="256" height="56"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="56" id="EnF-sy-4wP"/>
@@ -232,7 +222,7 @@
                                                     </state>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dac-Eq-dqL">
-                                                    <rect key="frame" x="0.0" y="409" width="256" height="1"/>
+                                                    <rect key="frame" x="0.0" y="342" width="256" height="1"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="N4V-CR-FvH"/>
@@ -277,11 +267,13 @@
                             <constraint firstItem="Hb3-NG-4sk" firstAttribute="top" secondItem="B9L-pa-vsv" secondAttribute="top" constant="20" id="NuH-Ol-uQM"/>
                             <constraint firstItem="Nod-Z1-L7u" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="24" id="P09-Ch-ois"/>
                             <constraint firstItem="pvO-vw-zfT" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" id="UvD-10-Kog"/>
-                            <constraint firstItem="B9L-pa-vsv" firstAttribute="bottom" secondItem="dOL-GF-LPa" secondAttribute="bottom" constant="32" id="WJu-nJ-Gw5"/>
+                            <constraint firstItem="B9L-pa-vsv" firstAttribute="bottom" secondItem="dOL-GF-LPa" secondAttribute="bottom" constant="240" id="WJu-nJ-Gw5"/>
                             <constraint firstItem="pvO-vw-zfT" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="-100" id="Yv6-pe-xIt"/>
                             <constraint firstItem="dOL-GF-LPa" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="32" id="Zke-w1-res"/>
+                            <constraint firstItem="ez6-jK-pZ1" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="40" id="h4u-yD-q01"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="trailing" secondItem="dOL-GF-LPa" secondAttribute="trailing" constant="32" id="klY-No-mYn"/>
-                            <constraint firstItem="B9L-pa-vsv" firstAttribute="bottom" secondItem="Nod-Z1-L7u" secondAttribute="bottom" constant="24" id="lBA-Vy-D3z"/>
+                            <constraint firstItem="B9L-pa-vsv" firstAttribute="bottom" secondItem="Nod-Z1-L7u" secondAttribute="bottom" constant="232" id="lBA-Vy-D3z"/>
+                            <constraint firstItem="ez6-jK-pZ1" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" constant="-220" id="qbQ-or-ysw"/>
                             <constraint firstItem="dOL-GF-LPa" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" constant="32" id="rZh-jQ-GwB"/>
                         </constraints>
                     </view>
@@ -289,6 +281,9 @@
                     <connections>
                         <outlet property="backLayer" destination="tHY-5W-5Qd" id="1Kh-zX-ZXK"/>
                         <outlet property="blurView" destination="dOL-GF-LPa" id="u7G-0b-FjP"/>
+                        <outlet property="boatHeightConstraint" destination="RLA-db-Tpo" id="351-bq-4rI"/>
+                        <outlet property="boatImageView" destination="ez6-jK-pZ1" id="XPj-rQ-u7Q"/>
+                        <outlet property="boatWidthConstraint" destination="RF5-Db-YM1" id="FHO-z5-kpy"/>
                         <outlet property="checkListButton" destination="VVR-cd-gGp" id="fL7-gp-sKH"/>
                         <outlet property="cloudsHeightConstraint" destination="bAr-0F-KR5" id="OSf-7j-IER"/>
                         <outlet property="cloudsImageView" destination="pvO-vw-zfT" id="ChX-uB-cVR"/>
@@ -336,6 +331,7 @@
     </scenes>
     <resources>
         <image name="888" width="1200" height="900"/>
+        <image name="boat2" width="1651" height="1416"/>
         <image name="clouds1" width="2039" height="552"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

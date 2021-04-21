@@ -18,12 +18,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         case closed
     }
     
-    enum ThemeState {
-        case one
-        case two
-        case three
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backLayer: Rounding!
     @IBOutlet weak var blurView: UIVisualEffectView!
@@ -45,25 +39,27 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var vitThemeButton: UIButton!
     
     
+    private var currentTheme : String? {didSet {tableView.reloadData()}}
     let realm = try! Realm()
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let main = Main.instance
     private var menuState: MenuState = .closed
-    let def = UserDefaults.standard
-    var headerRowView = UIView()
     
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewScreen()
-        changeState(state: .one)
+        UserDefaults.standard.string(forKey: "k")
+        changeState(state: main.state ?? "1")
         cloudsImageView.isHidden = true
+        tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         try? main.updateTasksFromRealm()
-        try? main.addSection(sectionName: "Базовая секция № 1")
+//        try? main.addSection(sectionName: "Базовая секция № 1")
+        try? Main.instance.addSection(sectionName: "")
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
@@ -127,26 +123,18 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if main.userSession.tasks[section].sectionTasks.count != 0 {
-            return main.userSession.tasks[section].sectionName
-            
-        } else { return "" }
+        return main.userSession.tasks[section].sectionName
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? { // хедеры
-        headerRowView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20))
-        headerRowView.backgroundColor = main.colorSchemeVit1
-        headerRowView.layer.shadowColor = UIColor.black.cgColor
-        headerRowView.layer.shadowRadius = 8
-        headerRowView.layer.shadowOpacity = 0.8
-        headerRowView.layer.shadowOffset = CGSize(width: 3, height: 13)
-        let lbl = UILabel(frame: CGRect(x: 15, y: 5, width: headerRowView.frame.width - 10, height: 20))
-        lbl.textAlignment = .center
-        lbl.font = UIFont.boldSystemFont(ofSize: 17)
-        lbl.textColor = .vitBackground
-        lbl.text = main.userSession.tasks[section].sectionName
-        headerRowView.addSubview(lbl)
-        return headerRowView
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "someHeaderViewIdentifier") as? HeaderView else { return nil }
+        switch section{
+            case 0:
+                headerView.configure(theme: "4", sameColorView: navSeparatorView)
+            default:
+                headerView.configure(theme: currentTheme ?? "1", sameColorView: nil)
+            }
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -165,8 +153,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let pickColorButton = pickColorAction(at: indexPath)
         let okButton = okAction(at: indexPath)
-        pickColorButton.backgroundColor = .systemYellow
-        okButton.backgroundColor = .systemGreen
+        pickColorButton.backgroundColor = .darkGray
+        okButton.backgroundColor = .darkGray
         let configuration = UISwipeActionsConfiguration(actions: [pickColorButton, okButton])
         configuration.performsFirstActionWithFullSwipe = false
             return configuration
@@ -204,7 +192,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 self.navSeparatorView.frame.origin.x += self.view.frame.width/1.2
                 self.boatImageView.frame.origin.x += self.view.frame.width/1.2
                 self.mapImageView.frame.origin.x += self.view.frame.width/1.2
-                self.settingsStack.frame.origin.x += self.view.frame.width/1.2
+                self.settingsStack.center = self.view.center
                 self.trashView.frame.origin.x += self.view.frame.width/1.2
                 
                 self.blurView.backgroundColor = .black
@@ -225,7 +213,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 self.navSeparatorView.frame.origin.x = 0
                 self.boatImageView.frame.origin.x = -220
                 self.mapImageView.frame.origin.x = -300
-                self.settingsStack.frame.origin.x = -207
+                self.settingsStack.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
                 self.trashView.frame.origin.x = 0
                 
                 self.blurView.backgroundColor = .clear
@@ -243,82 +231,85 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
-        try? Main.instance.addSection(sectionName: "Базовая секция № 1")
+//        try? Main.instance.addSection(sectionName: "Базовая секция № 1")
+        try? Main.instance.addSection(sectionName: "")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
         router?.present(vc: destinationVC, animated: true)
     }
     
     //MARK: - CHANGE STATE SETTINGS
-    @IBAction func vitThemeTapped(_ sender: Any) {changeState(state: .one)}
-    @IBAction func alexeyThemeTapped(_ sender: Any) {changeState(state: .two)}
-    @IBAction func alexandrThemeTapped(_ sender: Any) {changeState(state: .three)}
+    @IBAction func vitThemeTapped(_ sender: Any) {
+        changeState(state: "1")
+        main.state = "1"
+        UserDefaults.standard.set(main.state, forKey: "k")
+    }
+    @IBAction func alexeyThemeTapped(_ sender: Any) {
+        changeState(state: "2")
+        main.state = "2"
+        UserDefaults.standard.set(main.state, forKey: "k")
+    }
+    @IBAction func alexandrThemeTapped(_ sender: Any) {
+        changeState(state: "3")
+        main.state = "3"
+        UserDefaults.standard.set(main.state, forKey: "k")
+    }
     
-    func changeState(state: ThemeState) {
+    func changeState(state: String) {
+        self.currentTheme = state
         switch state {
-        case .one:
-            UIView.animate(withDuration: 1) {
-                self.view.applyGradient(colours: [self.main.colorSchemeVit2, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-                print("1")
-                self.mapImageView.isHidden = false
-                self.boatImageView.isHidden = true
-                self.navigationController?.navigationBar.barTintColor = .vitDarkBrown
-                self.newTaskButton.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
-                self.newTaskButton.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
-                self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
-                self.navSeparatorView.backgroundColor = .systemYellow
-                self.headerRowView.backgroundColor = .systemYellow
-            }
-        case .two:
-            UIView.animate(withDuration: 1) {
-                self.view.applyGradient(colours: [self.main.colorSchemeVit2, .green], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-                print("2")
-                self.mapImageView.isHidden = true
-                self.boatImageView.isHidden = false
-                self.navigationController?.navigationBar.barTintColor = .alexeyFog
-                self.newTaskButton.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
-                self.newTaskButton.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .highlighted)
-                self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
-                self.navSeparatorView.backgroundColor = .alexeyBackground
-                self.headerRowView.backgroundColor = .alexeyBackground
-            }
-        case .three:
-            UIView.animate(withDuration: 1) {
-                self.view.applyGradient(colours: [self.main.colorSchemeVit2, .red], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-                print("3")
-                self.boatImageView.isHidden = true
-                self.mapImageView.isHidden = true
-                self.navigationController?.navigationBar.barTintColor = .systemRed
-                self.newTaskButton.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .normal)
-                self.newTaskButton.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .highlighted)
-                self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-                    [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                     NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .normal)
-                self.navSeparatorView.backgroundColor = .cyan
-                self.headerRowView.backgroundColor = .cyan
-            }
+        case "1":
+            mapImageView.isHidden = false
+            boatImageView.isHidden = true
+            navigationController?.navigationBar.barTintColor = .vitDarkBrown
+            newTaskButton.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
+            newTaskButton.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
+            navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
+            navSeparatorView.backgroundColor = .systemYellow
+        case "2":
+            mapImageView.isHidden = true
+            boatImageView.isHidden = false
+            navigationController?.navigationBar.barTintColor = .alexeyFog
+            newTaskButton.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
+            newTaskButton.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .highlighted)
+            navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
+            navSeparatorView.backgroundColor = .alexeyBackground
+        case "3":
+            boatImageView.isHidden = true
+            mapImageView.isHidden = true
+            navigationController?.navigationBar.barTintColor = .systemRed
+            newTaskButton.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .normal)
+            newTaskButton.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .highlighted)
+            navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+                 NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .normal)
+            navSeparatorView.backgroundColor = .cyan
+        case "4":
+            break
+        default:
+            break
         }
     }
     
     //MARK: - SET VIEW SCREEN
     func setViewScreen() {
-//        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
