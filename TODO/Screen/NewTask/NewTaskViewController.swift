@@ -109,13 +109,15 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //            router?.dismiss(animated: true, completion: nil)
 //        } else { showAlert(title: "Ошибка", message: "Заполните поля") }
 //
-        guard Main.instance.notificationDateInterval != 1.0 else {return showAlert(title: "Ошибка", message: "Выберите время больше текущего")}
+        guard Main.instance.notificationDateInterval != 1.0 else {
+            return showAlert(title: "Ошибка", message: "Выбрано прошедшее время")
+        }
         // TODO: сделать правильную проверку
         if newSectionTextField.text != "" && newTaskNameTextField.text != "" {
             try? Main.instance.addTask(sectionName: newSectionTextField.text!, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text)
             router?.dismiss(animated: true, completion: nil)
         } else {
-            showAlert(title: "Ошибка", message: "Заполните поля")
+            showAlert(title: "Ошибка", message: "Заполните обязательные поля")
         }
     }
     
@@ -132,6 +134,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         selectedBackgroundColor = viewController.selectedColor
         coverButton.backgroundColor = viewController.selectedColor
+        coverButton.alpha = 0.7
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -184,7 +187,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
         )
         view.endEditing(true)
     }
@@ -212,14 +215,14 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         case "1":
             mapImageView.isHidden = false
             boatImageView.isHidden = true
-            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите или создайте секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             newSectionTextField.textColor = .systemYellow
             fakeKB.textColor = .yellow
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             newTaskNameTextField.textColor = .systemYellow
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             descriptionTextField.textColor = .systemYellow
-            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Напоминание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             notificationTextField.textColor = .systemYellow
             coverButton.setTitleColor(.systemYellow, for: .normal)
             coverButton.setTitleColor(.systemYellow, for: .highlighted)
@@ -230,14 +233,14 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         case "2":
             mapImageView.isHidden = true
             boatImageView.isHidden = false
-            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
+            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите или создайте секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             newSectionTextField.textColor = .alexeyBackground
             fakeKB.textColor = .alexeyBackground
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             newTaskNameTextField.textColor = .alexeyBackground
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             descriptionTextField.textColor = .alexeyBackground
-            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
+            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Напоминание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             notificationTextField.textColor = .alexeyBackground
             coverButton.setTitleColor(.alexeyBackground, for: .normal)
             coverButton.setTitleColor(.alexeyBackground, for: .highlighted)
@@ -249,14 +252,14 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
-            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
+            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите или создайте секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             newSectionTextField.textColor = .cyan
             fakeKB.textColor = .cyan
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             newTaskNameTextField.textColor = .cyan
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             descriptionTextField.textColor = .cyan
-            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
+            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Напоминание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             notificationTextField.textColor = .cyan
             coverButton.setTitleColor(.cyan, for: .normal)
             coverButton.setTitleColor(.cyan, for: .highlighted)
@@ -290,5 +293,18 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         boatHeightConstraint.constant = view.frame.width*1.8
         stackBottomConstraint.constant = view.frame.height/4
         backLayerBottomConstraint.constant = view.frame.height/4 - 8
+        
+        // separators in stackView
+        let borderWidth: CGFloat = 1
+        let borderColor = UIColor.systemGray.cgColor
+        
+        newTaskNameTextField.layer.borderWidth = borderWidth
+        newTaskNameTextField.layer.borderColor = borderColor
+        
+        descriptionTextField.layer.borderWidth = borderWidth
+        descriptionTextField.layer.borderColor = borderColor
+        
+        checkListButton.layer.borderWidth = borderWidth
+        checkListButton.layer.borderColor = borderColor
     }
 }

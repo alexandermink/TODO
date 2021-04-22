@@ -81,26 +81,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="311" height="368"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-Dh-4XR">
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-Dh-4XR">
                                             <rect key="frame" x="0.0" y="0.0" width="311" height="368"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmk-Yg-Ide">
-                                                    <rect key="frame" x="0.0" y="0.0" width="311" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="FJE-zk-9rG"/>
-                                                    </constraints>
-                                                </view>
-                                                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ItF-RI-4pU">
-                                                    <rect key="frame" x="0.0" y="1" width="311" height="0.0"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите название секции" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ItF-RI-4pU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="311" height="0.0"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                                                 </textField>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите секцию" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="twg-EY-wp1">
-                                                    <rect key="frame" x="0.0" y="1" width="311" height="60.333333333333336"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите или создайте секцию" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="twg-EY-wp1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="311" height="52.666666666666664"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -110,16 +101,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qam-ja-2eV">
-                                                    <rect key="frame" x="0.0" y="61.333333333333343" width="311" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="tfw-uX-0mO"/>
-                                                    </constraints>
-                                                </view>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-wz-RRO">
-                                                    <rect key="frame" x="0.0" y="62.333333333333343" width="311" height="60"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="0.0" y="52.666666666666657" width="311" height="52.333333333333343"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -129,16 +112,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uq1-n1-pMT">
-                                                    <rect key="frame" x="0.0" y="122.33333333333331" width="311" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="iG9-RS-spn"/>
-                                                    </constraints>
-                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3VI-PW-BYs">
-                                                    <rect key="frame" x="0.0" y="123.3333333333333" width="311" height="60.333333333333329"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="0.0" y="105" width="311" height="79"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <state key="normal" title="Обложка">
                                                         <color key="titleColor" systemColor="systemYellowColor"/>
@@ -147,16 +122,8 @@
                                                         <action selector="pickColorButtonTapped:" destination="ZIG-J0-Jce" eventType="touchUpInside" id="dcp-W7-9OC"/>
                                                     </connections>
                                                 </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Gc-9y-VoR">
-                                                    <rect key="frame" x="0.0" y="183.66666666666669" width="311" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="clN-GK-bqU"/>
-                                                    </constraints>
-                                                </view>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Описание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2tT-nH-U0R">
-                                                    <rect key="frame" x="0.0" y="184.66666666666669" width="311" height="60"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="0.0" y="184" width="311" height="52.666666666666657"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -166,16 +133,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJq-kl-yaL">
-                                                    <rect key="frame" x="0.0" y="244.66666666666669" width="311" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="JnA-TH-PnN"/>
-                                                    </constraints>
-                                                </view>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Напоминание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ws-xw-BHA">
-                                                    <rect key="frame" x="0.0" y="245.66666666666671" width="311" height="60.333333333333343"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="0.0" y="236.66666666666671" width="311" height="52.333333333333343"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -185,54 +144,31 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6k-a9-onX">
-                                                    <rect key="frame" x="0.0" y="306" width="311" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="YHP-Ds-Wea"/>
-                                                    </constraints>
-                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVR-cd-gGp">
-                                                    <rect key="frame" x="0.0" y="307" width="311" height="60"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="0.0" y="289" width="311" height="79"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <state key="normal" title="Чек лист">
                                                         <color key="titleColor" systemColor="systemYellowColor"/>
                                                     </state>
                                                 </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dac-Eq-dqL">
-                                                    <rect key="frame" x="0.0" y="367" width="311" height="1"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="N4V-CR-FvH"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="VVR-cd-gGp" firstAttribute="top" secondItem="x6k-a9-onX" secondAttribute="bottom" id="1Ys-5Y-zW6"/>
-                                                <constraint firstAttribute="trailing" secondItem="twg-EY-wp1" secondAttribute="trailing" id="4VM-dW-MS6"/>
-                                                <constraint firstItem="XJq-kl-yaL" firstAttribute="top" secondItem="2tT-nH-U0R" secondAttribute="bottom" id="6P5-Lq-FfJ"/>
-                                                <constraint firstItem="1Gc-9y-VoR" firstAttribute="top" secondItem="3VI-PW-BYs" secondAttribute="bottom" id="9os-JW-JkL"/>
-                                                <constraint firstItem="2tT-nH-U0R" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="Gat-Ja-2hO"/>
-                                                <constraint firstItem="2ws-xw-BHA" firstAttribute="top" secondItem="XJq-kl-yaL" secondAttribute="bottom" id="KeJ-Fg-iyg"/>
-                                                <constraint firstItem="gRX-wz-RRO" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="L0c-P0-MUM"/>
-                                                <constraint firstItem="2ws-xw-BHA" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="N7Q-e5-EBO"/>
-                                                <constraint firstItem="Dac-Eq-dqL" firstAttribute="top" secondItem="VVR-cd-gGp" secondAttribute="bottom" id="OqI-Wg-98s"/>
-                                                <constraint firstItem="3VI-PW-BYs" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="Q4y-Ra-MD9"/>
-                                                <constraint firstItem="x6k-a9-onX" firstAttribute="top" secondItem="2ws-xw-BHA" secondAttribute="bottom" id="Rld-Gs-dxG"/>
-                                                <constraint firstAttribute="trailing" secondItem="VVR-cd-gGp" secondAttribute="trailing" id="VmR-gO-iWO"/>
-                                                <constraint firstItem="qam-ja-2eV" firstAttribute="top" secondItem="twg-EY-wp1" secondAttribute="bottom" id="Wag-bX-kHD"/>
-                                                <constraint firstAttribute="trailing" secondItem="gRX-wz-RRO" secondAttribute="trailing" id="aWj-43-KAo"/>
-                                                <constraint firstItem="gRX-wz-RRO" firstAttribute="top" secondItem="qam-ja-2eV" secondAttribute="bottom" id="b5y-rS-6bi"/>
-                                                <constraint firstItem="uq1-n1-pMT" firstAttribute="top" secondItem="gRX-wz-RRO" secondAttribute="bottom" id="c6t-WO-PLv"/>
-                                                <constraint firstAttribute="trailing" secondItem="2tT-nH-U0R" secondAttribute="trailing" id="k93-Sh-tuj"/>
-                                                <constraint firstAttribute="trailing" secondItem="2ws-xw-BHA" secondAttribute="trailing" id="mEn-Og-UCu"/>
-                                                <constraint firstItem="3VI-PW-BYs" firstAttribute="top" secondItem="uq1-n1-pMT" secondAttribute="bottom" id="nLD-ua-wde"/>
-                                                <constraint firstItem="2tT-nH-U0R" firstAttribute="top" secondItem="1Gc-9y-VoR" secondAttribute="bottom" id="on5-ws-ueh"/>
-                                                <constraint firstItem="twg-EY-wp1" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="tb5-Kj-6Dn"/>
-                                                <constraint firstItem="twg-EY-wp1" firstAttribute="top" secondItem="hmk-Yg-Ide" secondAttribute="bottom" id="xO3-ca-XJ9"/>
-                                                <constraint firstItem="VVR-cd-gGp" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="yTb-Vy-e4R"/>
-                                                <constraint firstAttribute="trailing" secondItem="3VI-PW-BYs" secondAttribute="trailing" id="zSB-S9-454"/>
+                                                <constraint firstAttribute="trailing" secondItem="2tT-nH-U0R" secondAttribute="trailing" id="3dM-7G-ef3"/>
+                                                <constraint firstAttribute="trailing" secondItem="2ws-xw-BHA" secondAttribute="trailing" id="55q-hr-J03"/>
+                                                <constraint firstItem="VVR-cd-gGp" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="9Sr-QK-By1"/>
+                                                <constraint firstItem="gRX-wz-RRO" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="B7t-4s-AbT"/>
+                                                <constraint firstAttribute="trailing" secondItem="twg-EY-wp1" secondAttribute="trailing" id="BVH-xu-JB5"/>
+                                                <constraint firstItem="ItF-RI-4pU" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="Fcx-0p-Y2j"/>
+                                                <constraint firstItem="2tT-nH-U0R" firstAttribute="top" secondItem="3VI-PW-BYs" secondAttribute="bottom" id="Ir9-Oh-7yI"/>
+                                                <constraint firstItem="2tT-nH-U0R" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="RvG-9T-mbb"/>
+                                                <constraint firstAttribute="trailing" secondItem="gRX-wz-RRO" secondAttribute="trailing" id="U7K-GJ-idG"/>
+                                                <constraint firstAttribute="trailing" secondItem="VVR-cd-gGp" secondAttribute="trailing" id="Uqv-k6-nQU"/>
+                                                <constraint firstAttribute="trailing" secondItem="3VI-PW-BYs" secondAttribute="trailing" id="VHp-xP-9VN"/>
+                                                <constraint firstAttribute="trailing" secondItem="ItF-RI-4pU" secondAttribute="trailing" id="b9q-vw-w2I"/>
+                                                <constraint firstItem="2ws-xw-BHA" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="hDg-fN-kgh"/>
+                                                <constraint firstItem="3VI-PW-BYs" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="l6q-XF-Qcc"/>
+                                                <constraint firstItem="ItF-RI-4pU" firstAttribute="top" secondItem="ZG6-Dh-4XR" secondAttribute="top" id="lxn-nT-gIP"/>
+                                                <constraint firstItem="twg-EY-wp1" firstAttribute="leading" secondItem="ZG6-Dh-4XR" secondAttribute="leading" id="vNg-Oa-pkw"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>

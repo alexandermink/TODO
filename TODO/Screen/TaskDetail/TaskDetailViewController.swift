@@ -94,11 +94,7 @@ class TaskDetailViewController: UIViewController{
         taskDescriptionTextView.contentInsetAdjustmentBehavior = .automatic
         taskDescriptionTextView.isEditable = true
         taskDescriptionTextView.isScrollEnabled = true
-        if task?.taskDescription != ""{
-            taskDescriptionTextView.text = task?.taskDescription
-        } else {
-            taskDescriptionTextView.text = "Напишите описание задачи"
-        }
+        taskDescriptionTextView.text = (task?.taskDescription != "" ? task?.taskDescription : "Напишите описание задачи")
         taskDescriptionTextView.textAlignment = .left
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
@@ -112,12 +108,8 @@ class TaskDetailViewController: UIViewController{
     
     @objc func handleDoneTouchUpInside(){
         task?.name = taskNameTextView.text
-        task?.taskDescription = taskDescriptionTextView.text
-        if taskDateTextField.text == "Дата уведомления не назначена" {
-            task?.notificationDate = ""
-        } else {
-            task?.notificationDate = taskDateTextField.text
-        }
+        task?.taskDescription = (taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDescriptionTextView.text)
+        task?.notificationDate = (taskDateTextField.text == "Дата уведомления не назначена" ? "" : taskDateTextField.text)
         guard let task = task else { return }
         try? Main.instance.updateTask(task: task)
         router?.dismiss(animated: true, completion: nil)
