@@ -105,7 +105,7 @@ extension Main: LocalDataBaseService {
     func getSectionsFromRealm() throws -> [String] {
         let realm = try Realm()
         var sections: [String] = []
-        let sectionsTaskRealm = realm.objects(SectionTaskRealm.self)
+        let sectionsTaskRealm = realm.objects(SectionTaskRealm.self).sorted(byKeyPath: "sectionName", ascending: true)
         for section in sectionsTaskRealm {
             sections.append(section.sectionName)
         }

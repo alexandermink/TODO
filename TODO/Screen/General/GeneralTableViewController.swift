@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-private let reuseIdentifier = "GeneralCell"
+//private let reuseIdentifier = "GeneralCell"
 
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIColorPickerViewControllerDelegate {
     
@@ -55,11 +55,12 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         changeState(state: main.state ?? "1")
         cloudsImageView.isHidden = true
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
+        
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         try? main.updateTasksFromRealm()
 //        try? main.addSection(sectionName: "Базовая секция № 1")
-        try? Main.instance.addSection(sectionName: "")
+//        try? Main.instance.addSection(sectionName: "")
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
@@ -81,7 +82,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - TABLE
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return main.userSession.tasks[section].sectionTasks.count
+        return main.userSession.tasks[section].sectionTasks.count + 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -89,25 +90,33 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! GeneralTableViewCell
-        cell.selectedBackgroundView = {
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.size.width, height: cell.frame.size.height))
-            view.backgroundColor = UIColor.hexStringToUIColor(hex: "#fcdab7")
-            return view
-        }()
-//        cell.tasksIconImageView.image = UIImage(systemName: "pencil.circle.fill")
-        cell.taskNameLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
-        cell.descriptionLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
-        cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
-        cell.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
-        cell.notificationLabel.textColor = .systemYellow
-        cell.descriptionLabel.textColor = .vitBackground
+        
+        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralCell", for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
+            cell.selectedBackgroundView = {
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.size.width, height: cell.frame.size.height))
+                view.backgroundColor = UIColor.hexStringToUIColor(hex: "#fcdab7")
+                return view
+            }()
+            cell.taskNameLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
+            cell.descriptionLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
+            cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
+            cell.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
+            cell.notificationLabel.textColor = .systemYellow
+            cell.descriptionLabel.textColor = .vitBackground
+            return cell
+        }
+        
+        
         
 //        addPanGesture(view: cell)
 //        fileViewOrigin = cell.bounds
 //        view.bringSubviewToFront(cell)
         
-        return cell
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -232,7 +241,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
 //        try? Main.instance.addSection(sectionName: "Базовая секция № 1")
-        try? Main.instance.addSection(sectionName: "")
+//        try? Main.instance.addSection(sectionName: "")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
         router?.present(vc: destinationVC, animated: true)
