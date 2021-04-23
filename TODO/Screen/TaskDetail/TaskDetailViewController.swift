@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskDetailViewController: UIViewController{
+class TaskDetailViewController: UIViewController, UITableViewDelegate{
     
     var doneButton: UIButton!
     var taskNameTitleLabel = UILabel()
@@ -19,6 +19,7 @@ class TaskDetailViewController: UIViewController{
     var taskDateTextField: UITextField!
     var taskDescriptionTitleLabel = UILabel()
     var taskDescriptionTextView: UITextView!
+    let checkListTableView = UITableView()
     
     var task: Task? = Task()
     let dateFormatter = DateFormatter()
@@ -26,6 +27,7 @@ class TaskDetailViewController: UIViewController{
     var router: BaseRouter?
     private var currentTheme : String?
     
+    var testDataForTableView = ["uno", "dos", "tres", "quatro", "cinco", "sies"]
     
     func makeTF(lab: UILabel, text: String, color: UIColor) -> UILabel {
         var label = lab
@@ -38,12 +40,19 @@ class TaskDetailViewController: UIViewController{
         return label
     }
     
+//    override func loadView() {
+//        super.loadView()
+//        checkListTableView.backgroundColor = .clear
+//        checkListTableView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(checkListTableView)
+//        checkListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         router = BaseRouter(viewController: self)
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
-//        view.backgroundColor = UIColor.lightGray
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         doneButton = UIButton(type: .system)
@@ -60,7 +69,7 @@ class TaskDetailViewController: UIViewController{
         
         taskNameTextView = UITextView()
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
-        taskNameTextView.text = task?.name
+        taskNameTextView.text = (task?.name != "" ? task?.name : "Напишите название задачи")
         taskNameTextView.backgroundColor = UIColor.clear
         taskNameTextView.isEditable = true
         taskNameTextView.isScrollEnabled = true
@@ -100,6 +109,13 @@ class TaskDetailViewController: UIViewController{
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDescriptionTextView)
+
+        checkListTableView.backgroundColor = .clear
+        checkListTableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(checkListTableView)
+        checkListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        checkListTableView.dataSource = self
+        checkListTableView.delegate = self
         
         constrainsInit()
         
@@ -159,9 +175,14 @@ class TaskDetailViewController: UIViewController{
             taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 24),
-            taskDescriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+            taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkListTableView.topAnchor, constant: 2),
             taskDescriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
-            taskDescriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12)
+            taskDescriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
+            
+            checkListTableView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 70),
+            checkListTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            checkListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
+            checkListTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
             
         ])
     }
@@ -192,6 +213,22 @@ class TaskDetailViewController: UIViewController{
         default:
             break
         }
+    }
+    
+}
+
+extension TaskDetailViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return testDataForTableView.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = testDataForTableView[indexPath.row]
+        cell.textLabel?.textColor = .systemBlue
+        cell.backgroundColor = .clear
+        return cell
     }
     
 }
