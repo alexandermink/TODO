@@ -24,6 +24,7 @@ class TaskDetailViewController: UIViewController{
     let dateFormatter = DateFormatter()
     var notificationPicker = UIDatePicker()
     var router: BaseRouter?
+    private var currentTheme : String?
     
     
     func makeTF(lab: UILabel, text: String, color: UIColor) -> UILabel {
@@ -42,10 +43,8 @@ class TaskDetailViewController: UIViewController{
         router = BaseRouter(viewController: self)
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
-        view.backgroundColor = UIColor.lightGray
+//        view.backgroundColor = UIColor.lightGray
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        
-        taskNameTitleLabel = makeTF(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         
         doneButton = UIButton(type: .system)
         doneButton.setTitle("Готово", for: .normal)
@@ -56,6 +55,8 @@ class TaskDetailViewController: UIViewController{
         doneButton.addTarget(self,
                              action: #selector(handleDoneTouchUpInside),
                              for: .touchUpInside)
+        
+        taskNameTitleLabel = makeTF(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         
         taskNameTextView = UITextView()
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,6 +104,8 @@ class TaskDetailViewController: UIViewController{
         constrainsInit()
         
         view.addTapGestureToHideKeyboard()
+        
+        changeState(state: Main.instance.state ?? "1")
         
     }
     
@@ -162,4 +165,33 @@ class TaskDetailViewController: UIViewController{
             
         ])
     }
+    
+    func changeState(state: String) {
+        self.currentTheme = state
+        switch Main.instance.state {
+        case "1":
+            doneButton.tintColor = .systemYellow
+            taskNameTextView.textColor = .systemYellow
+            taskCreationDateLabel.textColor = .systemYellow
+            taskDateTextField.textColor = .systemYellow
+            taskDescriptionTextView.textColor = .systemYellow
+        case "2":
+            doneButton.tintColor = .alexeyBackground
+            taskNameTextView.textColor = .alexeyBackground
+            taskCreationDateLabel.textColor = .alexeyBackground
+            taskDateTextField.textColor = .alexeyBackground
+            taskDescriptionTextView.textColor = .alexeyBackground
+        case "3":
+            doneButton.tintColor = .cyan
+            taskNameTextView.textColor = .cyan
+            taskCreationDateLabel.textColor = .cyan
+            taskDateTextField.textColor = .cyan
+            taskDescriptionTextView.textColor = .cyan
+        case "4":
+            break
+        default:
+            break
+        }
+    }
+    
 }
