@@ -184,7 +184,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: notificationTextField?.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
         )
         view.endEditing(true)
     }
@@ -219,7 +219,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             newTaskNameTextField.textColor = .systemYellow
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             descriptionTextField.textColor = .systemYellow
-            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Напоминание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             notificationTextField.textColor = .systemYellow
             coverButton.setTitleColor(.systemYellow, for: .normal)
             coverButton.setTitleColor(.systemYellow, for: .highlighted)
@@ -237,7 +237,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             newTaskNameTextField.textColor = .alexeyBackground
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             descriptionTextField.textColor = .alexeyBackground
-            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
+            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Напоминание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             notificationTextField.textColor = .alexeyBackground
             coverButton.setTitleColor(.alexeyBackground, for: .normal)
             coverButton.setTitleColor(.alexeyBackground, for: .highlighted)
@@ -256,7 +256,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             newTaskNameTextField.textColor = .cyan
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             descriptionTextField.textColor = .cyan
-            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
+            notificationTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Напоминание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             notificationTextField.textColor = .cyan
             coverButton.setTitleColor(.cyan, for: .normal)
             coverButton.setTitleColor(.cyan, for: .highlighted)
