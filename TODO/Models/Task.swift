@@ -36,12 +36,12 @@ struct Task {
 }
 
 class TaskRealm: Object {
-    @objc var id: Int = -1
-    @objc var name: String = ""
-    @objc var backgroundColor: String? = ""
-    @objc var taskDescription: String? = ""
-    @objc var creationDate: Date = Date()
-    @objc var notificationDate: String? = ""
+    @objc dynamic var id: Int = -1
+    @objc dynamic var name: String = ""
+    @objc dynamic var backgroundColor: String? = ""
+    @objc dynamic var taskDescription: String? = ""
+    @objc dynamic var creationDate: Date = Date()
+    @objc dynamic var notificationDate: String? = ""
 //    var members = List<String>()
     
     override class func primaryKey() -> String? {
@@ -74,7 +74,7 @@ struct SectionTask: Comparable {
 }
 
 class SectionTaskRealm: Object {
-    @objc var sectionName: String = ""
+    @objc dynamic var sectionName: String = ""
     let sectionTasks = List<TaskRealm>()
     
     override class func primaryKey() -> String? {

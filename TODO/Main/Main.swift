@@ -52,7 +52,7 @@ extension Main: LocalDataBaseService {
     func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?) throws {
         
         let realm = try Realm()
-        let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.value(forKey: "id") as? Int ?? 0) + 1
+        let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.id ?? 0) + 1
         let creationDate = Date()
         let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate)
         if !userSession.tasks.map(\.sectionName).contains(sectionName) {
@@ -80,7 +80,7 @@ extension Main: LocalDataBaseService {
         userSession.tasks = []
         let tasksRealm = realm.objects(SectionTaskRealm.self)
         for taskRealm in tasksRealm {
-            let section = SectionTask(sectionName: taskRealm.value(forKey: "sectionName") as! String, tasks: taskRealmConverter.convert(taskRealm.sectionTasks))
+            let section = SectionTask(sectionName: taskRealm.sectionName, tasks: taskRealmConverter.convert(taskRealm.sectionTasks))
             userSession.tasks.append(section)
         }
         userSession.tasks = userSession.tasks.sorted()
@@ -105,9 +105,9 @@ extension Main: LocalDataBaseService {
     func getSectionsFromRealm() throws -> [String] {
         let realm = try Realm()
         var sections: [String] = []
-        let sectionsTaskRealm = realm.objects(SectionTaskRealm.self)
+        let sectionsTaskRealm = realm.objects(SectionTaskRealm.self).sorted(byKeyPath: "sectionName", ascending: true)
         for section in sectionsTaskRealm {
-            sections.append(section.value(forKey: "sectionName") as! String)
+            sections.append(section.sectionName)
         }
         return sections
     }

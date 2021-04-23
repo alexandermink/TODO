@@ -190,6 +190,42 @@
                                                         <outlet property="taskNameLabel" destination="yWY-Na-e7y" id="xHq-7D-CrT"/>
                                                     </connections>
                                                 </tableViewCell>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddButtonCell" id="yw9-xc-zFg" customClass="AddButtonTableViewCell" customModule="TODO" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="94" width="256" height="30.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yw9-xc-zFg" id="BDf-B5-jcj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="30.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Q64-gK-Lw3">
+                                                                <rect key="frame" x="0.0" y="0.0" width="256" height="30.5"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjh-sV-bvv">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="30.5"/>
+                                                                        <state key="normal" title="Добавить"/>
+                                                                    </button>
+                                                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите задачу" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcg-Zh-wYJ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="Q64-gK-Lw3" firstAttribute="top" secondItem="BDf-B5-jcj" secondAttribute="top" id="PMT-bZ-LVI"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Q64-gK-Lw3" secondAttribute="bottom" id="W0H-PH-JmJ"/>
+                                                            <constraint firstItem="Q64-gK-Lw3" firstAttribute="leading" secondItem="BDf-B5-jcj" secondAttribute="leading" id="frC-TO-aZI"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Q64-gK-Lw3" secondAttribute="trailing" id="kFb-Jq-SYm"/>
+                                                        </constraints>
+                                                    </tableViewCellContentView>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <connections>
+                                                        <outlet property="addButton" destination="mjh-sV-bvv" id="6fL-nb-YL0"/>
+                                                        <outlet property="addFastTaskNameTextField" destination="tcg-Zh-wYJ" id="MqM-u5-PVX"/>
+                                                    </connections>
+                                                </tableViewCell>
                                             </prototypes>
                                             <connections>
                                                 <outlet property="dataSource" destination="Xc2-F3-y3F" id="UkQ-C9-h5D"/>
