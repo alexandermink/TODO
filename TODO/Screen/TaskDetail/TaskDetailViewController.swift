@@ -21,6 +21,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     var taskDescriptionTextView: UITextView!
     let checkListTableView = UITableView()
     
+    
     var task: Task? = Task()
     let dateFormatter = DateFormatter()
     var notificationPicker = UIDatePicker()
@@ -29,7 +30,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     
     var testDataForTableView = ["uno", "dos", "tres", "quatro", "cinco", "sies"]
     
-    func makeTF(lab: UILabel, text: String, color: UIColor) -> UILabel {
+    func labelFactory(lab: UILabel, text: String, color: UIColor) -> UILabel {
         var label = lab
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,14 +40,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         view.addSubview(label)
         return label
     }
-    
-//    override func loadView() {
-//        super.loadView()
-//        checkListTableView.backgroundColor = .clear
-//        checkListTableView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(checkListTableView)
-//        checkListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +58,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
                              action: #selector(handleDoneTouchUpInside),
                              for: .touchUpInside)
         
-        taskNameTitleLabel = makeTF(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
+        taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         
         taskNameTextView = UITextView()
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,11 +71,11 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskNameTextView)
         
-        taskCreationDateTitleLabel = makeTF(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
+        taskCreationDateTitleLabel = labelFactory(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
         
-        taskCreationDateLabel = makeTF(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
+        taskCreationDateLabel = labelFactory(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
         
-        taskDateTitleLabel = makeTF(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
+        taskDateTitleLabel = labelFactory(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         
         taskDateTextField = UITextField()
         taskDateTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -93,10 +86,11 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
         taskDateTextField.clearsOnBeginEditing = true
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
+        taskDateTextField.keyboardAppearance = .dark
         view.addSubview(taskDateTextField)
         if taskDateTextField.text == "" { taskDateTextField.text = "Дата уведомления не назначена" }
         
-        taskDescriptionTitleLabel = makeTF(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
+        taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
         taskDescriptionTextView = UITextView()
         taskDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +118,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         changeState(state: Main.instance.state ?? "1")
         
     }
-    
+    //MARK: - ACTIONS
     @objc func handleDoneTouchUpInside(){
         task?.name = taskNameTextView.text
         task?.taskDescription = (taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDescriptionTextView.text)
@@ -144,7 +138,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
 //        )
         view.endEditing(true)
     }
-    
+    //MARK: - CONSTRIAINTS
     func constrainsInit(){
         NSLayoutConstraint.activate([
             
@@ -175,18 +169,18 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 24),
-            taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkListTableView.topAnchor, constant: 2),
+            taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkListTableView.topAnchor, constant: -4),
             taskDescriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             taskDescriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
             
-            checkListTableView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 70),
-            checkListTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            checkListTableView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 76),
+            checkListTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28),
             checkListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
-            checkListTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
+            checkListTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28),
             
         ])
     }
-    
+    //MARK: - CHANGE STATE SETTINGS
     func changeState(state: String) {
         self.currentTheme = state
         switch Main.instance.state {
@@ -216,7 +210,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     }
     
 }
-
+    //MARK: - TEBLEVIEW EXTENSION
 extension TaskDetailViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
