@@ -11,7 +11,36 @@ import UIKit
 class AddButtonTableViewCell: UITableViewCell {
 
     
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addFastTaskNameTextField: UITextField!
+    @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     
+    var indexPath: IndexPath = IndexPath()
+    var styleEditing = false
+    
+    
+    override class func awakeFromNib() {
+        
+    }
+    
+    @IBAction func plusButtonTapped(_ sender: Any) {
+        print("000")
+        addFastTaskNameTextField.isHidden = false
+        addButton.isHidden = false
+        plusButton.isHidden = true
+    }
+    @IBAction func addButtonAction(_ sender: Any) {
+        config()
+        addFastTaskNameTextField.isHidden = true
+        addButton.isHidden = true
+        plusButton.isHidden = false
+        
+    }
+    
+    
+    func config() {
+        let sectionName = Main.instance.userSession.tasks[indexPath.section].sectionName
+        guard let name = addFastTaskNameTextField.text else { return }
+        try? Main.instance.addTask(sectionName: sectionName, name: name, backgroundColor: .clear, taskDescription: nil, notificationDate: nil)
+    }
 }

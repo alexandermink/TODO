@@ -70,8 +70,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
-//        categoryPicker.selectRow(2, inComponent: 0, animated: true)
-//        categoryPicker.selectRow(0, inComponent: 0, animated: true)
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         calendar.timeZone = .autoupdatingCurrent
@@ -91,7 +89,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 
     
     // MARK: - ACTIONS
-    
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
         func tempAddTask(sectionName: String) {
@@ -243,7 +240,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         case "1":
             mapImageView.isHidden = false
             boatImageView.isHidden = true
-            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите или создайте секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             newSectionTextField.textColor = .systemYellow
             fakeKB.textColor = .yellow
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
@@ -261,7 +258,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         case "2":
             mapImageView.isHidden = true
             boatImageView.isHidden = false
-            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите или создайте секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
+            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             newSectionTextField.textColor = .alexeyBackground
             fakeKB.textColor = .alexeyBackground
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
@@ -280,7 +277,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
-            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Выберите или создайте секцию", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
+            newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             newSectionTextField.textColor = .cyan
             fakeKB.textColor = .cyan
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))

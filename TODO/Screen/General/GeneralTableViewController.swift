@@ -37,6 +37,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var trashView: UIImageView!
     @IBOutlet weak var navSeparatorView: UIView!
     @IBOutlet weak var vitThemeButton: UIButton!
+    @IBOutlet weak var panEdgeView: UIView!
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -45,11 +46,15 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var router: BaseRouter?
     let main = Main.instance
     private var menuState: MenuState = .closed
+    let panGestureRecognizer = UIPanGestureRecognizer()
     
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        panGestureRecognizer.addTarget(self, action: #selector(closeMenu))
+        panEdgeView.addGestureRecognizer(panGestureRecognizer)
+
         setViewScreen()
         UserDefaults.standard.string(forKey: "k")
         changeState(state: main.state ?? "1")
@@ -93,6 +98,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         
         if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
+            cell.addFastTaskNameTextField.textColor = .systemYellow
+            cell.addButton.setTitleColor(.systemYellow, for: .normal)
+            
+            cell.indexPath = indexPath
+            if !cell.styleEditing {
+                cell.setEditing(false, animated: false)
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralCell", for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
@@ -109,14 +121,17 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             cell.descriptionLabel.textColor = .vitBackground
             return cell
         }
-        
-        
-        
 //        addPanGesture(view: cell)
 //        fileViewOrigin = cell.bounds
 //        view.bringSubviewToFront(cell)
-        
-        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count{
+            return false
+        } else {
+            return true
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -137,21 +152,21 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "someHeaderViewIdentifier") as? HeaderView else { return nil }
-        switch section{
-            case 0:
-                headerView.configure(theme: "4", sameColorView: navSeparatorView)
-            default:
-                headerView.configure(theme: currentTheme ?? "1", sameColorView: nil)
-            }
+        headerView.configure(theme: currentTheme ?? "1", sameColorView: nil)
         return headerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let destinationViewController = TaskDetailViewController()
-        let object = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-        destinationViewController.task = object
-        router?.present(vc: destinationViewController)
+        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count {
+            print("ячейка с кнопкой 'Добавить' нажата")
+        } else {
+            let destinationViewController = TaskDetailViewController()
+            let object = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+            destinationViewController.task = object
+            router?.present(vc: destinationViewController)
+            print("ячейка нажата")
+        }
     }
     
     //MARK: - ВЫБОР ЦВЕТА СВАЙП ЯЧЕЙКИ
@@ -190,51 +205,65 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - ACTIONS
+    func openMenu() {
+        self.cloudsImageView.isHidden = false
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
+            self.backLayer.frame.origin.x += self.view.frame.width/1.2
+            self.blurView.frame.origin.x += self.view.frame.width/1.2
+            self.navSeparatorView.frame.origin.x += self.view.frame.width/1.2
+            self.boatImageView.frame.origin.x += self.view.frame.width/1.2
+            self.mapImageView.frame.origin.x += self.view.frame.width/1.2
+            self.settingsStack.center = self.view.center
+            self.trashView.frame.origin.x += self.view.frame.width/1.2
+            
+            self.blurView.backgroundColor = .black
+            self.backLayer.backgroundColor = .vitBackground
+            self.blurView.alpha = 0.5
+            self.navigationItem.leftBarButtonItem?.title = "Скрыть"
+            self.newTaskButton.isEnabled = false
+            self.newTaskButton.title = ""
+            self.panEdgeView.isHidden = false
+        } completion: { [weak self] done in
+            if done {
+                self?.menuState = .opened
+                self!.navigationItem.leftBarButtonItem?.isEnabled = true
+            }
+        }
+    }
+    
+    @objc func closeMenu() {
+        self.cloudsImageView.isHidden = true
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
+            self.backLayer.frame.origin.x = 0
+            self.blurView.frame.origin.x = 32
+            self.navSeparatorView.frame.origin.x = 0
+            self.boatImageView.frame.origin.x = -220
+            self.mapImageView.frame.origin.x = -300
+            self.settingsStack.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
+            self.trashView.frame.origin.x = 0
+            
+            self.blurView.backgroundColor = .clear
+            self.backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+            self.blurView.alpha = 0.8
+            self.navigationItem.leftBarButtonItem?.title = "Настройки"
+            self.newTaskButton.isEnabled = true
+            self.newTaskButton.title = "Новая задача"
+            self.panEdgeView.isHidden = true 
+        } completion: { [weak self] done in
+            if done {
+                self?.menuState = .closed
+                self!.navigationItem.leftBarButtonItem?.isEnabled = true
+            }
+        }
+    }
+    
     @objc func didTapMenuButton() {
         navigationItem.leftBarButtonItem?.isEnabled = false
         switch menuState {
         case .closed:
-            self.cloudsImageView.isHidden = false
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
-                self.backLayer.frame.origin.x += self.view.frame.width/1.2
-                self.blurView.frame.origin.x += self.view.frame.width/1.2
-                self.navSeparatorView.frame.origin.x += self.view.frame.width/1.2
-                self.boatImageView.frame.origin.x += self.view.frame.width/1.2
-                self.mapImageView.frame.origin.x += self.view.frame.width/1.2
-                self.settingsStack.center = self.view.center
-                self.trashView.frame.origin.x += self.view.frame.width/1.2
-                
-                self.blurView.backgroundColor = .black
-                self.backLayer.backgroundColor = .vitBackground
-                self.blurView.alpha = 0.5
-                self.navigationItem.leftBarButtonItem?.title = "Скрыть"
-            } completion: { [weak self] done in
-                if done {
-                    self?.menuState = .opened
-                    self!.navigationItem.leftBarButtonItem?.isEnabled = true
-                }
-            }
+            openMenu()
         case .opened:
-            self.cloudsImageView.isHidden = true
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
-                self.backLayer.frame.origin.x = 0
-                self.blurView.frame.origin.x = 32
-                self.navSeparatorView.frame.origin.x = 0
-                self.boatImageView.frame.origin.x = -220
-                self.mapImageView.frame.origin.x = -300
-                self.settingsStack.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
-                self.trashView.frame.origin.x = 0
-                
-                self.blurView.backgroundColor = .clear
-                self.backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-                self.blurView.alpha = 0.8
-                self.navigationItem.leftBarButtonItem?.title = "Настройки"
-            } completion: { [weak self] done in
-                if done {
-                    self?.menuState = .closed
-                    self!.navigationItem.leftBarButtonItem?.isEnabled = true
-                }
-            }
+            closeMenu()
         }
     }
     
@@ -309,8 +338,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .normal)
             navSeparatorView.backgroundColor = .cyan
-        case "4":
-            break
         default:
             break
         }
