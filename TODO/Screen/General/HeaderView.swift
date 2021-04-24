@@ -30,13 +30,6 @@ class HeaderView: UITableViewHeaderFooterView {
             contentView.backgroundColor = .alexeyBackground
         case "3":
             contentView.backgroundColor = .cyan
-        case "4":
-            contentView.backgroundColor = sameColorView?.backgroundColor
-//            contentView.layer.backgroundColor = UIColor.clear.cgColor
-            contentView.layer.shadowColor = nil
-            contentView.layer.shadowRadius = 0
-            contentView.layer.shadowOpacity = 0
-            contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
         default:
             break
         }

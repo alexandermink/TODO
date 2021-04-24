@@ -243,8 +243,8 @@
 				96600B6F253D0BCC00F3FDC1 /* GeneralTableViewController.swift */,
 				96600B71253D0BE400F3FDC1 /* GeneralTableViewCell.swift */,
 				5D2B3BEA262FED08006BF979 /* HeaderView.swift */,
-				96600B55253D057E00F3FDC1 /* Main.storyboard */,
 				969C87982632481C0036A2A5 /* AddButtonTableViewCell.swift */,
+				96600B55253D057E00F3FDC1 /* Main.storyboard */,
 			);
 			path = General;
 			sourceTree = "<group>";
