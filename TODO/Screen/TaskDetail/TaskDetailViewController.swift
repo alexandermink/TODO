@@ -10,6 +10,7 @@ import UIKit
 
 class TaskDetailViewController: UIViewController, UITableViewDelegate{
     
+    //MARK: - VARIABLES
     var doneButton: UIButton!
     var taskNameTitleLabel = UILabel()
     var taskNameTextView: UITextView!
@@ -41,11 +42,25 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         return label
     }
     
+    //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         router = BaseRouter(viewController: self)
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+        
+        uiSetUp()
+        
+        constrainsInit()
+        
+        view.addTapGestureToHideKeyboard()
+        
+        changeState(state: Main.instance.state ?? "1")
+        
+    }
+    
+    //MARK: - UI SET UP
+    func uiSetUp(){
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         doneButton = UIButton(type: .system)
@@ -110,14 +125,8 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         checkListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         checkListTableView.dataSource = self
         checkListTableView.delegate = self
-        
-        constrainsInit()
-        
-        view.addTapGestureToHideKeyboard()
-        
-        changeState(state: Main.instance.state ?? "1")
-        
     }
+    
     //MARK: - ACTIONS
     @objc func handleDoneTouchUpInside(){
         task?.name = taskNameTextView.text
@@ -138,6 +147,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
 //        )
         view.endEditing(true)
     }
+    
     //MARK: - CONSTRIAINTS
     func constrainsInit(){
         NSLayoutConstraint.activate([
@@ -180,6 +190,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             
         ])
     }
+    
     //MARK: - CHANGE STATE SETTINGS
     func changeState(state: String) {
         self.currentTheme = state
@@ -210,6 +221,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     }
     
 }
+
     //MARK: - TEBLEVIEW EXTENSION
 extension TaskDetailViewController: UITableViewDataSource{
     
