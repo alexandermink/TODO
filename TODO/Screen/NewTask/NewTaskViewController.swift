@@ -134,16 +134,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         coverButton.alpha = 0.7
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return self.textLimit(existingText: textField.text, newText: string, limit: 200)
-    }
-            
-    private func textLimit(existingText: String?, newText: String, limit: Int) -> Bool {
-        let text = existingText ?? ""
-        let isAtLimit = text.count + newText.count <= limit
-        return isAtLimit
-    }
-    
     @objc func deleteCategoryAction() {
         
         try? Main.instance.deleteSection(delSectionName: newSectionTextField.text ?? "")
@@ -331,5 +321,15 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         checkListButton.layer.borderWidth = borderWidth
         checkListButton.layer.borderColor = borderColor
+    }
+    //MARK: - CHARACTER LIMIT
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return self.textLimit(existingText: textField.text, newText: string, limit: 200)
+    }
+            
+    private func textLimit(existingText: String?, newText: String, limit: Int) -> Bool {
+        let text = existingText ?? ""
+        let isAtLimit = text.count + newText.count <= limit
+        return isAtLimit
     }
 }
