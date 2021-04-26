@@ -19,6 +19,12 @@ extension UIColor {
     static let alexeyFog = UIColor.rgb(r: 185, g: 196, b: 201)
 //    static let alexeyText = UIColor.rgb(r: 45, g: 200, b: 180)
     
+    static let alexDarkRed = UIColor.rgb(r: 106, g: 26, b: 22)
+    static let alexRed = UIColor.rgb(r: 130, g: 25, b: 16)
+    static let alexDark = UIColor.rgb(r: 31, g: 31, b: 31)
+    static let alexDarkGray = UIColor.rgb(r: 112, g: 112, b: 112)
+    static let alexLightGray = UIColor.rgb(r: 212, g: 212, b: 212)
+    
     
     static func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
