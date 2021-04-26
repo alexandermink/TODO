@@ -24,6 +24,7 @@ class TaskDetailViewController: UIViewController{
     let dateFormatter = DateFormatter()
     var notificationPicker = UIDatePicker()
     var router: BaseRouter?
+    let notificationService = NotificationService()
     
     
     func makeTF(lab: UILabel, text: String, color: UIColor) -> UILabel {
@@ -119,10 +120,10 @@ class TaskDetailViewController: UIViewController{
         taskDateTextField?.text = dateFormatter.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter.date(from: taskDateTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
-//        notificationService.sendNotificationRequest(
-//            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-//            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: Main.instance.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
-//        )
+        notificationService.sendNotificationRequest(
+            content: notificationService.makeNotificationContent(str: taskNameTextView.text ?? ""),
+            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: taskDateTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+        )
         view.endEditing(true)
     }
     

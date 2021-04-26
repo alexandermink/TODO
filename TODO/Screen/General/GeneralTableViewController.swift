@@ -38,6 +38,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var navSeparatorView: UIView!
     @IBOutlet weak var vitThemeButton: UIButton!
     @IBOutlet weak var panEdgeView: UIView!
+    @IBOutlet weak var alexLayer1: UIImageView!
+    @IBOutlet weak var alexLayer2: UIImageView!
+    @IBOutlet weak var alexLayer1widthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var alexLayer1HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
+    
+    
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -63,6 +71,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: alexLayer1, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: alexLayer2, magnitude: -50)
         try? main.updateTasksFromRealm()
 //        try? main.addSection(sectionName: "Базовая секция № 1")
 //        try? Main.instance.addSection(sectionName: "")
@@ -215,6 +225,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             self.mapImageView.frame.origin.x += self.view.frame.width/1.2
             self.settingsStack.center = self.view.center
             self.trashView.frame.origin.x += self.view.frame.width/1.2
+            self.alexLayer1.frame.origin.x += self.view.frame.width/1.2
+            self.alexLayer2.frame.origin.x += self.view.frame.width/1.2
             
             self.blurView.backgroundColor = .black
             self.backLayer.backgroundColor = .vitBackground
@@ -241,6 +253,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             self.mapImageView.frame.origin.x = -300
             self.settingsStack.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
             self.trashView.frame.origin.x = 0
+            self.alexLayer1.frame.origin.x = -300
+            self.alexLayer2.frame.origin.x = -300
             
             self.blurView.backgroundColor = .clear
             self.backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
@@ -299,6 +313,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         case "1":
             mapImageView.isHidden = false
             boatImageView.isHidden = true
+            alexLayer1.isHidden = true
+            alexLayer2.isHidden = true
             navigationController?.navigationBar.barTintColor = .vitDarkBrown
             newTaskButton.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
@@ -313,6 +329,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         case "2":
             mapImageView.isHidden = true
             boatImageView.isHidden = false
+            alexLayer1.isHidden = true
+            alexLayer2.isHidden = true
             navigationController?.navigationBar.barTintColor = .alexeyFog
             newTaskButton.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
@@ -327,17 +345,19 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
-            navigationController?.navigationBar.barTintColor = .systemRed
+            alexLayer1.isHidden = false
+            alexLayer2.isHidden = false
+            navigationController?.navigationBar.barTintColor = .alexDarkRed
             newTaskButton.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .normal)
+                 NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .normal)
             newTaskButton.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .highlighted)
+                 NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .highlighted)
             navigationItem.leftBarButtonItem?.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.cyan], for: .normal)
-            navSeparatorView.backgroundColor = .cyan
+                 NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .normal)
+            navSeparatorView.backgroundColor = .alexLightGray
         default:
             break
         }
@@ -357,6 +377,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         
         boatWidthConstraint.constant = view.frame.width*1.8
         boatHeightConstraint.constant = view.frame.width*1.8
+        
+        alexLayer1widthConstraint.constant = view.frame.width*3.6
+        alexLayer1HeightConstraint.constant = view.frame.width*2.4
+        alexLayer2widthConstraint.constant = view.frame.width*3.2
+        alexLayer2HeightConstraint.constant = view.frame.width*1.8
         
         settingsStackLeadingConstraint.constant = -view.frame.width/2
         self.cloudsImageView.frame = .init(x: -view.frame.width*4, y: 0, width: view.frame.width*2, height: view.frame.width)
