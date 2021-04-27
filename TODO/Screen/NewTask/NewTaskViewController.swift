@@ -32,9 +32,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var boatImageView: UIImageView!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var fakeKB: UITextField! {
+    @IBOutlet weak var substituteCategoryTextField: UITextField! {
         didSet{
-            fakeKB.inputAccessoryView = makeToolBarCategoryKB()
+            substituteCategoryTextField.inputAccessoryView = makeToolBarCategory()
         }
     }
     @IBOutlet weak var cloudsImageView: UIImageView!
@@ -106,11 +106,11 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             return showAlert(title: "Ошибка", message: "Выбрано прошедшее время")
         }
         
-        // Проверка на пустые поля ввода: fakeKB, newSectionTextField, newTaskNameTextField
+        // Проверка на пустые поля ввода: substituteCategoryTextField, newSectionTextField, newTaskNameTextField
         if newTaskNameTextField.text == "" {
             showAlert(title: "Ошибка", message: "Не заполнено поле: Название")
-        } else if fakeKB.text != ""{
-            tempAddTask(sectionName: fakeKB.text ?? "")
+        } else if substituteCategoryTextField.text != ""{
+            tempAddTask(sectionName: substituteCategoryTextField.text ?? "")
         } else if newSectionTextField.text != "" {
             tempAddTask(sectionName: newSectionTextField.text ?? "")
         } else {
@@ -119,9 +119,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @IBAction func pickColorButtonTapped(_ sender: UIButton) {
-        let colorPickerVC = UIColorPickerViewController()
-        colorPickerVC.delegate = self
-        present(colorPickerVC, animated: true)
+        let colorPickerViewController = UIColorPickerViewController()
+        colorPickerViewController.delegate = self
+        present(colorPickerViewController, animated: true)
     }
     
     @objc func dismissKeyboard() {
@@ -169,23 +169,23 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             newSectionTextField.resignFirstResponder()
             newSectionTextField.isHidden = true
             newSectionTextField.text = ""
-            fakeKB.text = ""
-            fakeKB.isHidden = false
-            fakeKB.becomeFirstResponder()
+            substituteCategoryTextField.text = ""
+            substituteCategoryTextField.isHidden = false
+            substituteCategoryTextField.becomeFirstResponder()
             isKeyboard = true
-//            newSectionTextField.text = fakeKB.text
+//            newSectionTextField.text = substituteCategoryTextField.text
         } else {
             if sections?.count != 0 {
                 try? Main.instance.deleteSection(delSectionName: "")
             }
-            fakeKB.resignFirstResponder()
-            fakeKB.isHidden = true
+            substituteCategoryTextField.resignFirstResponder()
+            substituteCategoryTextField.isHidden = true
             newSectionTextField.isHidden = false
             newSectionTextField.becomeFirstResponder()
             isKeyboard = false
             categoryPicker.selectedRow(inComponent: 0)
-            newSectionTextField.text = fakeKB.text
-            fakeKB.text = ""
+            newSectionTextField.text = substituteCategoryTextField.text
+            substituteCategoryTextField.text = ""
             try? Main.instance.addSection(sectionName: newSectionTextField.text ?? "")
             sections = try? Main.instance.getSectionsFromRealm()
             newSectionTextField.text = sections?.count != 0 ? sections?[0] : ""
@@ -232,7 +232,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             boatImageView.isHidden = true
             newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             newSectionTextField.textColor = .systemYellow
-            fakeKB.textColor = .yellow
+            substituteCategoryTextField.textColor = .yellow
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             newTaskNameTextField.textColor = .systemYellow
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
@@ -250,7 +250,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             boatImageView.isHidden = false
             newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             newSectionTextField.textColor = .alexeyBackground
-            fakeKB.textColor = .alexeyBackground
+            substituteCategoryTextField.textColor = .alexeyBackground
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             newTaskNameTextField.textColor = .alexeyBackground
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
@@ -269,7 +269,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             mapImageView.isHidden = true
             newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             newSectionTextField.textColor = .cyan
-            fakeKB.textColor = .cyan
+            substituteCategoryTextField.textColor = .cyan
             newTaskNameTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Название", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
             newTaskNameTextField.textColor = .cyan
             descriptionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Описание", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.cyan]))
