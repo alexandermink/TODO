@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,14 +12,14 @@
             <objects>
                 <viewController storyboardIdentifier="NewTaskViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZIG-J0-Jce" customClass="NewTaskViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hwd-mr-lNl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nod-Z1-L7u" customClass="Shadow" customModule="TODO" customModuleProvider="target">
-                                <rect key="frame" x="24" y="162" width="327" height="384"/>
+                                <rect key="frame" x="24" y="118" width="552" height="250"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHY-5W-5Qd" customClass="Rounding" customModule="TODO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="384"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="552" height="250"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="radius">
@@ -52,7 +51,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XR-lr7">
-                                <rect key="frame" x="-400" y="108" width="800" height="400"/>
+                                <rect key="frame" x="-400" y="64" width="800" height="400"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="Gr4-Vs-1iC"/>
@@ -60,7 +59,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="ez6-jK-pZ1">
-                                <rect key="frame" x="-220" y="178" width="1200" height="600"/>
+                                <rect key="frame" x="-220" y="134" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1200" id="RF5-Db-YM1"/>
@@ -68,7 +67,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds1" translatesAutoresizingMaskIntoConstraints="NO" id="pvO-vw-zfT">
-                                <rect key="frame" x="0.0" y="38" width="2600" height="800"/>
+                                <rect key="frame" x="0.0" y="-6" width="2600" height="800"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="2600" id="K6h-M2-c3p"/>
@@ -76,22 +75,22 @@
                                 </constraints>
                             </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOL-GF-LPa">
-                                <rect key="frame" x="32" y="170" width="311" height="368"/>
+                                <rect key="frame" x="32" y="126" width="536" height="234"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iDW-QO-9WQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="311" height="368"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="234"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-Dh-4XR">
-                                            <rect key="frame" x="0.0" y="0.0" width="311" height="368"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="536" height="234"/>
                                             <subviews>
                                                 <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите название секции" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ItF-RI-4pU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="311" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="536" height="0.0"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Секция" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="twg-EY-wp1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="311" height="61.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="536" height="39"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -102,7 +101,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-wz-RRO">
-                                                    <rect key="frame" x="0.0" y="61.333333333333343" width="311" height="61.333333333333343"/>
+                                                    <rect key="frame" x="0.0" y="39" width="536" height="39"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -113,7 +112,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3VI-PW-BYs">
-                                                    <rect key="frame" x="0.0" y="122.66666666666667" width="311" height="61.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="78" width="536" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <state key="normal" title="Обложка">
                                                         <color key="titleColor" systemColor="systemYellowColor"/>
@@ -123,7 +122,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Описание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2tT-nH-U0R">
-                                                    <rect key="frame" x="0.0" y="184" width="311" height="61.333333333333343"/>
+                                                    <rect key="frame" x="0.0" y="117" width="536" height="39"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -134,7 +133,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Напоминание" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ws-xw-BHA">
-                                                    <rect key="frame" x="0.0" y="245.33333333333334" width="311" height="61.333333333333343"/>
+                                                    <rect key="frame" x="0.0" y="156" width="536" height="39"/>
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
@@ -145,7 +144,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVR-cd-gGp">
-                                                    <rect key="frame" x="0.0" y="306.66666666666669" width="311" height="61.333333333333314"/>
+                                                    <rect key="frame" x="0.0" y="195" width="536" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <state key="normal" title="Чек лист">
                                                         <color key="titleColor" systemColor="systemYellowColor"/>
@@ -183,7 +182,7 @@
                                 <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hb3-NG-4sk">
-                                <rect key="frame" x="255" y="108" width="100" height="30"/>
+                                <rect key="frame" x="480" y="64" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8OG-t0-9Hj"/>
                                     <constraint firstAttribute="width" constant="100" id="m9f-o0-sdX"/>
@@ -233,7 +232,6 @@
                         <outlet property="coverButton" destination="3VI-PW-BYs" id="ccv-17-9oo"/>
                         <outlet property="createButton" destination="Hb3-NG-4sk" id="cTb-JV-dD3"/>
                         <outlet property="descriptionTextField" destination="2tT-nH-U0R" id="4S1-4x-ChS"/>
-                        <outlet property="fakeKB" destination="ItF-RI-4pU" id="REC-Ao-BuI"/>
                         <outlet property="mapHeightConstraint" destination="Gr4-Vs-1iC" id="BMo-Rp-bny"/>
                         <outlet property="mapImageView" destination="wNf-XR-lr7" id="xfI-8q-DfL"/>
                         <outlet property="mapWidthConstraint" destination="gOE-0f-O5R" id="Nc2-Am-3Nt"/>
@@ -241,6 +239,7 @@
                         <outlet property="newTaskNameTextField" destination="gRX-wz-RRO" id="iLZ-y5-s9k"/>
                         <outlet property="notificationTextField" destination="2ws-xw-BHA" id="MvX-Gr-IWx"/>
                         <outlet property="stackBottomConstraint" destination="WJu-nJ-Gw5" id="iN9-Qb-tNM"/>
+                        <outlet property="substituteCategoryTextField" destination="ItF-RI-4pU" id="REC-Ao-BuI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paz-JO-ksn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

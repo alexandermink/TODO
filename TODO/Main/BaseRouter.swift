@@ -27,11 +27,7 @@ final class BaseRouter: RouterFactory{
     func present(vc: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         viewController?.present(vc, animated: animated, completion: completion)
     }
-    
-//    func pop(vc: UIViewController, animated: Bool = true){
-//        viewController?.navigationController?.popToViewController(vc, animated: animated)
-//    }
-//    
+
     func pop(animated: Bool = true){
         viewController?.navigationController?.popViewController(animated: animated)
     }

@@ -14,10 +14,10 @@ class ToolBarBuilder {
     static let size2 = 18
     
     static func setAttributedString(textSize: CGFloat) -> [NSAttributedString.Key: Any]{
-        let doneBtn: [NSAttributedString.Key: Any]
-        doneBtn = [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: textSize),
+        let doneButton: [NSAttributedString.Key: Any]
+        doneButton = [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: textSize),
          NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
-        return doneBtn
+        return doneButton
     }
     
     static func configDoneButton() -> UIToolbar {
@@ -67,7 +67,7 @@ extension UIViewController {
         return toolBar
     }
     
-    func makeToolBarCategoryKB() -> UIToolbar {
+    func makeToolBarCategory() -> UIToolbar {
         let toolBar = ToolBarBuilder.configDoneButton()
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.changePickerAndKeyboard))
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)

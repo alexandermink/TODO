@@ -22,7 +22,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     var taskDescriptionTextView: UITextView!
     let checkListTableView = UITableView()
     
-    
     var task: Task? = Task()
     let dateFormatter = DateFormatter()
     var notificationPicker = UIDatePicker()
@@ -30,9 +29,9 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     let notificationService = NotificationService()
     private var currentTheme : String?
 
-    
     var testDataForTableView = ["uno", "dos", "tres", "quatro", "cinco", "sies"]
     
+    //MARK: - LABEL FACTORY
     func labelFactory(lab: UILabel, text: String, color: UIColor) -> UILabel {
         var label = lab
         label = UILabel()
@@ -210,13 +209,11 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskDateTextField.textColor = .alexeyBackground
             taskDescriptionTextView.textColor = .alexeyBackground
         case "3":
-            doneButton.tintColor = .cyan
-            taskNameTextView.textColor = .cyan
-            taskCreationDateLabel.textColor = .cyan
-            taskDateTextField.textColor = .cyan
-            taskDescriptionTextView.textColor = .cyan
-        case "4":
-            break
+            doneButton.tintColor = .alexDarkRed
+            taskNameTextView.textColor = .alexDarkRed
+            taskCreationDateLabel.textColor = .alexDarkRed
+            taskDateTextField.textColor = .alexDarkRed
+            taskDescriptionTextView.textColor = .alexDarkRed
         default:
             break
         }
