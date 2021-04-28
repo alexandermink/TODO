@@ -18,6 +18,7 @@
 		5D32F3D32616E43D008C1A58 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D32F3D22616E43D008C1A58 /* NotificationService.swift */; };
 		5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D32F3D52616E7A2008C1A58 /* AlertBuilder.swift */; };
 		5D34CCAC2628025100FBA762 /* ParalaxEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D34CCAB2628025100FBA762 /* ParalaxEffect.swift */; };
+		5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D71D3232639B8A90084F464 /* CheckListCell.swift */; };
 		5D977704261D972C00F74E53 /* UIView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D977703261D972C00F74E53 /* UIView+ext.swift */; };
 		5D977708261D979200F74E53 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D977707261D979200F74E53 /* UIColor.swift */; };
 		5DBD9042261458DA00732A50 /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBD9041261458DA00732A50 /* String+ext.swift */; };
@@ -50,6 +51,7 @@
 		5D32F3D22616E43D008C1A58 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5D32F3D52616E7A2008C1A58 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		5D34CCAB2628025100FBA762 /* ParalaxEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParalaxEffect.swift; sourceTree = "<group>"; };
+		5D71D3232639B8A90084F464 /* CheckListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListCell.swift; sourceTree = "<group>"; };
 		5D977703261D972C00F74E53 /* UIView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ext.swift"; sourceTree = "<group>"; };
 		5D977707261D979200F74E53 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5DBD9041261458DA00732A50 /* String+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ext.swift"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				9664687525A6967300443B81 /* NewTaskViewController.swift */,
+				5D71D3232639B8A90084F464 /* CheckListCell.swift */,
 				15F9973D2615E17E003FFD71 /* NewTaskStoryboard.storyboard */,
 			);
 			path = NewTask;
@@ -393,6 +396,7 @@
 				5D2B3BEB262FED08006BF979 /* HeaderView.swift in Sources */,
 				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,
+				5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */,
 				5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */,
 				96600B52253D057E00F3FDC1 /* SceneDelegate.swift in Sources */,
 				96D934CA261C8AF70093FF47 /* LocalDataBaseService.swift in Sources */,

@@ -9,8 +9,6 @@
 import UIKit
 import RealmSwift
 
-//private let reuseIdentifier = "GeneralCell"
-
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIColorPickerViewControllerDelegate {
     
     enum MenuState {
@@ -44,8 +42,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var alexLayer1HeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
-    
-    
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -326,6 +322,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
             navSeparatorView.backgroundColor = .systemYellow
+            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "2":
             mapImageView.isHidden = true
             boatImageView.isHidden = false
@@ -342,6 +339,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
             navSeparatorView.backgroundColor = .alexeyBackground
+            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
@@ -358,6 +356,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .normal)
             navSeparatorView.backgroundColor = .alexLightGray
+            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         default:
             break
         }
