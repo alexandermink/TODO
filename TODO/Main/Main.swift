@@ -24,6 +24,10 @@ class Main {
         get {return UserDefaults.standard.string(forKey: "k")}
         set {UserDefaults.standard.set(newValue, forKey: "k")}
     }
+    var isCloudsHidden: Bool? {
+        get {return UserDefaults.standard.bool(forKey: "clouds")}
+        set {UserDefaults.standard.set(newValue, forKey: "clouds")}
+    }
     
 
     private init() { }

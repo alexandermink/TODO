@@ -10,10 +10,10 @@ import UIKit
 
 class AddButtonTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var addFastTaskNameTextField: UITextField!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
+    
     
     var indexPath: IndexPath = IndexPath()
     var styleEditing = false
@@ -24,11 +24,11 @@ class AddButtonTableViewCell: UITableViewCell {
     }
     
     @IBAction func plusButtonTapped(_ sender: Any) {
-        print("000")
         addFastTaskNameTextField.isHidden = false
         addButton.isHidden = false
         plusButton.isHidden = true
     }
+    
     @IBAction func addButtonAction(_ sender: Any) {
         config()
         addFastTaskNameTextField.isHidden = true
@@ -36,7 +36,6 @@ class AddButtonTableViewCell: UITableViewCell {
         plusButton.isHidden = false
         
     }
-    
     
     func config() {
         let sectionName = Main.instance.userSession.tasks[indexPath.section].sectionName

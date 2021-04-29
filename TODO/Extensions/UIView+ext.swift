@@ -15,10 +15,11 @@ extension UIView {
         gradient.endPoint = CGPoint(x: endX, y: endY)
         gradient.frame = self.bounds
         gradient.colors = colours.map { $0.cgColor }
-        self.layer.insertSublayer(gradient, at: 0)
-//        self.layer.addSublayer(gradient)
-        
-        //return gradient
+        if let oldGradientLayer = layer.sublayers?.compactMap({ $0 as?  CAGradientLayer }).first {
+            self.layer.replaceSublayer(oldGradientLayer, with: gradient)
+        } else {
+            self.layer.insertSublayer(gradient, at: 0)
+        }        
     }
     
     func addTapGestureToHideKeyboard() {

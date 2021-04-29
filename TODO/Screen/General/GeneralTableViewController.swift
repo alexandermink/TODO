@@ -9,8 +9,6 @@
 import UIKit
 import RealmSwift
 
-//private let reuseIdentifier = "GeneralCell"
-
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIColorPickerViewControllerDelegate {
     
     enum MenuState {
@@ -44,9 +42,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var alexLayer1HeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
-    
-    
-    
+    @IBOutlet var settingsButtons: [UIButton]!
+
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
     let realm = try! Realm()
@@ -62,10 +59,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         panGestureRecognizer.addTarget(self, action: #selector(closeMenu))
         panEdgeView.addGestureRecognizer(panGestureRecognizer)
-
         setViewScreen()
         UserDefaults.standard.string(forKey: "k")
         changeState(state: main.state ?? "1")
+        UserDefaults.standard.bool(forKey: "clouds")
+        if main.isCloudsHidden! {
+            cloudsImageView.isHidden = true
+        } else { cloudsImageView.isHidden = false }
         cloudsImageView.isHidden = true
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
         
@@ -74,8 +74,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         ParalaxEffect.paralaxEffect(view: alexLayer1, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: alexLayer2, magnitude: -50)
         try? main.updateTasksFromRealm()
-//        try? main.addSection(sectionName: "Базовая секция № 1")
-//        try? Main.instance.addSection(sectionName: "")
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
@@ -131,9 +129,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             cell.descriptionLabel.textColor = .vitBackground
             return cell
         }
-//        addPanGesture(view: cell)
-//        fileViewOrigin = cell.bounds
-//        view.bringSubviewToFront(cell)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -216,7 +211,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - ACTIONS
     func openMenu() {
-        self.cloudsImageView.isHidden = false
+        if main.isCloudsHidden! {
+            cloudsImageView.isHidden = true
+        } else {cloudsImageView.isHidden = false }
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
             self.backLayer.frame.origin.x += self.view.frame.width/1.2
             self.blurView.frame.origin.x += self.view.frame.width/1.2
@@ -283,8 +280,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
-//        try? Main.instance.addSection(sectionName: "Базовая секция № 1")
-//        try? Main.instance.addSection(sectionName: "")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
         router?.present(vc: destinationVC, animated: true)
@@ -307,6 +302,19 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         UserDefaults.standard.set(main.state, forKey: "k")
     }
     
+    @IBAction func hideCloudsAction(_ sender: Any) {
+        if main.isCloudsHidden! {
+            main.isCloudsHidden = false
+            UserDefaults.standard.set(main.isCloudsHidden, forKey: "clouds")
+            cloudsImageView.isHidden = false
+        } else {
+            main.isCloudsHidden = true
+            UserDefaults.standard.set(main.isCloudsHidden, forKey: "clouds")
+            cloudsImageView.isHidden = true
+        }
+    }
+    
+    
     func changeState(state: String) {
         self.currentTheme = state
         switch state {
@@ -326,6 +334,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
             navSeparatorView.backgroundColor = .systemYellow
+            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            settingsButtons.forEach { buttons in
+//                buttons.setTitleColor(.systemYellow, for: .normal)
+//            }
         case "2":
             mapImageView.isHidden = true
             boatImageView.isHidden = false
@@ -342,6 +354,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
             navSeparatorView.backgroundColor = .alexeyBackground
+            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            settingsButtons.forEach { buttons in
+//                buttons.setTitleColor(.alexeyBackground, for: .normal)
+//            }
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
@@ -358,6 +374,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .normal)
             navSeparatorView.backgroundColor = .alexLightGray
+            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            settingsButtons.forEach { buttons in
+//                buttons.setTitleColor(.alexLightGray, for: .normal)
+//            }
         default:
             break
         }
@@ -388,44 +408,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Настройки", style: .done, target: self, action: #selector(didTapMenuButton))
         cloudsWidthConstraint.constant = view.frame.width*5.2
         cloudsHeightConstraint.constant = view.frame.width*2
+        
+        settingsButtons.forEach { buttons in
+            buttons.setTitleColor(.alexeyFog, for: .normal)
+        }
     }
-    
-    //MARK: - MOVE VIEWS WITH GESTURE
-//    var fileViewOrigin: CGRect!
-//
-//    func addPanGesture(view: UIView) {
-//        let pan = UIPanGestureRecognizer(target: self, action: #selector(GeneralTableViewController.handlePan(sender:)))
-//        view.addGestureRecognizer(pan)
-//    }
-//
-//    @objc func handlePan(sender: UIPanGestureRecognizer) {
-//        let fileView = sender.view!
-//        switch sender.state {
-//        case .began, .changed:
-//            moveViewWithPan(view: fileView, sender: sender)
-//        case .ended:
-//            if fileView.frame.intersects(trashView.frame) {
-//                deleteView(view: fileView)
-//            } else { returnViewToOrigin(view: fileView) }
-//        default: break
-//        }
-//    }
-//
-//    func moveViewWithPan(view: UIView, sender: UIPanGestureRecognizer) {
-//        let translation = sender.translation(in: view)
-//        view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
-//        sender.setTranslation(CGPoint.zero, in: view)
-//    }
-//
-//    func returnViewToOrigin(view: UIView) {
-//        UIView.animate(withDuration: 0.3, animations: {
-//            view.bounds = self.fileViewOrigin
-//        })
-//    }
-//
-//    func deleteView(view: UIView) {
-//        UIView.animate(withDuration: 0.3, animations: {
-//            view.alpha = 0.0
-//        })
-//    }
 }

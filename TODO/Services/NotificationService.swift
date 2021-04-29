@@ -20,8 +20,8 @@ class NotificationService {
         return content
     }
 
-    func makeIntervalNotificationTrigger(doub: Double) -> UNNotificationTrigger {
-        let pickedTime = doub // подставить выбранное в picker время
+    func makeIntervalNotificationTrigger(double: Double) -> UNNotificationTrigger {
+        let pickedTime = double // подставить выбранное в picker время
         let curentTime = Date().timeIntervalSince1970 // текущее время
         let interval = pickedTime - curentTime // интервал в секундах между выбранным и текущим
         Main.instance.notificationDateInterval = interval

@@ -32,11 +32,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var boatImageView: UIImageView!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var substituteCategoryTextField: UITextField! {
-        didSet{
-            substituteCategoryTextField.inputAccessoryView = makeToolBarCategory()
-        }
-    }
+    @IBOutlet weak var substituteCategoryTextField: UITextField! {didSet{
+        substituteCategoryTextField.inputAccessoryView = makeToolBarCategory()}}
     @IBOutlet weak var cloudsImageView: UIImageView!
     @IBOutlet weak var cloudsWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
@@ -44,6 +41,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var boatHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var backLayerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var checkTableTopConstraints: NSLayoutConstraint!
+    @IBOutlet weak var checkBlurView: UIVisualEffectView!
+    @IBOutlet weak var checkPlusButton: UIButton!
+    @IBOutlet weak var checkToolBarView: UIView!
     
     
     var sections: [String]?
@@ -65,6 +66,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         try? Main.instance.deleteSection(delSectionName: "")
         boatImageView.isHidden = true
         setViewScreen()
+        if Main.instance.isCloudsHidden! {
+            cloudsImageView.isHidden = true
+        } else { cloudsImageView.isHidden = false }
         changeState(state: Main.instance.state ?? "1")
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
@@ -87,7 +91,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }, completion: nil)
     }
 
-    
     // MARK: - ACTIONS
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
@@ -135,10 +138,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @objc func deleteCategoryAction() {
-        
         try? Main.instance.deleteSection(delSectionName: newSectionTextField.text ?? "")
-        
-//        try? Main.instance.addSection(sectionName: "Базовая секция № 1")
         if sections?.count == 0 {
             try? Main.instance.addSection(sectionName: "")
         } else {
@@ -173,7 +173,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             substituteCategoryTextField.isHidden = false
             substituteCategoryTextField.becomeFirstResponder()
             isKeyboard = true
-//            newSectionTextField.text = substituteCategoryTextField.text
         } else {
             if sections?.count != 0 {
                 try? Main.instance.deleteSection(delSectionName: "")
@@ -200,15 +199,29 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(doub: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+            trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
         )
         self.dismissKeyboard()
     }
     
-    // MARK: - PICKER
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    // MARK: - CHECK LIST ACTIONS
+    @IBAction func checkListButtonAction(_ sender: Any) {
+        checkTableTopConstraints.constant = 200
     }
+    
+    @IBAction func checkTableHideAction(_ sender: Any) {
+        checkTableTopConstraints.constant = 0
+    }
+    
+    @IBAction func checkTableDoneAction(_ sender: Any) {
+    }
+    
+    @IBAction func checkTablePlusAction(_ sender: Any) {
+    }
+    
+    
+    // MARK: - PICKER
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return sections?.count ?? 0
@@ -244,7 +257,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.systemYellow, for: .normal)
             checkListButton.setTitleColor(.systemYellow, for: .highlighted)
             createButton.setTitleColor(.systemYellow, for: .normal)
-            createButton.setTitleColor(.systemYellow, for: .highlighted)  
+            createButton.setTitleColor(.systemYellow, for: .highlighted)
+            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "2":
             mapImageView.isHidden = true
             boatImageView.isHidden = false
@@ -263,7 +277,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.alexeyBackground, for: .highlighted)
             createButton.setTitleColor(.alexeyBackground, for: .normal)
             createButton.setTitleColor(.alexeyBackground, for: .highlighted)
-            cloudsImageView.isHidden = true
+            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
@@ -282,6 +296,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.cyan, for: .highlighted)
             createButton.setTitleColor(.cyan, for: .normal)
             createButton.setTitleColor(.cyan, for: .highlighted)
+            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "4":
             break
         default:
@@ -321,7 +336,19 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         checkListButton.layer.borderWidth = borderWidth
         checkListButton.layer.borderColor = borderColor
+        
+        checkTableTopConstraints.constant = 0
+        checkBlurView.layer.cornerRadius = 24
+        checkBlurView.layer.borderWidth = 3
+        checkBlurView.layer.borderColor = UIColor.darkGray.cgColor
+        
+        checkPlusButton.backgroundColor = .vitBackground
+        checkPlusButton.layer.cornerRadius = 15
+        checkPlusButton.layer.borderWidth = 2
+        checkPlusButton.layer.borderColor = UIColor.darkGray.cgColor
+        checkToolBarView.backgroundColor = .vitDarkBrown
     }
+    
     //MARK: - CHARACTER LIMIT
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return self.textLimit(existingText: textField.text, newText: string, limit: 200)
@@ -331,5 +358,19 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         let text = existingText ?? ""
         let isAtLimit = text.count + newText.count <= limit
         return isAtLimit
+    }
+}
+
+extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
+        
+        cell.checkListItemTextField.text = cell.rowText
+        
+        return cell
     }
 }

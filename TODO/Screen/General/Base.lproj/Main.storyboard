@@ -118,7 +118,7 @@
                                 <rect key="frame" x="-100" y="204" width="160" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I96-XS-tnX">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <state key="normal" title="Тема Виталия">
                                             <color key="titleColor" systemColor="systemYellowColor"/>
@@ -128,7 +128,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aty-Ra-ylf">
-                                        <rect key="frame" x="0.0" y="53.5" width="160" height="53"/>
+                                        <rect key="frame" x="0.0" y="40" width="160" height="40"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <state key="normal" title="Тема Алексея">
                                             <color key="titleColor" systemColor="systemYellowColor"/>
@@ -138,13 +138,23 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enm-Ra-Moz">
-                                        <rect key="frame" x="0.0" y="106.5" width="160" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="80" width="160" height="40"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <state key="normal" title="Тема Александра">
                                             <color key="titleColor" systemColor="systemYellowColor"/>
                                         </state>
                                         <connections>
                                             <action selector="alexandrThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="CEL-I7-Ezp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAK-o3-NDO">
+                                        <rect key="frame" x="0.0" y="120" width="160" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <state key="normal" title="Скрыть облака">
+                                            <color key="titleColor" systemColor="systemYellowColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hideCloudsAction:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="StR-c2-OWV"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -373,6 +383,10 @@
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
                         <outlet property="trashView" destination="WyF-1P-IdP" id="bdr-8V-EsH"/>
                         <outlet property="vitThemeButton" destination="I96-XS-tnX" id="6VR-EF-Q4j"/>
+                        <outletCollection property="settingsButtons" destination="I96-XS-tnX" collectionClass="NSMutableArray" id="vIM-n1-lMC"/>
+                        <outletCollection property="settingsButtons" destination="aty-Ra-ylf" collectionClass="NSMutableArray" id="C6b-L5-7Me"/>
+                        <outletCollection property="settingsButtons" destination="enm-Ra-Moz" collectionClass="NSMutableArray" id="8p6-4a-hiU"/>
+                        <outletCollection property="settingsButtons" destination="eAK-o3-NDO" collectionClass="NSMutableArray" id="gTO-Ro-9Mc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjY-Fx-tBw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
