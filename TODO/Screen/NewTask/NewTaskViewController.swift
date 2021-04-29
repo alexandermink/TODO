@@ -66,6 +66,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         try? Main.instance.deleteSection(delSectionName: "")
         boatImageView.isHidden = true
         setViewScreen()
+        if Main.instance.isCloudsHidden! {
+            cloudsImageView.isHidden = true
+        } else { cloudsImageView.isHidden = false }
         changeState(state: Main.instance.state ?? "1")
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
@@ -274,7 +277,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.alexeyBackground, for: .highlighted)
             createButton.setTitleColor(.alexeyBackground, for: .normal)
             createButton.setTitleColor(.alexeyBackground, for: .highlighted)
-            cloudsImageView.isHidden = true
             view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "3":
             boatImageView.isHidden = true
