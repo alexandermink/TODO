@@ -142,10 +142,10 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskDateTextField?.text = dateFormatter.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter.date(from: taskDateTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
-        notificationService.sendNotificationRequest(
-            content: notificationService.makeNotificationContent(str: taskNameTextView.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: taskDateTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
-        )
+//        notificationService.sendNotificationRequest(
+//            content: notificationService.makeNotificationContent(str: taskNameTextView.text ?? ""),
+//            trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: taskDateTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+//        )
         view.endEditing(true)
     }
     

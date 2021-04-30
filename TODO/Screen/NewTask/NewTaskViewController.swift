@@ -18,7 +18,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var notificationTextField: UITextField! {didSet{
         notificationTextField.inputAccessoryView = makeToolBarNotifications()
         notificationTextField.inputView = notificationPicker
-        notificationPicker.minimumDate = minDate
+//        notificationPicker.minimumDate = minDate
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
     @IBOutlet weak var newTaskNameTextField: UITextField! {didSet{
         newTaskNameTextField.delegate = self}}
@@ -189,17 +189,23 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             sections = try? Main.instance.getSectionsFromRealm()
             newSectionTextField.text = sections?.count != 0 ? sections?[0] : ""
         }
-//
         categoryPicker.reloadAllComponents()
     }
     
     @objc func chooseNotificationAction() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            guard granted else {
+                print("Разрешение не получено")
+                return
+            }
+        }
         notificationTextField?.text = dateFormatter.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
+        let taskRealm = TaskRealm()
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
+            trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 ), task: taskRealm
         )
         self.dismissKeyboard()
     }
