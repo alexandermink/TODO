@@ -189,7 +189,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             sections = try? Main.instance.getSectionsFromRealm()
             newSectionTextField.text = sections?.count != 0 ? sections?[0] : ""
         }
-//
         categoryPicker.reloadAllComponents()
     }
     

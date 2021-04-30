@@ -11,15 +11,20 @@ import UIKit
 class TaskDetailViewController: UIViewController, UITableViewDelegate{
     
     //MARK: - VARIABLES
-    var doneButton: UIButton!
+    var doneButton = UIButton(type: .system)
     var taskNameTitleLabel = UILabel()
-    var taskNameTextView: UITextView!
+    var taskNameTextView = UITextView()
     var taskCreationDateTitleLabel = UILabel()
     var taskCreationDateLabel = UILabel()
     var taskDateTitleLabel = UILabel()
-    var taskDateTextField: UITextField!
+    var taskDateTextField = UITextField()
     var taskDescriptionTitleLabel = UILabel()
-    var taskDescriptionTextView: UITextView!
+    var taskDescriptionTextView = UITextView()
+    var checkBlurView: UIVisualEffectView!
+    var toolBarView: UIView!
+    var toolBarStackView: UIStackView!
+    var addCheckButton = UIButton(type: .system)
+    var cancelCheckButton = UIButton(type: .system)
     let checkListTableView = UITableView()
     
     var task: Task? = Task()
@@ -64,7 +69,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     func uiSetUp(){
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
-        doneButton = UIButton(type: .system)
         doneButton.setTitle("Готово", for: .normal)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.tintColor = .systemYellow
@@ -76,7 +80,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         
         taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         
-        taskNameTextView = UITextView()
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
         taskNameTextView.text = (task?.name != "" ? task?.name : "Напишите название задачи")
         taskNameTextView.backgroundColor = UIColor.clear
@@ -93,7 +96,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         
         taskDateTitleLabel = labelFactory(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         
-        taskDateTextField = UITextField()
         taskDateTextField.translatesAutoresizingMaskIntoConstraints = false
         taskDateTextField.text = task?.notificationDate
         taskDateTextField.textColor = .systemYellow
@@ -108,7 +110,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         
         taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
-        taskDescriptionTextView = UITextView()
         taskDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         taskDescriptionTextView.backgroundColor = UIColor.clear
         taskDescriptionTextView.contentInsetAdjustmentBehavior = .automatic
@@ -119,11 +120,42 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         view.addSubview(taskDescriptionTextView)
+        
+        checkBlurView = UIVisualEffectView()
+        checkBlurView.translatesAutoresizingMaskIntoConstraints = false
+        checkBlurView.backgroundColor = .clear
+        checkBlurView.effect = UIBlurEffect(style: .systemThinMaterial)
+        view.addSubview(checkBlurView)
+        
+        toolBarView = UIView()
+        toolBarView.translatesAutoresizingMaskIntoConstraints = false
+        toolBarView.backgroundColor = .vitDarkBrown
+        checkBlurView.contentView.addSubview(toolBarView)
+        
+        toolBarStackView = UIStackView()
+        toolBarStackView.translatesAutoresizingMaskIntoConstraints = false
+        toolBarStackView.axis = .horizontal
+        toolBarStackView.alignment = .fill
+        toolBarStackView.distribution = .fillEqually
+        toolBarView.addSubview(toolBarStackView)
+        
+        addCheckButton.translatesAutoresizingMaskIntoConstraints = false
+        addCheckButton.setTitle("+", for: .normal)
+        addCheckButton.tintColor = .systemYellow
+        addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
+        toolBarStackView.addArrangedSubview(addCheckButton)
+        
+        cancelCheckButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelCheckButton.setTitle("Отменить", for: .normal)
+        cancelCheckButton.tintColor = .systemYellow
+        cancelCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
+        toolBarStackView.addArrangedSubview(cancelCheckButton)
 
         checkListTableView.backgroundColor = .clear
         checkListTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(checkListTableView)
-        checkListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        checkListTableView.register(CheckTableViewCell.self, forCellReuseIdentifier: "cell")
+        checkListTableView.rowHeight = 48
         checkListTableView.dataSource = self
         checkListTableView.delegate = self
     }
@@ -139,8 +171,8 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     }
     
     @objc func chooseNotificationAction() {
-        taskDateTextField?.text = dateFormatter.string(from: notificationPicker.date)
-        Main.instance.notificationDate = dateFormatter.date(from: taskDateTextField?.text ?? "")?.localString()
+        taskDateTextField.text = dateFormatter.string(from: notificationPicker.date)
+        Main.instance.notificationDate = dateFormatter.date(from: taskDateTextField.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         notificationService.sendNotificationRequest(
             content: notificationService.makeNotificationContent(str: taskNameTextView.text ?? ""),
@@ -180,14 +212,29 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             
             taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 24),
-            taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkListTableView.topAnchor, constant: -4),
+            taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: -4),
             taskDescriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
             taskDescriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
             
-            checkListTableView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 76),
-            checkListTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28),
-            checkListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
-            checkListTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28),
+            checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 76),
+            checkBlurView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28),
+            checkBlurView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
+            checkBlurView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28),
+            
+            toolBarView.topAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: 0),
+            toolBarView.leftAnchor.constraint(equalTo: checkBlurView.leftAnchor, constant: 0),
+            toolBarView.rightAnchor.constraint(equalTo: checkBlurView.rightAnchor, constant: 0),
+            toolBarView.heightAnchor.constraint(equalToConstant: 36),
+            
+            toolBarStackView.topAnchor.constraint(equalTo: toolBarView.topAnchor, constant: 0),
+            toolBarStackView.leftAnchor.constraint(equalTo: toolBarView.leftAnchor, constant: 0),
+            toolBarStackView.rightAnchor.constraint(equalTo: toolBarView.rightAnchor, constant: 0),
+            toolBarStackView.bottomAnchor.constraint(equalTo: toolBarView.bottomAnchor, constant: 0),
+            
+            checkListTableView.topAnchor.constraint(equalTo: toolBarView.bottomAnchor, constant: 0),
+            checkListTableView.leftAnchor.constraint(equalTo: checkBlurView.contentView.leftAnchor, constant: 0),
+            checkListTableView.bottomAnchor.constraint(equalTo: checkBlurView.contentView.bottomAnchor, constant: 0),
+            checkListTableView.rightAnchor.constraint(equalTo: checkBlurView.contentView.rightAnchor, constant: 0),
             
         ])
     }
@@ -229,11 +276,9 @@ extension TaskDetailViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = testDataForTableView[indexPath.row]
-        cell.textLabel?.textColor = .systemBlue
-        cell.backgroundColor = .clear
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckTableViewCell
+        cell?.checkListItemTextField.text = cell?.rowText
+        return cell!
     }
     
 }
