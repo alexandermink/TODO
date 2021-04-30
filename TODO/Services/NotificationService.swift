@@ -40,10 +40,11 @@ class NotificationService {
 
     func sendNotificationRequest(
         content: UNNotificationContent,
-        trigger: UNNotificationTrigger) {
+        trigger: UNNotificationTrigger,
+        task: TaskRealm) {
                 
         let request = UNNotificationRequest(
-            identifier: UUID().uuidString, // для формирования уникальных строк
+            identifier: task.uuid,
             content: content,
             trigger: trigger
         )

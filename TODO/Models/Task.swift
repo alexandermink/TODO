@@ -47,6 +47,7 @@ class TaskRealm: Object {
     override class func primaryKey() -> String? {
         return "id"
     }
+    @objc dynamic var uuid = UUID().uuidString
 }
 
 struct SectionTask: Comparable {

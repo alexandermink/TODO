@@ -107,13 +107,6 @@
                                     <constraint firstAttribute="height" constant="800" id="dm0-rI-SGx"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40K-H8-g5L">
-                                <rect key="frame" x="80" y="44" width="240" height="524"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="yCy-av-sWH"/>
-                                </constraints>
-                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-tH-h0f">
                                 <rect key="frame" x="-100" y="204" width="160" height="160"/>
                                 <subviews>
@@ -311,6 +304,13 @@
                                     <constraint firstAttribute="height" constant="80" id="ZAc-VK-Ldf"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40K-H8-g5L">
+                                <rect key="frame" x="260" y="44" width="60" height="524"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="yCy-av-sWH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aJG-we-1F9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
