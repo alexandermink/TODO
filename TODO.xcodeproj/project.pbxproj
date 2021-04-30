@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		152DB631263AEDE900B8F1E0 /* CheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */; };
 		15469273260E4C44007D8238 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15469272260E4C44007D8238 /* BaseRouter.swift */; };
 		156EBB112611D08200BDC565 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156EBB102611D08200BDC565 /* TaskDetailViewController.swift */; };
 		15F9973B2615DC29003FFD71 /* RouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9973A2615DC29003FFD71 /* RouterFactory.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTableViewCell.swift; sourceTree = "<group>"; };
 		15469272260E4C44007D8238 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		156EBB102611D08200BDC565 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		15F9973A2615DC29003FFD71 /* RouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterFactory.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				156EBB102611D08200BDC565 /* TaskDetailViewController.swift */,
+				152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */,
 			);
 			path = TaskDetail;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */,
 				96600B52253D057E00F3FDC1 /* SceneDelegate.swift in Sources */,
 				96D934CA261C8AF70093FF47 /* LocalDataBaseService.swift in Sources */,
+				152DB631263AEDE900B8F1E0 /* CheckTableViewCell.swift in Sources */,
 				5D32F3D32616E43D008C1A58 /* NotificationService.swift in Sources */,
 				5D294215261EF64B001C1021 /* Shadow.swift in Sources */,
 				969C87992632481C0036A2A5 /* AddButtonTableViewCell.swift in Sources */,
