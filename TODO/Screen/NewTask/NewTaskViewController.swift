@@ -95,12 +95,19 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         
         func tempAddTask(sectionName: String) {
-            try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text)
+            
+            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text) else { return }
+            notificationService.sendNotificationRequest(
+                content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
+                trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 ),
+                task: task
+            )
             
             guard let sectionsCount = sections?.count else { return }
             if sectionsCount > 0 {
                 try? Main.instance.deleteSection(delSectionName: "")
             }
+            
             router?.dismiss(animated: true, completion: nil)
         }
         
@@ -202,11 +209,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         notificationTextField?.text = dateFormatter.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter.date(from: notificationTextField?.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
-        let taskRealm = TaskRealm()
-        notificationService.sendNotificationRequest(
-            content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-            trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 ), task: taskRealm
-        )
         self.dismissKeyboard()
     }
     

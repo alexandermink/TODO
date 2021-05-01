@@ -53,16 +53,17 @@ extension Main: LocalDataBaseService {
         }
     }
     
-    func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?) throws {
-        
-        let realm = try Realm()
-        let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.id ?? 0) + 1
-        let creationDate = Date()
-        let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate)
+    func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?) throws -> Task {
         if !userSession.tasks.map(\.sectionName).contains(sectionName) {
             try addSection(sectionName: sectionName)
-            try addTask(sectionName: sectionName, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, notificationDate: notificationDate)
+            let task = try addTask(sectionName: sectionName, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, notificationDate: notificationDate)
+            return task
         } else {
+            let realm = try Realm()
+            let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.id ?? 0) + 1
+            let creationDate = Date()
+            let tempNotificationID = notificationDate == "" ? "" : UUID().uuidString
+            let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID)
             //Создание таски в локальном массиве
             for indexSection in 0..<userSession.tasks.count {
                 if userSession.tasks[indexSection].sectionName == sectionName {
@@ -75,6 +76,7 @@ extension Main: LocalDataBaseService {
                 let tTaskRealm = realm.objects(SectionTaskRealm.self).filter("sectionName = '\(sectionName)'").first
                 tTaskRealm?.sectionTasks.append(taskRealmConverter.convert(task))
             }
+            return task
         }
     }
 
@@ -100,6 +102,7 @@ extension Main: LocalDataBaseService {
         objectRealm.taskDescription = task.taskDescription
         objectRealm.creationDate = task.creationDate
         objectRealm.notificationDate = task.notificationDate
+        objectRealm.notificationID = task.notificationID
         
         try realm.write {
             realm.add(objectRealm, update: .modified)
@@ -118,12 +121,19 @@ extension Main: LocalDataBaseService {
     
     func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws {
         let realm = try! Realm()
-        let deleteTask = realm.objects(TaskRealm.self).filter("id = \(self.userSession.tasks[indexPathSectionTask].sectionTasks[indexPathRowTask].id)").first
-        try! realm.write {
+        let task = userSession.tasks[indexPathSectionTask].sectionTasks[indexPathRowTask]
+        let deleteTask = realm.objects(TaskRealm.self).filter("id = \(task.id)").first
+        try realm.write {
             if let delTask = deleteTask {
                 realm.delete(delTask)
             }
         }
+        
+        if task.notificationID != "" {
+            let notificationService = NotificationService()
+            notificationService.deleteNotificationRequest(notificationIdentifier: task.notificationID!)
+        }
+        
         self.userSession.tasks[indexPathSectionTask].sectionTasks.remove(at: indexPathRowTask)
     }
 
@@ -132,10 +142,10 @@ extension Main: LocalDataBaseService {
 
         // TODO: сделать каскадное удаление в Realm (в официале не реализовано, есть рабочий кусок по ссылке)
         // https://gist.github.com/verebes1/02950e46fff91456f2ad359b3f3ec3d9
-        let realm = try! Realm()
+        let realm = try Realm()
         let delSection = realm.objects(SectionTaskRealm.self).filter("sectionName = '\(delSectionName)'").first
         print("delSection_______=\(String(describing: delSection))")
-        try! realm.write{
+        try realm.write{
             if let realmDelSection = delSection {
                 realm.delete(realmDelSection)
             }

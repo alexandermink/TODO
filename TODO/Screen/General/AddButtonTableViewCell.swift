@@ -27,6 +27,7 @@ class AddButtonTableViewCell: UITableViewCell {
         addFastTaskNameTextField.isHidden = false
         addButton.isHidden = false
         plusButton.isHidden = true
+        addFastTaskNameTextField.becomeFirstResponder()
     }
     
     @IBAction func addButtonAction(_ sender: Any) {
@@ -34,12 +35,12 @@ class AddButtonTableViewCell: UITableViewCell {
         addFastTaskNameTextField.isHidden = true
         addButton.isHidden = true
         plusButton.isHidden = false
-        
+        addFastTaskNameTextField.text = ""
     }
     
     func config() {
         let sectionName = Main.instance.userSession.tasks[indexPath.section].sectionName
         guard let name = addFastTaskNameTextField.text else { return }
-        try? Main.instance.addTask(sectionName: sectionName, name: name, backgroundColor: .clear, taskDescription: nil, notificationDate: nil)
+        try? Main.instance.addTask(sectionName: sectionName, name: name, backgroundColor: .clear, taskDescription: "", notificationDate: nil)
     }
 }
