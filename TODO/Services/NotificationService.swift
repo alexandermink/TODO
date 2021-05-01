@@ -41,10 +41,12 @@ class NotificationService {
     func sendNotificationRequest(
         content: UNNotificationContent,
         trigger: UNNotificationTrigger,
-        task: TaskRealm) {
-                
+        task: Task) {
+        
+//        guard let identifier = task.notificationID else { return }
+        let identifier = task.notificationID!
         let request = UNNotificationRequest(
-            identifier: task.uuid,
+            identifier: identifier,
             content: content,
             trigger: trigger
         )
@@ -54,6 +56,11 @@ class NotificationService {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func deleteNotificationRequest(notificationIdentifier: String) {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
     }
 }
 

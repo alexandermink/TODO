@@ -21,6 +21,7 @@ class TaskRealmConverter {
         taskRealm.taskDescription = task.taskDescription
         taskRealm.creationDate = task.creationDate
         taskRealm.notificationDate = task.notificationDate
+        taskRealm.notificationID = task.notificationID
         
         return taskRealm
     }
@@ -44,6 +45,7 @@ class TaskRealmConverter {
         task.taskDescription = taskRealm.taskDescription
         task.creationDate = taskRealm.creationDate
         task.notificationDate = taskRealm.notificationDate
+        task.notificationID = taskRealm.notificationID
         
         return task
     }

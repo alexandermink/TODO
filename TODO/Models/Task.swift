@@ -21,13 +21,14 @@ struct Task {
     // TODO: сделать авторизацию
 //    var members: [String]?
     
-    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?) {
+    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?, notificationID: String?) {
         self.id = id
         self.name = name
         self.backgroundColor = backgroundColor
         self.taskDescription = taskDescription
         self.creationDate = creationDate
         self.notificationDate = notificationDate
+        self.notificationID = notificationID
 //        self.members = members
     }
     
@@ -42,12 +43,13 @@ class TaskRealm: Object {
     @objc dynamic var taskDescription: String? = ""
     @objc dynamic var creationDate: Date = Date()
     @objc dynamic var notificationDate: String? = ""
+    @objc dynamic var notificationID: String? = ""
 //    var members = List<String>()
     
     override class func primaryKey() -> String? {
         return "id"
     }
-    @objc dynamic var uuid = UUID().uuidString
+    
 }
 
 struct SectionTask: Comparable {
