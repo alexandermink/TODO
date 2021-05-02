@@ -20,6 +20,7 @@ class Main {
     var notifID: String?
     var notifBadgeCount = 0
     var notificationDateInterval = 0.0
+    let notificationService = NotificationService()
     var state: String? {
         get {return UserDefaults.standard.string(forKey: "k")}
         set {UserDefaults.standard.set(newValue, forKey: "k")}
@@ -102,7 +103,12 @@ extension Main: LocalDataBaseService {
         objectRealm.taskDescription = task.taskDescription
         objectRealm.creationDate = task.creationDate
         objectRealm.notificationDate = task.notificationDate
-        objectRealm.notificationID = task.notificationID
+        if task.notificationDate != "" {
+            objectRealm.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
+        } else {
+            objectRealm.notificationID = task.notificationID
+        }
+        
         
         try realm.write {
             realm.add(objectRealm, update: .modified)

@@ -10,12 +10,17 @@ import UIKit
 
 class NotificationService {
     
-//    let vc = NewTaskViewController()
-
-    func makeNotificationContent(str: String) -> UNNotificationContent {
+    var dateFormatter = DateFormatter()
+    
+    init() {
+        dateFormatter.timeZone = .autoupdatingCurrent
+        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+    }
+    
+    func makeNotificationContent(title: String) -> UNNotificationContent {
         Main.instance.notifBadgeCount += 1
         let content = UNMutableNotificationContent()
-        content.title = str
+        content.title = title
         content.badge = NSNumber(value: Main.instance.notifBadgeCount)
         return content
     }
@@ -39,12 +44,12 @@ class NotificationService {
     }
 
     func sendNotificationRequest(
-        content: UNNotificationContent,
-        trigger: UNNotificationTrigger,
-        task: Task) {
+        task: Task) -> String {
         
 //        guard let identifier = task.notificationID else { return }
         let identifier = task.notificationID!
+        let content = makeNotificationContent(title: task.name)
+        let trigger = makeIntervalNotificationTrigger(double: dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
         let request = UNNotificationRequest(
             identifier: identifier,
             content: content,
@@ -56,6 +61,12 @@ class NotificationService {
                 print(error.localizedDescription)
             }
         }
+        return identifier
+    }
+    
+    func updateNotificationRequest(task: Task, notificationIdentifier: String) -> String {
+        deleteNotificationRequest(notificationIdentifier: notificationIdentifier)
+        return sendNotificationRequest(task: task)
     }
     
     func deleteNotificationRequest(notificationIdentifier: String) {

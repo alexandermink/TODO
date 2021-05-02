@@ -29,7 +29,7 @@ class HeaderView: UITableViewHeaderFooterView {
         case "2":
             contentView.backgroundColor = .alexeyBackground
         case "3":
-            contentView.backgroundColor = .alexDarkRed
+            contentView.backgroundColor = .red
         default:
             break
         }

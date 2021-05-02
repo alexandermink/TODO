@@ -97,11 +97,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         func tempAddTask(sectionName: String) {
             
             guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text) else { return }
-            notificationService.sendNotificationRequest(
-                content: notificationService.makeNotificationContent(str: newTaskNameTextField.text ?? ""),
-                trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 ),
-                task: task
-            )
+            notificationService.sendNotificationRequest(task: task)
             
             guard let sectionsCount = sections?.count else { return }
             if sectionsCount > 0 {

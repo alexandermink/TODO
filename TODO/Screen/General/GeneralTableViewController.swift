@@ -363,18 +363,18 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             mapImageView.isHidden = true
             alexLayer1.isHidden = false
             alexLayer2.isHidden = false
-            navigationController?.navigationBar.barTintColor = .alexDarkRed
+            navigationController?.navigationBar.barTintColor = .alexDark
             newTaskButton.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .normal)
+                 NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
             newTaskButton.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .highlighted)
+                 NSAttributedString.Key.foregroundColor: UIColor.red], for: .highlighted)
             navigationItem.leftBarButtonItem?.setTitleTextAttributes(
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.alexLightGray], for: .normal)
-            navSeparatorView.backgroundColor = .alexLightGray
-            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+                 NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
+            navSeparatorView.backgroundColor = .red
+            view.applyGradient(colours: [.alexRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
 //            settingsButtons.forEach { buttons in
 //                buttons.setTitleColor(.alexLightGray, for: .normal)
 //            }
