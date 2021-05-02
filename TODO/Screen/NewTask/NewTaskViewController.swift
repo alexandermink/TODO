@@ -107,12 +107,12 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             router?.dismiss(animated: true, completion: nil)
         }
         
-        // Проверка на выбранное время: выбрано время, которое истекло
-        guard Main.instance.notificationDateInterval != 1.0 else {
+        let pickedDate: Double = dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? 0
+        let interval = pickedDate - Date().timeIntervalSince1970
+        if interval <= 1 {
             return showAlert(title: "Ошибка", message: "Выбрано прошедшее время")
         }
         
-        // Проверка на пустые поля ввода: substituteCategoryTextField, newSectionTextField, newTaskNameTextField
         if newTaskNameTextField.text == "" {
             showAlert(title: "Ошибка", message: "Не заполнено поле: Название")
         } else if substituteCategoryTextField.text != ""{

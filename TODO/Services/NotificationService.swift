@@ -24,32 +24,20 @@ class NotificationService {
         content.badge = NSNumber(value: Main.instance.notifBadgeCount)
         return content
     }
-
-    func makeIntervalNotificationTrigger(double: Double) -> UNNotificationTrigger {
-        let pickedTime = double // подставить выбранное в picker время
-        let curentTime = Date().timeIntervalSince1970 // текущее время
-        let interval = pickedTime - curentTime // интервал в секундах между выбранным и текущим
+    
+    func makeIntervalNotificationTrigger(pickedTime: Double) -> Double {
+        let interval = pickedTime - Date().timeIntervalSince1970
         Main.instance.notificationDateInterval = interval
-        guard interval > 0 else {
-            Main.instance.notificationDateInterval = 1
-            return UNTimeIntervalNotificationTrigger(
-                timeInterval: 1,
-                repeats: false
-            )
-        }
-        return UNTimeIntervalNotificationTrigger(
-            timeInterval: interval,
-            repeats: false
-        )
+        return interval
     }
 
     func sendNotificationRequest(
         task: Task) -> String {
         
-//        guard let identifier = task.notificationID else { return }
         let identifier = task.notificationID!
         let content = makeNotificationContent(title: task.name)
-        let trigger = makeIntervalNotificationTrigger(double: dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000)
+        let triggerInterval =  makeIntervalNotificationTrigger(pickedTime: dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: triggerInterval, repeats: false)
         let request = UNNotificationRequest(
             identifier: identifier,
             content: content,
