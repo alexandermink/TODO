@@ -27,7 +27,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     var cancelCheckButton = UIButton(type: .system)
     let checkListTableView = UITableView()
     
-    var task: Task? = Task()
+    var task: Task = Task()
     let dateFormatter = DateFormatter()
     var notificationPicker = UIDatePicker()
     var router: BaseRouter?
@@ -81,7 +81,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
-        taskNameTextView.text = (task?.name != "" ? task?.name : "Напишите название задачи")
+        taskNameTextView.text = (task.name != "" ? task.name : "Напишите название задачи")
         taskNameTextView.backgroundColor = UIColor.clear
         taskNameTextView.isEditable = true
         taskNameTextView.isScrollEnabled = true
@@ -92,12 +92,13 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         
         taskCreationDateTitleLabel = labelFactory(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
         
-        taskCreationDateLabel = labelFactory(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task?.creationDate ?? Date()), color: .systemYellow)
+        taskCreationDateLabel = labelFactory(lab: self.taskCreationDateLabel, text: dateFormatter.string(from: task.creationDate), color: .systemYellow)
         
         taskDateTitleLabel = labelFactory(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         
         taskDateTextField.translatesAutoresizingMaskIntoConstraints = false
-        taskDateTextField.text = task?.notificationDate
+        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+        taskDateTextField.text = task.notificationDate
         taskDateTextField.textColor = .systemYellow
         taskDateTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         taskDateTextField.inputView = notificationPicker
@@ -106,7 +107,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
         taskDateTextField.keyboardAppearance = .dark
         view.addSubview(taskDateTextField)
-        if taskDateTextField.text == "" { taskDateTextField.text = "Дата уведомления не назначена" }
+//        if taskDateTextField.text == "" { taskDateTextField.text = "Дата уведомления не назначена" }
         
         taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
@@ -115,7 +116,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskDescriptionTextView.contentInsetAdjustmentBehavior = .automatic
         taskDescriptionTextView.isEditable = true
         taskDescriptionTextView.isScrollEnabled = true
-        taskDescriptionTextView.text = (task?.taskDescription != "" ? task?.taskDescription : "Напишите описание задачи")
+        taskDescriptionTextView.text = (task.taskDescription != "" ? task.taskDescription : "Напишите описание задачи")
         taskDescriptionTextView.textAlignment = .left
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
@@ -162,10 +163,21 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     
     //MARK: - ACTIONS
     @objc func handleDoneTouchUpInside(){
-        task?.name = taskNameTextView.text
-        task?.taskDescription = (taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDescriptionTextView.text)
-        task?.notificationDate = (taskDateTextField.text == "Дата уведомления не назначена" ? "" : taskDateTextField.text)
-        guard let task = task else { return }
+        task.name = (taskNameTextView.text == "Напишите название задачи" ? "" : taskNameTextView.text)
+        task.taskDescription = (taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDescriptionTextView.text)
+        if taskDateTextField.text != task.notificationDate {
+            if taskDateTextField.text == "" {
+                print("delete")
+                notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
+                task.notificationID = ""
+                taskDateTextField.text = ""
+            } else {
+                print("update")
+                task.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
+            }
+        }
+        task.notificationDate = taskDateTextField.text
+        
         try? Main.instance.updateTask(task: task)
         router?.dismiss(animated: true, completion: nil)
     }
@@ -174,10 +186,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskDateTextField.text = dateFormatter.string(from: notificationPicker.date)
         Main.instance.notificationDate = dateFormatter.date(from: taskDateTextField.text ?? "")?.localString()
         print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
-//        notificationService.sendNotificationRequest(
-//            content: notificationService.makeNotificationContent(str: taskNameTextView.text ?? ""),
-//            trigger: notificationService.makeIntervalNotificationTrigger(double: dateFormatter.date(from: taskDateTextField.text ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970+1000 )
-//        )
         view.endEditing(true)
     }
     

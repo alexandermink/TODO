@@ -10,41 +10,34 @@ import UIKit
 
 class NotificationService {
     
-//    let vc = NewTaskViewController()
-
-    func makeNotificationContent(str: String) -> UNNotificationContent {
+    var dateFormatter = DateFormatter()
+    
+    init() {
+        dateFormatter.timeZone = .autoupdatingCurrent
+        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+    }
+    
+    func makeNotificationContent(title: String) -> UNNotificationContent {
         Main.instance.notifBadgeCount += 1
         let content = UNMutableNotificationContent()
-        content.title = str
+        content.title = title
         content.badge = NSNumber(value: Main.instance.notifBadgeCount)
         return content
     }
-
-    func makeIntervalNotificationTrigger(double: Double) -> UNNotificationTrigger {
-        let pickedTime = double // подставить выбранное в picker время
-        let curentTime = Date().timeIntervalSince1970 // текущее время
-        let interval = pickedTime - curentTime // интервал в секундах между выбранным и текущим
+    
+    func makeIntervalNotificationTrigger(pickedTime: Double) -> Double {
+        let interval = pickedTime - Date().timeIntervalSince1970
         Main.instance.notificationDateInterval = interval
-        guard interval > 0 else {
-            Main.instance.notificationDateInterval = 1
-            return UNTimeIntervalNotificationTrigger(
-                timeInterval: 1,
-                repeats: false
-            )
-        }
-        return UNTimeIntervalNotificationTrigger(
-            timeInterval: interval,
-            repeats: false
-        )
+        return interval
     }
 
     func sendNotificationRequest(
-        content: UNNotificationContent,
-        trigger: UNNotificationTrigger,
-        task: Task) {
+        task: Task) -> String {
         
-//        guard let identifier = task.notificationID else { return }
         let identifier = task.notificationID!
+        let content = makeNotificationContent(title: task.name)
+        let triggerInterval =  makeIntervalNotificationTrigger(pickedTime: dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: triggerInterval, repeats: false)
         let request = UNNotificationRequest(
             identifier: identifier,
             content: content,
@@ -56,6 +49,12 @@ class NotificationService {
                 print(error.localizedDescription)
             }
         }
+        return identifier
+    }
+    
+    func updateNotificationRequest(task: Task, notificationIdentifier: String) -> String {
+        deleteNotificationRequest(notificationIdentifier: notificationIdentifier)
+        return sendNotificationRequest(task: task)
     }
     
     func deleteNotificationRequest(notificationIdentifier: String) {
