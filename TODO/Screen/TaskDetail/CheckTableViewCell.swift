@@ -13,10 +13,11 @@ class CheckTableViewCell: UITableViewCell {
     var checkListItemTextField = UITextField()
     var checkMarkButton =  UIButton()
     
-    var rowText = "test777"
+    var rowText = "your check task"
     var isMarkSelected = false
     var attributeString: NSMutableAttributedString? = nil
     var attributeString2: NSMutableAttributedString? = nil
+    private var currentTheme : String?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,6 +25,8 @@ class CheckTableViewCell: UITableViewCell {
         uiSetUp()
         
         constrainsInit()
+        
+        changeState(state: Main.instance.state ?? "1")
         
     }
     
@@ -34,11 +37,11 @@ class CheckTableViewCell: UITableViewCell {
     func uiSetUp(){
         checkListItemTextField.translatesAutoresizingMaskIntoConstraints = false
         checkListItemTextField.font = UIFont(name: "HelveticaNeue", size: 17)
+        checkListItemTextField.textColor = .black
         contentView.addSubview(checkListItemTextField)
         
         checkMarkButton.translatesAutoresizingMaskIntoConstraints = false
         checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        checkMarkButton.tintColor = .systemYellow
         checkMarkButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
         contentView.addSubview(checkMarkButton)
         checkMarkButton.addTarget(self,
@@ -70,6 +73,20 @@ class CheckTableViewCell: UITableViewCell {
         checkListItemTextField.attributedText = isMarkSelected ? attributeString2 : attributeString
         
         isMarkSelected.toggle()
+    }
+    
+    func changeState(state: String) {
+        self.currentTheme = state
+        switch Main.instance.state {
+        case "1":
+            checkMarkButton.tintColor = .systemYellow
+        case "2":
+            checkMarkButton.tintColor = .alexeyBackground
+        case "3":
+            checkMarkButton.tintColor = .alexDarkRed
+        default:
+            break
+        }
     }
     
 }

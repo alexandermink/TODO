@@ -67,7 +67,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     
     //MARK: - UI SET UP
     func uiSetUp(){
-        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         doneButton.setTitle("Готово", for: .normal)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +129,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         
         toolBarView = UIView()
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
-        toolBarView.backgroundColor = .vitDarkBrown
         checkBlurView.contentView.addSubview(toolBarView)
         
         toolBarStackView = UIStackView()
@@ -142,13 +140,13 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         
         addCheckButton.translatesAutoresizingMaskIntoConstraints = false
         addCheckButton.setTitle("+", for: .normal)
-        addCheckButton.tintColor = .systemYellow
+        addCheckButton.tintColor = .black
         addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
         toolBarStackView.addArrangedSubview(addCheckButton)
         
         cancelCheckButton.translatesAutoresizingMaskIntoConstraints = false
         cancelCheckButton.setTitle("Отменить", for: .normal)
-        cancelCheckButton.tintColor = .systemYellow
+        cancelCheckButton.tintColor = .black
         cancelCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
         toolBarStackView.addArrangedSubview(cancelCheckButton)
 
@@ -257,18 +255,27 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskCreationDateLabel.textColor = .systemYellow
             taskDateTextField.textColor = .systemYellow
             taskDescriptionTextView.textColor = .systemYellow
+            toolBarView.backgroundColor = .systemYellow
+            view.backgroundColor = .systemYellow
+            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "2":
             doneButton.tintColor = .alexeyBackground
             taskNameTextView.textColor = .alexeyBackground
             taskCreationDateLabel.textColor = .alexeyBackground
             taskDateTextField.textColor = .alexeyBackground
             taskDescriptionTextView.textColor = .alexeyBackground
+            toolBarView.backgroundColor = .alexeyBackground
+            view.backgroundColor = .alexeyBackground
+            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "3":
             doneButton.tintColor = .alexDarkRed
             taskNameTextView.textColor = .alexDarkRed
             taskCreationDateLabel.textColor = .alexDarkRed
             taskDateTextField.textColor = .alexDarkRed
             taskDescriptionTextView.textColor = .alexDarkRed
+            toolBarView.backgroundColor = .alexDarkRed
+            view.backgroundColor = .alexLightGray
+            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         default:
             break
         }
