@@ -23,6 +23,7 @@ class Main {
     var notifBadgeCount = 0
     var notificationDateInterval = 0.0
     let notificationService = NotificationService()
+    var tempCheckList: [CheckMark] = []
     var state: String? {
         get {return UserDefaults.standard.string(forKey: "k")}
         set {UserDefaults.standard.set(newValue, forKey: "k")}
@@ -59,17 +60,17 @@ extension Main: LocalDataBaseService {
         }
     }
     
-    func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?) throws -> Task {
+    func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?, checkList: [CheckMark]) throws -> Task {
         if !userSession.tasks.map(\.sectionName).contains(sectionName) {
             try addSection(sectionName: sectionName)
-            let task = try addTask(sectionName: sectionName, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, notificationDate: notificationDate)
+            let task = try addTask(sectionName: sectionName, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, notificationDate: notificationDate, checkList: checkList)
             return task
         } else {
             let realm = try Realm()
             let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.id ?? 0) + 1
             let creationDate = Date()
             let tempNotificationID = notificationDate == "" ? "" : UUID().uuidString
-            let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID)
+            let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID, checkList: checkList)
             //Создание таски в локальном массиве
             for indexSection in 0..<userSession.tasks.count {
                 if userSession.tasks[indexSection].sectionName == sectionName {

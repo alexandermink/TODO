@@ -9,6 +9,31 @@
 import UIKit
 import RealmSwift
 
+struct CheckMark: Comparable {
+    
+    static func < (lhs: CheckMark, rhs: CheckMark) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
+    var id: Int = -1
+    var isMarkSelected: Bool = false
+    var title: String = ""
+    
+    init () { }
+    
+    init (id: Int, title: String, isMarkSelected: Bool) {
+        self.id = id
+        self.title = title
+        self.isMarkSelected = isMarkSelected
+    }
+}
+
+class CheckMarkRealm: Object {
+    @objc dynamic var id: Int = -1
+    @objc dynamic var isMarkSelected: Bool = false
+    @objc dynamic var title: String = ""
+}
+
 struct Task {
     
     var id: Int = -1
@@ -18,10 +43,11 @@ struct Task {
     var creationDate: Date = Date()
     var notificationDate: String? = ""
     var notificationID: String? = ""
+    var checkList: [CheckMark] = []
     // TODO: сделать авторизацию
 //    var members: [String]?
     
-    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?, notificationID: String?) {
+    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?, notificationID: String?, checkList: [CheckMark]) {
         self.id = id
         self.name = name
         self.backgroundColor = backgroundColor
@@ -29,6 +55,7 @@ struct Task {
         self.creationDate = creationDate
         self.notificationDate = notificationDate
         self.notificationID = notificationID
+        self.checkList = checkList
 //        self.members = members
     }
     
@@ -44,6 +71,7 @@ class TaskRealm: Object {
     @objc dynamic var creationDate: Date = Date()
     @objc dynamic var notificationDate: String? = ""
     @objc dynamic var notificationID: String? = ""
+    let checkList = List<CheckMarkRealm>()
 //    var members = List<String>()
     
     override class func primaryKey() -> String? {
