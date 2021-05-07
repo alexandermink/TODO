@@ -19,10 +19,6 @@ class AddButtonTableViewCell: UITableViewCell {
     var styleEditing = false
     
     
-    override class func awakeFromNib() {
-        
-    }
-    
     @IBAction func plusButtonTapped(_ sender: Any) {
         addFastTaskNameTextField.isHidden = false
         addButton.isHidden = false
@@ -41,6 +37,6 @@ class AddButtonTableViewCell: UITableViewCell {
     func config() {
         let sectionName = Main.instance.userSession.tasks[indexPath.section].sectionName
         guard let name = addFastTaskNameTextField.text else { return }
-        try? Main.instance.addTask(sectionName: sectionName, name: name, backgroundColor: .clear, taskDescription: "", notificationDate: nil)
+        try? Main.instance.addTask(sectionName: sectionName, name: name, backgroundColor: .clear, taskDescription: "", notificationDate: nil, checkList: [])
     }
 }

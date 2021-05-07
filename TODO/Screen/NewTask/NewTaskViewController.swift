@@ -45,6 +45,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var checkBlurView: UIVisualEffectView!
     @IBOutlet weak var checkPlusButton: UIButton!
     @IBOutlet weak var checkToolBarView: UIView!
+    @IBOutlet weak var checkListTableView: UITableView!
     
     
     var sections: [String]?
@@ -79,6 +80,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         calendar.timeZone = .autoupdatingCurrent
         router = BaseRouter(viewController: self)
         sections = try? Main.instance.getSectionsFromRealm()
+        Main.instance.tempCheckList = []
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(_:)), name: Notification.Name("tempCheckListReloadData"), object: Main.instance.tempCheckList)
         newSectionTextField?.textAlignment = .center
         newSectionTextField?.text = sections?.count != 0 ? sections?[0] : ""
         view.addTapGestureToHideKeyboard()
@@ -96,7 +99,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         func tempAddTask(sectionName: String) {
             
-            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text) else { return }
+            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList) else { return }
             notificationService.sendNotificationRequest(task: task)
             
             guard let sectionsCount = sections?.count else { return }
@@ -210,17 +213,57 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     // MARK: - CHECK LIST ACTIONS
     @IBAction func checkListButtonAction(_ sender: Any) {
+        print("Нажата кнопка создания чек-листа")
         checkTableTopConstraints.constant = 200
+        checkListTableView.reloadData()
     }
     
     @IBAction func checkTableHideAction(_ sender: Any) {
+        print("Нажата кнопка скрыть")
+        checkListTableView.reloadData()
         checkTableTopConstraints.constant = 0
     }
     
     @IBAction func checkTableDoneAction(_ sender: Any) {
+        print("Нажата кнопка готово")
+        checkListTableView.reloadData()
+        checkTableTopConstraints.constant = 0
     }
     
     @IBAction func checkTablePlusAction(_ sender: Any) {
+        print("Нажата кнопка плюс (добавление доп строки)")
+        let id = (Main.instance.tempCheckList.max()?.id ?? 0) + 1
+        print("plus id: ", id)
+        
+        checkListTableView.reloadData()
+    }
+    
+    @objc func methodOfReceivedNotification(_ notification: Notification) {
+        
+        print("methodWork")
+        checkListTableView.reloadData()
+        
+    }
+    
+    public func updateTempCheckList() {
+//        for indexCell in 0...Main.instance.tempCheckList.count - 1 {
+//            let indexPath = IndexPath(row: indexCell, section: 0)
+//            let cell = checkListTableView.cellForRow(at: indexPath) as? CheckListCell
+//            Main.instance.tempCheckList[indexCell].title = cell?.title ?? ""
+//            Main.instance.tempCheckList[indexCell].isMarkSelected = cell?.isMarkSelected ?? false
+//
+//            for var checkMark in Main.instance.tempCheckList {
+//                if checkMark.id == cell?.id {
+//                    checkMark.title = cell?.title ?? ""
+//                    checkMark.isMarkSelected = cell?.isMarkSelected ?? false
+//                }
+//            }
+//        }
+
+
+
+
+        checkListTableView.reloadData()
     }
     
     
@@ -367,14 +410,37 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 
 extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        Main.instance.tempCheckList.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
         
-        cell.checkListItemTextField.text = cell.rowText
+//        print("IdnexPath: ", indexPath)
+//        print("Mark id: ", Main.instance.tempCheckList[indexPath.row].id)
+//
+//        cell.id = Main.instance.tempCheckList[indexPath.row].id
+//        cell.isMarkSelected = Main.instance.tempCheckList[indexPath.row].isMarkSelected
+//        cell.title = Main.instance.tempCheckList[indexPath.row].title
+//
+//
         
-        return cell
+        
+        
+        if indexPath.row == Main.instance.tempCheckList.count {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCheckListCell", for: indexPath) as? AddButtonCheckListTableViewCell else { return UITableViewCell() }
+            
+            cell.indexPath = indexPath
+            cell.titleTextField.textColor = .systemYellow
+            cell.addCheckListButton.setTitleColor(.systemYellow, for: .normal)
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
+            
+            cell.checkListItemTextField.text = Main.instance.tempCheckList[indexPath.row].title
+            
+            return cell
+        }
     }
 }

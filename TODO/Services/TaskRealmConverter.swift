@@ -23,6 +23,13 @@ class TaskRealmConverter {
         taskRealm.notificationDate = task.notificationDate
         taskRealm.notificationID = task.notificationID
         
+        for checkMark in task.checkList {
+            let checkMarkRealm = CheckMarkRealm()
+            checkMarkRealm.isMarkSelected = checkMark.isMarkSelected
+            checkMarkRealm.title = checkMark.title
+            taskRealm.checkList.append(checkMarkRealm)
+        }
+        
         return taskRealm
     }
     
@@ -47,6 +54,14 @@ class TaskRealmConverter {
         task.notificationDate = taskRealm.notificationDate
         task.notificationID = taskRealm.notificationID
         
+        
+        for checkMarkRealm in taskRealm.checkList {
+            var checkMark = CheckMark()
+            checkMark.isMarkSelected = checkMarkRealm.isMarkSelected
+            checkMark.title = checkMarkRealm.title
+            task.checkList.append(checkMark)
+        }
+        
         return task
     }
     
@@ -61,4 +76,24 @@ class TaskRealmConverter {
     func convert(_ sectionTaskRealm: SectionTaskRealm) -> SectionTask {
         return SectionTask(sectionName: sectionTaskRealm.sectionName, tasks: convert(sectionTaskRealm.sectionTasks))
     }
+    
+    func convert(_ checkMarkRealm: CheckMarkRealm) -> CheckMark {
+        
+        var checkMark = CheckMark()
+        
+        checkMark.isMarkSelected = checkMarkRealm.isMarkSelected
+        checkMark.title = checkMarkRealm.title
+        
+        return checkMark
+    }
+    
+    func convert(_ checksMarkRealm: List<CheckMarkRealm>) -> [CheckMark] {
+        var checkMark: [CheckMark] = []
+        for checkMarkRealm in checksMarkRealm {
+//            checkMark.append(convert(taskRealm))
+             checkMark.append(convert(checkMarkRealm))
+        }
+        return checkMark
+    }
+    
 }

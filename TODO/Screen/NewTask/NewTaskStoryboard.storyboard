@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -241,21 +241,21 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <prototypes>
-                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CheckListCell" rowHeight="102" id="jC5-7C-XfM" customClass="CheckListCell" customModule="TODO" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="24.5" width="414" height="102"/>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CheckListCell" rowHeight="61" id="jC5-7C-XfM" customClass="CheckListCell" customModule="TODO" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="28" width="414" height="61"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jC5-7C-XfM" id="Mts-lS-McD">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="102"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dff-o3-IbN">
-                                                                <rect key="frame" x="56" y="29" width="328" height="44"/>
+                                                                <rect key="frame" x="56" y="29" width="328" height="3"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="816-E1-YBi">
-                                                                <rect key="frame" x="8" y="36" width="40" height="30"/>
+                                                                <rect key="frame" x="8" y="15.5" width="40" height="30"/>
                                                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                                                 <connections>
                                                                     <action selector="checkMarkButtonAction:" destination="jC5-7C-XfM" eventType="touchUpInside" id="TqN-1Q-Qh1"/>
@@ -275,8 +275,60 @@
                                                     </tableViewCellContentView>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
-                                                        <outlet property="checkListItemTextField" destination="dff-o3-IbN" id="KP5-rN-RO3"/>
+                                                        <outlet property="checkListItemTextField" destination="dff-o3-IbN" id="wL1-8X-i5S"/>
                                                         <outlet property="checkMarkButton" destination="816-E1-YBi" id="Rmw-Bi-BA4"/>
+                                                    </connections>
+                                                </tableViewCell>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddButtonCheckListCell" rowHeight="64" id="SLL-6h-mGi" customClass="AddButtonCheckListTableViewCell" customModule="TODO" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="89" width="414" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SLL-6h-mGi" id="raN-2a-zP6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4c-Hv-paw">
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                                                <subviews>
+                                                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="10V-qd-duN">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="64"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYj-Wn-NJ9">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="64"/>
+                                                                        <state key="normal" title="Добавить"/>
+                                                                        <connections>
+                                                                            <action selector="addButtonAction:" destination="SLL-6h-mGi" eventType="touchUpInside" id="fZ3-KQ-MS0"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VX2-OW-sEP">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                                                        <state key="normal" image="plus" catalog="system"/>
+                                                                        <connections>
+                                                                            <action selector="plusButtonAction:" destination="SLL-6h-mGi" eventType="touchUpInside" id="c32-Xk-ohe"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="GYj-Wn-NJ9" firstAttribute="centerY" secondItem="q4c-Hv-paw" secondAttribute="centerY" id="ACQ-Ca-4NJ"/>
+                                                                    <constraint firstItem="VX2-OW-sEP" firstAttribute="centerY" secondItem="q4c-Hv-paw" secondAttribute="centerY" id="Ril-5j-tx0"/>
+                                                                    <constraint firstItem="10V-qd-duN" firstAttribute="centerY" secondItem="q4c-Hv-paw" secondAttribute="centerY" id="gwx-34-PyA"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="q4c-Hv-paw" firstAttribute="top" secondItem="raN-2a-zP6" secondAttribute="top" id="3CN-vc-gxp"/>
+                                                            <constraint firstItem="q4c-Hv-paw" firstAttribute="leading" secondItem="raN-2a-zP6" secondAttribute="leading" id="LNy-9l-Fhb"/>
+                                                            <constraint firstAttribute="trailing" secondItem="q4c-Hv-paw" secondAttribute="trailing" id="iJl-ax-KDh"/>
+                                                            <constraint firstAttribute="bottom" secondItem="q4c-Hv-paw" secondAttribute="bottom" id="yCa-up-hhv"/>
+                                                        </constraints>
+                                                    </tableViewCellContentView>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <connections>
+                                                        <outlet property="addCheckListButton" destination="GYj-Wn-NJ9" id="l2M-iQ-Yf8"/>
+                                                        <outlet property="plusCheckListButton" destination="VX2-OW-sEP" id="p5c-BI-hEi"/>
+                                                        <outlet property="titleTextField" destination="10V-qd-duN" id="CZm-NZ-JSR"/>
                                                     </connections>
                                                 </tableViewCell>
                                             </prototypes>
@@ -346,6 +398,7 @@
                         <outlet property="boatWidthConstraint" destination="RF5-Db-YM1" id="FHO-z5-kpy"/>
                         <outlet property="checkBlurView" destination="AuC-He-cPs" id="H1f-bS-nEL"/>
                         <outlet property="checkListButton" destination="VVR-cd-gGp" id="fL7-gp-sKH"/>
+                        <outlet property="checkListTableView" destination="IDh-J2-7xl" id="LeS-Cc-VkH"/>
                         <outlet property="checkPlusButton" destination="bAo-a1-mK5" id="Of0-6v-MRw"/>
                         <outlet property="checkTableTopConstraints" destination="phj-TQ-BiZ" id="VyX-i6-WUg"/>
                         <outlet property="checkToolBarView" destination="uZA-16-wN4" id="xnw-kh-CMx"/>
