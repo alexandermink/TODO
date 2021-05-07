@@ -37,7 +37,6 @@
 		9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9664687525A6967300443B81 /* NewTaskViewController.swift */; };
 		96663008261A6F25000CF25F /* TaskRealmConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96663007261A6F25000CF25F /* TaskRealmConverter.swift */; };
 		969C87992632481C0036A2A5 /* AddButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C87982632481C0036A2A5 /* AddButtonTableViewCell.swift */; };
-		96B44A91264443AA00BEC5AE /* AddButtonCheckListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B44A90264443AA00BEC5AE /* AddButtonCheckListTableViewCell.swift */; };
 		96D934CA261C8AF70093FF47 /* LocalDataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D934C9261C8AF70093FF47 /* LocalDataBaseService.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +75,6 @@
 		9664687525A6967300443B81 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		96663007261A6F25000CF25F /* TaskRealmConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealmConverter.swift; sourceTree = "<group>"; };
 		969C87982632481C0036A2A5 /* AddButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonTableViewCell.swift; sourceTree = "<group>"; };
-		96B44A90264443AA00BEC5AE /* AddButtonCheckListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonCheckListTableViewCell.swift; sourceTree = "<group>"; };
 		96D934C9261C8AF70093FF47 /* LocalDataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,7 +251,6 @@
 		9664687425A6963100443B81 /* NewTask */ = {
 			isa = PBXGroup;
 			children = (
-				96B44A90264443AA00BEC5AE /* AddButtonCheckListTableViewCell.swift */,
 				9664687525A6967300443B81 /* NewTaskViewController.swift */,
 				5D71D3232639B8A90084F464 /* CheckListCell.swift */,
 				15F9973D2615E17E003FFD71 /* NewTaskStoryboard.storyboard */,
@@ -401,7 +398,6 @@
 				96552941253D89760013F834 /* UserSession.swift in Sources */,
 				5D2B3BEB262FED08006BF979 /* HeaderView.swift in Sources */,
 				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
-				96B44A91264443AA00BEC5AE /* AddButtonCheckListTableViewCell.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,
 				5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */,
 				5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */,

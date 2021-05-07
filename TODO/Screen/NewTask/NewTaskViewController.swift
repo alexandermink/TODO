@@ -97,26 +97,28 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 
     // MARK: - ACTIONS
     @IBAction func createNewTaskButton(_ sender: UIButton) {
-        
         func tempAddTask(sectionName: String) {
-            
             guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList) else { return }
-            notificationService.sendNotificationRequest(task: task)
+            
+            if task.notificationDate != "" {
+                notificationService.sendNotificationRequest(task: task)
+            }
+            
             
             guard let sectionsCount = sections?.count else { return }
             if sectionsCount > 0 {
                 try? Main.instance.deleteSection(delSectionName: "")
             }
-            
             router?.dismiss(animated: true, completion: nil)
         }
         
-        let pickedDate: Double = dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? 0
-        let interval = pickedDate - Date().timeIntervalSince1970
-        if interval <= 1 {
-            return showAlert(title: "Ошибка", message: "Выбрано прошедшее время")
+        if notificationTextField.text != "" {
+            let pickedDate: Double = dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? 0
+            let interval = pickedDate - Date().timeIntervalSince1970
+            if interval <= 1 {
+                return showAlert(title: "Ошибка", message: "Выбрано прошедшее время")
+            }
         }
-        
         if newTaskNameTextField.text == "" {
             showAlert(title: "Ошибка", message: "Не заполнено поле: Название")
         } else if substituteCategoryTextField.text != ""{
@@ -215,8 +217,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // MARK: - CHECK LIST ACTIONS
     @IBAction func checkListButtonAction(_ sender: Any) {
         print("Нажата кнопка создания чек-листа")
-      checkTableTopConstraints.constant = 272
+        checkTableTopConstraints.constant = 366
         checkListTableView.reloadData()
+        checkToolBarrTextField.becomeFirstResponder()
         
     }
     
@@ -236,7 +239,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print("Нажата кнопка плюс (добавление доп строки)")
         let id = (Main.instance.tempCheckList.max()?.id ?? 0) + 1
         print("plus id: ", id)
-        
+        let checkMark = CheckMark(id: id, title: checkToolBarrTextField.text ?? "", isMarkSelected: true)
+        Main.instance.tempCheckList.append(checkMark)
+        checkToolBarrTextField.text = ""
+        checkToolBarrTextField.becomeFirstResponder()
         checkListTableView.reloadData()
     }
     
@@ -247,27 +253,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
     }
     
-    public func updateTempCheckList() {
-//        for indexCell in 0...Main.instance.tempCheckList.count - 1 {
-//            let indexPath = IndexPath(row: indexCell, section: 0)
-//            let cell = checkListTableView.cellForRow(at: indexPath) as? CheckListCell
-//            Main.instance.tempCheckList[indexCell].title = cell?.title ?? ""
-//            Main.instance.tempCheckList[indexCell].isMarkSelected = cell?.isMarkSelected ?? false
-//
-//            for var checkMark in Main.instance.tempCheckList {
-//                if checkMark.id == cell?.id {
-//                    checkMark.title = cell?.title ?? ""
-//                    checkMark.isMarkSelected = cell?.isMarkSelected ?? false
-//                }
-//            }
-//        }
-
-
-
-
+    @objc func toggleSelected(button: UIButton) {
+        Main.instance.tempCheckList[button.tag].isMarkSelected.toggle()
         checkListTableView.reloadData()
     }
-    
     
     // MARK: - PICKER
     func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
@@ -412,29 +401,30 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 
 extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Main.instance.tempCheckList.count + 1
-
+        Main.instance.tempCheckList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
+        let checkMark = Main.instance.tempCheckList[indexPath.row]
+        checkMark.isMarkSelected ? cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal) : cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
         
-
-        
-        if indexPath.row == Main.instance.tempCheckList.count {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCheckListCell", for: indexPath) as? AddButtonCheckListTableViewCell else { return UITableViewCell() }
-            
-            cell.indexPath = indexPath
-            cell.titleTextField.textColor = .systemYellow
-            cell.addCheckListButton.setTitleColor(.systemYellow, for: .normal)
-            
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
-            
-            cell.checkListItemTextField.text = Main.instance.tempCheckList[indexPath.row].title
-            
-            return cell
+        let strikedText = NSMutableAttributedString(string: checkMark.title)
+        strikedText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 3, range: NSMakeRange(0, strikedText.length))
+        let normalText = NSMutableAttributedString(string: checkMark.title)
+        normalText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 0, range: NSMakeRange(0, normalText.length))
+        cell.titleLabel.text = checkMark.title
+        cell.titleLabel.attributedText = checkMark.isMarkSelected ? normalText : strikedText
+        cell.checkMarkButton.addTarget(self, action: #selector(NewTaskViewController.toggleSelected(button:)), for: .touchUpInside)
+        cell.checkMarkButton.tag = indexPath.row
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            Main.instance.tempCheckList.remove(at: indexPath.row)
+            checkListTableView.deleteRows(at: [indexPath], with: .fade)
         }
+        checkListTableView.reloadData()
     }
 }
