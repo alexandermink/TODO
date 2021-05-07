@@ -187,6 +187,18 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         view.endEditing(true)
     }
     
+//    @objc func textFieldDidChange(_ textField: UITextField) {
+//        
+//        title = textField.text ?? ""
+//
+//        for index in 0...Main.instance.tempCheckList.count - 1 {
+//            if id == Main.instance.tempCheckList[index].id {
+//                print("cell id:", id, " checkMarkid:", Main.instance.tempCheckList[index].id)
+//                Main.instance.tempCheckList[index].title = title
+//            }
+//        }
+//    }
+    
     //MARK: - CONSTRIAINTS
     func constrainsInit(){
         NSLayoutConstraint.activate([
