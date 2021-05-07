@@ -15,4 +15,17 @@ class GeneralTableViewCell: UITableViewCell {
     @IBOutlet weak var notificationLabel: UILabel!
     
     var styleEditing = true
+    
+    public func configure(theme: String) {
+        switch theme {
+        case "1":
+            notificationLabel.textColor = .systemYellow
+        case "2":
+            notificationLabel.textColor = .alexeyBackground
+        case "3":
+            notificationLabel.textColor = .red
+        default:
+            break
+        }
+    }
 }

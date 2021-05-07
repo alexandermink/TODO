@@ -195,16 +195,26 @@
                                                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="49e-QN-du8">
+                                                                <rect key="frame" x="0.0" y="57.5" width="256" height="8"/>
+                                                                <color key="tintColor" systemColor="systemYellowColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="8" id="Ulf-3f-g6d"/>
+                                                                </constraints>
+                                                            </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="8Fk-Ro-zBV" secondAttribute="trailing" constant="10" id="4t0-UE-9FA"/>
                                                             <constraint firstItem="8Fk-Ro-zBV" firstAttribute="leading" secondItem="yWY-Na-e7y" secondAttribute="trailing" constant="10" id="C3H-87-tRn"/>
+                                                            <constraint firstAttribute="trailing" secondItem="49e-QN-du8" secondAttribute="trailing" id="JUH-D0-wmN"/>
                                                             <constraint firstItem="8Fk-Ro-zBV" firstAttribute="top" secondItem="6mS-J8-6mA" secondAttribute="top" constant="16" id="RYk-Le-wgG"/>
+                                                            <constraint firstItem="49e-QN-du8" firstAttribute="leading" secondItem="6mS-J8-6mA" secondAttribute="leading" id="fcI-xe-wRt"/>
                                                             <constraint firstAttribute="trailing" secondItem="Rs7-DC-lYc" secondAttribute="trailing" constant="10" id="fqh-gh-a9D"/>
                                                             <constraint firstItem="Rs7-DC-lYc" firstAttribute="leading" secondItem="6mS-J8-6mA" secondAttribute="leading" constant="10" id="iFO-Qo-k5L"/>
                                                             <constraint firstItem="Rs7-DC-lYc" firstAttribute="top" secondItem="8Fk-Ro-zBV" secondAttribute="bottom" constant="1" id="mDv-K8-E3R"/>
                                                             <constraint firstAttribute="bottom" secondItem="Rs7-DC-lYc" secondAttribute="bottom" constant="10" id="tYb-Ts-e2r"/>
+                                                            <constraint firstAttribute="bottom" secondItem="49e-QN-du8" secondAttribute="bottom" id="uGd-fH-eiI"/>
                                                             <constraint firstItem="yWY-Na-e7y" firstAttribute="top" secondItem="6mS-J8-6mA" secondAttribute="top" constant="16" id="vOM-Hz-Ct8"/>
                                                             <constraint firstItem="Rs7-DC-lYc" firstAttribute="top" secondItem="yWY-Na-e7y" secondAttribute="bottom" constant="1" id="wR1-VX-tFu"/>
                                                             <constraint firstItem="yWY-Na-e7y" firstAttribute="leading" secondItem="6mS-J8-6mA" secondAttribute="leading" constant="10" id="xbl-xB-yUs"/>
@@ -247,9 +257,9 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bfk-bG-Z3K">
                                                                         <rect key="frame" x="0.0" y="0.0" width="256" height="45"/>
                                                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <color key="tintColor" systemColor="systemYellowColor"/>
+                                                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <state key="normal" image="plus" catalog="system">
-                                                                            <color key="titleColor" systemColor="systemYellowColor"/>
+                                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
                                                                         <connections>
                                                                             <action selector="plusButtonTapped:" destination="yw9-xc-zFg" eventType="touchUpInside" id="qC9-G8-VqJ"/>
@@ -294,16 +304,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WyF-1P-IdP">
-                                <rect key="frame" x="-100" y="467" width="80" height="80.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" systemColor="systemYellowColor"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="0yE-It-iXp"/>
-                                    <constraint firstAttribute="height" constant="80" id="ZAc-VK-Ldf"/>
-                                </constraints>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40K-H8-g5L">
                                 <rect key="frame" x="260" y="44" width="60" height="524"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -330,7 +330,6 @@
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="40K-H8-g5L" secondAttribute="bottom" id="Ywk-Be-6b1"/>
                             <constraint firstItem="40K-H8-g5L" firstAttribute="top" secondItem="aJG-we-1F9" secondAttribute="top" id="aTH-cx-W5E"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="hPa-VJ-bCE" secondAttribute="bottom" constant="32" id="dx7-Nk-uDo"/>
-                            <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="WyF-1P-IdP" secondAttribute="bottom" constant="20" id="eCX-Rj-z9q"/>
                             <constraint firstItem="bgD-tH-h0f" firstAttribute="centerY" secondItem="VXl-KW-F5K" secondAttribute="centerY" id="eJh-f3-2EW"/>
                             <constraint firstItem="Zv6-Hz-A0S" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-300" id="gRe-9h-VJd"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="40K-H8-g5L" secondAttribute="trailing" id="gz8-qn-g4d"/>
@@ -338,7 +337,6 @@
                             <constraint firstItem="sAg-gp-Xj3" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" id="iBN-rb-Ogc"/>
                             <constraint firstItem="Zv6-Hz-A0S" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-30" id="iqx-o6-bsn"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="32" id="lVm-zZ-wx6"/>
-                            <constraint firstItem="WyF-1P-IdP" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-100" id="mOt-42-AmA"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="nUR-EV-gOM"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="nkn-cV-d0N" secondAttribute="trailing" constant="24" id="qjh-ro-Oix"/>
                             <constraint firstItem="o6O-du-MmM" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="40" id="tJs-Am-sKF"/>
@@ -349,6 +347,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q9Y-x2-7Ne">
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" title="Новая задача" id="Thb-en-nUn">
                             <color key="tintColor" red="0.41458874940000001" green="0.1026140079" blue="0.086256317789999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
@@ -381,7 +380,6 @@
                         <outlet property="settingsStack" destination="bgD-tH-h0f" id="9cv-t6-Eet"/>
                         <outlet property="settingsStackLeadingConstraint" destination="XdY-nB-zJf" id="EiR-dQ-0l1"/>
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
-                        <outlet property="trashView" destination="WyF-1P-IdP" id="bdr-8V-EsH"/>
                         <outlet property="vitThemeButton" destination="I96-XS-tnX" id="6VR-EF-Q4j"/>
                         <outletCollection property="settingsButtons" destination="I96-XS-tnX" collectionClass="NSMutableArray" id="vIM-n1-lMC"/>
                         <outletCollection property="settingsButtons" destination="aty-Ra-ylf" collectionClass="NSMutableArray" id="C6b-L5-7Me"/>
@@ -419,7 +417,6 @@
         <image name="boat2" width="1651" height="1416"/>
         <image name="clouds888" width="2039" height="552"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
