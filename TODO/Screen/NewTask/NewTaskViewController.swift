@@ -18,7 +18,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var notificationTextField: UITextField! {didSet{
         notificationTextField.inputAccessoryView = makeToolBarNotifications()
         notificationTextField.inputView = notificationPicker
-//        notificationPicker.minimumDate = minDate
+        notificationPicker.minimumDate = minDate
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
     @IBOutlet weak var newTaskNameTextField: UITextField! {didSet{
         newTaskNameTextField.delegate = self}}
@@ -45,6 +45,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var checkBlurView: UIVisualEffectView!
     @IBOutlet weak var checkPlusButton: UIButton!
     @IBOutlet weak var checkToolBarView: UIView!
+    @IBOutlet weak var checkToolBarrTextField: UITextField!
     
     
     var sections: [String]?
@@ -210,7 +211,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     // MARK: - CHECK LIST ACTIONS
     @IBAction func checkListButtonAction(_ sender: Any) {
-        checkTableTopConstraints.constant = 200
+        checkTableTopConstraints.constant = 272
     }
     
     @IBAction func checkTableHideAction(_ sender: Any) {
@@ -367,13 +368,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 
 extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        13
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
         
-        cell.checkListItemTextField.text = cell.rowText
+//        cell.checkListItemTextField.text = cell.rowText
         
         return cell
     }

@@ -10,9 +10,8 @@ import UIKit
 
 class CheckListCell: UITableViewCell {
     
-    @IBOutlet weak var checkListItemTextField: UITextField!
-    @IBOutlet weak var checkMarkButton: UIButton!
-    
+    @IBOutlet weak var checkMarkButton: UIButton!    
+    @IBOutlet weak var titleLabel: UILabel!
     
     var rowText = "test777"
     var isMarkSelected = false
@@ -36,7 +35,7 @@ class CheckListCell: UITableViewCell {
     @IBAction func checkMarkButtonAction(_ sender: Any) {
         isMarkSelected ? checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal) : checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
 //        checkListItemTextField.attributedText = attributeString
-        checkListItemTextField.attributedText = isMarkSelected ? attributeString2 : attributeString
+        titleLabel.attributedText = isMarkSelected ? attributeString2 : attributeString
         
         
         

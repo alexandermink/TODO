@@ -32,7 +32,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsStackLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsStack: UIStackView!
-    @IBOutlet weak var trashView: UIImageView!
     @IBOutlet weak var navSeparatorView: UIView!
     @IBOutlet weak var vitThemeButton: UIButton!
     @IBOutlet weak var panEdgeView: UIView!
@@ -57,6 +56,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
+        tableView.dragDelegate = self
         panGestureRecognizer.addTarget(self, action: #selector(closeMenu))
         panEdgeView.addGestureRecognizer(panGestureRecognizer)
         setViewScreen()
@@ -125,7 +126,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             cell.descriptionLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
             cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
             cell.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
-            cell.notificationLabel.textColor = .systemYellow
+//            cell.notificationLabel.textColor = .systemYellow
+            cell.configure(theme: currentTheme ?? "1")
             cell.descriptionLabel.textColor = .vitBackground
             return cell
         }
@@ -221,7 +223,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             self.boatImageView.frame.origin.x += self.view.frame.width/1.2
             self.mapImageView.frame.origin.x += self.view.frame.width/1.2
             self.settingsStack.center = self.view.center
-            self.trashView.frame.origin.x += self.view.frame.width/1.2
             self.alexLayer1.frame.origin.x += self.view.frame.width/1.2
             self.alexLayer2.frame.origin.x += self.view.frame.width/1.2
             
@@ -249,7 +250,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             self.boatImageView.frame.origin.x = -220
             self.mapImageView.frame.origin.x = -300
             self.settingsStack.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
-            self.trashView.frame.origin.x = 0
             self.alexLayer1.frame.origin.x = -300
             self.alexLayer2.frame.origin.x = -300
             
@@ -335,9 +335,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                  NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
             navSeparatorView.backgroundColor = .systemYellow
             view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-//            settingsButtons.forEach { buttons in
-//                buttons.setTitleColor(.systemYellow, for: .normal)
-//            }
         case "2":
             mapImageView.isHidden = true
             boatImageView.isHidden = false
@@ -355,9 +352,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                  NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
             navSeparatorView.backgroundColor = .alexeyBackground
             view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-//            settingsButtons.forEach { buttons in
-//                buttons.setTitleColor(.alexeyBackground, for: .normal)
-//            }
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
@@ -375,9 +369,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                  NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
             navSeparatorView.backgroundColor = .red
             view.applyGradient(colours: [.alexRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-//            settingsButtons.forEach { buttons in
-//                buttons.setTitleColor(.alexLightGray, for: .normal)
-//            }
         default:
             break
         }
@@ -412,5 +403,27 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         settingsButtons.forEach { buttons in
             buttons.setTitleColor(.alexeyFog, for: .normal)
         }
+    }
+}
+
+extension GeneralTableViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+        return [ dragItem ]
+    }
+
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        print("sourceIndexPath :\(sourceIndexPath)")
+        print("destinationIndexPath :\(destinationIndexPath)")
+        
+        let mover = main.userSession.tasks[sourceIndexPath.section].sectionTasks.remove(at: sourceIndexPath.row)
+        main.userSession.tasks[destinationIndexPath.section].sectionTasks.insert(mover, at: destinationIndexPath.row)
+        
+//        try? main.updateTask(task: main.userSession.tasks[sourceIndexPath.section].sectionTasks[sourceIndexPath.row])
     }
 }
