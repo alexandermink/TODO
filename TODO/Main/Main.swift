@@ -13,6 +13,8 @@ class Main {
     
     static let instance = Main()
     
+    var dateFormatter = DateFormatter()
+    
     var userSession: UserSession = UserSession()
     var notificationDate: String?
     var taskRealmConverter = TaskRealmConverter()
@@ -32,7 +34,10 @@ class Main {
     }
     
 
-    private init() { }
+    private init() {
+        dateFormatter.timeZone = .autoupdatingCurrent
+        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+    }
     
 }
 
@@ -104,13 +109,16 @@ extension Main: LocalDataBaseService {
         objectRealm.taskDescription = task.taskDescription
         objectRealm.creationDate = task.creationDate
         objectRealm.notificationDate = task.notificationDate
-        if task.notificationDate != "" {
-            objectRealm.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
-        } else {
+        
+        let notificationDate: Double = dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? 0
+        let interval = notificationDate - Date().timeIntervalSince1970
+        if interval <= 1 {
             objectRealm.notificationID = task.notificationID
+        } else {
+            if task.notificationDate != "" {
+                objectRealm.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
+            }
         }
-        
-        
         try realm.write {
             realm.add(objectRealm, update: .modified)
         }

@@ -9,9 +9,8 @@
 import UIKit
 
 class CheckListCell: UITableViewCell {
-    
+
     @IBOutlet weak var checkListItemTextField: UITextField!
-    @IBOutlet weak var checkMarkButton: UIButton!
     
 
     var id: Int = -1
@@ -19,6 +18,10 @@ class CheckListCell: UITableViewCell {
     var title: String = ""
     var strikedText: NSMutableAttributedString? = nil
     var normalText: NSMutableAttributedString? = nil
+
+    @IBOutlet weak var checkMarkButton: UIButton!    
+    @IBOutlet weak var titleLabel: UILabel!
+
         
     
     override func awakeFromNib() {

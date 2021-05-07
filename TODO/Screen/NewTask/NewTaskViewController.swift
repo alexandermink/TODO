@@ -18,7 +18,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var notificationTextField: UITextField! {didSet{
         notificationTextField.inputAccessoryView = makeToolBarNotifications()
         notificationTextField.inputView = notificationPicker
-//        notificationPicker.minimumDate = minDate
+        notificationPicker.minimumDate = minDate
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
     @IBOutlet weak var newTaskNameTextField: UITextField! {didSet{
         newTaskNameTextField.delegate = self}}
@@ -46,6 +46,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var checkPlusButton: UIButton!
     @IBOutlet weak var checkToolBarView: UIView!
     @IBOutlet weak var checkListTableView: UITableView!
+    @IBOutlet weak var checkToolBarrTextField: UITextField!
     
     
     var sections: [String]?
@@ -214,8 +215,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // MARK: - CHECK LIST ACTIONS
     @IBAction func checkListButtonAction(_ sender: Any) {
         print("Нажата кнопка создания чек-листа")
-        checkTableTopConstraints.constant = 200
+      checkTableTopConstraints.constant = 272
         checkListTableView.reloadData()
+        
     }
     
     @IBAction func checkTableHideAction(_ sender: Any) {
@@ -411,21 +413,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         Main.instance.tempCheckList.count + 1
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
         
-//        print("IdnexPath: ", indexPath)
-//        print("Mark id: ", Main.instance.tempCheckList[indexPath.row].id)
-//
-//        cell.id = Main.instance.tempCheckList[indexPath.row].id
-//        cell.isMarkSelected = Main.instance.tempCheckList[indexPath.row].isMarkSelected
-//        cell.title = Main.instance.tempCheckList[indexPath.row].title
-//
-//
-        
-        
+
         
         if indexPath.row == Main.instance.tempCheckList.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCheckListCell", for: indexPath) as? AddButtonCheckListTableViewCell else { return UITableViewCell() }
