@@ -12,11 +12,7 @@ class CheckTableViewCell: UITableViewCell {
 
     var checkListItemTextField = UITextField()
     var checkMarkButton =  UIButton()
-    
-    var rowText = "your check task"
-    var isMarkSelected = false
-    var attributeString: NSMutableAttributedString? = nil
-    var attributeString2: NSMutableAttributedString? = nil
+
     private var currentTheme : String?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,6 +31,7 @@ class CheckTableViewCell: UITableViewCell {
     }
     
     func uiSetUp(){
+        
         checkListItemTextField.translatesAutoresizingMaskIntoConstraints = false
         checkListItemTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         checkListItemTextField.textColor = .black
@@ -44,14 +41,7 @@ class CheckTableViewCell: UITableViewCell {
         checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         checkMarkButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
         contentView.addSubview(checkMarkButton)
-        checkMarkButton.addTarget(self,
-                             action: #selector(checkMarkButtonAction),
-                             for: .touchUpInside)
-        
-        attributeString = NSMutableAttributedString(string: rowText)
-        attributeString!.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 4, range: NSMakeRange(0, attributeString!.length))
-        attributeString2 = NSMutableAttributedString(string: rowText)
-        attributeString2!.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 0, range: NSMakeRange(0, attributeString2!.length))
+
     }
     
     func constrainsInit(){
@@ -64,26 +54,19 @@ class CheckTableViewCell: UITableViewCell {
             ])
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    @objc func checkMarkButtonAction(_ sender: Any) {
-        isMarkSelected ? checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal) : checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        checkListItemTextField.attributedText = isMarkSelected ? attributeString : attributeString2
-        
-        isMarkSelected.toggle()
-    }
-    
+
     func changeState(state: String) {
         self.currentTheme = state
         switch Main.instance.state {
         case "1":
             checkMarkButton.tintColor = .systemYellow
+            checkListItemTextField.textColor = .systemYellow
         case "2":
             checkMarkButton.tintColor = .alexeyBackground
+            checkListItemTextField.textColor = .alexeyBackground
         case "3":
             checkMarkButton.tintColor = .alexDarkRed
+            checkListItemTextField.textColor = .red
         default:
             break
         }
