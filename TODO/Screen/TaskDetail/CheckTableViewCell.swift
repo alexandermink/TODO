@@ -69,8 +69,8 @@ class CheckTableViewCell: UITableViewCell {
     }
     
     @objc func checkMarkButtonAction(_ sender: Any) {
-        isMarkSelected ? checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal) : checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        checkListItemTextField.attributedText = isMarkSelected ? attributeString2 : attributeString
+        isMarkSelected ? checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal) : checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        checkListItemTextField.attributedText = isMarkSelected ? attributeString : attributeString2
         
         isMarkSelected.toggle()
     }

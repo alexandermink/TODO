@@ -13,6 +13,7 @@ class GeneralTableViewCell: UITableViewCell {
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var notificationLabel: UILabel!
+    @IBOutlet weak var checkProgressBar: UIProgressView!
     
     var styleEditing = true
     
