@@ -98,7 +98,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // MARK: - ACTIONS
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         func tempAddTask(sectionName: String) {
-            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList) else { return }
+            var tempMarkSelectedCount = 0
+            for mark in Main.instance.tempCheckList {
+                if mark.isMarkSelected {
+                    tempMarkSelectedCount += 1
+                }
+            }
+            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
             
             if task.notificationDate != "" {
                 notificationService.sendNotificationRequest(task: task)
@@ -239,7 +245,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print("Нажата кнопка плюс (добавление доп строки)")
         let id = (Main.instance.tempCheckList.max()?.id ?? 0) + 1
         print("plus id: ", id)
-        let checkMark = CheckMark(id: id, title: checkToolBarrTextField.text ?? "", isMarkSelected: true)
+        let checkMark = CheckMark(id: id, title: checkToolBarrTextField.text ?? "", isMarkSelected: false)
         Main.instance.tempCheckList.append(checkMark)
         checkToolBarrTextField.text = ""
         checkToolBarrTextField.becomeFirstResponder()
@@ -407,14 +413,14 @@ extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as? CheckListCell else { return UITableViewCell() }
         let checkMark = Main.instance.tempCheckList[indexPath.row]
-        checkMark.isMarkSelected ? cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal) : cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        checkMark.isMarkSelected ? cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal) : cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         
         let strikedText = NSMutableAttributedString(string: checkMark.title)
         strikedText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 3, range: NSMakeRange(0, strikedText.length))
         let normalText = NSMutableAttributedString(string: checkMark.title)
         normalText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 0, range: NSMakeRange(0, normalText.length))
         cell.titleLabel.text = checkMark.title
-        cell.titleLabel.attributedText = checkMark.isMarkSelected ? normalText : strikedText
+        cell.titleLabel.attributedText = checkMark.isMarkSelected ? strikedText : normalText
         cell.checkMarkButton.addTarget(self, action: #selector(NewTaskViewController.toggleSelected(button:)), for: .touchUpInside)
         cell.checkMarkButton.tag = indexPath.row
         return cell

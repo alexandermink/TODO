@@ -44,10 +44,11 @@ struct Task {
     var notificationDate: String? = ""
     var notificationID: String? = ""
     var checkList: [CheckMark] = []
+    var markSelectedCount: Int = 0
     // TODO: сделать авторизацию
 //    var members: [String]?
     
-    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?, notificationID: String?, checkList: [CheckMark]) {
+    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?, notificationID: String?, checkList: [CheckMark], markSelectedCount: Int) {
         self.id = id
         self.name = name
         self.backgroundColor = backgroundColor
@@ -56,6 +57,7 @@ struct Task {
         self.notificationDate = notificationDate
         self.notificationID = notificationID
         self.checkList = checkList
+        self.markSelectedCount = markSelectedCount
 //        self.members = members
     }
     
@@ -72,6 +74,7 @@ class TaskRealm: Object {
     @objc dynamic var notificationDate: String? = ""
     @objc dynamic var notificationID: String? = ""
     let checkList = List<CheckMarkRealm>()
+    @objc dynamic var markSelectedCount: Int = 0
 //    var members = List<String>()
     
     override class func primaryKey() -> String? {

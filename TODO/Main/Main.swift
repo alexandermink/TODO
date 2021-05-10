@@ -60,17 +60,17 @@ extension Main: LocalDataBaseService {
         }
     }
     
-    func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?, checkList: [CheckMark]) throws -> Task {
+    func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?, checkList: [CheckMark], markSelectedCount: Int) throws -> Task {
         if !userSession.tasks.map(\.sectionName).contains(sectionName) {
             try addSection(sectionName: sectionName)
-            let task = try addTask(sectionName: sectionName, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, notificationDate: notificationDate, checkList: checkList)
+            let task = try addTask(sectionName: sectionName, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, notificationDate: notificationDate, checkList: checkList, markSelectedCount: markSelectedCount)
             return task
         } else {
             let realm = try Realm()
             let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.id ?? 0) + 1
             let creationDate = Date()
             let tempNotificationID = notificationDate == "" ? "" : UUID().uuidString
-            let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID, checkList: checkList)
+            let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID, checkList: checkList, markSelectedCount: markSelectedCount)
             //Создание таски в локальном массиве
             for indexSection in 0..<userSession.tasks.count {
                 if userSession.tasks[indexSection].sectionName == sectionName {

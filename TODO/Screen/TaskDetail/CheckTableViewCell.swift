@@ -54,6 +54,7 @@ class CheckTableViewCell: UITableViewCell {
             ])
     }
     
+
     func changeState(state: String) {
         self.currentTheme = state
         switch Main.instance.state {
