@@ -51,6 +51,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         router = BaseRouter(viewController: self)
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
