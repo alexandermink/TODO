@@ -195,7 +195,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     @objc func checkTablePlusAction(){
         let id = (task.checkList.max()?.id ?? 0) + 1
         print("plus id: ", id)
-        let checkMark = CheckMark(id: id, title: addCheckElementTextField.text ?? "", isMarkSelected: true)
+        let checkMark = CheckMark(id: id, title: addCheckElementTextField.text ?? "", isMarkSelected: false)
         task.checkList.append(checkMark)
         addCheckElementTextField.text = ""
         addCheckElementTextField.becomeFirstResponder()
@@ -316,14 +316,14 @@ extension TaskDetailViewController: UITableViewDataSource{
         
         cell.checkListItemTextField.text = checkMark.title
         
-        checkMark.isMarkSelected ? cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal) : cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        checkMark.isMarkSelected ? cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal) : cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         
         let strikedText = NSMutableAttributedString(string: checkMark.title)
         strikedText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 3, range: NSMakeRange(0, strikedText.length))
         let normalText = NSMutableAttributedString(string: checkMark.title)
         normalText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 0, range: NSMakeRange(0, normalText.length))
         cell.checkListItemTextField.text = checkMark.title
-        cell.checkListItemTextField.attributedText = checkMark.isMarkSelected ? normalText : strikedText
+        cell.checkListItemTextField.attributedText = checkMark.isMarkSelected ?  strikedText : normalText
         cell.checkListItemTextField.tag = indexPath.row
         cell.checkListItemTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         cell.checkMarkButton.addTarget(self, action: #selector(self.toggleSelected(button:)), for: .touchUpInside)
@@ -342,6 +342,11 @@ extension TaskDetailViewController: UITableViewDataSource{
     }
     
     @objc func toggleSelected(button: UIButton) {
+        if task.checkList[button.tag].isMarkSelected {
+            task.markSelectedCount -= 1
+        } else {
+            task.markSelectedCount += 1
+        }
         task.checkList[button.tag].isMarkSelected.toggle()
         checkListTableView.reloadData()
     }
