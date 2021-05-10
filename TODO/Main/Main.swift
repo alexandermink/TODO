@@ -109,6 +109,7 @@ extension Main: LocalDataBaseService {
         objectRealm.taskDescription = task.taskDescription
         objectRealm.creationDate = task.creationDate
         objectRealm.notificationDate = task.notificationDate
+        objectRealm.markSelectedCount = task.markSelectedCount
         for checkMark in task.checkList {
             objectRealm.checkList.append(taskRealmConverter.convert(checkMark))
         }

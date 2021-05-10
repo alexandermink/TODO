@@ -91,7 +91,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIView.animate(withDuration: 180, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
-            self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
+            self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
         }, completion: nil)
     }
 
