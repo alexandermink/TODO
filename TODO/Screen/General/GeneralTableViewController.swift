@@ -134,15 +134,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let markSelectedCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
             let allMarkCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
             
-            print(markSelectedCount, "markSelectedCount")
-            print(allMarkCount, "allMarkCount")
-            
             var progress: Float = 0
-            if allMarkCount > Float(0)  {
+            if allMarkCount > 0  {
                 progress = markSelectedCount / allMarkCount
             }
             cell.checkProgressBar.setProgress(progress, animated: true)
-            print(progress, "progress")
             return cell
         }
     }

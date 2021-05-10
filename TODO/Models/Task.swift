@@ -28,7 +28,7 @@ struct CheckMark: Comparable {
     }
 }
 
-class CheckMarkRealm: Object {
+class CheckMarkRealm: EmbeddedObject {
     @objc dynamic var id: Int = -1
     @objc dynamic var isMarkSelected: Bool = false
     @objc dynamic var title: String = ""

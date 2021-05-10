@@ -22,6 +22,7 @@ class TaskRealmConverter {
         taskRealm.creationDate = task.creationDate
         taskRealm.notificationDate = task.notificationDate
         taskRealm.notificationID = task.notificationID
+        taskRealm.markSelectedCount = task.markSelectedCount
         
         for checkMark in task.checkList {
             let checkMarkRealm = CheckMarkRealm()
@@ -53,6 +54,7 @@ class TaskRealmConverter {
         task.creationDate = taskRealm.creationDate
         task.notificationDate = taskRealm.notificationDate
         task.notificationID = taskRealm.notificationID
+        task.markSelectedCount = taskRealm.markSelectedCount
         
         
         for checkMarkRealm in taskRealm.checkList {
