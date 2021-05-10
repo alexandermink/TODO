@@ -24,7 +24,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     var toolBarView: UIView!
     var toolBarStackView: UIStackView!
     var addCheckButton = UIButton(type: .system)
-    var cancelCheckButton = UIButton(type: .system)
+    var addCheckElementTextField = UITextField()
     let checkListTableView = UITableView()
     
     var task: Task = Task()
@@ -33,8 +33,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     var router: BaseRouter?
     let notificationService = NotificationService()
     private var currentTheme : String?
-
-    var testDataForTableView = ["uno", "dos", "tres", "quatro", "cinco", "sies"]
     
     //MARK: - LABEL FACTORY
     func labelFactory(lab: UILabel, text: String, color: UIColor) -> UILabel {
@@ -106,7 +104,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
         taskDateTextField.keyboardAppearance = .dark
         view.addSubview(taskDateTextField)
-//        if taskDateTextField.text == "" { taskDateTextField.text = "Дата уведомления не назначена" }
         
         taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
@@ -135,22 +132,29 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         toolBarStackView.translatesAutoresizingMaskIntoConstraints = false
         toolBarStackView.axis = .horizontal
         toolBarStackView.alignment = .fill
-        toolBarStackView.distribution = .fillEqually
+        toolBarStackView.distribution = .fill
         toolBarView.addSubview(toolBarStackView)
+        
+        addCheckElementTextField.translatesAutoresizingMaskIntoConstraints = false
+        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+        addCheckElementTextField.text = ""
+        addCheckElementTextField.textColor = .black
+        addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 17)
+        addCheckElementTextField.clearsOnBeginEditing = true
+        addCheckElementTextField.backgroundColor = .lightGray
+        addCheckElementTextField.borderStyle = .roundedRect
+        toolBarStackView.addArrangedSubview(addCheckElementTextField)
         
         addCheckButton.translatesAutoresizingMaskIntoConstraints = false
         addCheckButton.setTitle("+", for: .normal)
         addCheckButton.tintColor = .black
         addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
+        addCheckButton.addTarget(self,
+                             action: #selector(checkTablePlusAction),
+                             for: .touchUpInside)
         toolBarStackView.addArrangedSubview(addCheckButton)
-        
-        cancelCheckButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelCheckButton.setTitle("Отменить", for: .normal)
-        cancelCheckButton.tintColor = .black
-        cancelCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
-        toolBarStackView.addArrangedSubview(cancelCheckButton)
 
-        checkListTableView.backgroundColor = .clear
+        checkListTableView.backgroundColor = .vitBackground
         checkListTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(checkListTableView)
         checkListTableView.register(CheckTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -187,17 +191,15 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         view.endEditing(true)
     }
     
-//    @objc func textFieldDidChange(_ textField: UITextField) {
-//        
-//        title = textField.text ?? ""
-//
-//        for index in 0...Main.instance.tempCheckList.count - 1 {
-//            if id == Main.instance.tempCheckList[index].id {
-//                print("cell id:", id, " checkMarkid:", Main.instance.tempCheckList[index].id)
-//                Main.instance.tempCheckList[index].title = title
-//            }
-//        }
-//    }
+    @objc func checkTablePlusAction(){
+        let id = (task.checkList.max()?.id ?? 0) + 1
+        print("plus id: ", id)
+        let checkMark = CheckMark(id: id, title: addCheckElementTextField.text ?? "", isMarkSelected: true)
+        task.checkList.append(checkMark)
+        addCheckElementTextField.text = ""
+        addCheckElementTextField.becomeFirstResponder()
+        checkListTableView.reloadData()
+    }
     
     //MARK: - CONSTRIAINTS
     func constrainsInit(){
@@ -211,7 +213,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             
             taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 24),
             taskNameTextView.bottomAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 2),
-            taskNameTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            taskNameTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8),
             taskNameTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
             
             taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 48),
@@ -231,13 +233,13 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             
             taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 24),
             taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: -4),
-            taskDescriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
+            taskDescriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8),
             taskDescriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
             
             checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 76),
-            checkBlurView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28),
-            checkBlurView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
-            checkBlurView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28),
+            checkBlurView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            checkBlurView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            checkBlurView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             
             toolBarView.topAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: 0),
             toolBarView.leftAnchor.constraint(equalTo: checkBlurView.leftAnchor, constant: 0),
@@ -254,6 +256,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             checkListTableView.bottomAnchor.constraint(equalTo: checkBlurView.contentView.bottomAnchor, constant: 0),
             checkListTableView.rightAnchor.constraint(equalTo: checkBlurView.contentView.rightAnchor, constant: 0),
             
+            addCheckButton.widthAnchor.constraint(equalToConstant: 46)
         ])
     }
     
@@ -267,6 +270,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskCreationDateLabel.textColor = .systemYellow
             taskDateTextField.textColor = .systemYellow
             taskDescriptionTextView.textColor = .systemYellow
+//            addCheckElementTextField.textColor = .systemYellow
             toolBarView.backgroundColor = .systemYellow
             view.backgroundColor = .systemYellow
             view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
@@ -276,6 +280,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskCreationDateLabel.textColor = .alexeyBackground
             taskDateTextField.textColor = .alexeyBackground
             taskDescriptionTextView.textColor = .alexeyBackground
+//            addCheckElementTextField.textColor = .alexeyBackground
             toolBarView.backgroundColor = .alexeyBackground
             view.backgroundColor = .alexeyBackground
             view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
@@ -285,6 +290,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskCreationDateLabel.textColor = .alexDarkRed
             taskDateTextField.textColor = .alexDarkRed
             taskDescriptionTextView.textColor = .alexDarkRed
+//            addCheckElementTextField.textColor = .red
             toolBarView.backgroundColor = .alexDarkRed
             view.backgroundColor = .alexLightGray
             view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
@@ -299,13 +305,50 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
 extension TaskDetailViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testDataForTableView.count
+        return task.checkList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckTableViewCell
-        cell?.checkListItemTextField.text = cell?.rowText
-        return cell!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckTableViewCell else { return UITableViewCell() }
+        
+        let checkMark = task.checkList[indexPath.row]
+        
+        cell.checkListItemTextField.text = checkMark.title
+        
+        checkMark.isMarkSelected ? cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal) : cell.checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        
+        let strikedText = NSMutableAttributedString(string: checkMark.title)
+        strikedText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 3, range: NSMakeRange(0, strikedText.length))
+        let normalText = NSMutableAttributedString(string: checkMark.title)
+        normalText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 0, range: NSMakeRange(0, normalText.length))
+        cell.checkListItemTextField.text = checkMark.title
+        cell.checkListItemTextField.attributedText = checkMark.isMarkSelected ? normalText : strikedText
+        cell.checkListItemTextField.tag = indexPath.row
+        cell.checkListItemTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        cell.checkMarkButton.addTarget(self, action: #selector(self.toggleSelected(button:)), for: .touchUpInside)
+        cell.checkMarkButton.tag = indexPath.row
+        cell.backgroundColor = .clear
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            task.checkList.remove(at: indexPath.row)
+            checkListTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        checkListTableView.reloadData()
+    }
+    
+    @objc func toggleSelected(button: UIButton) {
+        task.checkList[button.tag].isMarkSelected.toggle()
+        checkListTableView.reloadData()
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+
+        task.checkList[textField.tag].title = textField.text ?? ""
+
     }
     
 }

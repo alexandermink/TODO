@@ -81,10 +81,22 @@ class TaskRealmConverter {
         
         var checkMark = CheckMark()
         
+        checkMark.id = checkMarkRealm.id
         checkMark.isMarkSelected = checkMarkRealm.isMarkSelected
         checkMark.title = checkMarkRealm.title
         
         return checkMark
+    }
+    
+    func convert(_ checkMark: CheckMark) -> CheckMarkRealm {
+
+        let checkMarkRealm = CheckMarkRealm()
+
+        checkMarkRealm.id = checkMark.id
+        checkMarkRealm.title = checkMark.title
+        checkMarkRealm.isMarkSelected = checkMark.isMarkSelected
+
+        return checkMarkRealm
     }
     
     func convert(_ checksMarkRealm: List<CheckMarkRealm>) -> [CheckMark] {
