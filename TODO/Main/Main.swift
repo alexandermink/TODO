@@ -109,6 +109,11 @@ extension Main: LocalDataBaseService {
         objectRealm.taskDescription = task.taskDescription
         objectRealm.creationDate = task.creationDate
         objectRealm.notificationDate = task.notificationDate
+        for checkMark in task.checkList {
+            objectRealm.checkList.append(taskRealmConverter.convert(checkMark))
+        }
+        
+        
         
         let notificationDate: Double = dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? 0
         let interval = notificationDate - Date().timeIntervalSince1970
