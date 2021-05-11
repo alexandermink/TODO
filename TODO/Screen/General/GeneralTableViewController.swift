@@ -62,6 +62,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.addTapGestureToHideKeyboard()
         tableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
         tableView.dragDelegate = self
         panGestureRecognizer.addTarget(self, action: #selector(closeMenu))
@@ -115,6 +116,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
             cell.addFastTaskNameTextField.textColor = .systemYellow
             cell.addButton.setTitleColor(.systemYellow, for: .normal)
+            cell.addFastTaskNameTextField.keyboardAppearance = .dark
             
             cell.indexPath = indexPath
             if !cell.styleEditing {
@@ -135,7 +137,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 //            cell.notificationLabel.textColor = .systemYellow
             cell.configure(theme: currentTheme ?? "1")
             cell.descriptionLabel.textColor = .vitBackground
-
             
             let markSelectedCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
             let allMarkCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
@@ -429,6 +430,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         }
         settingsTitleLabel.textColor = .vitBackground
         hideCloudsButton.setTitleColor(.vitBackground, for: .normal)
+        panEdgeView.isHidden = true
     }
 }
 
