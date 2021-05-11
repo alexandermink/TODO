@@ -24,6 +24,43 @@
                                     <constraint firstAttribute="height" constant="5" id="tEi-EO-701"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hiy-6c-O9Q" customClass="Shadow" customModule="TODO" customModuleProvider="target">
+                                <rect key="frame" x="-106" y="168" width="232" height="232"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIT-bF-rOV" customClass="Rounding" customModule="TODO" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="232" height="232"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                                <real key="value" value="24"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="tIT-bF-rOV" secondAttribute="bottom" id="4cX-hw-Icr"/>
+                                    <constraint firstItem="tIT-bF-rOV" firstAttribute="leading" secondItem="Hiy-6c-O9Q" secondAttribute="leading" id="5FF-cB-f4o"/>
+                                    <constraint firstAttribute="width" constant="232" id="9Xm-bL-dUO"/>
+                                    <constraint firstAttribute="trailing" secondItem="tIT-bF-rOV" secondAttribute="trailing" id="MCc-mX-2i2"/>
+                                    <constraint firstAttribute="height" constant="232" id="N6q-bq-P5e"/>
+                                    <constraint firstItem="tIT-bF-rOV" firstAttribute="top" secondItem="Hiy-6c-O9Q" secondAttribute="top" id="S9s-3g-5NT"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="opacity">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="offset">
+                                        <size key="value" width="1" height="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkn-cV-d0N" customClass="Shadow" customModule="TODO" customModuleProvider="target">
                                 <rect key="frame" x="24" y="73" width="272" height="471"/>
                                 <subviews>
@@ -107,55 +144,83 @@
                                     <constraint firstAttribute="height" constant="800" id="dm0-rI-SGx"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-tH-h0f">
-                                <rect key="frame" x="-100" y="204" width="160" height="160"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I96-XS-tnX">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="Тема Виталия">
-                                            <color key="titleColor" systemColor="systemYellowColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="vitThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="IqL-gz-aIT"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aty-Ra-ylf">
-                                        <rect key="frame" x="0.0" y="40" width="160" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="Тема Алексея">
-                                            <color key="titleColor" systemColor="systemYellowColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="alexeyThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="Mw7-Zc-Qg5"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enm-Ra-Moz">
-                                        <rect key="frame" x="0.0" y="80" width="160" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="Тема Александра">
-                                            <color key="titleColor" systemColor="systemYellowColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="alexandrThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="CEL-I7-Ezp"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAK-o3-NDO">
-                                        <rect key="frame" x="0.0" y="120" width="160" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="Скрыть облака">
-                                            <color key="titleColor" systemColor="systemYellowColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="hideCloudsAction:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="StR-c2-OWV"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qrI-kW-h2Z">
+                                <rect key="frame" x="-180" y="174" width="220" height="220"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MJg-hQ-4do">
+                                    <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-tH-h0f">
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите тему" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFX-mw-CfA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="220" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I96-XS-tnX">
+                                                    <rect key="frame" x="0.0" y="44" width="220" height="44"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                    <state key="normal" title="Тема 1">
+                                                        <color key="titleColor" systemColor="systemYellowColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="vitThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="IqL-gz-aIT"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aty-Ra-ylf">
+                                                    <rect key="frame" x="0.0" y="88" width="220" height="44"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                    <state key="normal" title="Тема 2">
+                                                        <color key="titleColor" systemColor="systemYellowColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="alexeyThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="Mw7-Zc-Qg5"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enm-Ra-Moz">
+                                                    <rect key="frame" x="0.0" y="132" width="220" height="44"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                    <state key="normal" title="Тема 3">
+                                                        <color key="titleColor" systemColor="systemYellowColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="alexandrThemeTapped:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="CEL-I7-Ezp"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAK-o3-NDO">
+                                                    <rect key="frame" x="0.0" y="176" width="220" height="44"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                    <state key="normal" title="Облака вкл/выкл">
+                                                        <color key="titleColor" systemColor="systemYellowColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="hideCloudsAction:" destination="Xc2-F3-y3F" eventType="touchUpInside" id="StR-c2-OWV"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bgD-tH-h0f" firstAttribute="leading" secondItem="MJg-hQ-4do" secondAttribute="leading" id="vkE-vl-fy1"/>
+                                        <constraint firstAttribute="trailing" secondItem="bgD-tH-h0f" secondAttribute="trailing" id="wBh-44-jrE"/>
+                                        <constraint firstItem="bgD-tH-h0f" firstAttribute="top" secondItem="MJg-hQ-4do" secondAttribute="top" id="wKS-3g-lfX"/>
+                                        <constraint firstAttribute="bottom" secondItem="bgD-tH-h0f" secondAttribute="bottom" id="yIz-u9-8wH"/>
+                                    </constraints>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="TZJ-Oj-p3E"/>
-                                    <constraint firstAttribute="width" constant="160" id="jai-Wv-LvD"/>
+                                    <constraint firstAttribute="height" constant="220" id="75d-IE-qFv"/>
+                                    <constraint firstAttribute="width" constant="220" id="Dlh-sE-Y5W"/>
                                 </constraints>
-                            </stackView>
+                                <blurEffect style="systemUltraThinMaterial"/>
+                            </visualEffectView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-VJ-bCE">
                                 <rect key="frame" x="32" y="81" width="256" height="455"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="R4c-y0-lxd">
@@ -319,6 +384,7 @@
                         <constraints>
                             <constraint firstItem="MGk-aQ-yaO" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-30" id="2HJ-BR-HKS"/>
                             <constraint firstItem="K5D-Zk-kQF" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-100" id="59g-2A-aYY"/>
+                            <constraint firstItem="Hiy-6c-O9Q" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-106" id="8AI-vg-BXX"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="hPa-VJ-bCE" secondAttribute="trailing" constant="32" id="Mpt-Pg-y1S"/>
                             <constraint firstItem="K5D-Zk-kQF" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="Ms3-Vp-vuL"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="top" secondItem="aJG-we-1F9" secondAttribute="top" id="Nqv-ao-xYX"/>
@@ -326,12 +392,10 @@
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="nkn-cV-d0N" secondAttribute="bottom" constant="24" id="Sn3-eM-E6V"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="jd0-ou-lju" secondAttribute="trailing" id="Thx-Nk-f8v"/>
                             <constraint firstItem="Hnn-Zv-Nua" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-300" id="XYf-Ch-tDl"/>
-                            <constraint firstItem="bgD-tH-h0f" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-100" id="XdY-nB-zJf"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="32" id="YwB-Op-4JW"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="40K-H8-g5L" secondAttribute="bottom" id="Ywk-Be-6b1"/>
                             <constraint firstItem="40K-H8-g5L" firstAttribute="top" secondItem="aJG-we-1F9" secondAttribute="top" id="aTH-cx-W5E"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="hPa-VJ-bCE" secondAttribute="bottom" constant="32" id="dx7-Nk-uDo"/>
-                            <constraint firstItem="bgD-tH-h0f" firstAttribute="centerY" secondItem="VXl-KW-F5K" secondAttribute="centerY" id="eJh-f3-2EW"/>
                             <constraint firstItem="Zv6-Hz-A0S" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-300" id="gRe-9h-VJd"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="40K-H8-g5L" secondAttribute="trailing" id="gz8-qn-g4d"/>
                             <constraint firstItem="MGk-aQ-yaO" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-300" id="hr2-RN-Dkj"/>
@@ -339,6 +403,9 @@
                             <constraint firstItem="Zv6-Hz-A0S" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-30" id="iqx-o6-bsn"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="32" id="lVm-zZ-wx6"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="nUR-EV-gOM"/>
+                            <constraint firstItem="qrI-kW-h2Z" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-180" id="oML-D8-mFO"/>
+                            <constraint firstItem="qrI-kW-h2Z" firstAttribute="centerY" secondItem="VXl-KW-F5K" secondAttribute="centerY" id="q6N-UV-auK"/>
+                            <constraint firstItem="Hiy-6c-O9Q" firstAttribute="centerY" secondItem="VXl-KW-F5K" secondAttribute="centerY" id="q6v-wD-Ube"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="nkn-cV-d0N" secondAttribute="trailing" constant="24" id="qjh-ro-Oix"/>
                             <constraint firstItem="o6O-du-MmM" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="40" id="tJs-Am-sKF"/>
                             <constraint firstItem="nkn-cV-d0N" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="24" id="xdw-Yx-sCr"/>
@@ -371,6 +438,7 @@
                         <outlet property="cloudsHeightConstraint" destination="dm0-rI-SGx" id="h8Y-zJ-5ro"/>
                         <outlet property="cloudsImageView" destination="K5D-Zk-kQF" id="rgg-Vd-FUw"/>
                         <outlet property="cloudsWidthConstraint" destination="bHv-5Y-DDT" id="Owk-k4-rcq"/>
+                        <outlet property="hideCloudsButton" destination="eAK-o3-NDO" id="bh3-53-IJB"/>
                         <outlet property="mapHeightConstraint" destination="vT2-Cm-vCQ" id="kws-AX-07l"/>
                         <outlet property="mapImageView" destination="MGk-aQ-yaO" id="URC-8m-WPH"/>
                         <outlet property="mapView" destination="sAg-gp-Xj3" id="Tpa-ne-bJi"/>
@@ -378,14 +446,19 @@
                         <outlet property="navSeparatorView" destination="jd0-ou-lju" id="gZS-D9-TFK"/>
                         <outlet property="newTaskButton" destination="Thb-en-nUn" id="o6o-RF-BZP"/>
                         <outlet property="panEdgeView" destination="40K-H8-g5L" id="RrI-qv-PIP"/>
+                        <outlet property="settingsBackLayer" destination="tIT-bF-rOV" id="DYC-a4-o2Z"/>
+                        <outlet property="settingsBlurLeadConstraint" destination="oML-D8-mFO" id="FU2-84-tcT"/>
+                        <outlet property="settingsBlurView" destination="qrI-kW-h2Z" id="VdF-js-0Xz"/>
+                        <outlet property="settingsShadowBackLayer" destination="Hiy-6c-O9Q" id="tdK-1M-YrN"/>
+                        <outlet property="settingsShadowLeadConstraint" destination="8AI-vg-BXX" id="Mdb-DA-Bpj"/>
                         <outlet property="settingsStack" destination="bgD-tH-h0f" id="9cv-t6-Eet"/>
-                        <outlet property="settingsStackLeadingConstraint" destination="XdY-nB-zJf" id="EiR-dQ-0l1"/>
+                        <outlet property="settingsTitleLabel" destination="KFX-mw-CfA" id="Fvr-A5-HJ3"/>
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
                         <outlet property="vitThemeButton" destination="I96-XS-tnX" id="6VR-EF-Q4j"/>
-                        <outletCollection property="settingsButtons" destination="I96-XS-tnX" collectionClass="NSMutableArray" id="vIM-n1-lMC"/>
                         <outletCollection property="settingsButtons" destination="aty-Ra-ylf" collectionClass="NSMutableArray" id="C6b-L5-7Me"/>
                         <outletCollection property="settingsButtons" destination="enm-Ra-Moz" collectionClass="NSMutableArray" id="8p6-4a-hiU"/>
                         <outletCollection property="settingsButtons" destination="eAK-o3-NDO" collectionClass="NSMutableArray" id="gTO-Ro-9Mc"/>
+                        <outletCollection property="settingsButtons" destination="I96-XS-tnX" collectionClass="NSMutableArray" id="vIM-n1-lMC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjY-Fx-tBw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
