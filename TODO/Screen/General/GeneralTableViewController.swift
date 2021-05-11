@@ -130,6 +130,15 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             cell.configure(theme: currentTheme ?? "1")
             cell.descriptionLabel.textColor = .vitBackground
 
+            
+            let markSelectedCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
+            let allMarkCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
+            
+            var progress: Float = 0
+            if allMarkCount > 0  {
+                progress = markSelectedCount / allMarkCount
+            }
+            cell.checkProgressBar.setProgress(progress, animated: true)
             return cell
         }
     }
