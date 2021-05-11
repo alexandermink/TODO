@@ -86,6 +86,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskNameTextView.textColor = .systemYellow
         taskNameTextView.contentInsetAdjustmentBehavior = .automatic
         taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
+        taskNameTextView.keyboardAppearance = .dark
         view.addSubview(taskNameTextView)
         
         taskCreationDateTitleLabel = labelFactory(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
@@ -117,6 +118,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         taskDescriptionTextView.textAlignment = .left
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
+        taskDescriptionTextView.keyboardAppearance = .dark
         view.addSubview(taskDescriptionTextView)
         
         checkBlurView = UIVisualEffectView()
@@ -127,6 +129,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         
         toolBarView = UIView()
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
+        toolBarView.backgroundColor = .systemYellow
         checkBlurView.contentView.addSubview(toolBarView)
         
         toolBarStackView = UIStackView()
@@ -139,17 +142,18 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         addCheckElementTextField.translatesAutoresizingMaskIntoConstraints = false
         addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
         addCheckElementTextField.text = ""
-        addCheckElementTextField.textColor = .black
+        addCheckElementTextField.textColor = .systemYellow
         addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         addCheckElementTextField.clearsOnBeginEditing = true
-        addCheckElementTextField.backgroundColor = .lightGray
+        addCheckElementTextField.backgroundColor = .vitBackground
         addCheckElementTextField.borderStyle = .roundedRect
+        addCheckElementTextField.keyboardAppearance = .dark
         toolBarStackView.addArrangedSubview(addCheckElementTextField)
         
         addCheckButton.translatesAutoresizingMaskIntoConstraints = false
         addCheckButton.setTitle("+", for: .normal)
-        addCheckButton.tintColor = .black
-        addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
+        addCheckButton.tintColor = .vitBackground
+        addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 22)
         addCheckButton.addTarget(self,
                              action: #selector(checkTablePlusAction),
                              for: .touchUpInside)
@@ -245,19 +249,19 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             toolBarView.topAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: 0),
             toolBarView.leftAnchor.constraint(equalTo: checkBlurView.leftAnchor, constant: 0),
             toolBarView.rightAnchor.constraint(equalTo: checkBlurView.rightAnchor, constant: 0),
-            toolBarView.heightAnchor.constraint(equalToConstant: 36),
+            toolBarView.heightAnchor.constraint(equalToConstant: 54),
             
-            toolBarStackView.topAnchor.constraint(equalTo: toolBarView.topAnchor, constant: 0),
-            toolBarStackView.leftAnchor.constraint(equalTo: toolBarView.leftAnchor, constant: 0),
-            toolBarStackView.rightAnchor.constraint(equalTo: toolBarView.rightAnchor, constant: 0),
-            toolBarStackView.bottomAnchor.constraint(equalTo: toolBarView.bottomAnchor, constant: 0),
+            toolBarStackView.topAnchor.constraint(equalTo: toolBarView.topAnchor, constant: 6),
+            toolBarStackView.leftAnchor.constraint(equalTo: toolBarView.leftAnchor, constant: 6),
+            toolBarStackView.rightAnchor.constraint(equalTo: toolBarView.rightAnchor, constant: 6),
+            toolBarStackView.bottomAnchor.constraint(equalTo: toolBarView.bottomAnchor, constant: -6),
             
             checkListTableView.topAnchor.constraint(equalTo: toolBarView.bottomAnchor, constant: 0),
             checkListTableView.leftAnchor.constraint(equalTo: checkBlurView.contentView.leftAnchor, constant: 0),
             checkListTableView.bottomAnchor.constraint(equalTo: checkBlurView.contentView.bottomAnchor, constant: 0),
             checkListTableView.rightAnchor.constraint(equalTo: checkBlurView.contentView.rightAnchor, constant: 0),
             
-            addCheckButton.widthAnchor.constraint(equalToConstant: 46)
+            addCheckButton.widthAnchor.constraint(equalToConstant: 54)
         ])
     }
     
@@ -271,30 +275,36 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
             taskCreationDateLabel.textColor = .systemYellow
             taskDateTextField.textColor = .systemYellow
             taskDescriptionTextView.textColor = .systemYellow
-//            addCheckElementTextField.textColor = .systemYellow
+            addCheckElementTextField.textColor = .systemYellow
             toolBarView.backgroundColor = .systemYellow
             view.backgroundColor = .systemYellow
             view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
         case "2":
             doneButton.tintColor = .alexeyBackground
             taskNameTextView.textColor = .alexeyBackground
             taskCreationDateLabel.textColor = .alexeyBackground
             taskDateTextField.textColor = .alexeyBackground
             taskDescriptionTextView.textColor = .alexeyBackground
-//            addCheckElementTextField.textColor = .alexeyBackground
+            addCheckElementTextField.textColor = .alexeyBackground
             toolBarView.backgroundColor = .alexeyBackground
             view.backgroundColor = .alexeyBackground
             view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
+            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
         case "3":
             doneButton.tintColor = .alexDarkRed
             taskNameTextView.textColor = .alexDarkRed
             taskCreationDateLabel.textColor = .alexDarkRed
             taskDateTextField.textColor = .alexDarkRed
             taskDescriptionTextView.textColor = .alexDarkRed
-//            addCheckElementTextField.textColor = .red
+            addCheckElementTextField.textColor = .red
             toolBarView.backgroundColor = .alexDarkRed
             view.backgroundColor = .alexLightGray
             view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexDarkRed]))
+            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexDarkRed]))
         default:
             break
         }

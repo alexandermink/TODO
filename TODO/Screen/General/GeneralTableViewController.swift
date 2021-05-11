@@ -42,7 +42,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
     @IBOutlet var settingsButtons: [UIButton]!
-    @IBOutlet weak var checkProgressBar: UIProgressView!
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -130,6 +129,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 //            cell.notificationLabel.textColor = .systemYellow
             cell.configure(theme: currentTheme ?? "1")
             cell.descriptionLabel.textColor = .vitBackground
+
             
             let markSelectedCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
             let allMarkCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)

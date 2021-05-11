@@ -21,10 +21,13 @@ class GeneralTableViewCell: UITableViewCell {
         switch theme {
         case "1":
             notificationLabel.textColor = .systemYellow
+            checkProgressBar.tintColor = .systemYellow
         case "2":
             notificationLabel.textColor = .alexeyBackground
+            checkProgressBar.tintColor = .alexeyBackground
         case "3":
             notificationLabel.textColor = .red
+            checkProgressBar.tintColor = .alexDarkRed
         default:
             break
         }

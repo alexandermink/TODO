@@ -34,12 +34,14 @@ class CheckTableViewCell: UITableViewCell {
         
         checkListItemTextField.translatesAutoresizingMaskIntoConstraints = false
         checkListItemTextField.font = UIFont(name: "HelveticaNeue", size: 17)
-        checkListItemTextField.textColor = .black
+        checkListItemTextField.textColor = .systemYellow
+        checkListItemTextField.keyboardAppearance = .dark
         contentView.addSubview(checkListItemTextField)
         
         checkMarkButton.translatesAutoresizingMaskIntoConstraints = false
         checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         checkMarkButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
+        checkMarkButton.tintColor = .systemYellow
         contentView.addSubview(checkMarkButton)
 
     }
