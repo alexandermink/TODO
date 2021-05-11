@@ -62,6 +62,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.addTapGestureToHideKeyboard()
         tableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
         tableView.dragDelegate = self
         panGestureRecognizer.addTarget(self, action: #selector(closeMenu))
@@ -115,6 +116,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
             cell.addFastTaskNameTextField.textColor = .systemYellow
             cell.addButton.setTitleColor(.systemYellow, for: .normal)
+            cell.addFastTaskNameTextField.keyboardAppearance = .dark
             
             cell.indexPath = indexPath
             if !cell.styleEditing {
@@ -135,7 +137,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 //            cell.notificationLabel.textColor = .systemYellow
             cell.configure(theme: currentTheme ?? "1")
             cell.descriptionLabel.textColor = .vitBackground
-
             
             let markSelectedCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
             let allMarkCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
@@ -429,27 +430,28 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         }
         settingsTitleLabel.textColor = .vitBackground
         hideCloudsButton.setTitleColor(.vitBackground, for: .normal)
+        panEdgeView.isHidden = true
     }
 }
 
-extension GeneralTableViewController: UITableViewDragDelegate {
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-        return [ dragItem ]
-    }
-
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        print("sourceIndexPath :\(sourceIndexPath)")
-        print("destinationIndexPath :\(destinationIndexPath)")
-        
-        let mover = main.userSession.tasks[sourceIndexPath.section].sectionTasks.remove(at: sourceIndexPath.row)
-        main.userSession.tasks[destinationIndexPath.section].sectionTasks.insert(mover, at: destinationIndexPath.row)
-        
-//        try? main.updateTask(task: main.userSession.tasks[sourceIndexPath.section].sectionTasks[sourceIndexPath.row])
-    }
-}
+//extension GeneralTableViewController: UITableViewDragDelegate {
+//    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+//        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+//        dragItem.localObject = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+//        return [ dragItem ]
+//    }
+//
+//    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        print("sourceIndexPath :\(sourceIndexPath)")
+//        print("destinationIndexPath :\(destinationIndexPath)")
+//
+//        let mover = main.userSession.tasks[sourceIndexPath.section].sectionTasks.remove(at: sourceIndexPath.row)
+//        main.userSession.tasks[destinationIndexPath.section].sectionTasks.insert(mover, at: destinationIndexPath.row)
+//
+////        try? main.updateTask(task: main.userSession.tasks[sourceIndexPath.section].sectionTasks[sourceIndexPath.row])
+//    }
+//}

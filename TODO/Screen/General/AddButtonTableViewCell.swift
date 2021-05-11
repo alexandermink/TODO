@@ -18,7 +18,6 @@ class AddButtonTableViewCell: UITableViewCell {
     var indexPath: IndexPath = IndexPath()
     var styleEditing = false
     
-    
     @IBAction func plusButtonTapped(_ sender: Any) {
         addFastTaskNameTextField.isHidden = false
         addButton.isHidden = false
