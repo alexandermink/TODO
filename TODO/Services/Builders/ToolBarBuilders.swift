@@ -16,7 +16,7 @@ class ToolBarBuilder {
     static func setAttributedString(textSize: CGFloat) -> [NSAttributedString.Key: Any]{
         let doneButton: [NSAttributedString.Key: Any]
         doneButton = [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: textSize),
-         NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
+         NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         return doneButton
     }
     
@@ -34,16 +34,14 @@ extension UIViewController {
         let toolBar = ToolBarBuilder.configDoneButton()
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.chooseCategoryAction))
         let deleteButton = UIBarButtonItem(title: "Удалить", style: .done, target: self, action: #selector(NewTaskViewController.deleteCategoryAction))
-        let keyb = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "keyboard24"), style: .done, target: self, action: #selector(NewTaskViewController.changePickerAndKeyboard))
-        keyb.tintColor = .systemYellow
-        
-        
+        let keyboard = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "keyboard24"), style: .done, target: self, action: #selector(NewTaskViewController.changePickerAndKeyboard))
+        keyboard.tintColor = .lightGray        
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size2)), for: .highlighted)
         deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
         deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size2)), for: .highlighted)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.setItems([flexSpace, deleteButton, doneButton, keyb], animated: true)
+        toolBar.setItems([deleteButton, flexSpace, keyboard, flexSpace, doneButton], animated: true)
         return toolBar
     }
     
