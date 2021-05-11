@@ -30,7 +30,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var cloudsImageView: UIImageView!
     @IBOutlet weak var cloudsWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var settingsStackLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsBlurLeadConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsShadowLeadConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsStack: UIStackView!
     @IBOutlet weak var navSeparatorView: UIView!
     @IBOutlet weak var vitThemeButton: UIButton!
@@ -42,6 +43,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
     @IBOutlet var settingsButtons: [UIButton]!
+    @IBOutlet weak var settingsBlurView: UIVisualEffectView!
+    @IBOutlet weak var settingsBackLayer: Rounding!
+    @IBOutlet weak var settingsShadowBackLayer: Shadow!
+    @IBOutlet weak var hideCloudsButton: UIButton!
+    @IBOutlet weak var settingsTitleLabel: UILabel!
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -232,7 +238,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             self.navSeparatorView.frame.origin.x += self.view.frame.width/1.2
             self.boatImageView.frame.origin.x += self.view.frame.width/1.2
             self.mapImageView.frame.origin.x += self.view.frame.width/1.2
-            self.settingsStack.center = self.view.center
+            self.settingsBlurView.center = self.view.center
+            self.settingsShadowBackLayer.center = self.view.center
             self.alexLayer1.frame.origin.x += self.view.frame.width/1.2
             self.alexLayer2.frame.origin.x += self.view.frame.width/1.2
             
@@ -259,7 +266,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             self.navSeparatorView.frame.origin.x = 0
             self.boatImageView.frame.origin.x = -220
             self.mapImageView.frame.origin.x = -300
-            self.settingsStack.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
+            self.settingsBlurView.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
+            self.settingsShadowBackLayer.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
             self.alexLayer1.frame.origin.x = -300
             self.alexLayer2.frame.origin.x = -300
             
@@ -392,6 +400,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         
+        settingsBackLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+        settingsBlurView.layer.cornerRadius = 24
+        settingsBlurView.layer.borderWidth = 1
+        settingsBlurView.layer.borderColor = UIColor.darkGray.cgColor
+        
         newTaskButton.title = "Новая задача"
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.8
@@ -404,15 +417,18 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         alexLayer2widthConstraint.constant = view.frame.width*3.2
         alexLayer2HeightConstraint.constant = view.frame.width*1.8
         
-        settingsStackLeadingConstraint.constant = -view.frame.width/2
+        settingsBlurLeadConstraint.constant = -view.frame.width/2 - 80
+        settingsShadowLeadConstraint.constant = -view.frame.width/2 - 80
         self.cloudsImageView.frame = .init(x: -view.frame.width*4, y: 0, width: view.frame.width*2, height: view.frame.width)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Настройки", style: .done, target: self, action: #selector(didTapMenuButton))
         cloudsWidthConstraint.constant = view.frame.width*5.2
         cloudsHeightConstraint.constant = view.frame.width*2
         
         settingsButtons.forEach { buttons in
-            buttons.setTitleColor(.alexeyFog, for: .normal)
+            buttons.setTitleColor(.vitBackground, for: .normal)
         }
+        settingsTitleLabel.textColor = .vitBackground
+        hideCloudsButton.setTitleColor(.vitBackground, for: .normal)
     }
 }
 
