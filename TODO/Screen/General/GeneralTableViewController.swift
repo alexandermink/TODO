@@ -64,7 +64,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         mapView.addTapGestureToHideKeyboard()
         tableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
-        tableView.dragDelegate = self
+//        tableView.dragDelegate = self
         panGestureRecognizer.addTarget(self, action: #selector(closeMenu))
         panEdgeView.addGestureRecognizer(panGestureRecognizer)
         setViewScreen()
