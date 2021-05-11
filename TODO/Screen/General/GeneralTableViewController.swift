@@ -434,24 +434,24 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
 }
 
-extension GeneralTableViewController: UITableViewDragDelegate {
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-        return [ dragItem ]
-    }
-
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        print("sourceIndexPath :\(sourceIndexPath)")
-        print("destinationIndexPath :\(destinationIndexPath)")
-        
-        let mover = main.userSession.tasks[sourceIndexPath.section].sectionTasks.remove(at: sourceIndexPath.row)
-        main.userSession.tasks[destinationIndexPath.section].sectionTasks.insert(mover, at: destinationIndexPath.row)
-        
-//        try? main.updateTask(task: main.userSession.tasks[sourceIndexPath.section].sectionTasks[sourceIndexPath.row])
-    }
-}
+//extension GeneralTableViewController: UITableViewDragDelegate {
+//    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+//        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+//        dragItem.localObject = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+//        return [ dragItem ]
+//    }
+//
+//    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        print("sourceIndexPath :\(sourceIndexPath)")
+//        print("destinationIndexPath :\(destinationIndexPath)")
+//
+//        let mover = main.userSession.tasks[sourceIndexPath.section].sectionTasks.remove(at: sourceIndexPath.row)
+//        main.userSession.tasks[destinationIndexPath.section].sectionTasks.insert(mover, at: destinationIndexPath.row)
+//
+////        try? main.updateTask(task: main.userSession.tasks[sourceIndexPath.section].sectionTasks[sourceIndexPath.row])
+//    }
+//}
