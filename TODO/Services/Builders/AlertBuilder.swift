@@ -30,15 +30,20 @@ extension UIViewController {
         _ message: String,
         handler: ((UIAlertAction) -> Void)? = nil) {
         
-        let action = UIAlertAction(
-            title: "ОК",
+        let cancelAction = UIAlertAction(
+            title: "Отмена",
             style: .cancel,
+            handler: handler)
+        let okAction = UIAlertAction(
+            title: "ОК",
+            style: .default,
             handler: handler)
         let alert = UIAlertController(
             title: nil,
             message: message,
             preferredStyle: UIAlertController.Style.actionSheet)
-        alert.addAction(action)
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
 }

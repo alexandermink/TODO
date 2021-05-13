@@ -14,6 +14,8 @@ protocol LocalDataBaseService {
     func updateTasksFromRealm() throws
     func updateTask(task: Task) throws
     func getSectionsFromRealm() throws -> [String]
-    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws
+//    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws
+    func deleteTask(task: Task) throws
     func deleteSection(delSectionName: String) throws
+    func deleteAllData() throws
 }
