@@ -48,6 +48,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var settingsShadowBackLayer: Shadow!
     @IBOutlet weak var hideCloudsButton: UIButton!
     @IBOutlet weak var settingsTitleLabel: UILabel!
+    @IBOutlet weak var deleteAllDataButton: UIButton!
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -161,11 +162,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
-            try? main.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
-            if main.userSession.tasks[indexPath.section].sectionTasks.isEmpty {
-                main.userSession.tasks.remove(at: indexPath.section)
-            }
+//            try? main.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
+            try? main.deleteTask(task: self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row])
         }
         self.tableView.reloadData()
     }
@@ -334,6 +332,28 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
+    @IBAction func deleteDataAction(_ sender: UIButton) {
+        
+        let firstAlert = UIAlertController(title: "ВНИМАНИЕ!", message: "Все данные будут удалены", preferredStyle: .alert)
+        firstAlert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { action in
+            let secondAlert = UIAlertController(title: "ВНИМАНИЕ!!!", message: "Подтвердить удаление?", preferredStyle: .alert)
+            secondAlert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { action in
+                try? self.main.deleteAllData()
+                self.closeMenu()
+            }))
+            secondAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { action in
+                return
+            }))
+            self.present(secondAlert, animated: true, completion: nil)
+        }))
+        firstAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { action in
+            return
+        }))
+        
+        self.present(firstAlert, animated: true, completion: nil)
+        
+    }
+    
     func changeState(state: String) {
         self.currentTheme = state
         switch state {
@@ -430,6 +450,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         }
         settingsTitleLabel.textColor = .vitBackground
         hideCloudsButton.setTitleColor(.vitBackground, for: .normal)
+        deleteAllDataButton.setTitleColor(.vitBackground, for: .normal)
         panEdgeView.isHidden = true
     }
 }

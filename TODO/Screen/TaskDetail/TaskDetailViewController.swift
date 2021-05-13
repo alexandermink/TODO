@@ -274,7 +274,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
             contentView777.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView777.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
-            
             doneButton.topAnchor.constraint(equalTo: contentView777.topAnchor, constant: 12),
             doneButton.rightAnchor.constraint(equalTo: contentView777.rightAnchor, constant: -12),
             

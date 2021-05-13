@@ -140,22 +140,32 @@ extension Main: LocalDataBaseService {
         return sections
     }
     
-    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws {
-        let realm = try! Realm()
-        let task = userSession.tasks[indexPathSectionTask].sectionTasks[indexPathRowTask]
-        let deleteTask = realm.objects(TaskRealm.self).filter("id = \(task.id)").first
-        try realm.write {
-            if let delTask = deleteTask {
-                realm.delete(delTask)
-            }
+//    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws {
+//        let realm = try! Realm()
+//        let task = userSession.tasks[indexPathSectionTask].sectionTasks[indexPathRowTask]
+//        let deleteTask = realm.objects(TaskRealm.self).filter("id = \(task.id)").first
+//        try realm.write {
+//            if let delTask = deleteTask {
+//                realm.delete(delTask)
+//            }
+//        }
+//
+//        if task.notificationID != "" {
+//            let notificationService = NotificationService()
+//            notificationService.deleteNotificationRequest(notificationIdentifier: task.notificationID!)
+//        }
+//
+//        self.userSession.tasks[indexPathSectionTask].sectionTasks.remove(at: indexPathRowTask)
+//    }
+    
+    func deleteTask(task: Task) throws {
+        let realm = try Realm()
+        guard let delTask = realm.objects(TaskRealm.self).filter("id = \(task.id)").first else { return }
+        
+        try realm.write{
+            realm.delete(delTask)
         }
         
-        if task.notificationID != "" {
-            let notificationService = NotificationService()
-            notificationService.deleteNotificationRequest(notificationIdentifier: task.notificationID!)
-        }
-        
-        self.userSession.tasks[indexPathSectionTask].sectionTasks.remove(at: indexPathRowTask)
     }
 
     // на входе String с именем удалаяемой категории
@@ -178,5 +188,12 @@ extension Main: LocalDataBaseService {
             }
         }
         
+    }
+    
+    func deleteAllData() throws {
+        let realm = try Realm()
+        try realm.write{
+            realm.deleteAll()
+        }
     }
 }
