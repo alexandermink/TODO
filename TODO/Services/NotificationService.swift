@@ -58,6 +58,7 @@ class NotificationService {
     }
     
     func deleteNotificationRequest(notificationIdentifier: String) {
+        Main.instance.notifBadgeCount -= 1
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
     }
