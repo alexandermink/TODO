@@ -36,6 +36,6 @@ class AddButtonTableViewCell: UITableViewCell {
     func config() {
         let sectionName = Main.instance.userSession.tasks[indexPath.section].sectionName
         guard let name = addFastTaskNameTextField.text else { return }
-        try? Main.instance.addTask(sectionName: sectionName, name: name, backgroundColor: .clear, taskDescription: "", notificationDate: nil, checkList: [], markSelectedCount: 0)
+        try? Main.instance.addTask(sectionName: sectionName, name: name, backgroundColor: .clear, taskDescription: "", notificationDate: "", checkList: [], markSelectedCount: 0)
     }
 }

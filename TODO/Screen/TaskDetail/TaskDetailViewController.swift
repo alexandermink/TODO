@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskDetailViewController: UIViewController, UITableViewDelegate{
+class TaskDetailViewController: UIViewController, UITableViewDelegate {
     
     //MARK: - VARIABLES
     var scrollView = UIScrollView()
@@ -37,6 +37,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     var router: BaseRouter?
     let notificationService = NotificationService()
     private var currentTheme : String?
+    let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     
     //MARK: - LABEL FACTORY
     func labelFactory(lab: UILabel, text: String, color: UIColor) -> UILabel {
@@ -58,6 +59,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
         router = BaseRouter(viewController: self)
         dateFormatter.timeZone = .autoupdatingCurrent
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+        notificationPicker.minimumDate = minDate
         uiSetUp()
         constrainsInit()
         view.addTapGestureToHideKeyboard()
@@ -200,17 +202,41 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
     @objc func handleDoneTouchUpInside(){
         task.name = (taskNameTextView.text == "Напишите название задачи" ? "" : taskNameTextView.text)
         task.taskDescription = (taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDescriptionTextView.text)
-        if taskDateTextField.text != task.notificationDate {
-            if taskDateTextField.text == "" {
-                print("delete")
+//        if taskDateTextField.text != task.notificationDate {
+            
+        if task.notificationDate == "" {
+            if taskDateTextField.text != "" {
+                print("New notif")
+                task.notificationDate = taskDateTextField.text
+                task.notificationID = UUID().uuidString
+                task.notificationID = notificationService.sendNotificationRequest(task: task)
+            }
+        } else {
+            if taskDateTextField.text != "" {
+                if taskDateTextField.text != task.notificationDate {
+                    print("Update notif")
+                    task.notificationDate = taskDateTextField.text
+                    task.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
+                }
+            } else {
+                print("Delete notif")
                 notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
+                task.notificationDate = ""
                 task.notificationID = ""
                 taskDateTextField.text = ""
-            } else {
-                print("update")
-                task.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
             }
         }
+        
+//            if taskDateTextField.text == "" {
+//                print("delete")
+//                notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
+//                task.notificationID = ""
+//                taskDateTextField.text = ""
+//            } else {
+//                print("update")
+//                task.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
+//            }
+        
         task.notificationDate = taskDateTextField.text
         
         try? Main.instance.updateTask(task: task)
@@ -353,7 +379,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate{
 }
 
     //MARK: - TEBLEVIEW EXTENSION
-extension TaskDetailViewController: UITableViewDataSource{
+extension TaskDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return task.checkList.count
