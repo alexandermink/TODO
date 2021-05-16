@@ -180,7 +180,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         toolBarStackView.addArrangedSubview(addCheckElementTextField)
         
         addCheckButton.translatesAutoresizingMaskIntoConstraints = false
-        addCheckButton.setTitle("+", for: .normal)
+        addCheckButton.setImage(UIImage(systemName: "plus.app"), for: .normal)
         addCheckButton.tintColor = .vitBackground
         addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 22)
         addCheckButton.addTarget(self,
