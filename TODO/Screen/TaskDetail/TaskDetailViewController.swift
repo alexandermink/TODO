@@ -28,8 +28,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     var addCheckButton = UIButton(type: .system)
     var addCheckElementTextField = UITextField()
     let checkListTableView = UITableView()
-    var rrr: CGFloat?
-    
     
     var task: Task = Task()
     let dateFormatter = DateFormatter()
@@ -38,6 +36,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     let notificationService = NotificationService()
     private var currentTheme : String?
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
+    var bottomAncherConstraint: CGFloat?
     
     //MARK: - LABEL FACTORY
     func labelFactory(lab: UILabel, text: String, color: UIColor) -> UILabel {
@@ -53,8 +52,8 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
-        rrr = view.frame.height/1.2
         super.viewDidLoad()
+        bottomAncherConstraint = view.frame.height/1.2
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         router = BaseRouter(viewController: self)
         dateFormatter.timeZone = .autoupdatingCurrent
@@ -181,7 +180,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         toolBarStackView.addArrangedSubview(addCheckElementTextField)
         
         addCheckButton.translatesAutoresizingMaskIntoConstraints = false
-        addCheckButton.setTitle("+", for: .normal)
+        addCheckButton.setImage(UIImage(systemName: "plus.app"), for: .normal)
         addCheckButton.tintColor = .vitBackground
         addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 22)
         addCheckButton.addTarget(self,
@@ -202,7 +201,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     @objc func handleDoneTouchUpInside(){
         task.name = (taskNameTextView.text == "Напишите название задачи" ? "" : taskNameTextView.text)
         task.taskDescription = (taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDescriptionTextView.text)
-//        if taskDateTextField.text != task.notificationDate {
             
         if task.notificationDate == "" {
             if taskDateTextField.text != "" {
@@ -226,16 +224,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
                 taskDateTextField.text = ""
             }
         }
-        
-//            if taskDateTextField.text == "" {
-//                print("delete")
-//                notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
-//                task.notificationID = ""
-//                taskDateTextField.text = ""
-//            } else {
-//                print("update")
-//                task.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
-//            }
         
         task.notificationDate = taskDateTextField.text
         
@@ -307,7 +295,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
             
             checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 76),
             checkBlurView.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 0),
-            checkBlurView.bottomAnchor.constraint(equalTo: contentView777.bottomAnchor, constant: -rrr!),
+            checkBlurView.bottomAnchor.constraint(equalTo: contentView777.bottomAnchor, constant: -bottomAncherConstraint!),
             checkBlurView.rightAnchor.constraint(equalTo: contentView777.rightAnchor, constant: 0),
             
             toolBarView.topAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: 0),
@@ -359,17 +347,17 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
             addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
         case "3":
-            doneButton.tintColor = .alexDarkRed
-            taskNameTextView.textColor = .alexDarkRed
-            taskCreationDateLabel.textColor = .alexDarkRed
-            taskDateTextField.textColor = .alexDarkRed
-            taskDescriptionTextView.textColor = .alexDarkRed
+            doneButton.tintColor = .red
+            taskNameTextView.textColor = .red
+            taskCreationDateLabel.textColor = .red
+            taskDateTextField.textColor = .red
+            taskDescriptionTextView.textColor = .red
             addCheckElementTextField.textColor = .red
-            toolBarView.backgroundColor = .alexDarkRed
+            toolBarView.backgroundColor = .red
             view.backgroundColor = .alexLightGray
             view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexDarkRed]))
-            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexDarkRed]))
+            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.red]))
+            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.red]))
         default:
             break
         }
@@ -416,6 +404,8 @@ extension TaskDetailViewController: UITableViewDataSource {
         checkListTableView.reloadData()
     }
     
+    
+    //MARK: - TEBLEVIEW ACTIONS
     @objc func toggleSelected(button: UIButton) {
         if task.checkList[button.tag].isMarkSelected {
             task.markSelectedCount -= 1

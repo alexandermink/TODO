@@ -67,7 +67,7 @@ class CheckTableViewCell: UITableViewCell {
             checkMarkButton.tintColor = .alexeyBackground
             checkListItemTextField.textColor = .alexeyBackground
         case "3":
-            checkMarkButton.tintColor = .alexDarkRed
+            checkMarkButton.tintColor = .red
             checkListItemTextField.textColor = .red
         default:
             break
