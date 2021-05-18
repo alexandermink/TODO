@@ -96,10 +96,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.bounds.size.height = view.bounds.size.height
         UIView.animate(withDuration: 180, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
             self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
         }, completion: nil)
         self.tableView.reloadData()
+        TableRowsAnimation.animateTable(table: tableView)
+        print(tableView.bounds.size.height)
+        
     }
     
     //MARK: - TABLE
