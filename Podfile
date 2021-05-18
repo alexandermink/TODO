@@ -6,6 +6,7 @@ target 'TODO' do
   use_frameworks!
 
   pod 'RealmSwift', '= 10.7.2'
+  pod 'IQKeyboardManagerSwift', '6.5.6'
   
   # Pods for TODO
 

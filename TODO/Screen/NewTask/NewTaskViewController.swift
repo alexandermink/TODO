@@ -223,7 +223,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // MARK: - CHECK LIST ACTIONS
     @IBAction func checkListButtonAction(_ sender: Any) {
         print("Нажата кнопка создания чек-листа")
-        checkTableTopConstraints.constant = view.frame.height / 1.4
+        checkTableTopConstraints.constant = view.frame.height / 1.5
         checkListTableView.reloadData()
         checkToolBarrTextField.becomeFirstResponder()
         
