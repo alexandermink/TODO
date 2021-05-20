@@ -12,7 +12,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     
     //MARK: - VARIABLES
     var scrollView = UIScrollView()
-    var contentView777 = UIView()
+    var detailContentView = UIView()
     var doneButton = UIButton(type: .system)
     var taskNameTitleLabel = UILabel()
     var taskNameTextView = UITextView()
@@ -46,7 +46,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         label.text = text
         label.font = UIFont(name: "HelveticaNeue", size: 17)
         label.textColor = color
-        contentView777.addSubview(label)
+        detailContentView.addSubview(label)
         return label
     }
     
@@ -63,44 +63,44 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         constrainsInit()
         view.addTapGestureToHideKeyboard()
         changeState(state: Main.instance.state ?? "1")
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardOn),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardOff),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil)
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(keyboardOn),
+//            name: UIResponder.keyboardWillShowNotification,
+//            object: nil)
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(keyboardOff),
+//            name: UIResponder.keyboardWillHideNotification,
+//            object: nil)
     }
     
     //MARK: - KEYBOARD
-    @objc func keyboardOn(notification: Notification) {
-        print("on")
-        let userInfo = notification.userInfo
-        let frame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        scrollView.contentOffset = CGPoint(x: 0, y: frame.height/2)
-    }
-    
-    @objc func keyboardOff(notification: Notification) {
-        scrollView.contentOffset = CGPoint.zero
-        print("off")
-    }
+//    @objc func keyboardOn(notification: Notification) {
+//        print("on")
+//        let userInfo = notification.userInfo
+//        let frame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//        scrollView.contentOffset = CGPoint(x: 0, y: frame.height/2)
+//    }
+//
+//    @objc func keyboardOff(notification: Notification) {
+//        scrollView.contentOffset = CGPoint.zero
+//        print("off")
+//    }
     
     //MARK: - UI SET UP
     func uiSetUp(){
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
-        contentView777.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(contentView777)
+        detailContentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(detailContentView)
         
         doneButton.setTitle("Готово", for: .normal)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.tintColor = .systemYellow
         doneButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
-        contentView777.addSubview(doneButton)
+        detailContentView.addSubview(doneButton)
         doneButton.addTarget(self,
                              action: #selector(handleDoneTouchUpInside),
                              for: .touchUpInside)
@@ -116,7 +116,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         taskNameTextView.contentInsetAdjustmentBehavior = .automatic
         taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         taskNameTextView.keyboardAppearance = .dark
-        contentView777.addSubview(taskNameTextView)
+        detailContentView.addSubview(taskNameTextView)
         
         taskCreationDateTitleLabel = labelFactory(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
         
@@ -134,7 +134,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         taskDateTextField.clearsOnBeginEditing = true
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
         taskDateTextField.keyboardAppearance = .dark
-        contentView777.addSubview(taskDateTextField)
+        detailContentView.addSubview(taskDateTextField)
         
         taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
@@ -148,13 +148,13 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         taskDescriptionTextView.keyboardAppearance = .dark
-        contentView777.addSubview(taskDescriptionTextView)
+        detailContentView.addSubview(taskDescriptionTextView)
         
         checkBlurView = UIVisualEffectView()
         checkBlurView.translatesAutoresizingMaskIntoConstraints = false
         checkBlurView.backgroundColor = .clear
         checkBlurView.effect = UIBlurEffect(style: .systemThinMaterial)
-        contentView777.addSubview(checkBlurView)
+        detailContentView.addSubview(checkBlurView)
         
         toolBarView = UIView()
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
@@ -172,7 +172,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
         addCheckElementTextField.text = ""
         addCheckElementTextField.textColor = .systemYellow
-        addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 17)
+        addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 15)
         addCheckElementTextField.clearsOnBeginEditing = true
         addCheckElementTextField.backgroundColor = .vitBackground
         addCheckElementTextField.borderStyle = .roundedRect
@@ -190,7 +190,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
 
         checkListTableView.backgroundColor = .vitBackground
         checkListTableView.translatesAutoresizingMaskIntoConstraints = false
-        contentView777.addSubview(checkListTableView)
+        detailContentView.addSubview(checkListTableView)
         checkListTableView.register(CheckTableViewCell.self, forCellReuseIdentifier: "cell")
         checkListTableView.rowHeight = 48
         checkListTableView.dataSource = self
@@ -257,52 +257,52 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            contentView777.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            contentView777.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView777.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView777.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            detailContentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            detailContentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            detailContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            detailContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
-            doneButton.topAnchor.constraint(equalTo: contentView777.topAnchor, constant: 12),
-            doneButton.rightAnchor.constraint(equalTo: contentView777.rightAnchor, constant: -12),
+            doneButton.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 12),
+            doneButton.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
-            taskNameTitleLabel.topAnchor.constraint(equalTo: contentView777.topAnchor, constant: 20),
-            taskNameTitleLabel.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 12),
+            taskNameTitleLabel.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 20),
+            taskNameTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
-            taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 24),
+            taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 20),
             taskNameTextView.bottomAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 2),
-            taskNameTextView.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 8),
-            taskNameTextView.rightAnchor.constraint(equalTo: contentView777.rightAnchor, constant: -12),
+            taskNameTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 8),
+            taskNameTextView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
             taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 48),
-            taskCreationDateTitleLabel.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 12),
+            taskCreationDateTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
             taskCreationDateLabel.topAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 28),
-            taskCreationDateLabel.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 12),
+            taskCreationDateLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
             taskDateTitleLabel.topAnchor.constraint(equalTo: taskCreationDateLabel.topAnchor, constant: 36),
-            taskDateTitleLabel.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 12),
+            taskDateTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
             taskDateTextField.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 28),
-            taskDateTextField.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 12),
+            taskDateTextField.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
             taskDescriptionTitleLabel.topAnchor.constraint(equalTo: taskDateTextField.topAnchor, constant: 36),
-            taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 12),
+            taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
-            taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 24),
+            taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 20),
             taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: -4),
-            taskDescriptionTextView.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 8),
-            taskDescriptionTextView.rightAnchor.constraint(equalTo: contentView777.rightAnchor, constant: -12),
+            taskDescriptionTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 8),
+            taskDescriptionTextView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
-            checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 76),
-            checkBlurView.leftAnchor.constraint(equalTo: contentView777.leftAnchor, constant: 0),
-            checkBlurView.bottomAnchor.constraint(equalTo: contentView777.bottomAnchor, constant: -bottomAncherConstraint!),
-            checkBlurView.rightAnchor.constraint(equalTo: contentView777.rightAnchor, constant: 0),
+            checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 116),
+            checkBlurView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 0),
+            checkBlurView.bottomAnchor.constraint(equalTo: detailContentView.bottomAnchor, constant: -bottomAncherConstraint!),
+            checkBlurView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: 0),
             
             toolBarView.topAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: 0),
             toolBarView.leftAnchor.constraint(equalTo: checkBlurView.leftAnchor, constant: 0),
             toolBarView.rightAnchor.constraint(equalTo: checkBlurView.rightAnchor, constant: 0),
             toolBarView.bottomAnchor.constraint(equalTo: checkBlurView.bottomAnchor, constant: 0),
-            toolBarView.heightAnchor.constraint(equalToConstant: 54),
+            toolBarView.heightAnchor.constraint(equalToConstant: 40),
             
             toolBarStackView.topAnchor.constraint(equalTo: toolBarView.topAnchor, constant: 6),
             toolBarStackView.leftAnchor.constraint(equalTo: toolBarView.leftAnchor, constant: 6),
@@ -311,7 +311,7 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
             
             checkListTableView.topAnchor.constraint(equalTo: toolBarView.bottomAnchor, constant: 0),
             checkListTableView.leftAnchor.constraint(equalTo: checkBlurView.contentView.leftAnchor, constant: 0),
-            checkListTableView.bottomAnchor.constraint(equalTo: contentView777.bottomAnchor, constant: 0),
+            checkListTableView.bottomAnchor.constraint(equalTo: detailContentView.bottomAnchor, constant: 0),
             checkListTableView.rightAnchor.constraint(equalTo: checkBlurView.contentView.rightAnchor, constant: 0),
             
             addCheckButton.widthAnchor.constraint(equalToConstant: 54)
