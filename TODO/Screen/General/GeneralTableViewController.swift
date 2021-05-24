@@ -11,44 +11,23 @@ import RealmSwift
 
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIColorPickerViewControllerDelegate {
     
-    enum MenuState {
-        case opened
-        case closed
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backLayer: Rounding!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var newTaskButton: UIBarButtonItem!
     @IBOutlet weak var mapImageView: UIImageView!
     @IBOutlet weak var boatImageView: UIImageView!
-    @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var boatWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var boatHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cloudsImageView: UIImageView!
-    @IBOutlet weak var cloudsWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var settingsBlurLeadConstraint: NSLayoutConstraint!
-    @IBOutlet weak var settingsShadowLeadConstraint: NSLayoutConstraint!
-    @IBOutlet weak var settingsStack: UIStackView!
     @IBOutlet weak var navSeparatorView: UIView!
-    @IBOutlet weak var vitThemeButton: UIButton!
-    @IBOutlet weak var panEdgeView: UIView!
     @IBOutlet weak var alexLayer1: UIImageView!
     @IBOutlet weak var alexLayer2: UIImageView!
     @IBOutlet weak var alexLayer1widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer1HeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
-    @IBOutlet var settingsButtons: [UIButton]!
-    @IBOutlet weak var settingsBlurView: UIVisualEffectView!
-    @IBOutlet weak var settingsBackLayer: Rounding!
-    @IBOutlet weak var settingsShadowBackLayer: Shadow!
-    @IBOutlet weak var hideCloudsButton: UIButton!
-    @IBOutlet weak var settingsTitleLabel: UILabel!
-    @IBOutlet weak var deleteAllDataButton: UIButton!
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -56,28 +35,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let main = Main.instance
-    private var menuState: MenuState = .closed
-    let panGestureRecognizer = UIPanGestureRecognizer()
     
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.addTapGestureToHideKeyboard()
-        tableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
-//        tableView.dragDelegate = self
-        panGestureRecognizer.addTarget(self, action: #selector(closeMenu))
-        panEdgeView.addGestureRecognizer(panGestureRecognizer)
         setViewScreen()
-        UserDefaults.standard.string(forKey: "k")
-        changeState(state: main.state ?? "1")
-        UserDefaults.standard.bool(forKey: "clouds")
-        if main.isCloudsHidden! {
-            cloudsImageView.isHidden = true
-        } else { cloudsImageView.isHidden = false }
-        cloudsImageView.isHidden = true
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
-        
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: alexLayer1, magnitude: 50)
@@ -96,14 +60,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        changeState(state: main.state ?? "1")
         tableView.bounds.size.height = view.bounds.size.height
-        UIView.animate(withDuration: 180, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
-            self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.width)
-        }, completion: nil)
         self.tableView.reloadData()
         TableRowsAnimation.animateTable(table: tableView)
-        print(tableView.bounds.size.height)
-        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
     }
     
     //MARK: - TABLE
@@ -139,7 +103,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             cell.descriptionLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
             cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
             cell.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
-//            cell.notificationLabel.textColor = .systemYellow
             cell.configure(theme: currentTheme ?? "1")
             cell.descriptionLabel.textColor = .vitBackground
             
@@ -166,7 +129,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
-//            try? main.deleteTask(indexPathSectionTask: indexPath.section, indexPathRowTask: indexPath.row)
             try? main.deleteTask(task: self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row])
         }
         self.tableView.reloadData()
@@ -191,6 +153,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let object = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
             destinationViewController.task = object
             router?.present(vc: destinationViewController)
+//            router?.present(vc: destinationViewController, animated: true)
             print("ячейка нажата")
         }
     }
@@ -231,74 +194,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - ACTIONS
-    func openMenu() {
-        if main.isCloudsHidden! {
-            cloudsImageView.isHidden = true
-        } else {cloudsImageView.isHidden = false }
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
-            self.backLayer.frame.origin.x += self.view.frame.width/1.2
-            self.blurView.frame.origin.x += self.view.frame.width/1.2
-            self.navSeparatorView.frame.origin.x += self.view.frame.width/1.2
-            self.boatImageView.frame.origin.x += self.view.frame.width/1.2
-            self.mapImageView.frame.origin.x += self.view.frame.width/1.2
-            self.settingsBlurView.center = self.view.center
-            self.settingsShadowBackLayer.center = self.view.center
-            self.alexLayer1.frame.origin.x += self.view.frame.width/1.2
-            self.alexLayer2.frame.origin.x += self.view.frame.width/1.2
-            
-            self.blurView.backgroundColor = .black
-            self.backLayer.backgroundColor = .vitBackground
-            self.blurView.alpha = 0.5
-            self.navigationItem.leftBarButtonItem?.title = "Скрыть"
-            self.newTaskButton.isEnabled = false
-            self.newTaskButton.title = ""
-            self.panEdgeView.isHidden = false
-        } completion: { [weak self] done in
-            if done {
-                self?.menuState = .opened
-                self!.navigationItem.leftBarButtonItem?.isEnabled = true
-            }
-        }
-    }
-    
-    @objc func closeMenu() {
-        self.cloudsImageView.isHidden = true
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
-            self.backLayer.frame.origin.x = 0
-            self.blurView.frame.origin.x = 32
-            self.navSeparatorView.frame.origin.x = 0
-            self.boatImageView.frame.origin.x = -220
-            self.mapImageView.frame.origin.x = -300
-            self.settingsBlurView.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
-            self.settingsShadowBackLayer.center = CGPoint(x: -self.view.frame.width/2, y: self.view.frame.height/2)
-            self.alexLayer1.frame.origin.x = -300
-            self.alexLayer2.frame.origin.x = -300
-            
-            self.blurView.backgroundColor = .clear
-            self.backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-            self.blurView.alpha = 0.8
-            self.navigationItem.leftBarButtonItem?.title = "Настройки"
-            self.newTaskButton.isEnabled = true
-            self.newTaskButton.title = "Новая задача"
-            self.panEdgeView.isHidden = true 
-        } completion: { [weak self] done in
-            if done {
-                self?.menuState = .closed
-                self!.navigationItem.leftBarButtonItem?.isEnabled = true
-            }
-        }
-    }
-    
-    @objc func didTapMenuButton() {
-        navigationItem.leftBarButtonItem?.isEnabled = false
-        switch menuState {
-        case .closed:
-            openMenu()
-        case .opened:
-            closeMenu()
-        }
-    }
-    
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
@@ -307,61 +202,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - CHANGE STATE SETTINGS
-    @IBAction func vitThemeTapped(_ sender: Any) {
-        changeState(state: "1")
-        main.state = "1"
-        UserDefaults.standard.set(main.state, forKey: "k")
-    }
-    @IBAction func alexeyThemeTapped(_ sender: Any) {
-        changeState(state: "2")
-        main.state = "2"
-        UserDefaults.standard.set(main.state, forKey: "k")
-    }
-    @IBAction func alexandrThemeTapped(_ sender: Any) {
-        changeState(state: "3")
-        main.state = "3"
-        UserDefaults.standard.set(main.state, forKey: "k")
-    }
-    
-    @IBAction func hideCloudsAction(_ sender: Any) {
-        if main.isCloudsHidden! {
-            main.isCloudsHidden = false
-            UserDefaults.standard.set(main.isCloudsHidden, forKey: "clouds")
-            cloudsImageView.isHidden = false
-        } else {
-            main.isCloudsHidden = true
-            UserDefaults.standard.set(main.isCloudsHidden, forKey: "clouds")
-            cloudsImageView.isHidden = true
-        }
-    }
-    
-    
-    @IBAction func deleteDataAction(_ sender: UIButton) {
-        
-        let firstAlert = UIAlertController(title: "ВНИМАНИЕ!", message: "Все данные будут удалены", preferredStyle: .alert)
-        firstAlert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { action in
-            let secondAlert = UIAlertController(title: "ВНИМАНИЕ!!!", message: "Подтвердить удаление?", preferredStyle: .alert)
-            secondAlert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { action in
-                try? self.main.deleteAllData()
-                self.closeMenu()
-            }))
-            secondAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { action in
-                return
-            }))
-            self.present(secondAlert, animated: true, completion: nil)
-        }))
-        firstAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { action in
-            return
-        }))
-        
-        self.present(firstAlert, animated: true, completion: nil)
-        
-    }
-    
     func changeState(state: String) {
         self.currentTheme = state
         switch state {
         case "1":
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .light
+            }
             mapImageView.isHidden = false
             boatImageView.isHidden = true
             alexLayer1.isHidden = true
@@ -379,6 +226,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             navSeparatorView.backgroundColor = .systemYellow
             view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "2":
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .light
+            }
             mapImageView.isHidden = true
             boatImageView.isHidden = false
             alexLayer1.isHidden = true
@@ -396,6 +246,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             navSeparatorView.backgroundColor = .alexeyBackground
             view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "3":
+            UIApplication.shared.windows.forEach { window in
+                window.overrideUserInterfaceStyle = .dark
+            }
             boatImageView.isHidden = true
             mapImageView.isHidden = true
             alexLayer1.isHidden = false
@@ -419,64 +272,26 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - SET VIEW SCREEN
     func setViewScreen() {
-        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
-        
-        settingsBackLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-        settingsBlurView.layer.cornerRadius = 24
-        settingsBlurView.layer.borderWidth = 1
-        settingsBlurView.layer.borderColor = UIColor.darkGray.cgColor
-        
         newTaskButton.title = "Новая задача"
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.8
-        
         boatWidthConstraint.constant = view.frame.width*1.8
         boatHeightConstraint.constant = view.frame.width*1.8
-        
         alexLayer1widthConstraint.constant = view.frame.width*3.6
         alexLayer1HeightConstraint.constant = view.frame.width*2.4
         alexLayer2widthConstraint.constant = view.frame.width*3.2
         alexLayer2HeightConstraint.constant = view.frame.width*1.8
-        
-        settingsBlurLeadConstraint.constant = -view.frame.width/2 - 80
-        settingsShadowLeadConstraint.constant = -view.frame.width/2 - 80
-        self.cloudsImageView.frame = .init(x: -view.frame.width*4, y: 0, width: view.frame.width*2, height: view.frame.width)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Настройки", style: .done, target: self, action: #selector(didTapMenuButton))
-        cloudsWidthConstraint.constant = view.frame.width*5.2
-        cloudsHeightConstraint.constant = view.frame.width*2
-        
-        settingsButtons.forEach { buttons in
-            buttons.setTitleColor(.vitBackground, for: .normal)
-        }
-        settingsTitleLabel.textColor = .vitBackground
-        hideCloudsButton.setTitleColor(.vitBackground, for: .normal)
-        deleteAllDataButton.setTitleColor(.vitBackground, for: .normal)
-        panEdgeView.isHidden = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .done, target: self, action: #selector(checkMenu))
+        navigationItem.leftBarButtonItem?.tintColor = .systemYellow
+    }
+    
+    @objc func checkMenu() {
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(identifier: "Menu") as! MenuViewController
+        router?.push(vc: destinationVC, animated: true)
     }
 }
-
-//extension GeneralTableViewController: UITableViewDragDelegate {
-//    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-//        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-//        dragItem.localObject = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-//        return [ dragItem ]
-//    }
-//
-//    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        print("sourceIndexPath :\(sourceIndexPath)")
-//        print("destinationIndexPath :\(destinationIndexPath)")
-//
-//        let mover = main.userSession.tasks[sourceIndexPath.section].sectionTasks.remove(at: sourceIndexPath.row)
-//        main.userSession.tasks[destinationIndexPath.section].sectionTasks.insert(mover, at: destinationIndexPath.row)
-//
-////        try? main.updateTask(task: main.userSession.tasks[sourceIndexPath.section].sectionTasks[sourceIndexPath.row])
-//    }
-//}
