@@ -22,13 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let baseRouter = BaseRouter(viewController: mainViewContoller)
         mainViewContoller.router = baseRouter
         
-        let navigationController = UINavigationController(rootViewController: mainViewContoller)
+        let navigationController = CustomNavigationController(rootViewController: mainViewContoller)
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-//        window!.applyGradient(colours: [Main.instance.colorSchemeVit2, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        
+        window!.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -62,3 +61,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+//func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//
+//    guard let windowScene = (scene as? UIWindowScene) else { return }
+//
+////        let mainViewContoller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GeneralTableViewController") as! GeneralTableViewController
+//
+//    let containerVC = ContainerViewController()
+//
+//    let baseRouter = BaseRouter(viewController: containerVC)
+//    containerVC.router = baseRouter
+//
+////        let navigationController = UINavigationController(rootViewController: containerVC)
+//
+//    window = UIWindow(windowScene: windowScene)
+//    window?.rootViewController = containerVC
+//    window?.makeKeyAndVisible()
+//}
