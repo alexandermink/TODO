@@ -66,6 +66,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         TableRowsAnimation.animateTable(table: tableView)
     }
     
+    deinit {
+        print("deinit")
+    }
+    
     override func viewWillLayoutSubviews() {
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
     }
@@ -198,7 +202,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         print("нажата")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
-        router?.present(vc: destinationVC, animated: true)
+        main.transitionSide = "right"
+        router?.push(vc: destinationVC, animated: true)
     }
     
     //MARK: - CHANGE STATE SETTINGS
@@ -292,6 +297,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @objc func checkMenu() {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "Menu") as! MenuViewController
+        main.transitionSide = "left"
         router?.push(vc: destinationVC, animated: true)
     }
 }

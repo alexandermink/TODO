@@ -65,6 +65,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = nil
         try? Main.instance.deleteSection(delSectionName: "")
         boatImageView.isHidden = true
         setViewScreen()
@@ -94,7 +95,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
         }, completion: nil)
     }
-
+    
     // MARK: - ACTIONS
     @IBAction func createNewTaskButton(_ sender: UIButton) {
         func tempAddTask(sectionName: String) {
@@ -285,7 +286,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         self.currentTheme = state
         switch Main.instance.state {
         case "1":
-            mapImageView.isHidden = false
+            mapImageView.isHidden = true
             boatImageView.isHidden = true
             newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
             newSectionTextField.textColor = .systemYellow
@@ -302,10 +303,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.systemYellow, for: .highlighted)
             createButton.setTitleColor(.systemYellow, for: .normal)
             createButton.setTitleColor(.systemYellow, for: .highlighted)
-            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "2":
             mapImageView.isHidden = true
-            boatImageView.isHidden = false
+            boatImageView.isHidden = true
             newSectionTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Секция", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
             newSectionTextField.textColor = .alexeyBackground
             substituteCategoryTextField.textColor = .alexeyBackground
@@ -321,7 +322,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.alexeyBackground, for: .highlighted)
             createButton.setTitleColor(.alexeyBackground, for: .normal)
             createButton.setTitleColor(.alexeyBackground, for: .highlighted)
-            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "3":
             boatImageView.isHidden = true
             mapImageView.isHidden = true
@@ -340,7 +341,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.cyan, for: .highlighted)
             createButton.setTitleColor(.cyan, for: .normal)
             createButton.setTitleColor(.cyan, for: .highlighted)
-            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "4":
             break
         default:
@@ -350,7 +351,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     // MARK: - SET VIEW SCREEN
     func setViewScreen() {
-        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
