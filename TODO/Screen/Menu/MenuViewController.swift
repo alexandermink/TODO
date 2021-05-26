@@ -15,7 +15,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var menuBackLayerTrailingConstr: NSLayoutConstraint!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewTrailingConstr: NSLayoutConstraint!
-
+    @IBOutlet weak var settingsStack: UIStackView!
+    
     
     var router: BaseRouter?
     
@@ -25,7 +26,6 @@ class MenuViewController: UIViewController {
         router = BaseRouter(viewController: self)
         view.backgroundColor = nil
         settingsBackLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-        
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
@@ -33,7 +33,15 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = .vitDarkBrown
+        self.title = "Настройки"
     }
+    
+    
+    
+    
+    
+    
+    
     
     @IBAction func deleteAllData(_ sender: Any) {
         let firstAlert = UIAlertController(title: "ВНИМАНИЕ!", message: "Все данные будут удалены", preferredStyle: .alert)

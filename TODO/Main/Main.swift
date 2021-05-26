@@ -32,6 +32,8 @@ class Main {
         get {return UserDefaults.standard.bool(forKey: "clouds")}
         set {UserDefaults.standard.set(newValue, forKey: "clouds")}
     }
+    var transitionSide = "left"
+    
     
 
     private init() {

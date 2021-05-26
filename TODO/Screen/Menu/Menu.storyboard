@@ -13,14 +13,14 @@
             <objects>
                 <viewController storyboardIdentifier="Menu" id="LCm-8o-EhV" customClass="MenuViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3gh-nW-2OV">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6o-2H-RbQ" customClass="Shadow" customModule="TODO" customModuleProvider="target">
-                                <rect key="frame" x="24" y="73" width="252" height="765"/>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6o-2H-RbQ" customClass="Shadow" customModule="TODO" customModuleProvider="target">
+                                <rect key="frame" x="24" y="73" width="366" height="765"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2P-8i-i41" customClass="Rounding" customModule="TODO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="252" height="765"/>
+                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2P-8i-i41" customClass="Rounding" customModule="TODO" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="765"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="radius">
@@ -52,62 +52,62 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-7Z-Tyk">
-                                <rect key="frame" x="32" y="81" width="236" height="749"/>
+                                <rect key="frame" x="32" y="81" width="350" height="749"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="M4W-fg-8TK">
-                                    <rect key="frame" x="0.0" y="0.0" width="236" height="749"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="749"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="AaY-zH-YfF">
-                                            <rect key="frame" x="0.0" y="0.0" width="236" height="749"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="749"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flB-dF-beB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="236" height="83"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="83"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8P-xb-EO2">
-                                                    <rect key="frame" x="0.0" y="83" width="236" height="83.5"/>
+                                                    <rect key="frame" x="0.0" y="83" width="350" height="83.5"/>
                                                     <state key="normal" title="тема 1"/>
                                                     <connections>
                                                         <action selector="theme1action:" destination="LCm-8o-EhV" eventType="touchUpInside" id="IZ0-Dv-gsn"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3i-xO-U71">
-                                                    <rect key="frame" x="0.0" y="166.5" width="236" height="83"/>
+                                                    <rect key="frame" x="0.0" y="166.5" width="350" height="83"/>
                                                     <state key="normal" title="тема 2"/>
                                                     <connections>
                                                         <action selector="theme2action:" destination="LCm-8o-EhV" eventType="touchUpInside" id="XJ4-pQ-idN"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rU-oc-bUV">
-                                                    <rect key="frame" x="0.0" y="249.5" width="236" height="83.5"/>
+                                                    <rect key="frame" x="0.0" y="249.5" width="350" height="83.5"/>
                                                     <state key="normal" title="тема 3"/>
                                                     <connections>
                                                         <action selector="theme3action:" destination="LCm-8o-EhV" eventType="touchUpInside" id="EQQ-BU-mRr"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNy-As-k01">
-                                                    <rect key="frame" x="0.0" y="333" width="236" height="83"/>
+                                                    <rect key="frame" x="0.0" y="333" width="350" height="83"/>
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugD-my-WB2">
-                                                    <rect key="frame" x="0.0" y="416" width="236" height="83.5"/>
+                                                    <rect key="frame" x="0.0" y="416" width="350" height="83.5"/>
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZF-9N-fvZ">
-                                                    <rect key="frame" x="0.0" y="499.5" width="236" height="83"/>
+                                                    <rect key="frame" x="0.0" y="499.5" width="350" height="83"/>
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6c-34-TzB">
-                                                    <rect key="frame" x="0.0" y="582.5" width="236" height="83.5"/>
+                                                    <rect key="frame" x="0.0" y="582.5" width="350" height="83.5"/>
                                                     <state key="normal" title="Облака вкл/выкл"/>
                                                     <connections>
                                                         <action selector="hideCloudsAction:" destination="LCm-8o-EhV" eventType="touchUpInside" id="lxt-w0-ufT"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdN-xd-RVK">
-                                                    <rect key="frame" x="0.0" y="666" width="236" height="83"/>
+                                                    <rect key="frame" x="0.0" y="666" width="350" height="83"/>
                                                     <state key="normal" title="Очистить данные"/>
                                                     <connections>
                                                         <action selector="deleteAllData:" destination="LCm-8o-EhV" eventType="touchUpInside" id="eWX-9Z-VOw"/>
@@ -144,13 +144,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ucw-dC-ANC"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="896"/>
+                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="blurView" destination="Vp0-7Z-Tyk" id="npt-9e-7M4"/>
                         <outlet property="blurViewTrailingConstr" destination="XWl-BJ-0kk" id="JeN-DY-V6B"/>
                         <outlet property="menuBackLayerTrailingConstr" destination="r1J-zc-81N" id="s73-Ap-c0y"/>
                         <outlet property="settingsBackLayer" destination="b2P-8i-i41" id="Bx5-Bu-wif"/>
                         <outlet property="settingsShadowBackLayer" destination="a6o-2H-RbQ" id="Bvq-Za-hYZ"/>
+                        <outlet property="settingsStack" destination="AaY-zH-YfF" id="WCp-eC-XUA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ej-MQ-fNg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
