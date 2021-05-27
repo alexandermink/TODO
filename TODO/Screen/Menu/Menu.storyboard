@@ -57,72 +57,32 @@
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="749"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="AaY-zH-YfF">
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jf2-3y-EfI">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="749"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flB-dF-beB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="83"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8P-xb-EO2">
-                                                    <rect key="frame" x="0.0" y="83" width="350" height="83.5"/>
-                                                    <state key="normal" title="тема 1"/>
-                                                    <connections>
-                                                        <action selector="theme1action:" destination="LCm-8o-EhV" eventType="touchUpInside" id="IZ0-Dv-gsn"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3i-xO-U71">
-                                                    <rect key="frame" x="0.0" y="166.5" width="350" height="83"/>
-                                                    <state key="normal" title="тема 2"/>
-                                                    <connections>
-                                                        <action selector="theme2action:" destination="LCm-8o-EhV" eventType="touchUpInside" id="XJ4-pQ-idN"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rU-oc-bUV">
-                                                    <rect key="frame" x="0.0" y="249.5" width="350" height="83.5"/>
-                                                    <state key="normal" title="тема 3"/>
-                                                    <connections>
-                                                        <action selector="theme3action:" destination="LCm-8o-EhV" eventType="touchUpInside" id="EQQ-BU-mRr"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNy-As-k01">
-                                                    <rect key="frame" x="0.0" y="333" width="350" height="83"/>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugD-my-WB2">
-                                                    <rect key="frame" x="0.0" y="416" width="350" height="83.5"/>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZF-9N-fvZ">
-                                                    <rect key="frame" x="0.0" y="499.5" width="350" height="83"/>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6c-34-TzB">
-                                                    <rect key="frame" x="0.0" y="582.5" width="350" height="83.5"/>
-                                                    <state key="normal" title="Облака вкл/выкл"/>
-                                                    <connections>
-                                                        <action selector="hideCloudsAction:" destination="LCm-8o-EhV" eventType="touchUpInside" id="lxt-w0-ufT"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdN-xd-RVK">
-                                                    <rect key="frame" x="0.0" y="666" width="350" height="83"/>
-                                                    <state key="normal" title="Очистить данные"/>
-                                                    <connections>
-                                                        <action selector="deleteAllData:" destination="LCm-8o-EhV" eventType="touchUpInside" id="eWX-9Z-VOw"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </stackView>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <prototypes>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsTableViewCell" id="9p9-RT-pb9" customClass="SettingsTableViewCell" customModule="TODO" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="28" width="350" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9p9-RT-pb9" id="Z8X-pf-gWP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="43.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </tableViewCellContentView>
+                                                </tableViewCell>
+                                            </prototypes>
+                                            <sections/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="LCm-8o-EhV" id="KBp-5f-uxI"/>
+                                                <outlet property="delegate" destination="LCm-8o-EhV" id="NPn-Fq-Td7"/>
+                                            </connections>
+                                        </tableView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="AaY-zH-YfF" secondAttribute="trailing" id="5gf-WY-fM5"/>
-                                        <constraint firstAttribute="bottom" secondItem="AaY-zH-YfF" secondAttribute="bottom" id="L9I-fg-3SI"/>
-                                        <constraint firstItem="AaY-zH-YfF" firstAttribute="top" secondItem="M4W-fg-8TK" secondAttribute="top" id="cue-FV-VdW"/>
-                                        <constraint firstItem="AaY-zH-YfF" firstAttribute="leading" secondItem="M4W-fg-8TK" secondAttribute="leading" id="rvu-4o-wrv"/>
+                                        <constraint firstItem="jf2-3y-EfI" firstAttribute="top" secondItem="M4W-fg-8TK" secondAttribute="top" id="441-p5-TcZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="jf2-3y-EfI" secondAttribute="bottom" id="5s7-ju-psU"/>
+                                        <constraint firstAttribute="trailing" secondItem="jf2-3y-EfI" secondAttribute="trailing" id="dyJ-fU-GGI"/>
+                                        <constraint firstItem="jf2-3y-EfI" firstAttribute="leading" secondItem="M4W-fg-8TK" secondAttribute="leading" id="xSF-Nl-ewZ"/>
                                     </constraints>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -151,7 +111,7 @@
                         <outlet property="menuBackLayerTrailingConstr" destination="r1J-zc-81N" id="s73-Ap-c0y"/>
                         <outlet property="settingsBackLayer" destination="b2P-8i-i41" id="Bx5-Bu-wif"/>
                         <outlet property="settingsShadowBackLayer" destination="a6o-2H-RbQ" id="Bvq-Za-hYZ"/>
-                        <outlet property="settingsStack" destination="AaY-zH-YfF" id="WCp-eC-XUA"/>
+                        <outlet property="tableView" destination="jf2-3y-EfI" id="XoT-fG-58J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ej-MQ-fNg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -160,6 +120,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

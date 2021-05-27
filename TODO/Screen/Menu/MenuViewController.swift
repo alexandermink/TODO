@@ -15,11 +15,12 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var menuBackLayerTrailingConstr: NSLayoutConstraint!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewTrailingConstr: NSLayoutConstraint!
-    @IBOutlet weak var settingsStack: UIStackView!
+    @IBOutlet weak var tableView: UITableView!
     
     
     var router: BaseRouter?
-    
+    let settings = SettingsFactory.makeSetting()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +36,6 @@ class MenuViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .vitDarkBrown
         self.title = "Настройки"
     }
-    
-    
-    
-    
-    
-    
-    
     
     @IBAction func deleteAllData(_ sender: Any) {
         let firstAlert = UIAlertController(title: "ВНИМАНИЕ!", message: "Все данные будут удалены", preferredStyle: .alert)
@@ -88,4 +82,45 @@ class MenuViewController: UIViewController {
 //            cloudsImageView.isHidden = true
         }
     }
+}
+
+extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return settings.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return settings[section].settingsFields.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTableViewCell", for: indexPath) as? SettingsTableViewCell else { return UITableViewCell() }
+        
+        let set = settings[indexPath.section].settingsFields[indexPath.row]
+        
+        cell.textLabel?.text = set.name
+        cell.imageView?.image = UIImage(systemName: set.picture ?? "clear")
+        cell.accessoryType = set.isDisclosure ? .disclosureIndicator : .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return settings[section].name
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count {
+//            print("ячейка с кнопкой 'Добавить' нажата")
+//        } else {
+//            let destinationViewController = TaskDetailViewController()
+//            let object = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+//            destinationViewController.task = object
+//            router?.present(vc: destinationViewController)
+////            router?.present(vc: destinationViewController, animated: true)
+//            print("ячейка нажата")
+//        }
+    }
+    
+    
 }
