@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Themes View Controller-->
+        <scene sceneID="7Mg-fw-8YQ">
+            <objects>
+                <viewController storyboardIdentifier="Themes" id="Ad0-YD-efU" customClass="ThemesViewController" customModule="TODO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y2x-Cd-zx7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGc-mx-3MD">
+                                <rect key="frame" x="12" y="139" width="390" height="691"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B4e-bP-Rg9">
+                                        <rect key="frame" x="8" y="8" width="374" height="675"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="B4e-bP-Rg9" firstAttribute="top" secondItem="jGc-mx-3MD" secondAttribute="top" constant="8" id="P5j-n7-acP"/>
+                                    <constraint firstAttribute="trailing" secondItem="B4e-bP-Rg9" secondAttribute="trailing" constant="8" id="nQo-fZ-YER"/>
+                                    <constraint firstItem="B4e-bP-Rg9" firstAttribute="leading" secondItem="jGc-mx-3MD" secondAttribute="leading" constant="8" id="sXp-jh-moo"/>
+                                    <constraint firstAttribute="bottom" secondItem="B4e-bP-Rg9" secondAttribute="bottom" constant="8" id="u9Y-j3-KsK"/>
+                                </constraints>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QPl-8u-cJT">
+                                <rect key="frame" x="32" y="76" width="350" height="32"/>
+                                <segments>
+                                    <segment title="Тема 1"/>
+                                    <segment title="Тема 2"/>
+                                    <segment title="Тема 3"/>
+                                </segments>
+                                <connections>
+                                    <action selector="themesSegmentAction:" destination="Ad0-YD-efU" eventType="valueChanged" id="es8-Ln-6Zn"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zpc-Ec-SQw"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstItem="jGc-mx-3MD" firstAttribute="top" secondItem="QPl-8u-cJT" secondAttribute="bottom" constant="32" id="Fcj-2a-Xn9"/>
+                            <constraint firstItem="zpc-Ec-SQw" firstAttribute="trailing" secondItem="QPl-8u-cJT" secondAttribute="trailing" constant="32" id="GQT-qZ-M2p"/>
+                            <constraint firstItem="QPl-8u-cJT" firstAttribute="leading" secondItem="zpc-Ec-SQw" secondAttribute="leading" constant="32" id="S4h-C3-wuY"/>
+                            <constraint firstItem="jGc-mx-3MD" firstAttribute="leading" secondItem="zpc-Ec-SQw" secondAttribute="leading" constant="12" id="X4P-8r-9o6"/>
+                            <constraint firstItem="QPl-8u-cJT" firstAttribute="centerX" secondItem="y2x-Cd-zx7" secondAttribute="centerX" id="XWE-Kx-fo0"/>
+                            <constraint firstItem="zpc-Ec-SQw" firstAttribute="bottom" secondItem="jGc-mx-3MD" secondAttribute="bottom" constant="32" id="fTq-Z8-oNZ"/>
+                            <constraint firstItem="jGc-mx-3MD" firstAttribute="centerX" secondItem="y2x-Cd-zx7" secondAttribute="centerX" id="nXk-Dg-Iid"/>
+                            <constraint firstItem="zpc-Ec-SQw" firstAttribute="trailing" secondItem="jGc-mx-3MD" secondAttribute="trailing" constant="12" id="o7n-s6-4FF"/>
+                            <constraint firstItem="QPl-8u-cJT" firstAttribute="top" secondItem="zpc-Ec-SQw" secondAttribute="top" constant="32" id="piB-rB-p5d"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="segment" destination="QPl-8u-cJT" id="ugw-cV-IN7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxJ-rM-a2n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285.50724637681162" y="122.54464285714285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
