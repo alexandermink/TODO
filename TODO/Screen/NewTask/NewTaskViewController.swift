@@ -97,7 +97,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     // MARK: - ACTIONS
-    @IBAction func createNewTaskButton(_ sender: UIButton) {
+    @objc func createNewTaskButton() {
         func tempAddTask(sectionName: String) {
             var tempMarkSelectedCount = 0
             for mark in Main.instance.tempCheckList {
@@ -106,19 +106,19 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 }
             }
             guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
-            
+
             if task.notificationDate != "" {
                 notificationService.sendNotificationRequest(task: task)
             }
-            
-            
+
+
             guard let sectionsCount = sections?.count else { return }
             if sectionsCount > 0 {
                 try? Main.instance.deleteSection(delSectionName: "")
             }
-            router?.dismiss(animated: true, completion: nil)
+            router?.pop(animated: true)
         }
-        
+
         if notificationTextField.text != "" {
             let pickedDate: Double = dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? 0
             let interval = pickedDate - Date().timeIntervalSince1970
@@ -303,6 +303,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.systemYellow, for: .highlighted)
             createButton.setTitleColor(.systemYellow, for: .normal)
             createButton.setTitleColor(.systemYellow, for: .highlighted)
+            navigationController?.navigationBar.barTintColor = .vitDarkBrown
 //            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "2":
             mapImageView.isHidden = true
@@ -322,6 +323,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.alexeyBackground, for: .highlighted)
             createButton.setTitleColor(.alexeyBackground, for: .normal)
             createButton.setTitleColor(.alexeyBackground, for: .highlighted)
+            navigationController?.navigationBar.barTintColor = .alexeyFog
 //            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "3":
             boatImageView.isHidden = true
@@ -341,6 +343,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             checkListButton.setTitleColor(.cyan, for: .highlighted)
             createButton.setTitleColor(.cyan, for: .normal)
             createButton.setTitleColor(.cyan, for: .highlighted)
+            navigationController?.navigationBar.barTintColor = .alexDark
 //            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case "4":
             break
@@ -392,6 +395,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         checkPlusButton.layer.borderWidth = 2
         checkPlusButton.layer.borderColor = UIColor.darkGray.cgColor
         checkToolBarView.backgroundColor = .vitDarkBrown
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Создать", style: .done, target: self, action: #selector(createNewTaskButton))
     }
     
     //MARK: - CHARACTER LIMIT

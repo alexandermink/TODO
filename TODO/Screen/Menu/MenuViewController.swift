@@ -109,17 +109,18 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count {
-//            print("ячейка с кнопкой 'Добавить' нажата")
-//        } else {
-//            let destinationViewController = TaskDetailViewController()
-//            let object = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-//            destinationViewController.task = object
-//            router?.present(vc: destinationViewController)
-////            router?.present(vc: destinationViewController, animated: true)
-//            print("ячейка нажата")
-//        }
+        let storyboard = UIStoryboard(name: "Themes", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(identifier: "Themes") as! ThemesViewController
+        switch indexPath {
+        case [0, 0]:
+            router?.present(vc: destinationVC, animated: true)
+        case [1, 0]:
+            print("кнопка очистить данные нажата")
+        default:
+            break
+        }
+        
+
     }
     
     

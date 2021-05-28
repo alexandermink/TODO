@@ -23,10 +23,8 @@ struct SettingsField {
 final class SettingsFactory {
     static func makeSetting() -> [SettingsCategory] {
         
-        let themes = SettingsCategory(name: "Темы", settingsFields: [
-            SettingsField(name: "Тема 1", state: nil, picture: "sun.min", isDisclosure: true),
-            SettingsField(name: "Тема 2", state: nil, picture: "cloud.sun.fill", isDisclosure: true),
-            SettingsField(name: "Тема 3", state: nil, picture: "cloud.sun.bolt", isDisclosure: true)
+        let themes = SettingsCategory(name: "Внешний вид", settingsFields: [
+            SettingsField(name: "Выбор темы", state: nil, picture: "sun.min", isDisclosure: true)
         ])
         
         let some = SettingsCategory(name: "Some", settingsFields: [

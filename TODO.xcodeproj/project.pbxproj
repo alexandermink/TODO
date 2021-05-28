@@ -32,6 +32,8 @@
 		5DCF0838265A814E008EAE9D /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF0837265A814E008EAE9D /* TransitionAnimator.swift */; };
 		5DCF083C265A81BC008EAE9D /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF083B265A81BC008EAE9D /* CustomNavigationController.swift */; };
 		5DCF0840265A8203008EAE9D /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF083F265A8203008EAE9D /* InteractiveTransition.swift */; };
+		5DE89D4A26610D1A0079C4C7 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE89D4926610D1A0079C4C7 /* ThemesViewController.swift */; };
+		5DE89D4E26610D370079C4C7 /* Themes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DE89D4D26610D370079C4C7 /* Themes.storyboard */; };
 		5DEB6F84264E7ED70012B820 /* TableRowsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEB6F83264E7ED70012B820 /* TableRowsAnimation.swift */; };
 		875DEC27DBB556E1B9DD43A7 /* Pods_TODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF261960F9984306264C1D /* Pods_TODO.framework */; };
 		9655293B253D86CF0013F834 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9655293A253D86CF0013F834 /* Task.swift */; };
@@ -76,6 +78,8 @@
 		5DCF0837265A814E008EAE9D /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		5DCF083B265A81BC008EAE9D /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		5DCF083F265A8203008EAE9D /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
+		5DE89D4926610D1A0079C4C7 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		5DE89D4D26610D370079C4C7 /* Themes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Themes.storyboard; sourceTree = "<group>"; };
 		5DEB6F83264E7ED70012B820 /* TableRowsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowsAnimation.swift; sourceTree = "<group>"; };
 		72F18A26507E7F4027B94B8E /* Pods-TODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TODO.release.xcconfig"; path = "Target Support Files/Pods-TODO/Pods-TODO.release.xcconfig"; sourceTree = "<group>"; };
 		7AAF261960F9984306264C1D /* Pods_TODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +135,7 @@
 		5D0400C42653F88400ED26F8 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				5DE89D4826610CBF0079C4C7 /* DetailMenu */,
 				5D0400C82653F90300ED26F8 /* MenuViewController.swift */,
 				5D80F793265E9C6A00B3A7E4 /* SettingsTableViewCell.swift */,
 				5D6730242657F625002FA390 /* Menu.storyboard */,
@@ -187,6 +192,15 @@
 				5DCF083F265A8203008EAE9D /* InteractiveTransition.swift */,
 			);
 			path = CustomClasses;
+			sourceTree = "<group>";
+		};
+		5DE89D4826610CBF0079C4C7 /* DetailMenu */ = {
+			isa = PBXGroup;
+			children = (
+				5DE89D4926610D1A0079C4C7 /* ThemesViewController.swift */,
+				5DE89D4D26610D370079C4C7 /* Themes.storyboard */,
+			);
+			path = DetailMenu;
 			sourceTree = "<group>";
 		};
 		9655293F253D896C0013F834 /* Main */ = {
@@ -375,6 +389,7 @@
 			files = (
 				5D6730252657F625002FA390 /* Menu.storyboard in Resources */,
 				96600B5C253D058200F3FDC1 /* LaunchScreen.storyboard in Resources */,
+				5DE89D4E26610D370079C4C7 /* Themes.storyboard in Resources */,
 				15F9973E2615E17E003FFD71 /* NewTaskStoryboard.storyboard in Resources */,
 				96600B59253D058200F3FDC1 /* Assets.xcassets in Resources */,
 				96600B57253D057E00F3FDC1 /* Main.storyboard in Resources */,
@@ -452,6 +467,7 @@
 				5D2B3BEB262FED08006BF979 /* HeaderView.swift in Sources */,
 				5D80F798265EA0E600B3A7E4 /* Settings.swift in Sources */,
 				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
+				5DE89D4A26610D1A0079C4C7 /* ThemesViewController.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,
 				5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */,
 				5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */,

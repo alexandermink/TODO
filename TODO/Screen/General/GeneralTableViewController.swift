@@ -71,7 +71,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewWillLayoutSubviews() {
-        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
     }
     
     //MARK: - TABLE
@@ -229,7 +229,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
             navSeparatorView.backgroundColor = .systemYellow
-            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+            navigationItem.leftBarButtonItem?.tintColor = .systemYellow
         case "2":
             UIApplication.shared.windows.forEach { window in
                 window.overrideUserInterfaceStyle = .light
@@ -249,7 +249,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
             navSeparatorView.backgroundColor = .alexeyBackground
-            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+            navigationItem.leftBarButtonItem?.tintColor = .alexeyBackground
         case "3":
             UIApplication.shared.windows.forEach { window in
                 window.overrideUserInterfaceStyle = .dark
@@ -269,7 +269,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
                  NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
             navSeparatorView.backgroundColor = .red
-            view.applyGradient(colours: [.alexRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+            navigationItem.leftBarButtonItem?.tintColor = .red
         default:
             break
         }
@@ -291,7 +291,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         alexLayer2widthConstraint.constant = view.frame.width*3.2
         alexLayer2HeightConstraint.constant = view.frame.width*1.8
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .done, target: self, action: #selector(checkMenu))
-        navigationItem.leftBarButtonItem?.tintColor = .systemYellow
+        view.backgroundColor = nil
     }
     
     @objc func checkMenu() {
