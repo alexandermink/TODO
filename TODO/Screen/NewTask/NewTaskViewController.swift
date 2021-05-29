@@ -111,7 +111,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 notificationService.sendNotificationRequest(task: task)
             }
 
-
             guard let sectionsCount = sections?.count else { return }
             if sectionsCount > 0 {
                 try? Main.instance.deleteSection(delSectionName: "")

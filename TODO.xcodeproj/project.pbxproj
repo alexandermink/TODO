@@ -22,6 +22,7 @@
 		5D32F3D32616E43D008C1A58 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D32F3D22616E43D008C1A58 /* NotificationService.swift */; };
 		5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D32F3D52616E7A2008C1A58 /* AlertBuilder.swift */; };
 		5D34CCAC2628025100FBA762 /* ParalaxEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D34CCAB2628025100FBA762 /* ParalaxEffect.swift */; };
+		5D44F0F42662747A00A4A669 /* GeneralCellDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D44F0F32662747A00A4A669 /* GeneralCellDataSource.swift */; };
 		5D6730252657F625002FA390 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D6730242657F625002FA390 /* Menu.storyboard */; };
 		5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D71D3232639B8A90084F464 /* CheckListCell.swift */; };
 		5D80F794265E9C6A00B3A7E4 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D80F793265E9C6A00B3A7E4 /* SettingsTableViewCell.swift */; };
@@ -68,6 +69,7 @@
 		5D32F3D22616E43D008C1A58 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5D32F3D52616E7A2008C1A58 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		5D34CCAB2628025100FBA762 /* ParalaxEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParalaxEffect.swift; sourceTree = "<group>"; };
+		5D44F0F32662747A00A4A669 /* GeneralCellDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCellDataSource.swift; sourceTree = "<group>"; };
 		5D6730242657F625002FA390 /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		5D71D3232639B8A90084F464 /* CheckListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListCell.swift; sourceTree = "<group>"; };
 		5D80F793265E9C6A00B3A7E4 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				5D2B3BEA262FED08006BF979 /* HeaderView.swift */,
 				969C87982632481C0036A2A5 /* AddButtonTableViewCell.swift */,
 				96600B55253D057E00F3FDC1 /* Main.storyboard */,
+				5D44F0F32662747A00A4A669 /* GeneralCellDataSource.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				15F9973B2615DC29003FFD71 /* RouterFactory.swift in Sources */,
 				96663008261A6F25000CF25F /* TaskRealmConverter.swift in Sources */,
 				15A4420226567863000D245A /* TaskDetailTableVIewExtension.swift in Sources */,
+				5D44F0F42662747A00A4A669 /* GeneralCellDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
