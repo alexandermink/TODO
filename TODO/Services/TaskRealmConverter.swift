@@ -25,10 +25,7 @@ class TaskRealmConverter {
         taskRealm.markSelectedCount = task.markSelectedCount
         
         for checkMark in task.checkList {
-            let checkMarkRealm = CheckMarkRealm()
-            checkMarkRealm.isMarkSelected = checkMark.isMarkSelected
-            checkMarkRealm.title = checkMark.title
-            taskRealm.checkList.append(checkMarkRealm)
+            taskRealm.checkList.append(convert(checkMark))
         }
         
         return taskRealm

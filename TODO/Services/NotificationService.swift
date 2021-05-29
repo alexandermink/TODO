@@ -26,9 +26,7 @@ class NotificationService {
     }
     
     func makeIntervalNotificationTrigger(pickedTime: Double) -> Double {
-        let interval = pickedTime - Date().timeIntervalSince1970
-        Main.instance.notificationDateInterval = interval
-        return interval
+        return pickedTime - Date().timeIntervalSince1970
     }
 
     func sendNotificationRequest(

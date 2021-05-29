@@ -30,10 +30,10 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     let checkListTableView = UITableView()
     
     var task: Task = Task()
-    let dateFormatter = DateFormatter()
+    let dateFormatter = Main.instance.dateFormatter
     var notificationPicker = UIDatePicker()
     var router: BaseRouter?
-    let notificationService = NotificationService()
+    let notificationService = Main.instance.notificationService
     private var currentTheme : String?
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var bottomAncherConstraint: CGFloat?
@@ -56,8 +56,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         bottomAncherConstraint = view.frame.height/1.2
         view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         router = BaseRouter(viewController: self)
-        dateFormatter.timeZone = .autoupdatingCurrent
-        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         notificationPicker.minimumDate = minDate
         uiSetUp()
         constrainsInit()
@@ -233,8 +231,6 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     
     @objc func chooseNotificationAction() {
         taskDateTextField.text = dateFormatter.string(from: notificationPicker.date)
-        Main.instance.notificationDate = dateFormatter.date(from: taskDateTextField.text ?? "")?.localString()
-        print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         view.endEditing(true)
     }
     
