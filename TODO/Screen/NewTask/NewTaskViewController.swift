@@ -53,9 +53,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var router: BaseRouter?
     let categoryPicker = UIPickerView()
     let notificationPicker = UIDatePicker()
-    let dateFormatter = DateFormatter()
+    let dateFormatter = Main.instance.dateFormatter
     var calendar = Calendar.current
-    let notificationService = NotificationService()
+    let notificationService = Main.instance.notificationService
     var selectedBackgroundColor: UIColor? = UIColor.clear
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var isKeyboard = false
@@ -77,8 +77,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
-        dateFormatter.timeZone = .autoupdatingCurrent
-        dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         calendar.timeZone = .autoupdatingCurrent
         router = BaseRouter(viewController: self)
         sections = try? Main.instance.getSectionsFromRealm()
@@ -216,8 +214,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             }
         }
         notificationTextField?.text = dateFormatter.string(from: notificationPicker.date)
-        Main.instance.notificationDate = dateFormatter.date(from: notificationTextField?.text ?? "")?.localString()
-        print(Main.instance.notificationDate ?? "синглтон с датой тип строка", "🍏" )
         self.dismissKeyboard()
     }
     

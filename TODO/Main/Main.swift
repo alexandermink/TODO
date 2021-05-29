@@ -13,17 +13,24 @@ class Main {
     
     static let instance = Main()
     
-    var dateFormatter = DateFormatter()
-    
     var userSession: UserSession = UserSession()
-    var notificationDate: String?
-    var taskRealmConverter = TaskRealmConverter()
-    var rowBGCcolor: UIColor = .clear
-    var notifID: String?
+    
     var notifBadgeCount = 0
-    var notificationDateInterval = 0.0
+    
+    
+    // Сервисы
+    let dateFormatter = DateFormatter()
+    let taskRealmConverter = TaskRealmConverter()
     let notificationService = NotificationService()
+    
+    // Временные переменные
     var tempCheckList: [CheckMark] = []
+    
+    
+    // Лишние переменные, необходимо провести рефакторинг, слишком много мест вызова
+    var rowBGColor: UIColor = .clear
+    
+    // Этим переменным здесь не место, слишком много мест вызова
     var state: String? {
         get {return UserDefaults.standard.string(forKey: "k")}
         set {UserDefaults.standard.set(newValue, forKey: "k")}
@@ -33,8 +40,6 @@ class Main {
         set {UserDefaults.standard.set(newValue, forKey: "clouds")}
     }
     var transitionSide = "left"
-    
-    
 
     private init() {
         dateFormatter.timeZone = .autoupdatingCurrent
@@ -48,8 +53,6 @@ extension Main: LocalDataBaseService {
     func addSection(sectionName: String) throws {
 
         guard userSession.tasks.map(\.sectionName).contains(sectionName) else {
-            //Создание секции в локальном массиве
-            userSession.tasks.append(SectionTask(sectionName: sectionName, tasks: []))
             
             //Сохранение секции в базу данных Realm
             let realm = try Realm()
@@ -69,16 +72,12 @@ extension Main: LocalDataBaseService {
             return task
         } else {
             let realm = try Realm()
-            let id = (realm.objects(TaskRealm.self).sorted(byKeyPath: "id", ascending: false).first?.id ?? 0) + 1
+            let id = (realm.objects(TaskRealm.self).max { (taskRealm1, taskRealm2) -> Bool in
+                taskRealm1.id < taskRealm2.id
+            }?.id ?? 0) + 1
             let creationDate = Date()
             let tempNotificationID = notificationDate == "" ? "" : UUID().uuidString
             let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID, checkList: checkList, markSelectedCount: markSelectedCount)
-            //Создание таски в локальном массиве
-            for indexSection in 0..<userSession.tasks.count {
-                if userSession.tasks[indexSection].sectionName == sectionName {
-                    userSession.tasks[indexSection].sectionTasks.append(task)
-                }
-            }
             
             //Создание таски в базе данных Realm
             try realm.write {
@@ -89,7 +88,7 @@ extension Main: LocalDataBaseService {
         }
     }
 
-    func updateTasksFromRealm() throws {
+    func getTasksFromRealm() throws {
         
         let realm = try Realm()
         userSession.tasks = []
@@ -104,19 +103,7 @@ extension Main: LocalDataBaseService {
     func updateTask(task: Task) throws {
         let realm = try Realm()
         
-        let objectRealm = TaskRealm()
-        objectRealm.id = task.id
-        objectRealm.name = task.name
-        objectRealm.backgroundColor = task.backgroundColor?.toString()
-        objectRealm.taskDescription = task.taskDescription
-        objectRealm.creationDate = task.creationDate
-        objectRealm.notificationDate = task.notificationDate
-        objectRealm.markSelectedCount = task.markSelectedCount
-        for checkMark in task.checkList {
-            objectRealm.checkList.append(taskRealmConverter.convert(checkMark))
-        }
-        
-        
+        let objectRealm = taskRealmConverter.convert(task)
         
         let notificationDate: Double = dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? 0
         let interval = notificationDate - Date().timeIntervalSince1970
@@ -142,24 +129,6 @@ extension Main: LocalDataBaseService {
         return sections
     }
     
-//    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws {
-//        let realm = try! Realm()
-//        let task = userSession.tasks[indexPathSectionTask].sectionTasks[indexPathRowTask]
-//        let deleteTask = realm.objects(TaskRealm.self).filter("id = \(task.id)").first
-//        try realm.write {
-//            if let delTask = deleteTask {
-//                realm.delete(delTask)
-//            }
-//        }
-//
-//        if task.notificationID != "" {
-//            let notificationService = NotificationService()
-//            notificationService.deleteNotificationRequest(notificationIdentifier: task.notificationID!)
-//        }
-//
-//        self.userSession.tasks[indexPathSectionTask].sectionTasks.remove(at: indexPathRowTask)
-//    }
-    
     func deleteTask(task: Task) throws {
         let realm = try Realm()
         guard let delTask = realm.objects(TaskRealm.self).filter("id = \(task.id)").first else { return }
@@ -183,13 +152,6 @@ extension Main: LocalDataBaseService {
                 realm.delete(realmDelSection)
             }
         }
-        for sectionIndex in 0..<self.userSession.tasks.count {
-            if userSession.tasks[sectionIndex].sectionName.contains(delSectionName) {
-                self.userSession.tasks.remove(at: sectionIndex)
-                break
-            }
-        }
-        
     }
     
     func deleteAllData() throws {

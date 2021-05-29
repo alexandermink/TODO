@@ -11,7 +11,7 @@ import UIKit
 protocol LocalDataBaseService {
     func addSection(sectionName: String) throws
     func addTask(sectionName: String, name: String, backgroundColor: UIColor?, taskDescription: String?, notificationDate: String?, checkList: [CheckMark], markSelectedCount: Int) throws -> Task
-    func updateTasksFromRealm() throws
+    func getTasksFromRealm() throws
     func updateTask(task: Task) throws
     func getSectionsFromRealm() throws -> [String]
 //    func deleteTask(indexPathSectionTask: Int, indexPathRowTask: Int) throws

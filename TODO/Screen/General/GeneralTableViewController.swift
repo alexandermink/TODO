@@ -34,7 +34,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     let realm = try! Realm()
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
-    let main = Main.instance
     
     
     //MARK: - LIFE CYCLE
@@ -46,11 +45,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: alexLayer1, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: alexLayer2, magnitude: -50)
-        try? main.updateTasksFromRealm()
+        try? Main.instance.getTasksFromRealm()
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
-                try? self.main.updateTasksFromRealm()
+                try? Main.instance.getTasksFromRealm()
                 self.tableView.reloadData()
             case .initial(_): break
             case .error(_): break
@@ -60,14 +59,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        changeState(state: main.state ?? "1")
+        changeState(state: Main.instance.state ?? "1")
         tableView.bounds.size.height = view.bounds.size.height
         self.tableView.reloadData()
         TableRowsAnimation.animateTable(table: tableView)
-    }
-    
-    deinit {
-        print("deinit")
     }
     
     override func viewWillLayoutSubviews() {
@@ -76,16 +71,16 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - TABLE
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return main.userSession.tasks[section].sectionTasks.count + 1
+        return Main.instance.userSession.tasks[section].sectionTasks.count + 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return main.userSession.tasks.count
+        return Main.instance.userSession.tasks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count {
+        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
             cell.addFastTaskNameTextField.textColor = .systemYellow
             cell.addButton.setTitleColor(.systemYellow, for: .normal)
@@ -103,15 +98,15 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
                 view.backgroundColor = UIColor.hexStringToUIColor(hex: "#fcdab7")
                 return view
             }()
-            cell.taskNameLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
-            cell.descriptionLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
-            cell.notificationLabel.text = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
-            cell.backgroundColor = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
+            cell.taskNameLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
+            cell.descriptionLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
+            cell.notificationLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
+            cell.backgroundColor = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
             cell.configure(theme: currentTheme ?? "1")
             cell.descriptionLabel.textColor = .vitBackground
             
-            let markSelectedCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
-            let allMarkCount = Float(main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
+            let markSelectedCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
+            let allMarkCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
             
             var progress: Float = 0
             if allMarkCount > 0  {
@@ -123,7 +118,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count{
+        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count{
             return false
         } else {
             return true
@@ -132,14 +127,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
-            try? main.deleteTask(task: self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row])
+            Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
+            try? Main.instance.deleteTask(task: Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row])
         }
         self.tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return main.userSession.tasks[section].sectionName
+        return Main.instance.userSession.tasks[section].sectionName
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -150,11 +145,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == main.userSession.tasks[indexPath.section].sectionTasks.count {
+        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             print("ячейка с кнопкой 'Добавить' нажата")
         } else {
             let destinationViewController = TaskDetailViewController()
-            let object = main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+            let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
             destinationViewController.task = object
             router?.present(vc: destinationViewController)
 //            router?.present(vc: destinationViewController, animated: true)
@@ -164,7 +159,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - ВЫБОР ЦВЕТА СВАЙП ЯЧЕЙКИ
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        main.rowBGCcolor = viewController.selectedColor
+        Main.instance.rowBGColor = viewController.selectedColor
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -182,7 +177,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let colorPickerVC = UIColorPickerViewController()
             colorPickerVC.delegate = self
             self.present(colorPickerVC, animated: true)
-            self.main.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = main.rowBGCcolor
+            Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = Main.instance.rowBGColor
         }
         return action
     }
@@ -190,8 +185,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     func okAction(at indexPath: IndexPath) -> UIContextualAction {
         return UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
             var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-            task.backgroundColor = main.rowBGCcolor
-            main.rowBGCcolor = .clear
+            task.backgroundColor = Main.instance.rowBGColor
+            Main.instance.rowBGColor = .clear
             try? Main.instance.updateTask(task: task)
             tableView.reloadData()
         }
@@ -202,7 +197,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         print("нажата")
         let storyboard = UIStoryboard(name: "NewTaskStoryboard", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
-        main.transitionSide = "right"
+        Main.instance.transitionSide = "right"
         router?.push(vc: destinationVC, animated: true)
     }
     
@@ -297,7 +292,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @objc func checkMenu() {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(identifier: "Menu") as! MenuViewController
-        main.transitionSide = "left"
+        Main.instance.transitionSide = "left"
         router?.push(vc: destinationVC, animated: true)
     }
 }
