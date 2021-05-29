@@ -34,6 +34,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     let realm = try! Realm()
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
+    let dataSource = GeneralCellDataSource()
+
     
     
     //MARK: - LIFE CYCLE
@@ -65,99 +67,33 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         TableRowsAnimation.animateTable(table: tableView)
     }
     
-    override func viewWillLayoutSubviews() {
-//        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-    }
-    
+
     //MARK: - TABLE
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Main.instance.userSession.tasks[section].sectionTasks.count + 1
+        Main.instance.userSession.tasks[section].sectionTasks.count + 1
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return Main.instance.userSession.tasks.count
-    }
-
+    func numberOfSections(in tableView: UITableView) -> Int { Main.instance.userSession.tasks.count }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
-            cell.addFastTaskNameTextField.textColor = .systemYellow
-            cell.addButton.setTitleColor(.systemYellow, for: .normal)
-            cell.addFastTaskNameTextField.keyboardAppearance = .dark
-            
-            cell.indexPath = indexPath
-            if !cell.styleEditing {
-                cell.setEditing(false, animated: false)
-            }
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralCell", for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
-            cell.selectedBackgroundView = {
-                let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.size.width, height: cell.frame.size.height))
-                view.backgroundColor = UIColor.hexStringToUIColor(hex: "#fcdab7")
-                return view
-            }()
-            cell.taskNameLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
-            cell.descriptionLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
-            cell.notificationLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
-            cell.backgroundColor = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
-            cell.configure(theme: currentTheme ?? "1")
-            cell.descriptionLabel.textColor = .vitBackground
-            
-            let markSelectedCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
-            let allMarkCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
-            
-            var progress: Float = 0
-            if allMarkCount > 0  {
-                progress = markSelectedCount / allMarkCount
-            }
-            cell.checkProgressBar.setProgress(progress, animated: true)
-            return cell
-        }
+        self.dataSource.getCell(at: tableView, indexPath: indexPath, currentTheme: currentTheme ?? "1")
     }
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count{
-            return false
-        } else {
-            return true
-        }
+        self.dataSource.isEditRow(tableView, canEditRowAt: indexPath)
     }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
-            try? Main.instance.deleteTask(task: Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row])
-        }
-        self.tableView.reloadData()
+        self.dataSource.editingStyle(tableView, commit: editingStyle, forRowAt: indexPath)
     }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Main.instance.userSession.tasks[section].sectionName
+        Main.instance.userSession.tasks[section].sectionName
     }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "someHeaderViewIdentifier") as? HeaderView else { return nil }
-        headerView.configure(theme: currentTheme ?? "1", sameColorView: nil)
-        return headerView
+        self.dataSource.viewHeaderSection(tableView, viewForHeaderInSection: section, currentTheme: currentTheme ?? "1")
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
-            print("ячейка с кнопкой 'Добавить' нажата")
-        } else {
-            let destinationViewController = TaskDetailViewController()
-            let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-            destinationViewController.task = object
-            router?.present(vc: destinationViewController)
-//            router?.present(vc: destinationViewController, animated: true)
-            print("ячейка нажата")
-        }
+        self.dataSource.selectRow(tableView, didSelectRowAt: indexPath, router: router!)
     }
     
     //MARK: - ВЫБОР ЦВЕТА СВАЙП ЯЧЕЙКИ
+    
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         Main.instance.rowBGColor = viewController.selectedColor
     }
@@ -169,11 +105,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         okButton.backgroundColor = .darkGray
         let configuration = UISwipeActionsConfiguration(actions: [pickColorButton, okButton])
         configuration.performsFirstActionWithFullSwipe = false
-            return configuration
+        return configuration
     }
-    
+    //
     func pickColorAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "Выбрать цвет") { [self] (action, view, completion) in
+        let action = UIContextualAction(style: .normal, title: "Выбрать цвет") { (action, view, completion) in
             let colorPickerVC = UIColorPickerViewController()
             colorPickerVC.delegate = self
             self.present(colorPickerVC, animated: true)
@@ -181,7 +117,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         }
         return action
     }
-    
+
     func okAction(at indexPath: IndexPath) -> UIContextualAction {
         return UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
             var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
