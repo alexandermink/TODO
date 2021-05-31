@@ -41,6 +41,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        router = BaseRouter(viewController: self)
         setViewScreen()
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)

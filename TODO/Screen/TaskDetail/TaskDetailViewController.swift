@@ -230,6 +230,12 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     }
     
     @objc func chooseNotificationAction() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            guard granted else {
+                print("Разрешение не получено")
+                return
+            }
+        }
         taskDateTextField.text = dateFormatter.string(from: notificationPicker.date)
         view.endEditing(true)
     }
