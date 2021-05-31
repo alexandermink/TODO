@@ -81,6 +81,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         view.addTapGestureToHideKeyboard()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        view.dismissKeyboard()
+    }
+    
     // MARK: - ACTIONS
     @objc func createNewTaskButton() {
         func tempAddTask(sectionName: String) {
@@ -101,11 +105,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 try? Main.instance.deleteSection(delSectionName: "")
             }
             router?.pop(animated: true)
-//            self.navigationController?.popViewController(animated: true)
-//            window?.rootViewController
-//            UIApplication.shared.windows.first?.navigationController777
-            
-//            SceneDelegate.navigationController777?.popViewController(animated: true)
         }
 
         if notificationTextField.text != "" {

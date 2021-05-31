@@ -68,6 +68,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         TableRowsAnimation.animateTable(table: tableView)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        view.dismissKeyboard()
+    }
+    
 
     //MARK: - TABLE
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

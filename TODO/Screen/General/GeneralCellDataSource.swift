@@ -9,8 +9,9 @@
 import UIKit
 
 class GeneralCellDataSource {
+    
+    
     func getCell (at tableView: UITableView, indexPath: IndexPath, currentTheme: String) -> UITableViewCell {
-        
         if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
             cell.addFastTaskNameTextField.textColor = .systemYellow

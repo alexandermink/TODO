@@ -19,15 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let mainViewContoller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GeneralTableViewController") as! GeneralTableViewController
         
-        let newTaskViewController = UIStoryboard(name: "NewTaskStoryboard", bundle: nil).instantiateViewController(identifier: "NewTaskViewController") as! NewTaskViewController
-        
         let baseRouter = BaseRouter(viewController: mainViewContoller)
         mainViewContoller.router = baseRouter
         
         let navigationController = CustomNavigationController(rootViewController: mainViewContoller)
-        
-        navigationController.viewControllers = [newTaskViewController, mainViewContoller]
-        
+                
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
