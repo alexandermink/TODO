@@ -100,8 +100,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             if sectionsCount > 0 {
                 try? Main.instance.deleteSection(delSectionName: "")
             }
-//            router?.pop(animated: true)
-            self.navigationController?.popViewController(animated: true)
+            router?.pop(animated: true)
+//            self.navigationController?.popViewController(animated: true)
 //            window?.rootViewController
 //            UIApplication.shared.windows.first?.navigationController777
             
