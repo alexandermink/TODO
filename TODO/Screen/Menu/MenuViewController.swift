@@ -70,18 +70,6 @@ class MenuViewController: UIViewController {
         Main.instance.state = "3"
         UserDefaults.standard.set(Main.instance.state, forKey: "k")
     }
-    
-    @IBAction func hideCloudsAction(_ sender: Any) {
-        if Main.instance.isCloudsHidden! {
-            Main.instance.isCloudsHidden = false
-            UserDefaults.standard.set(Main.instance.isCloudsHidden, forKey: "clouds")
-//            cloudsImageView.isHidden = false
-        } else {
-            Main.instance.isCloudsHidden = true
-            UserDefaults.standard.set(Main.instance.isCloudsHidden, forKey: "clouds")
-//            cloudsImageView.isHidden = true
-        }
-    }
 }
 
 extension MenuViewController: UITableViewDelegate, UITableViewDataSource {

@@ -34,9 +34,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var substituteCategoryTextField: UITextField! {didSet{
         substituteCategoryTextField.inputAccessoryView = makeToolBarCategory()}}
-    @IBOutlet weak var cloudsImageView: UIImageView!
-    @IBOutlet weak var cloudsWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cloudsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var boatWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var boatHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
@@ -69,9 +66,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         try? Main.instance.deleteSection(delSectionName: "")
         boatImageView.isHidden = true
         setViewScreen()
-        if Main.instance.isCloudsHidden! {
-            cloudsImageView.isHidden = true
-        } else { cloudsImageView.isHidden = false }
         changeState(state: Main.instance.state ?? "1")
         ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
@@ -85,13 +79,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         newSectionTextField?.textAlignment = .center
         newSectionTextField?.text = sections?.count != 0 ? sections?[0] : ""
         view.addTapGestureToHideKeyboard()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIView.animate(withDuration: 180, delay: 0, options: [.curveLinear, .autoreverse, .repeat], animations: {
-            self.cloudsImageView.frame = .init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
-        }, completion: nil)
     }
     
     // MARK: - ACTIONS
@@ -113,7 +100,12 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             if sectionsCount > 0 {
                 try? Main.instance.deleteSection(delSectionName: "")
             }
-            router?.pop(animated: true)
+//            router?.pop(animated: true)
+            self.navigationController?.popViewController(animated: true)
+//            window?.rootViewController
+//            UIApplication.shared.windows.first?.navigationController777
+            
+//            SceneDelegate.navigationController777?.popViewController(animated: true)
         }
 
         if notificationTextField.text != "" {
@@ -359,9 +351,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         createButton.setTitle("Создать", for: .normal)
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.6
-        self.cloudsImageView.frame = .init(x: -view.frame.width*4, y: 40, width: view.frame.width*2, height: view.frame.width)
-        cloudsWidthConstraint.constant = view.frame.width*5.0
-        cloudsHeightConstraint.constant = view.frame.width*1.6
         boatWidthConstraint.constant = view.frame.width*1.8
         boatHeightConstraint.constant = view.frame.width*1.8
         stackBottomConstraint.constant = view.frame.height/4

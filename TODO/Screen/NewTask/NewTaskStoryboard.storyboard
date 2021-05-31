@@ -67,14 +67,6 @@
                                     <constraint firstAttribute="height" constant="600" id="RLA-db-Tpo"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds888" translatesAutoresizingMaskIntoConstraints="NO" id="pvO-vw-zfT">
-                                <rect key="frame" x="0.0" y="-6" width="2600" height="800"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="2600" id="K6h-M2-c3p"/>
-                                    <constraint firstAttribute="height" constant="800" id="bAr-0F-KR5"/>
-                                </constraints>
-                            </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOL-GF-LPa">
                                 <rect key="frame" x="32" y="126" width="350" height="496"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iDW-QO-9WQ">
@@ -336,9 +328,7 @@
                             <constraint firstItem="Nod-Z1-L7u" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" constant="24" id="KNR-1w-OTT"/>
                             <constraint firstItem="Hb3-NG-4sk" firstAttribute="top" secondItem="B9L-pa-vsv" secondAttribute="top" constant="20" id="NuH-Ol-uQM"/>
                             <constraint firstItem="Nod-Z1-L7u" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="24" id="P09-Ch-ois"/>
-                            <constraint firstItem="pvO-vw-zfT" firstAttribute="leading" secondItem="B9L-pa-vsv" secondAttribute="leading" id="UvD-10-Kog"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="bottom" secondItem="dOL-GF-LPa" secondAttribute="bottom" constant="240" id="WJu-nJ-Gw5"/>
-                            <constraint firstItem="pvO-vw-zfT" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="-100" id="Yv6-pe-xIt"/>
                             <constraint firstItem="dOL-GF-LPa" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="32" id="Zke-w1-res"/>
                             <constraint firstItem="ez6-jK-pZ1" firstAttribute="top" secondItem="Hb3-NG-4sk" secondAttribute="bottom" constant="40" id="h4u-yD-q01"/>
                             <constraint firstItem="B9L-pa-vsv" firstAttribute="trailing" secondItem="AuC-He-cPs" secondAttribute="trailing" id="iKN-8e-PAJ"/>
@@ -365,9 +355,6 @@
                         <outlet property="checkTableTopConstraints" destination="phj-TQ-BiZ" id="VyX-i6-WUg"/>
                         <outlet property="checkToolBarView" destination="uZA-16-wN4" id="xnw-kh-CMx"/>
                         <outlet property="checkToolBarrTextField" destination="ipK-ab-ReT" id="lzc-zj-pOT"/>
-                        <outlet property="cloudsHeightConstraint" destination="bAr-0F-KR5" id="OSf-7j-IER"/>
-                        <outlet property="cloudsImageView" destination="pvO-vw-zfT" id="ChX-uB-cVR"/>
-                        <outlet property="cloudsWidthConstraint" destination="K6h-M2-c3p" id="u8m-VH-rmc"/>
                         <outlet property="coverButton" destination="3VI-PW-BYs" id="ccv-17-9oo"/>
                         <outlet property="createButton" destination="Hb3-NG-4sk" id="cTb-JV-dD3"/>
                         <outlet property="descriptionTextField" destination="2tT-nH-U0R" id="4S1-4x-ChS"/>
@@ -395,7 +382,6 @@
     <resources>
         <image name="888" width="1200" height="900"/>
         <image name="boat2" width="1651" height="1416"/>
-        <image name="clouds888" width="2039" height="552"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
