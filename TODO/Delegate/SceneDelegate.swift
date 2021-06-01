@@ -22,23 +22,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let baseRouter = BaseRouter(viewController: mainViewContoller)
         mainViewContoller.router = baseRouter
         
+        let theme = Main.instance.themeService.getTheme()
         let navigationController = CustomNavigationController(rootViewController: mainViewContoller)
+        navigationController.navigationBar.tintColor = theme.interfaceColor
                 
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        Main.instance.state = "1"
-        switch Main.instance.state {
-        case "1":
-            window!.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        case "2":
-            window!.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        case "3":
-            window!.applyGradient(colours: [.alexRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        default:
-            break
-        }
+        
+        window!.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        
+        
+        
+//        Main.instance.state = "1"
+//        switch Main.instance.themeService {
+//        case "1":
+//            window!.applyGradient(colours: [.interfaceColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//        case "2":
+//            window!.applyGradient(colours: [.alexeyFog, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//        case "3":
+//            window!.applyGradient(colours: [.alexRed, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//        default:
+//            break
+//        }
     }
+    
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

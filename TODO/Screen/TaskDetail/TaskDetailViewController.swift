@@ -54,37 +54,18 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         bottomAncherConstraint = view.frame.height/1.2
-        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        let theme = Main.instance.themeService.getTheme()
+        view.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         router = BaseRouter(viewController: self)
         notificationPicker.minimumDate = minDate
         uiSetUp()
         constrainsInit()
         view.addTapGestureToHideKeyboard()
-        changeState(state: Main.instance.state ?? "1")
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(keyboardOn),
-//            name: UIResponder.keyboardWillShowNotification,
-//            object: nil)
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(keyboardOff),
-//            name: UIResponder.keyboardWillHideNotification,
-//            object: nil)
     }
     
-    //MARK: - KEYBOARD
-//    @objc func keyboardOn(notification: Notification) {
-//        print("on")
-//        let userInfo = notification.userInfo
-//        let frame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-//        scrollView.contentOffset = CGPoint(x: 0, y: frame.height/2)
-//    }
-//
-//    @objc func keyboardOff(notification: Notification) {
-//        scrollView.contentOffset = CGPoint.zero
-//        print("off")
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        changeTheme()
+    }
     
     //MARK: - UI SET UP
     func uiSetUp(){
@@ -172,21 +153,21 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         addCheckElementTextField.textColor = .systemYellow
         addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 15)
         addCheckElementTextField.clearsOnBeginEditing = true
-        addCheckElementTextField.backgroundColor = .vitBackground
+        addCheckElementTextField.backgroundColor = .mainBackground
         addCheckElementTextField.borderStyle = .roundedRect
         addCheckElementTextField.keyboardAppearance = .dark
         toolBarStackView.addArrangedSubview(addCheckElementTextField)
         
         addCheckButton.translatesAutoresizingMaskIntoConstraints = false
         addCheckButton.setImage(UIImage(systemName: "plus.app"), for: .normal)
-        addCheckButton.tintColor = .vitBackground
+        addCheckButton.tintColor = .mainBackground
         addCheckButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 22)
         addCheckButton.addTarget(self,
                              action: #selector(checkTablePlusAction),
                              for: .touchUpInside)
         toolBarStackView.addArrangedSubview(addCheckButton)
 
-        checkListTableView.backgroundColor = .vitBackground
+        checkListTableView.backgroundColor = .mainBackground
         checkListTableView.translatesAutoresizingMaskIntoConstraints = false
         detailContentView.addSubview(checkListTableView)
         checkListTableView.register(CheckTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -320,49 +301,67 @@ class TaskDetailViewController: UIViewController, UITableViewDelegate {
         ])
     }
     
+    //MARK: - CHANGE THEME
+    func changeTheme() {
+        let theme = Main.instance.themeService.getTheme()
+        navigationController?.navigationBar.barTintColor = theme.backgroundColor
+        navigationController?.navigationBar.tintColor = theme.interfaceColor
+        doneButton.tintColor = theme.interfaceColor
+        taskNameTextView.textColor = theme.interfaceColor
+        taskCreationDateLabel.textColor = theme.interfaceColor
+        taskDateTextField.textColor = theme.interfaceColor
+        taskDescriptionTextView.textColor = theme.interfaceColor
+        addCheckElementTextField.textColor = theme.interfaceColor
+        toolBarView.backgroundColor = theme.interfaceColor
+        view.backgroundColor = theme.interfaceColor
+        view.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+    }
+    
     //MARK: - CHANGE STATE SETTINGS
     func changeState(state: String) {
-        self.currentTheme = state
-        switch Main.instance.state {
-        case "1":
-            doneButton.tintColor = .systemYellow
-            taskNameTextView.textColor = .systemYellow
-            taskCreationDateLabel.textColor = .systemYellow
-            taskDateTextField.textColor = .systemYellow
-            taskDescriptionTextView.textColor = .systemYellow
-            addCheckElementTextField.textColor = .systemYellow
-            toolBarView.backgroundColor = .systemYellow
-            view.backgroundColor = .systemYellow
-            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
-            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
-        case "2":
-            doneButton.tintColor = .alexeyBackground
-            taskNameTextView.textColor = .alexeyBackground
-            taskCreationDateLabel.textColor = .alexeyBackground
-            taskDateTextField.textColor = .alexeyBackground
-            taskDescriptionTextView.textColor = .alexeyBackground
-            addCheckElementTextField.textColor = .alexeyBackground
-            toolBarView.backgroundColor = .alexeyBackground
-            view.backgroundColor = .alexeyBackground
-            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
-            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
-        case "3":
-            doneButton.tintColor = .red
-            taskNameTextView.textColor = .red
-            taskCreationDateLabel.textColor = .red
-            taskDateTextField.textColor = .red
-            taskDescriptionTextView.textColor = .red
-            addCheckElementTextField.textColor = .red
-            toolBarView.backgroundColor = .red
-            view.backgroundColor = .alexLightGray
-            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.red]))
-            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.red]))
-        default:
-            break
-        }
+//        self.currentTheme = state
+//        switch Main.instance.state {
+//        case "1":
+//            doneButton.tintColor = .systemYellow
+//            taskNameTextView.textColor = .systemYellow
+//            taskCreationDateLabel.textColor = .systemYellow
+//            taskDateTextField.textColor = .systemYellow
+//            taskDescriptionTextView.textColor = .systemYellow
+//            addCheckElementTextField.textColor = .systemYellow
+//            toolBarView.backgroundColor = .systemYellow
+//            view.backgroundColor = .systemYellow
+//            view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+//            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+//        case "2":
+//            doneButton.tintColor = .alexeyBackground
+//            taskNameTextView.textColor = .alexeyBackground
+//            taskCreationDateLabel.textColor = .alexeyBackground
+//            taskDateTextField.textColor = .alexeyBackground
+//            taskDescriptionTextView.textColor = .alexeyBackground
+//            addCheckElementTextField.textColor = .alexeyBackground
+//            toolBarView.backgroundColor = .alexeyBackground
+//            view.backgroundColor = .alexeyBackground
+//            view.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
+//            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground]))
+//        case "3":
+//            doneButton.tintColor = .red
+//            taskNameTextView.textColor = .red
+//            taskCreationDateLabel.textColor = .red
+//            taskDateTextField.textColor = .red
+//            taskDescriptionTextView.textColor = .red
+//            addCheckElementTextField.textColor = .red
+//            toolBarView.backgroundColor = .red
+//            view.backgroundColor = .alexLightGray
+//            view.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.red]))
+//            taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.red]))
+//        default:
+//            break
+//        }
     }
     
 }

@@ -22,10 +22,10 @@ class Main {
     let dateFormatter = DateFormatter()
     let taskRealmConverter = TaskRealmConverter()
     let notificationService = NotificationService()
+    let themeService = ThemeService()
     
     // Временные переменные
     var tempCheckList: [CheckMark] = []
-    
     
     // Лишние переменные, необходимо провести рефакторинг, слишком много мест вызова
     var rowBGColor: UIColor = .clear

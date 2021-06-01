@@ -15,33 +15,27 @@ class ThemesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        switch Main.instance.state {
-        case "1":
-            segment.selectedSegmentIndex = 0
-        case "2":
-            segment.selectedSegmentIndex = 1
-        case "3":
-            segment.selectedSegmentIndex = 2
-        default:
-            break
-        }
+        segment.selectedSegmentIndex = Main.instance.themeService.getState().rawValue
     }
     
     @IBAction func themesSegmentAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            Main.instance.state = "1"
-            UserDefaults.standard.set(Main.instance.state, forKey: "k")
-            UIApplication.shared.windows.first!.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            Main.instance.state = "1"
+            Main.instance.themeService.changeState(state: .Vitaliy)
+            segment.selectedSegmentIndex = 0
+//            UserDefaults.standard.set(Main.instance.state, forKey: "k")
+//            UIApplication.shared.windows.first!.applyGradient(colours: [.vitDarkBrown, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case 1:
-            Main.instance.state = "2"
-            UserDefaults.standard.set(Main.instance.state, forKey: "k")
-            UIApplication.shared.windows.first!.applyGradient(colours: [.alexeyFog, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            Main.instance.state = "2"
+            Main.instance.themeService.changeState(state: .Alexey)
+//            UserDefaults.standard.set(Main.instance.state, forKey: "k")
+//            UIApplication.shared.windows.first!.applyGradient(colours: [.alexeyFog, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case 2:
-            Main.instance.state = "3"
-            UserDefaults.standard.set(Main.instance.state, forKey: "k")
-            UIApplication.shared.windows.first!.applyGradient(colours: [.alexDarkRed, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+//            Main.instance.state = "3"
+            Main.instance.themeService.changeState(state: .Alexander)
+//            UserDefaults.standard.set(Main.instance.state, forKey: "k")
+//            UIApplication.shared.windows.first!.applyGradient(colours: [.alexDarkRed, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         default:
             break
         }

@@ -12,18 +12,33 @@ extension UIColor {
     static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
-    static let vitBackground = UIColor.rgb(r: 31, g: 33, b: 36)
+//    static let vitBackground = UIColor.rgb(r: 31, g: 33, b: 36)
+    static let vitBackground = UIColor.rgb(r: 79, g: 52, b: 11)
     static let vitDarkBrown = UIColor.rgb(r: 79, g: 52, b: 11)
+    static let vitInterface = UIColor.systemYellow
     
-    static let alexeyBackground = UIColor.rgb(r: 82, g: 149, b: 139)
+    static let alexeyBackground = UIColor.rgb(r: 185, g: 196, b: 201)
     static let alexeyFog = UIColor.rgb(r: 185, g: 196, b: 201)
+    static let alexeyInterface = UIColor.rgb(r: 82, g: 149, b: 139)
 //    static let alexeyText = UIColor.rgb(r: 45, g: 200, b: 180)
+    
+    
+    
     
     static let alexDarkRed = UIColor.rgb(r: 106, g: 26, b: 22)
     static let alexRed = UIColor.rgb(r: 130, g: 25, b: 16)
     static let alexDark = UIColor.rgb(r: 31, g: 31, b: 31)
     static let alexDarkGray = UIColor.rgb(r: 112, g: 112, b: 112)
     static let alexLightGray = UIColor.rgb(r: 212, g: 212, b: 212)
+    
+    static let alexanderBackground = UIColor.rgb(r: 31, g: 31, b: 31)
+    static let alexanderInterface = UIColor.red
+    
+    
+    
+    static let mainBackground = UIColor.rgb(r: 31, g: 33, b: 36)
+    
+    
     
     
     static func hexStringToUIColor (hex:String) -> UIColor {
