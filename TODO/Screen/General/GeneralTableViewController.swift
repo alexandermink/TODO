@@ -35,7 +35,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let dataSource = GeneralCellDataSource()
-
     
     
     //MARK: - LIFE CYCLE
@@ -62,8 +61,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        changeState(state: Main.instance.state ?? "1")
+//        changeState(state: Main.instance.state ?? "1")
         tableView.bounds.size.height = view.bounds.size.height
+        changeColors()
         self.tableView.reloadData()
         TableRowsAnimation.animateTable(table: tableView)
     }
@@ -143,72 +143,21 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //MARK: - CHANGE STATE SETTINGS
-    func changeState(state: String) {
-        self.currentTheme = state
-        switch state {
-        case "1":
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .light
-            }
-            mapImageView.isHidden = false
-            boatImageView.isHidden = true
-            alexLayer1.isHidden = true
-            alexLayer2.isHidden = true
-            navigationController?.navigationBar.barTintColor = .vitDarkBrown
-            newTaskButton.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
-            newTaskButton.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .highlighted)
-            navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.systemYellow], for: .normal)
-            navSeparatorView.backgroundColor = .systemYellow
-            navigationItem.leftBarButtonItem?.tintColor = .systemYellow
-        case "2":
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .light
-            }
-            mapImageView.isHidden = true
-            boatImageView.isHidden = false
-            alexLayer1.isHidden = true
-            alexLayer2.isHidden = true
-            navigationController?.navigationBar.barTintColor = .alexeyFog
-            newTaskButton.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
-            newTaskButton.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .highlighted)
-            navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.alexeyBackground], for: .normal)
-            navSeparatorView.backgroundColor = .alexeyBackground
-            navigationItem.leftBarButtonItem?.tintColor = .alexeyBackground
-        case "3":
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = .dark
-            }
-            boatImageView.isHidden = true
-            mapImageView.isHidden = true
-            alexLayer1.isHidden = false
-            alexLayer2.isHidden = false
-            navigationController?.navigationBar.barTintColor = .alexDark
-            newTaskButton.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
-            newTaskButton.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.red], for: .highlighted)
-            navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-                [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-                 NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
-            navSeparatorView.backgroundColor = .red
-            navigationItem.leftBarButtonItem?.tintColor = .red
-        default:
-            break
-        }
+    
+    func changeColors() {
+        let theme = Main.instance.themeService.getTheme()
+        navigationController?.navigationBar.barTintColor = theme.backgroundColor
+        newTaskButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
+        newTaskButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .highlighted)
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
+        navSeparatorView.backgroundColor = theme.interfaceColor
+        navigationItem.leftBarButtonItem?.tintColor = theme.interfaceColor
     }
     
     //MARK: - SET VIEW SCREEN
@@ -228,6 +177,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         alexLayer2HeightConstraint.constant = view.frame.width*1.8
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .done, target: self, action: #selector(checkMenu))
         view.backgroundColor = nil
+        
+        mapImageView.isHidden = true
+        boatImageView.isHidden = true
+        alexLayer1.isHidden = true
+        alexLayer2.isHidden = true
     }
     
     @objc func checkMenu() {

@@ -35,7 +35,7 @@ class GeneralCellDataSource {
             cell.notificationLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
             cell.backgroundColor = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
             cell.configure(theme: currentTheme)
-            cell.descriptionLabel.textColor = .vitBackground
+//            cell.descriptionLabel.textColor = .vitBackground
             
             let markSelectedCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
             let allMarkCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)

@@ -43,19 +43,26 @@ class ThemeService {
     }
     
     private func updateTheme() {
+        var userInterfaceStyle: UIUserInterfaceStyle = .dark
         switch state {
         case .Vitaliy:
             print("Vitaliy")
+            userInterfaceStyle = .light
             theme.backgroundColor = UIColor.vitBackground
             theme.interfaceColor = UIColor.vitInterface
         case .Alexey:
             print("Alexey")
+            userInterfaceStyle = .light
             theme.backgroundColor = UIColor.alexeyBackground
             theme.interfaceColor = UIColor.alexeyInterface
         case .Alexander:
             print("Alexander")
+            userInterfaceStyle = .dark
             theme.backgroundColor = UIColor.alexanderBackground
             theme.interfaceColor = UIColor.alexanderInterface
+        }
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = userInterfaceStyle
         }
         print("backgroundColor = ", theme.backgroundColor, ", interfaceColor = ", theme.interfaceColor)
         
