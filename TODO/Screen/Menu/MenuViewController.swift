@@ -37,7 +37,7 @@ class MenuViewController: UIViewController {
         self.title = "Настройки"
     }
     
-    @IBAction func deleteAllData(_ sender: Any) {
+    func deleteAllData() {
         let firstAlert = UIAlertController(title: "ВНИМАНИЕ!", message: "Все данные будут удалены", preferredStyle: .alert)
         firstAlert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { action in
             let secondAlert = UIAlertController(title: "ВНИМАНИЕ!!!", message: "Подтвердить удаление?", preferredStyle: .alert)
@@ -56,20 +56,20 @@ class MenuViewController: UIViewController {
         self.present(firstAlert, animated: true, completion: nil)
     }
     
-    @IBAction func theme1action(_ sender: Any) {
-        Main.instance.state = "1"
-        UserDefaults.standard.set(Main.instance.state, forKey: "k")
-    }
-    
-    @IBAction func theme2action(_ sender: Any) {
-        Main.instance.state = "2"
-        UserDefaults.standard.set(Main.instance.state, forKey: "k")
-    }
-    
-    @IBAction func theme3action(_ sender: Any) {
-        Main.instance.state = "3"
-        UserDefaults.standard.set(Main.instance.state, forKey: "k")
-    }
+//    @IBAction func theme1action(_ sender: Any) {
+//        Main.instance.state = "1"
+//        UserDefaults.standard.set(Main.instance.state, forKey: "k")
+//    }
+//
+//    @IBAction func theme2action(_ sender: Any) {
+//        Main.instance.state = "2"
+//        UserDefaults.standard.set(Main.instance.state, forKey: "k")
+//    }
+//
+//    @IBAction func theme3action(_ sender: Any) {
+//        Main.instance.state = "3"
+//        UserDefaults.standard.set(Main.instance.state, forKey: "k")
+//    }
 }
 
 extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
@@ -104,12 +104,9 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             router?.present(vc: destinationVC, animated: true)
         case [1, 0]:
             print("кнопка очистить данные нажата")
+            deleteAllData()
         default:
             break
         }
-        
-
     }
-    
-    
 }

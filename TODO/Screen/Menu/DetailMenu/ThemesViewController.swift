@@ -15,17 +15,7 @@ class ThemesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        switch Main.instance.state {
-        case "1":
-            segment.selectedSegmentIndex = 0
-        case "2":
-            segment.selectedSegmentIndex = 1
-        case "3":
-            segment.selectedSegmentIndex = 2
-        default:
-            break
-        }
+        segment.selectedSegmentIndex = Main.instance.themeService.getState().rawValue
     }
     
     @IBAction func themesSegmentAction(_ sender: UISegmentedControl) {
@@ -33,6 +23,7 @@ class ThemesViewController: UIViewController {
         case 0:
 //            Main.instance.state = "1"
             Main.instance.themeService.changeState(state: .Vitaliy)
+            segment.selectedSegmentIndex = 0
 //            UserDefaults.standard.set(Main.instance.state, forKey: "k")
 //            UIApplication.shared.windows.first!.applyGradient(colours: [.vitDarkBrown, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         case 1:

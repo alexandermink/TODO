@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ThemeState: Int {
+public enum ThemeState: Int {
     case Vitaliy
     case Alexey
     case Alexander
@@ -31,6 +31,10 @@ class ThemeService {
     
     func getTheme() -> Theme {
         return theme
+    }
+    
+    func getState() -> ThemeState {
+        return state
     }
     
     init() {
