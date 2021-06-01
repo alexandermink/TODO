@@ -22,12 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let baseRouter = BaseRouter(viewController: mainViewContoller)
         mainViewContoller.router = baseRouter
         
+        let theme = Main.instance.themeService.getTheme()
         let navigationController = CustomNavigationController(rootViewController: mainViewContoller)
+        navigationController.navigationBar.tintColor = theme.interfaceColor
                 
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        let theme = Main.instance.themeService.getTheme()
+        
         window!.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
         

@@ -14,8 +14,9 @@ class GeneralCellDataSource {
     func getCell (at tableView: UITableView, indexPath: IndexPath, currentTheme: String) -> UITableViewCell {
         if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
-            cell.addFastTaskNameTextField.textColor = .systemYellow
-            cell.addButton.setTitleColor(.systemYellow, for: .normal)
+            let theme = Main.instance.themeService.getTheme()
+            cell.addFastTaskNameTextField.textColor = theme.interfaceColor
+            cell.addButton.setTitleColor(theme.interfaceColor, for: .normal)
             cell.addFastTaskNameTextField.keyboardAppearance = .dark
             
             cell.indexPath = indexPath
@@ -35,7 +36,6 @@ class GeneralCellDataSource {
             cell.notificationLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
             cell.backgroundColor = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
             cell.configure(theme: currentTheme)
-//            cell.descriptionLabel.textColor = .vitBackground
             
             let markSelectedCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
             let allMarkCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)

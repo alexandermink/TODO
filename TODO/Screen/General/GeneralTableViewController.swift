@@ -63,7 +63,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         super.viewWillAppear(animated)
 //        changeState(state: Main.instance.state ?? "1")
         tableView.bounds.size.height = view.bounds.size.height
-        changeColors()
+        changeTheme()
         self.tableView.reloadData()
         TableRowsAnimation.animateTable(table: tableView)
     }
@@ -144,9 +144,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - CHANGE STATE SETTINGS
     
-    func changeColors() {
+    func changeTheme() {
         let theme = Main.instance.themeService.getTheme()
         navigationController?.navigationBar.barTintColor = theme.backgroundColor
+        navigationController?.navigationBar.tintColor = theme.interfaceColor
         newTaskButton.setTitleTextAttributes(
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
@@ -157,7 +158,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
         navSeparatorView.backgroundColor = theme.interfaceColor
-        navigationItem.leftBarButtonItem?.tintColor = theme.interfaceColor
     }
     
     //MARK: - SET VIEW SCREEN
