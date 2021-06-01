@@ -50,6 +50,7 @@
 		9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9664687525A6967300443B81 /* NewTaskViewController.swift */; };
 		96663008261A6F25000CF25F /* TaskRealmConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96663007261A6F25000CF25F /* TaskRealmConverter.swift */; };
 		969C87992632481C0036A2A5 /* AddButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C87982632481C0036A2A5 /* AddButtonTableViewCell.swift */; };
+		96C372482666423E001FE9C2 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C372472666423E001FE9C2 /* ThemeService.swift */; };
 		96D934CA261C8AF70093FF47 /* LocalDataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D934C9261C8AF70093FF47 /* LocalDataBaseService.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,7 @@
 		9664687525A6967300443B81 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		96663007261A6F25000CF25F /* TaskRealmConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealmConverter.swift; sourceTree = "<group>"; };
 		969C87982632481C0036A2A5 /* AddButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonTableViewCell.swift; sourceTree = "<group>"; };
+		96C372472666423E001FE9C2 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		96D934C9261C8AF70093FF47 /* LocalDataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 				5D32F3CC2616DD1E008C1A58 /* Builders */,
 				5D32F3D22616E43D008C1A58 /* NotificationService.swift */,
 				96663007261A6F25000CF25F /* TaskRealmConverter.swift */,
+				96C372472666423E001FE9C2 /* ThemeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				969C87992632481C0036A2A5 /* AddButtonTableViewCell.swift in Sources */,
 				15F9973B2615DC29003FFD71 /* RouterFactory.swift in Sources */,
 				96663008261A6F25000CF25F /* TaskRealmConverter.swift in Sources */,
+				96C372482666423E001FE9C2 /* ThemeService.swift in Sources */,
 				15A4420226567863000D245A /* TaskDetailTableVIewExtension.swift in Sources */,
 				5D44F0F42662747A00A4A669 /* GeneralCellDataSource.swift in Sources */,
 			);
