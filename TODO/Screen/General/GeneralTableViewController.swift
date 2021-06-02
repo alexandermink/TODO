@@ -15,17 +15,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var backLayer: Rounding!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var newTaskButton: UIBarButtonItem!
-    @IBOutlet weak var mapImageView: UIImageView!
-    @IBOutlet weak var boatImageView: UIImageView!
+    @IBOutlet weak var mainBGImageView: UIImageView!
     @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var boatWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var boatHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var navSeparatorView: UIView!
-    @IBOutlet weak var alexLayer1: UIImageView!
-    @IBOutlet weak var alexLayer2: UIImageView!
-    @IBOutlet weak var alexLayer1widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var alexLayer1HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var minorBGImageView: UIImageView!
     @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
     
@@ -43,10 +37,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         router = BaseRouter(viewController: self)
         setViewScreen()
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
-        ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
-        ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
-        ParalaxEffect.paralaxEffect(view: alexLayer1, magnitude: 50)
-        ParalaxEffect.paralaxEffect(view: alexLayer2, magnitude: -50)
+        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
         try? Main.instance.getTasksFromRealm()
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
@@ -61,7 +53,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        changeState(state: Main.instance.state ?? "1")
         tableView.bounds.size.height = view.bounds.size.height
         changeTheme()
         self.tableView.reloadData()
@@ -72,7 +63,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         view.dismissKeyboard()
     }
     
-
     //MARK: - TABLE
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         Main.instance.userSession.tasks[section].sectionTasks.count + 1
@@ -158,6 +148,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
         navSeparatorView.backgroundColor = theme.interfaceColor
+        mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
+        minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
     }
     
     //MARK: - SET VIEW SCREEN
@@ -169,19 +161,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         newTaskButton.title = "Новая задача"
         mapWidthConstraint.constant = view.frame.width*3.2
         mapHeightConstraint.constant = view.frame.width*1.8
-        boatWidthConstraint.constant = view.frame.width*1.8
-        boatHeightConstraint.constant = view.frame.width*1.8
-        alexLayer1widthConstraint.constant = view.frame.width*3.6
-        alexLayer1HeightConstraint.constant = view.frame.width*2.4
         alexLayer2widthConstraint.constant = view.frame.width*3.2
         alexLayer2HeightConstraint.constant = view.frame.width*1.8
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .done, target: self, action: #selector(checkMenu))
         view.backgroundColor = nil
-        
-        mapImageView.isHidden = true
-        boatImageView.isHidden = true
-        alexLayer1.isHidden = true
-        alexLayer2.isHidden = true
     }
     
     @objc func checkMenu() {

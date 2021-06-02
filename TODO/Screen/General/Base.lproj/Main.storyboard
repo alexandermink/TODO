@@ -75,7 +75,7 @@
                                     <constraint firstAttribute="width" constant="1200" id="knz-9b-Vfi"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alex_layer1" translatesAutoresizingMaskIntoConstraints="NO" id="Hnn-Zv-Nua">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alex_layer1" translatesAutoresizingMaskIntoConstraints="NO" id="Hnn-Zv-Nua">
                                 <rect key="frame" x="-300" y="-25" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -83,7 +83,7 @@
                                     <constraint firstAttribute="width" constant="1200" id="Juc-8a-0Kv"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="o6O-du-MmM">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="o6O-du-MmM">
                                 <rect key="frame" x="-220" y="45" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -275,20 +275,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="alexLayer1" destination="Hnn-Zv-Nua" id="7V6-Ed-GXN"/>
-                        <outlet property="alexLayer1HeightConstraint" destination="Txm-OS-DbA" id="oeo-1Y-K1W"/>
-                        <outlet property="alexLayer1widthConstraint" destination="Juc-8a-0Kv" id="jua-U2-oUZ"/>
-                        <outlet property="alexLayer2" destination="Zv6-Hz-A0S" id="qBM-ta-p3d"/>
                         <outlet property="alexLayer2HeightConstraint" destination="Txm-OS-DbA" id="AW2-6s-6fS"/>
                         <outlet property="alexLayer2widthConstraint" destination="knz-9b-Vfi" id="d7b-mt-awU"/>
                         <outlet property="backLayer" destination="n4a-mQ-BJW" id="HCq-wd-61L"/>
                         <outlet property="blurView" destination="hPa-VJ-bCE" id="Jiz-mV-HDn"/>
-                        <outlet property="boatHeightConstraint" destination="7dA-cL-Eeg" id="mNx-3c-YeN"/>
-                        <outlet property="boatImageView" destination="o6O-du-MmM" id="hOe-Vr-wJ3"/>
-                        <outlet property="boatWidthConstraint" destination="cJi-ix-jvU" id="UUu-eE-YqM"/>
+                        <outlet property="mainBGImageView" destination="MGk-aQ-yaO" id="URC-8m-WPH"/>
                         <outlet property="mapHeightConstraint" destination="vT2-Cm-vCQ" id="kws-AX-07l"/>
-                        <outlet property="mapImageView" destination="MGk-aQ-yaO" id="URC-8m-WPH"/>
                         <outlet property="mapWidthConstraint" destination="Ztc-YD-zR9" id="0dY-k5-hp9"/>
+                        <outlet property="minorBGImageView" destination="Zv6-Hz-A0S" id="qBM-ta-p3d"/>
                         <outlet property="navSeparatorView" destination="jd0-ou-lju" id="gZS-D9-TFK"/>
                         <outlet property="newTaskButton" destination="Thb-en-nUn" id="o6o-RF-BZP"/>
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
