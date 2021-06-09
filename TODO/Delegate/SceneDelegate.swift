@@ -12,7 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -29,25 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
         window!.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        
-        
-        
-//        Main.instance.state = "1"
-//        switch Main.instance.themeService {
-//        case "1":
-//            window!.applyGradient(colours: [.interfaceColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-//        case "2":
-//            window!.applyGradient(colours: [.alexeyFog, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-//        case "3":
-//            window!.applyGradient(colours: [.alexRed, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-//        default:
-//            break
-//        }
     }
-    
-    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -76,24 +58,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-
-//func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//
-//    guard let windowScene = (scene as? UIWindowScene) else { return }
-//
-////        let mainViewContoller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GeneralTableViewController") as! GeneralTableViewController
-//
-//    let containerVC = ContainerViewController()
-//
-//    let baseRouter = BaseRouter(viewController: containerVC)
-//    containerVC.router = baseRouter
-//
-////        let navigationController = UINavigationController(rootViewController: containerVC)
-//
-//    window = UIWindow(windowScene: windowScene)
-//    window?.rootViewController = containerVC
-//    window?.makeKeyAndVisible()
-//}

@@ -31,10 +31,6 @@ class Main {
     var rowBGColor: UIColor = .clear
     
     // Этим переменным здесь не место, слишком много мест вызова
-    var state: String? {
-        get {return UserDefaults.standard.string(forKey: "k")}
-        set {UserDefaults.standard.set(newValue, forKey: "k")}
-    }
     var transitionSide = "left"
 
     private init() {

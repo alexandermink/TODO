@@ -17,6 +17,8 @@ public enum ThemeState: Int {
 struct Theme {
     var backgroundColor: UIColor = .clear
     var interfaceColor: UIColor = .clear
+    var mainBackgroundImageName: String = ""
+    var minorBackgroundImageName: String = ""
 }
 
 class ThemeService {
@@ -54,20 +56,27 @@ class ThemeService {
             userInterfaceStyle = .light
             theme.backgroundColor = UIColor.vitBackground
             theme.interfaceColor = UIColor.vitInterface
+            theme.mainBackgroundImageName = "888"
+            theme.minorBackgroundImageName = "def"
         case .Alexey:
             print("Alexey")
             userInterfaceStyle = .light
             theme.backgroundColor = UIColor.alexeyBackground
             theme.interfaceColor = UIColor.alexeyInterface
+            theme.mainBackgroundImageName = "boat2"
+            theme.minorBackgroundImageName = "def"
         case .Alexander:
             print("Alexander")
             userInterfaceStyle = .dark
             theme.backgroundColor = UIColor.alexanderBackground
             theme.interfaceColor = UIColor.alexanderInterface
+            theme.mainBackgroundImageName = "Alex_layer1"
+            theme.minorBackgroundImageName = "Alex_layer2"
         }
         UIApplication.shared.windows.forEach { window in
             window.overrideUserInterfaceStyle = userInterfaceStyle
         }
+        UIApplication.shared.windows.first?.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         print("backgroundColor = ", theme.backgroundColor, ", interfaceColor = ", theme.interfaceColor)
         
         updateInterface()
