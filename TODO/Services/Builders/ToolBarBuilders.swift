@@ -55,16 +55,6 @@ extension UIViewController {
         return toolBar
     }
     
-    func makeToolBarNotificationsDetail() -> UIToolbar {
-        let toolBar = ToolBarBuilder.configDoneButton()
-        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(TaskDetailViewController.chooseNotificationAction))
-        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
-        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .highlighted)
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.setItems([flexSpace, doneButton], animated: true)
-        return toolBar
-    }
-    
     func makeToolBarCategory() -> UIToolbar {
         let toolBar = ToolBarBuilder.configDoneButton()
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(NewTaskViewController.changePickerAndKeyboard))
@@ -76,4 +66,16 @@ extension UIViewController {
     }
     
     
+}
+
+extension UIView {
+    func makeToolBarNotificationsDetail() -> UIToolbar {
+        let toolBar = ToolBarBuilder.configDoneButton()
+        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(TaskDetailView.chooseNotificationAction))
+        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
+        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .highlighted)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([flexSpace, doneButton], animated: true)
+        return toolBar
+    }
 }

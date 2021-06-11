@@ -23,7 +23,6 @@ class CheckTableViewCell: UITableViewCell {
         constrainsInit()
         
         changeTheme()
-//        changeState(state: Main.instance.state ?? "1")
         
     }
     
@@ -62,22 +61,5 @@ class CheckTableViewCell: UITableViewCell {
         checkMarkButton.tintColor = theme.interfaceColor
         checkListItemTextField.textColor = theme.interfaceColor
     }
-
-//    func changeState(state: String) {
-//        self.currentTheme = state
-//        switch Main.instance.state {
-//        case "1":
-//            checkMarkButton.tintColor = .systemYellow
-//            checkListItemTextField.textColor = .systemYellow
-//        case "2":
-//            checkMarkButton.tintColor = .alexeyBackground
-//            checkListItemTextField.textColor = .alexeyBackground
-//        case "3":
-//            checkMarkButton.tintColor = .red
-//            checkListItemTextField.textColor = .red
-//        default:
-//            break
-//        }
-//    }
     
 }
