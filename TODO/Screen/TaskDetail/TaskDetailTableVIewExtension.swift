@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension TaskDetailViewController: UITableViewDataSource {
+extension TaskDetailView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return task.checkList.count

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		152DB631263AEDE900B8F1E0 /* CheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */; };
 		15469273260E4C44007D8238 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15469272260E4C44007D8238 /* BaseRouter.swift */; };
+		156CD74D266FA0EE00006856 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD74C266FA0EE00006856 /* TaskDetailView.swift */; };
 		156EBB112611D08200BDC565 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156EBB102611D08200BDC565 /* TaskDetailViewController.swift */; };
 		15A4420226567863000D245A /* TaskDetailTableVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4420126567863000D245A /* TaskDetailTableVIewExtension.swift */; };
 		15F9973B2615DC29003FFD71 /* RouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9973A2615DC29003FFD71 /* RouterFactory.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTableViewCell.swift; sourceTree = "<group>"; };
 		15469272260E4C44007D8238 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		156CD74C266FA0EE00006856 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		156EBB102611D08200BDC565 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		15A4420126567863000D245A /* TaskDetailTableVIewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailTableVIewExtension.swift; sourceTree = "<group>"; };
 		15F9973A2615DC29003FFD71 /* RouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterFactory.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				156EBB102611D08200BDC565 /* TaskDetailViewController.swift */,
+				156CD74C266FA0EE00006856 /* TaskDetailView.swift */,
 				15A4420126567863000D245A /* TaskDetailTableVIewExtension.swift */,
 				152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */,
 			);
@@ -477,6 +480,7 @@
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,
 				5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */,
 				5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */,
+				156CD74D266FA0EE00006856 /* TaskDetailView.swift in Sources */,
 				96600B52253D057E00F3FDC1 /* SceneDelegate.swift in Sources */,
 				96D934CA261C8AF70093FF47 /* LocalDataBaseService.swift in Sources */,
 				5DCF0838265A814E008EAE9D /* TransitionAnimator.swift in Sources */,
