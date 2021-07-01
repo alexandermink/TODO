@@ -15,22 +15,22 @@ protocol TaskDetailDelegate {
 class TaskDetailView: UIView, UITableViewDelegate {
         
     //MARK: - VARIABLES
-    var scrollView = UIScrollView()
-    var detailContentView = UIView()
-    var doneButton = UIButton(type: .system)
+    let scrollView = UIScrollView()
+    let detailContentView = UIView()
+    let doneButton = UIButton(type: .system)
     var taskNameTitleLabel = UILabel()
-    var taskNameTextView = UITextView()
+    let taskNameTextView = UITextView()
     var taskCreationDateTitleLabel = UILabel()
     var taskCreationDateLabel = UILabel()
     var taskDateTitleLabel = UILabel()
-    var taskDateTextField = UITextField()
+    let taskDateTextField = UITextField()
     var taskDescriptionTitleLabel = UILabel()
-    var taskDescriptionTextView = UITextView()
+    let taskDescriptionTextView = UITextView()
     var checkBlurView: UIVisualEffectView!
     var toolBarView: UIView!
     var toolBarStackView: UIStackView!
-    var addCheckButton = UIButton(type: .system)
-    var addCheckElementTextField = UITextField()
+    let addCheckButton = UIButton(type: .system)
+    let addCheckElementTextField = UITextField()
     let checkListTableView = UITableView()
     
     let dateFormatter = Main.instance.dateFormatter
@@ -38,7 +38,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
     let notificationService = Main.instance.notificationService
     private var currentTheme : String?
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
-    var bottomAncherConstraint: CGFloat?
     var task: Task = Task()
     var delegate: TaskDetailDelegate?
     
@@ -54,10 +53,10 @@ class TaskDetailView: UIView, UITableViewDelegate {
         return label
     }
     
+    //MARK: - LIFE CYCLE
     override init(frame: CGRect){
         super.init(frame: frame)
         self.backgroundColor = .mainBackground
-//        bottomAncherConstraint = self.frame.height/1.2
         let theme = Main.instance.themeService.getTheme()
         self.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         notificationPicker.minimumDate = minDate
@@ -69,23 +68,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    
-    func updateData(){
-        taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
-        taskNameTextView.text = (task.name != "" ? task.name : "Напишите название задачи")
-        taskCreationDateLabel.text = dateFormatter.string(from: task.creationDate)
-        taskDateTextField.text = task.notificationDate
-        taskDescriptionTextView.text = (task.taskDescription != "" ? task.taskDescription : "Напишите описание задачи")
-        addCheckButton.addTarget(self,
-                                action: #selector(checkTablePlusAction),
-                                                for: .touchUpInside)
-        doneButton.addTarget(self,
-                                action: #selector(handleDoneTouchUpInside),
-                                for: .touchUpInside)
-        checkListTableView.reloadData()
-    }
-    
     
     //MARK: - UI SET UP
     func uiSetUp(){
@@ -182,7 +164,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
         detailContentView.addSubview(checkListTableView)
         checkListTableView.register(CheckTableViewCell.self, forCellReuseIdentifier: "cell")
         checkListTableView.rowHeight = 48
-        checkListTableView.dataSource = self
         checkListTableView.delegate = self
     }
     
@@ -233,7 +214,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
             
             checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 116),
             checkBlurView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 0),
-//            checkBlurView.bottomAnchor.constraint(equalTo: detailContentView.bottomAnchor, constant: -bottomAncherConstraint!),
             checkBlurView.bottomAnchor.constraint(equalTo: detailContentView.bottomAnchor, constant: -300),
             checkBlurView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: 0),
             
@@ -256,61 +236,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
             addCheckButton.widthAnchor.constraint(equalToConstant: 54)
         ])
     }
-    //MARK: - ACTIONS
-    @objc func handleDoneTouchUpInside(){
-        task.name = (taskNameTextView.text == "Напишите название задачи" ? "" : taskNameTextView.text)
-        task.taskDescription = (taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDescriptionTextView.text)
-            
-        if task.notificationDate == "" {
-            if taskDateTextField.text != "" {
-                print("New notif")
-                task.notificationDate = taskDateTextField.text
-                task.notificationID = UUID().uuidString
-                task.notificationID = notificationService.sendNotificationRequest(task: task)
-            }
-        } else {
-            if taskDateTextField.text != "" {
-                if taskDateTextField.text != task.notificationDate {
-                    print("Update notif")
-                    task.notificationDate = taskDateTextField.text
-                    task.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
-                }
-            } else {
-                print("Delete notif")
-                notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
-                task.notificationDate = ""
-                task.notificationID = ""
-                taskDateTextField.text = ""
-            }
-        }
-        
-        task.notificationDate = taskDateTextField.text
-        
-        try? Main.instance.updateTask(task: task)
-        delegate?.taskDetailDismiss()
-    }
-    
-    @objc func chooseNotificationAction() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            guard granted else {
-                print("Разрешение не получено")
-                return
-            }
-        }
-        taskDateTextField.text = dateFormatter.string(from: notificationPicker.date)
-        endEditing(true)
-    }
-    
-    @objc func checkTablePlusAction(){
-        let id = (task.checkList.max()?.id ?? 0) + 1
-        print("plus id: ", id)
-        let checkMark = CheckMark(id: id, title: addCheckElementTextField.text ?? "", isMarkSelected: false)
-        task.checkList.append(checkMark)
-        addCheckElementTextField.text = ""
-        addCheckElementTextField.becomeFirstResponder()
-        checkListTableView.reloadData()
-    }
-    
+
     //MARK: - CHANGE THEME
     func changeTheme() {
         let theme = Main.instance.themeService.getTheme()
