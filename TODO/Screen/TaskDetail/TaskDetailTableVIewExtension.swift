@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension TaskDetailView: UITableViewDataSource {
+extension TaskDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return task.checkList.count
@@ -41,9 +41,10 @@ extension TaskDetailView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             task.checkList.remove(at: indexPath.row)
-            checkListTableView.deleteRows(at: [indexPath], with: .fade)
+            taskDetailView.checkListTableView.deleteRows(at: [indexPath], with: .fade)
         }
-        checkListTableView.reloadData()
+        taskDetailView.checkListTableView.reloadData()
+        
     }
     
     
@@ -55,7 +56,7 @@ extension TaskDetailView: UITableViewDataSource {
             task.markSelectedCount += 1
         }
         task.checkList[button.tag].isMarkSelected.toggle()
-        checkListTableView.reloadData()
+        taskDetailView.checkListTableView.reloadData()
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
