@@ -38,7 +38,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
     let notificationService = Main.instance.notificationService
     private var currentTheme : String?
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
-    var task: Task = Task()
     var delegate: TaskDetailDelegate?
     
     //MARK: - LABEL FACTORY
