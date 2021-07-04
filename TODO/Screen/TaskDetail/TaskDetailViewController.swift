@@ -23,13 +23,13 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         taskDetailView.delegate = self
-        taskDetailView.task = task
         taskDetailView.checkListTableView.dataSource = self
-        updateData()
+        upDateData()
         router = BaseRouter(viewController: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         taskDetailView.changeTheme()
     }
     
@@ -38,7 +38,7 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate {
     }
     
     //MARK: - ACTION SET UP
-    func updateData(){
+    func upDateData(){
         taskDetailView.taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
         taskDetailView.taskNameTextView.text = (task.name != "" ? task.name : "Напишите название задачи")
         taskDetailView.taskCreationDateLabel.text = taskDetailView.dateFormatter.string(from: task.creationDate)
@@ -72,12 +72,12 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate {
                     task.notificationDate = taskDetailView.taskDateTextField.text
                     task.notificationID = taskDetailView.notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
                 }
-            } else {
-                print("Delete notif")
-                taskDetailView.notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
-                task.notificationDate = ""
-                task.notificationID = ""
-                taskDetailView.taskDateTextField.text = ""
+        } else {
+            print("Delete notif")
+            taskDetailView.notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
+            task.notificationDate = ""
+            task.notificationID = ""
+            taskDetailView.taskDateTextField.text = ""
             }
         }
         
