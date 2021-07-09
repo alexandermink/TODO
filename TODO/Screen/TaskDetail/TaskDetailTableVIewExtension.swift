@@ -30,7 +30,7 @@ extension TaskDetailViewController: UITableViewDataSource {
         cell.checkListItemTextField.text = checkMark.title
         cell.checkListItemTextField.attributedText = checkMark.isMarkSelected ?  strikedText : normalText
         cell.checkListItemTextField.tag = indexPath.row
-        cell.checkListItemTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        cell.checkListItemTextField.addTarget(self, action: #selector(textFieldDidChangeSelector), for: .editingChanged)
         cell.checkMarkButton.addTarget(self, action: #selector(self.toggleSelected(button:)), for: .touchUpInside)
         cell.checkMarkButton.tag = indexPath.row
         cell.backgroundColor = .clear
@@ -59,7 +59,7 @@ extension TaskDetailViewController: UITableViewDataSource {
         taskDetailView.checkListTableView.reloadData()
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc func textFieldDidChangeSelector(_ textField: UITextField) {
 
         task.checkList[textField.tag].title = textField.text ?? ""
 
