@@ -9,6 +9,7 @@
 import UIKit
 
 let duration = 0.8
+let distanceCoefficient: CGFloat = 1.4
 
 final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     
@@ -21,22 +22,26 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning,
         transitionContext.containerView.addSubview(destination.view)
         
         if Main.instance.transitionSide == "left" {
-            destination.view.frame.origin.x = -destination.view.frame.size.width
+            destination.view.alpha = 0
+            destination.view.frame.origin.x = -source.view.frame.size.width * distanceCoefficient
             UIView.animate(withDuration: duration, delay: 0, options: [], animations: {
-                source.view.frame.origin.x = source.view.frame.size.width*1.2
+                source.view.frame.origin.x = source.view.frame.size.width * distanceCoefficient
 //                source.view.frame.origin.x = 260
                 destination.view.frame.origin.x = 0
 //                destination.view.bounds.size.width = 260
                 source.view.alpha = 0
+                destination.view.alpha = 1
             }){ finished in
                 transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
             }
         } else {
-            destination.view.frame.origin.x = destination.view.frame.size.width
+            destination.view.alpha = 0
+            destination.view.frame.origin.x = destination.view.frame.size.width * distanceCoefficient
             UIView.animate(withDuration: duration, delay: 0, options: [], animations: {
-                source.view.frame.origin.x = -source.view.frame.size.width*1.2
+                source.view.frame.origin.x = -source.view.frame.size.width * distanceCoefficient
                 destination.view.frame.origin.x = 0
                 source.view.alpha = 0
+                destination.view.alpha = 1
             }){ finished in
                 transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
             }
@@ -56,20 +61,24 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.sendSubviewToBack(destination.view)
         
         if Main.instance.transitionSide == "left" {
-            destination.view.frame.origin.x = source.view.frame.size.width*2
+            source.view.alpha = 1
+            destination.view.frame.origin.x = source.view.frame.size.width * distanceCoefficient
             UIView.animate(withDuration: duration, delay: 0, options: [], animations: {
                 destination.view.frame.origin.x = 0
-                source.view.frame.origin.x = -source.view.frame.size.width
+                source.view.frame.origin.x = -source.view.frame.size.width * distanceCoefficient
                 destination.view.alpha = 1
+                source.view.alpha = 0
             }) { finished in
                 transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
             }
         } else {
-            destination.view.frame.origin.x = -source.view.frame.size.width*2
+            source.view.alpha = 1
+            destination.view.frame.origin.x = -source.view.frame.size.width * distanceCoefficient
             UIView.animate(withDuration: duration, delay: 0, options: [], animations: {
                 destination.view.frame.origin.x = 0
-                source.view.frame.origin.x = source.view.frame.size.width
+                source.view.frame.origin.x = source.view.frame.size.width * distanceCoefficient
                 destination.view.alpha = 1
+                source.view.alpha = 0
             }) { finished in
                 transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
             }

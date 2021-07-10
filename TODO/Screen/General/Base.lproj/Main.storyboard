@@ -60,7 +60,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="888" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-aQ-yaO">
-                                <rect key="frame" x="-300" y="-25" width="1200" height="600"/>
+                                <rect key="frame" x="-300" y="0.0" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1200" id="Ztc-YD-zR9"/>
@@ -68,27 +68,11 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alex_layer2" translatesAutoresizingMaskIntoConstraints="NO" id="Zv6-Hz-A0S">
-                                <rect key="frame" x="-300" y="-25" width="1200" height="600"/>
+                                <rect key="frame" x="-300" y="0.0" width="1200" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="600" id="Txm-OS-DbA"/>
                                     <constraint firstAttribute="width" constant="1200" id="knz-9b-Vfi"/>
-                                </constraints>
-                            </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alex_layer1" translatesAutoresizingMaskIntoConstraints="NO" id="Hnn-Zv-Nua">
-                                <rect key="frame" x="-300" y="-25" width="1200" height="600"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="BFh-BO-uui"/>
-                                    <constraint firstAttribute="width" constant="1200" id="Juc-8a-0Kv"/>
-                                </constraints>
-                            </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat2" translatesAutoresizingMaskIntoConstraints="NO" id="o6O-du-MmM">
-                                <rect key="frame" x="-220" y="45" width="1200" height="600"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="7dA-cL-Eeg"/>
-                                    <constraint firstAttribute="width" constant="1200" id="cJi-ix-jvU"/>
                                 </constraints>
                             </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-VJ-bCE">
@@ -244,24 +228,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="MGk-aQ-yaO" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-30" id="2HJ-BR-HKS"/>
+                            <constraint firstItem="MGk-aQ-yaO" firstAttribute="top" secondItem="aJG-we-1F9" secondAttribute="top" id="2HJ-BR-HKS"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="hPa-VJ-bCE" secondAttribute="trailing" constant="32" id="Mpt-Pg-y1S"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="top" secondItem="aJG-we-1F9" secondAttribute="top" id="Nqv-ao-xYX"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="nkn-cV-d0N" secondAttribute="bottom" constant="24" id="Sn3-eM-E6V"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="jd0-ou-lju" secondAttribute="trailing" id="Thx-Nk-f8v"/>
-                            <constraint firstItem="Hnn-Zv-Nua" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-300" id="XYf-Ch-tDl"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="32" id="YwB-Op-4JW"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="bottom" secondItem="hPa-VJ-bCE" secondAttribute="bottom" constant="32" id="dx7-Nk-uDo"/>
                             <constraint firstItem="Zv6-Hz-A0S" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-300" id="gRe-9h-VJd"/>
                             <constraint firstItem="MGk-aQ-yaO" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-300" id="hr2-RN-Dkj"/>
-                            <constraint firstItem="Zv6-Hz-A0S" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-30" id="iqx-o6-bsn"/>
+                            <constraint firstItem="Zv6-Hz-A0S" firstAttribute="top" secondItem="aJG-we-1F9" secondAttribute="top" id="iqx-o6-bsn"/>
                             <constraint firstItem="hPa-VJ-bCE" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="32" id="lVm-zZ-wx6"/>
                             <constraint firstItem="jd0-ou-lju" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" id="nUR-EV-gOM"/>
                             <constraint firstItem="aJG-we-1F9" firstAttribute="trailing" secondItem="nkn-cV-d0N" secondAttribute="trailing" constant="24" id="qjh-ro-Oix"/>
-                            <constraint firstItem="o6O-du-MmM" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="40" id="tJs-Am-sKF"/>
                             <constraint firstItem="nkn-cV-d0N" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="24" id="xdw-Yx-sCr"/>
-                            <constraint firstItem="Hnn-Zv-Nua" firstAttribute="top" secondItem="jd0-ou-lju" secondAttribute="bottom" constant="-30" id="xkN-Wy-NkD"/>
-                            <constraint firstItem="o6O-du-MmM" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="-220" id="xtp-Wy-JA0"/>
                             <constraint firstItem="nkn-cV-d0N" firstAttribute="leading" secondItem="aJG-we-1F9" secondAttribute="leading" constant="24" id="y3O-PZ-Y9F"/>
                         </constraints>
                     </view>
@@ -275,14 +255,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="alexLayer2HeightConstraint" destination="Txm-OS-DbA" id="AW2-6s-6fS"/>
-                        <outlet property="alexLayer2widthConstraint" destination="knz-9b-Vfi" id="d7b-mt-awU"/>
                         <outlet property="backLayer" destination="n4a-mQ-BJW" id="HCq-wd-61L"/>
                         <outlet property="blurView" destination="hPa-VJ-bCE" id="Jiz-mV-HDn"/>
+                        <outlet property="mainBGHeightConstraint" destination="vT2-Cm-vCQ" id="kws-AX-07l"/>
                         <outlet property="mainBGImageView" destination="MGk-aQ-yaO" id="URC-8m-WPH"/>
-                        <outlet property="mapHeightConstraint" destination="vT2-Cm-vCQ" id="kws-AX-07l"/>
-                        <outlet property="mapWidthConstraint" destination="Ztc-YD-zR9" id="0dY-k5-hp9"/>
+                        <outlet property="mainBGWidthConstraint" destination="Ztc-YD-zR9" id="0dY-k5-hp9"/>
+                        <outlet property="minorBGHeightConstraint" destination="Txm-OS-DbA" id="AW2-6s-6fS"/>
                         <outlet property="minorBGImageView" destination="Zv6-Hz-A0S" id="qBM-ta-p3d"/>
+                        <outlet property="minorBGWidthConstraint" destination="knz-9b-Vfi" id="d7b-mt-awU"/>
                         <outlet property="navSeparatorView" destination="jd0-ou-lju" id="gZS-D9-TFK"/>
                         <outlet property="newTaskButton" destination="Thb-en-nUn" id="o6o-RF-BZP"/>
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
@@ -295,9 +275,7 @@
     </scenes>
     <resources>
         <image name="888" width="1200" height="900"/>
-        <image name="Alex_layer1" width="1200" height="900"/>
         <image name="Alex_layer2" width="1200" height="900"/>
-        <image name="boat2" width="1651" height="1416"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

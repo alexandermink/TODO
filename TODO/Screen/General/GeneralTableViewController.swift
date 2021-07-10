@@ -9,19 +9,19 @@
 import UIKit
 import RealmSwift
 
-class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIColorPickerViewControllerDelegate {
+class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backLayer: Rounding!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var newTaskButton: UIBarButtonItem!
     @IBOutlet weak var mainBGImageView: UIImageView!
-    @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainBGWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var navSeparatorView: UIView!
     @IBOutlet weak var minorBGImageView: UIImageView!
-    @IBOutlet weak var alexLayer2widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var alexLayer2HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var minorBGWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
     
     
     private var currentTheme : String? {didSet {tableView.reloadData()}}
@@ -29,6 +29,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let dataSource = GeneralCellDataSource()
+//    weak var delegate: UIAdaptivePresentationControllerDelegate?
     
     
     //MARK: - LIFE CYCLE
@@ -87,42 +88,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         self.dataSource.selectRow(tableView, didSelectRowAt: indexPath, router: router!)
     }
     
-    //MARK: - ВЫБОР ЦВЕТА СВАЙП ЯЧЕЙКИ
-    
-    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        Main.instance.rowBGColor = viewController.selectedColor
-    }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let pickColorButton = pickColorAction(at: indexPath)
-        let okButton = okAction(at: indexPath)
-        pickColorButton.backgroundColor = .darkGray
-        okButton.backgroundColor = .darkGray
-        let configuration = UISwipeActionsConfiguration(actions: [pickColorButton, okButton])
-        configuration.performsFirstActionWithFullSwipe = false
-        return configuration
-    }
-    //
-    func pickColorAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "Выбрать цвет") { (action, view, completion) in
-            let colorPickerVC = UIColorPickerViewController()
-            colorPickerVC.delegate = self
-            self.present(colorPickerVC, animated: true)
-            Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = Main.instance.rowBGColor
-        }
-        return action
-    }
-
-    func okAction(at indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .normal, title: "ОК") { [self] (action, view, completion) in
-            var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-            task.backgroundColor = Main.instance.rowBGColor
-            Main.instance.rowBGColor = .clear
-            try? Main.instance.updateTask(task: task)
-            tableView.reloadData()
-        }
-    }
-    
     //MARK: - ACTIONS
     @IBAction func newTaskBarButton(_ sender: Any) {
         print("нажата")
@@ -159,10 +124,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         newTaskButton.title = "Новая задача"
-        mapWidthConstraint.constant = view.frame.width*3.2
-        mapHeightConstraint.constant = view.frame.width*1.8
-        alexLayer2widthConstraint.constant = view.frame.width*3.2
-        alexLayer2HeightConstraint.constant = view.frame.width*1.8
+        mainBGWidthConstraint.constant = view.frame.width*3.2
+        mainBGHeightConstraint.constant = view.frame.width*1.8
+        minorBGWidthConstraint.constant = view.frame.width*3.2
+        minorBGHeightConstraint.constant = view.frame.width*1.8
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .done, target: self, action: #selector(checkMenu))
         view.backgroundColor = nil
     }
