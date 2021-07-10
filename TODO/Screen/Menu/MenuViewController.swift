@@ -16,6 +16,16 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewTrailingConstr: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
+//
+    @IBOutlet weak var mainBGImageView: UIImageView!
+    @IBOutlet weak var mainBGWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainBGLeadingConstraint: NSLayoutConstraint!
+//
+    @IBOutlet weak var minorBGImageView: UIImageView!
+    @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var minorBGWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var minorBGLeadingConstraint: NSLayoutConstraint!
     
     
     var router: BaseRouter?
@@ -24,17 +34,23 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViewScreen()
         router = BaseRouter(viewController: self)
         view.backgroundColor = nil
         settingsBackLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
+        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = .vitDarkBrown
         self.title = "Настройки"
+        mainBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 - 500)
+        minorBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 - 300)
+        changeTheme()
+        print(view.frame.width, " 🍎🍎🍎🍎🍎")
     }
     
     func deleteAllData() {
@@ -56,20 +72,25 @@ class MenuViewController: UIViewController {
         self.present(firstAlert, animated: true, completion: nil)
     }
     
-//    @IBAction func theme1action(_ sender: Any) {
-//        Main.instance.state = "1"
-//        UserDefaults.standard.set(Main.instance.state, forKey: "k")
-//    }
-//
-//    @IBAction func theme2action(_ sender: Any) {
-//        Main.instance.state = "2"
-//        UserDefaults.standard.set(Main.instance.state, forKey: "k")
-//    }
-//
-//    @IBAction func theme3action(_ sender: Any) {
-//        Main.instance.state = "3"
-//        UserDefaults.standard.set(Main.instance.state, forKey: "k")
-//    }
+    func changeTheme() {
+        let theme = Main.instance.themeService.getTheme()
+        
+        navigationController?.navigationBar.barTintColor = theme.backgroundColor
+        navigationController?.navigationBar.tintColor = theme.interfaceColor
+        
+        mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
+        minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
+    }
+    
+    func setViewScreen() {
+        
+        mainBGWidthConstraint.constant = view.frame.width*3.2
+        mainBGHeightConstraint.constant = view.frame.width*1.8
+        minorBGWidthConstraint.constant = view.frame.width*3.2
+        minorBGHeightConstraint.constant = view.frame.width*1.8
+
+
+    }
 }
 
 extension MenuViewController: UITableViewDelegate, UITableViewDataSource {

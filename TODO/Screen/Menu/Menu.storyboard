@@ -51,6 +51,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IYi-QC-UOl">
+                                <rect key="frame" x="-300" y="44" width="1200" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="600" id="0Cl-WA-CZ9"/>
+                                    <constraint firstAttribute="width" constant="1200" id="jdB-03-vLl"/>
+                                </constraints>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-Bc-Koo">
+                                <rect key="frame" x="-300" y="44" width="1200" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="600" id="1ey-jN-5rG"/>
+                                    <constraint firstAttribute="width" constant="1200" id="4SL-rM-1Yz"/>
+                                </constraints>
+                            </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-7Z-Tyk">
                                 <rect key="frame" x="32" y="81" width="350" height="749"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="M4W-fg-8TK">
@@ -95,20 +109,30 @@
                             <constraint firstItem="a6o-2H-RbQ" firstAttribute="top" secondItem="Orf-9P-x3t" secondAttribute="top" constant="29" id="CSV-Xh-eWl"/>
                             <constraint firstItem="Vp0-7Z-Tyk" firstAttribute="top" secondItem="Orf-9P-x3t" secondAttribute="top" constant="37" id="IFM-oq-pGW"/>
                             <constraint firstItem="Orf-9P-x3t" firstAttribute="bottom" secondItem="Vp0-7Z-Tyk" secondAttribute="bottom" constant="32" id="KL1-sh-6ih"/>
+                            <constraint firstItem="ooh-Bc-Koo" firstAttribute="top" secondItem="Orf-9P-x3t" secondAttribute="top" id="Lbq-dQ-xQC"/>
                             <constraint firstItem="Orf-9P-x3t" firstAttribute="trailing" secondItem="Vp0-7Z-Tyk" secondAttribute="trailing" constant="32" id="XWl-BJ-0kk"/>
                             <constraint firstItem="Vp0-7Z-Tyk" firstAttribute="leading" secondItem="Orf-9P-x3t" secondAttribute="leading" constant="32" id="ZTn-UZ-4RM"/>
+                            <constraint firstItem="ooh-Bc-Koo" firstAttribute="leading" secondItem="Orf-9P-x3t" secondAttribute="leading" constant="-300" id="doX-nw-EQp"/>
                             <constraint firstItem="a6o-2H-RbQ" firstAttribute="leading" secondItem="Orf-9P-x3t" secondAttribute="leading" constant="24" id="loh-mg-3yU"/>
+                            <constraint firstItem="IYi-QC-UOl" firstAttribute="leading" secondItem="Orf-9P-x3t" secondAttribute="leading" constant="-300" id="mDY-cT-Mcn"/>
                             <constraint firstItem="Orf-9P-x3t" firstAttribute="trailing" secondItem="a6o-2H-RbQ" secondAttribute="trailing" constant="24" id="r1J-zc-81N"/>
                             <constraint firstItem="Orf-9P-x3t" firstAttribute="bottom" secondItem="a6o-2H-RbQ" secondAttribute="bottom" constant="24" id="s1H-mq-gDB"/>
+                            <constraint firstItem="IYi-QC-UOl" firstAttribute="top" secondItem="Orf-9P-x3t" secondAttribute="top" id="zl1-IB-wNl"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ucw-dC-ANC"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="blurView" destination="Vp0-7Z-Tyk" id="npt-9e-7M4"/>
                         <outlet property="blurViewTrailingConstr" destination="XWl-BJ-0kk" id="JeN-DY-V6B"/>
+                        <outlet property="mainBGHeightConstraint" destination="0Cl-WA-CZ9" id="8of-as-Lge"/>
+                        <outlet property="mainBGImageView" destination="IYi-QC-UOl" id="Lx8-Md-nWe"/>
+                        <outlet property="mainBGLeadingConstraint" destination="mDY-cT-Mcn" id="585-LS-Hen"/>
+                        <outlet property="mainBGWidthConstraint" destination="jdB-03-vLl" id="RN7-O9-6IX"/>
                         <outlet property="menuBackLayerTrailingConstr" destination="r1J-zc-81N" id="s73-Ap-c0y"/>
+                        <outlet property="minorBGHeightConstraint" destination="1ey-jN-5rG" id="pIm-S1-1sf"/>
+                        <outlet property="minorBGImageView" destination="ooh-Bc-Koo" id="02y-hG-chW"/>
+                        <outlet property="minorBGLeadingConstraint" destination="doX-nw-EQp" id="4lX-hD-VFF"/>
+                        <outlet property="minorBGWidthConstraint" destination="4SL-rM-1Yz" id="J5N-bP-5cl"/>
                         <outlet property="settingsBackLayer" destination="b2P-8i-i41" id="Bx5-Bu-wif"/>
                         <outlet property="settingsShadowBackLayer" destination="a6o-2H-RbQ" id="Bvq-Za-hYZ"/>
                         <outlet property="tableView" destination="jf2-3y-EfI" id="XoT-fG-58J"/>
@@ -116,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ej-MQ-fNg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886.9565217391305" y="76.339285714285708"/>
+            <point key="canvasLocation" x="2528" y="-26"/>
         </scene>
     </scenes>
     <resources>

@@ -28,14 +28,19 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var backLayer: Rounding!
     @IBOutlet weak var createButton: UIButton!
-    @IBOutlet weak var mapImageView: UIImageView!
-    @IBOutlet weak var boatImageView: UIImageView!
-    @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mapWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var mainBGImageView: UIImageView!
+    @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainBGWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainBGLeadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var minorBGImageView: UIImageView!
+    @IBOutlet weak var minorBGWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var minorBGLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var substituteCategoryTextField: UITextField! {didSet{
         substituteCategoryTextField.inputAccessoryView = makeToolBarCategory()}}
-    @IBOutlet weak var boatWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var boatHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var backLayerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var checkTableTopConstraints: NSLayoutConstraint!
@@ -44,6 +49,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var checkToolBarView: UIView!
     @IBOutlet weak var checkListTableView: UITableView!
     @IBOutlet weak var checkToolBarrTextField: UITextField!
+    @IBOutlet weak var blurBGView: UIView!
     
     
     var sections: [String]?
@@ -57,6 +63,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var isKeyboard = false
     private var currentTheme : String?
+//    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
     
     
     //MARK: - LIFE CYCLE
@@ -64,11 +71,11 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         super.viewDidLoad()
         view.backgroundColor = nil
         try? Main.instance.deleteSection(delSectionName: "")
-        boatImageView.isHidden = true
+//        boatImageView.isHidden = true
         setViewScreen()
 //        changeState(state: Main.instance.state ?? "1")
-        ParalaxEffect.paralaxEffect(view: mapImageView, magnitude: 50)
-        ParalaxEffect.paralaxEffect(view: boatImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
         calendar.timeZone = .autoupdatingCurrent
@@ -82,7 +89,13 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     override func viewWillAppear(_ animated: Bool) {
+//        effectView.frame = CGRect(x: 0, y: 0, width: blurBGView!.bounds.width, height: blurBGView.bounds.height)
+//        effectView.alpha = 0.95
+//        blurBGView.addSubview(effectView)
+        mainBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 + 300)
+        minorBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 + 300)
         changeTheme()
+        print(view.frame.width, " 🍎🍎🍎🍎🍎")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,6 +103,47 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     // MARK: - ACTIONS
+    
+    @IBAction func createNewTaskButton777(_ sender: Any) {
+//        func tempAddTask(sectionName: String) {
+//            var tempMarkSelectedCount = 0
+//            for mark in Main.instance.tempCheckList {
+//                if mark.isMarkSelected {
+//                    tempMarkSelectedCount += 1
+//                }
+//            }
+//            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
+//
+//            if task.notificationDate != "" {
+//                notificationService.sendNotificationRequest(task: task)
+//            }
+//
+//            guard let sectionsCount = sections?.count else { return }
+//            if sectionsCount > 0 {
+//                try? Main.instance.deleteSection(delSectionName: "")
+//            }
+//            router?.pop(animated: true)
+//        }
+//
+//        if notificationTextField.text != "" {
+//            let pickedDate: Double = dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? 0
+//            let interval = pickedDate - Date().timeIntervalSince1970
+//            if interval <= 1 {
+//                return showAlert(title: "Ошибка", message: "Выбрано прошедшее время")
+//            }
+//        }
+//        if newTaskNameTextField.text == "" {
+//            showAlert(title: "Ошибка", message: "Не заполнено поле: Название")
+//        } else if substituteCategoryTextField.text != ""{
+//            tempAddTask(sectionName: substituteCategoryTextField.text ?? "")
+//        } else if newSectionTextField.text != "" {
+//            tempAddTask(sectionName: newSectionTextField.text ?? "")
+//        } else {
+//            showAlert(title: "Ошибка", message: "Не заполнено поле: Секция")
+//        }
+    }
+    
+    
     @objc func createNewTaskButton() {
         func tempAddTask(sectionName: String) {
             var tempMarkSelectedCount = 0
@@ -292,6 +346,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         checkListButton.setTitleColor(theme.interfaceColor, for: .highlighted)
         createButton.setTitleColor(theme.interfaceColor, for: .normal)
         createButton.setTitleColor(theme.interfaceColor, for: .highlighted)
+        
+        mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
+        minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
     }
     
     // MARK: - SET VIEW SCREEN
@@ -303,10 +360,16 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         
         createButton.setTitle("Создать", for: .normal)
-        mapWidthConstraint.constant = view.frame.width*3.2
-        mapHeightConstraint.constant = view.frame.width*1.6
-        boatWidthConstraint.constant = view.frame.width*1.8
-        boatHeightConstraint.constant = view.frame.width*1.8
+        createButton.backgroundColor = .darkGray
+        createButton.layer.cornerRadius = 8
+        createButton.layer.borderWidth = 2
+        createButton.layer.borderColor = UIColor.lightGray.cgColor
+        
+        mainBGWidthConstraint.constant = view.frame.width*3.2
+        mainBGHeightConstraint.constant = view.frame.width*1.8
+        minorBGWidthConstraint.constant = view.frame.width*3.2
+        minorBGHeightConstraint.constant = view.frame.width*1.8
+
         stackBottomConstraint.constant = view.frame.height/4
         backLayerBottomConstraint.constant = view.frame.height/4 - 8
         
