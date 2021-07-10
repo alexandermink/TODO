@@ -84,36 +84,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         self.dataSource.viewHeaderSection(tableView, viewForHeaderInSection: section, currentTheme: currentTheme ?? "1")
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.view.window?.rootViewController
-//        self.dataSource.selectRow(tableView, didSelectRowAt: indexPath, router: router!)
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
-            print("ячейка с кнопкой 'Добавить' нажата")
-        } else {
-            
-            // Get the presented navigationController and the editViewController it contains.
-            
-            let navigationController = self.view.window?.rootViewController?.navigationController
-            let destinationViewController = TaskDetailViewController()
-            navigationController?.viewControllers.append(destinationViewController)
-            
-            
-            // Set the editViewController to be the delegate of the presentationController for this presentation.
-            // editViewController can then respond to attempted dismissals.
-            
-            navigationController?.presentationController?.delegate = destinationViewController
-            
-            
-//            let destinationViewController = TaskDetailViewController()
-            let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-            
-            
-            
-            destinationViewController.task = object
-            router?.present(vc: destinationViewController)
-            navigationController?.presentationController?.delegate = destinationViewController
-            print("ячейка нажата")
-        }
+        self.dataSource.selectRow(tableView, didSelectRowAt: indexPath, router: router!)
     }
     
     //MARK: - ВЫБОР ЦВЕТА СВАЙП ЯЧЕЙКИ

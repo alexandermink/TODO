@@ -17,7 +17,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
     //MARK: - VARIABLES
     let scrollView = UIScrollView()
     let detailContentView = UIView()
-    let doneButton = UIButton(type: .system)
+//    let doneButton = UIButton(type: .system)
     var taskNameTitleLabel = UILabel()
     let taskNameTextView = UITextView()
     var taskCreationDateTitleLabel = UILabel()
@@ -76,11 +76,11 @@ class TaskDetailView: UIView, UITableViewDelegate {
         detailContentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(detailContentView)
         
-        doneButton.setTitle("Готово", for: .normal)
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.tintColor = .systemYellow
-        doneButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
-        detailContentView.addSubview(doneButton)
+//        doneButton.setTitle("Готово", for: .normal)
+//        doneButton.translatesAutoresizingMaskIntoConstraints = false
+//        doneButton.tintColor = .systemYellow
+//        doneButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
+//        detailContentView.addSubview(doneButton)
         
         taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         
@@ -180,8 +180,8 @@ class TaskDetailView: UIView, UITableViewDelegate {
             detailContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             detailContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
-            doneButton.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 12),
-            doneButton.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
+//            doneButton.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 12),
+//            doneButton.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
             taskNameTitleLabel.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 20),
             taskNameTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
@@ -239,7 +239,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
     //MARK: - CHANGE THEME
     func changeTheme() {
         let theme = Main.instance.themeService.getTheme()
-        doneButton.tintColor = theme.interfaceColor
+//        doneButton.tintColor = theme.interfaceColor
         taskNameTextView.textColor = theme.interfaceColor
         taskCreationDateLabel.textColor = theme.interfaceColor
         taskDateTextField.textColor = theme.interfaceColor

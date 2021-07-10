@@ -49,33 +49,34 @@ class GeneralCellDataSource {
         }
     }
     
-//    func selectRow(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, router: BaseRouter) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
-//        print("ячейка с кнопкой 'Добавить' нажата")
-//    } else {
-//
-//        // Get the presented navigationController and the editViewController it contains.
-//
-//        let navigationController = UIApplication.shared.delegate?.window
-//        let destinationViewController = TaskDetailViewController()
-//        navigationController.viewControllers.append(destinationViewController)
-//
-//        // Set the editViewController to be the delegate of the presentationController for this presentation.
-//        // editViewController can then respond to attempted dismissals.
-//        navigationController.presentationController?.delegate = navigationController.viewControllers.first as! TaskDetailViewController
-//
-//
-////            let destinationViewController = TaskDetailViewController()
-//        let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-//
-////            destinationViewController.presentationController?.delegate = TaskDetailViewController()
-//
-//        destinationViewController.task = object
-//        router.push(vc: destinationViewController)
-//        print("ячейка нажата")
-//    }
-//    }
+    func selectRow(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, router: BaseRouter) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
+            print("ячейка с кнопкой 'Добавить' нажата")
+        } else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
+                print("ячейка с кнопкой 'Добавить' нажата")
+            } else {
+                let navigationController = UINavigationController()
+                let destinationViewController = TaskDetailViewController()
+                
+//                navigationController.navigationBar.barTintColor = .systemYellow
+//                navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Скрыть", style: .done, target: destinationViewController, action: #selector(destinationViewController.taskDetailDismiss))
+                
+                
+                
+                
+                
+//                let destinationViewController = TaskDetailViewController()
+                navigationController.viewControllers.append(destinationViewController)
+                navigationController.presentationController?.delegate = destinationViewController
+                let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+                destinationViewController.task = object
+                router.present(vc: navigationController)
+            }
+        }
+    }
     
     func isEditRow(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count{

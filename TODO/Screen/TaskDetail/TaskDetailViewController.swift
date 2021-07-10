@@ -22,6 +22,8 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         return task != editedTask
     }
     var router: BaseRouter?
+    var rightNavButton = UIBarButtonItem()
+    var leftNavButton = UIBarButtonItem()
     
     //MARK: - LIFE CYCLE
     override func loadView() {
@@ -39,10 +41,23 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         taskDetailView.taskNameTextView.delegate = self
         taskDetailView.taskDescriptionTextView.delegate = self
         
-        
         updateData()
+
+        navigationController!.navigationBar.barTintColor = Main.instance.themeService.getTheme().interfaceColor
+        leftNavButton = UIBarButtonItem(title: "Скрыть", style: .plain, target: self, action: #selector(cancel))
+        self.navigationItem.leftBarButtonItem  = leftNavButton
+        leftNavButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
+        
+        rightNavButton = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(handleDoneTouchUpInside))
+        self.navigationItem.rightBarButtonItem  = rightNavButton
+        rightNavButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
+        rightNavButton.isEnabled = hasChanges
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         taskDetailView.changeTheme()
@@ -50,11 +65,11 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
         isModalInPresentation = hasChanges
+        rightNavButton.isEnabled = hasChanges
     }
     
-    func taskDetailDismiss(){
+    @objc func taskDetailDismiss(){
         router?.dismiss()
     }
     
@@ -78,9 +93,9 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         taskDetailView.addCheckButton.addTarget(self,
                                 action: #selector(checkTablePlusAction),
                                                 for: .touchUpInside)
-        taskDetailView.doneButton.addTarget(self,
-                                action: #selector(handleDoneTouchUpInside),
-                                for: .touchUpInside)
+//        taskDetailView.doneButton.addTarget(self,
+//                                action: #selector(handleDoneTouchUpInside),
+//                                for: .touchUpInside)
         taskDetailView.checkListTableView.reloadData()
     }
     
@@ -140,33 +155,28 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
-        confirmCancel(showingSave: true)
+        confirmCancel()
     }
 
     // MARK: - Cancellation Confirmation
     
-    func confirmCancel(showingSave: Bool) {
-        // Present a UIAlertController as an action sheet to have the user confirm losing any
-        // recent changes.
+    @objc func confirmCancel() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        // Only ask if the user wants to save if they attempt to pull to dismiss, not if they tap Cancel.
-        if showingSave {
-            alert.addAction(UIAlertAction(title: "Save", style: .default) { _ in
-                self.handleDoneTouchUpInside()
-            })
-        }
-        
-        alert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: "Сохранить", style: .default) { _ in
+            self.handleDoneTouchUpInside()
+        })
+        alert.addAction(UIAlertAction(title: "Отменить изменения", style: .destructive) { _ in
             self.taskDetailDismiss()
         })
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        // If presenting the alert controller as a popover, point the popover at the Cancel button.
-//        alert.popoverPresentationController = cancelButton
-        
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
+    
+    @objc func cancel() {
+        if hasChanges {
+            confirmCancel()
+        } else {
+            taskDetailDismiss()
+        }
+    }
 }
