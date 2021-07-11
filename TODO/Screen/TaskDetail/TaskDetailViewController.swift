@@ -83,6 +83,10 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         editedTask.notificationDate = taskDetailView.taskDateTextField.text
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        editedTask.notificationDate = taskDetailView.taskDateTextField.text
+    }
+    
     //MARK: - ACTION SETUP
     func updateData(){
         taskDetailView.taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
@@ -93,9 +97,6 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         taskDetailView.addCheckButton.addTarget(self,
                                 action: #selector(checkTablePlusAction),
                                                 for: .touchUpInside)
-//        taskDetailView.doneButton.addTarget(self,
-//                                action: #selector(handleDoneTouchUpInside),
-//                                for: .touchUpInside)
         taskDetailView.checkListTableView.reloadData()
     }
     
