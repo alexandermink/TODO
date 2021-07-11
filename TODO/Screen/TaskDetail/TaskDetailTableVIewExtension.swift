@@ -11,13 +11,13 @@ import UIKit
 extension TaskDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return task.checkList.count
+        return editedTask.checkList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckTableViewCell else { return UITableViewCell() }
         
-        let checkMark = task.checkList[indexPath.row]
+        let checkMark = editedTask.checkList[indexPath.row]
         
         cell.checkListItemTextField.text = checkMark.title
         
@@ -30,7 +30,7 @@ extension TaskDetailViewController: UITableViewDataSource {
         cell.checkListItemTextField.text = checkMark.title
         cell.checkListItemTextField.attributedText = checkMark.isMarkSelected ?  strikedText : normalText
         cell.checkListItemTextField.tag = indexPath.row
-        cell.checkListItemTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        cell.checkListItemTextField.addTarget(self, action: #selector(textFieldDidChangeSelector), for: .editingChanged)
         cell.checkMarkButton.addTarget(self, action: #selector(self.toggleSelected(button:)), for: .touchUpInside)
         cell.checkMarkButton.tag = indexPath.row
         cell.backgroundColor = .clear
@@ -40,7 +40,7 @@ extension TaskDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            task.checkList.remove(at: indexPath.row)
+            editedTask.checkList.remove(at: indexPath.row)
             taskDetailView.checkListTableView.deleteRows(at: [indexPath], with: .fade)
         }
         taskDetailView.checkListTableView.reloadData()
@@ -50,18 +50,18 @@ extension TaskDetailViewController: UITableViewDataSource {
     
     //MARK: - TEBLEVIEW ACTIONS
     @objc func toggleSelected(button: UIButton) {
-        if task.checkList[button.tag].isMarkSelected {
-            task.markSelectedCount -= 1
+        if editedTask.checkList[button.tag].isMarkSelected {
+            editedTask.markSelectedCount -= 1
         } else {
-            task.markSelectedCount += 1
+            editedTask.markSelectedCount += 1
         }
-        task.checkList[button.tag].isMarkSelected.toggle()
+        editedTask.checkList[button.tag].isMarkSelected.toggle()
         taskDetailView.checkListTableView.reloadData()
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc func textFieldDidChangeSelector(_ textField: UITextField) {
 
-        task.checkList[textField.tag].title = textField.text ?? ""
+        editedTask.checkList[textField.tag].title = textField.text ?? ""
 
     }
     

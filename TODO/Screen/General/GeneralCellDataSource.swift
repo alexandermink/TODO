@@ -54,11 +54,27 @@ class GeneralCellDataSource {
         if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             print("ячейка с кнопкой 'Добавить' нажата")
         } else {
-            let destinationViewController = TaskDetailViewController()
-            let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-            destinationViewController.task = object
-            router.present(vc: destinationViewController)
-            print("ячейка нажата")
+            tableView.deselectRow(at: indexPath, animated: true)
+            if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
+                print("ячейка с кнопкой 'Добавить' нажата")
+            } else {
+                let navigationController = UINavigationController()
+                let destinationViewController = TaskDetailViewController()
+                
+//                navigationController.navigationBar.barTintColor = .systemYellow
+//                navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Скрыть", style: .done, target: destinationViewController, action: #selector(destinationViewController.taskDetailDismiss))
+                
+                
+                
+                
+                
+//                let destinationViewController = TaskDetailViewController()
+                navigationController.viewControllers.append(destinationViewController)
+                navigationController.presentationController?.delegate = destinationViewController
+                let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+                destinationViewController.task = object
+                router.present(vc: navigationController)
+            }
         }
     }
     

@@ -8,12 +8,22 @@
 
 import UIKit
 
-class TaskDetailViewController: UIViewController, TaskDetailDelegate {
+class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextViewDelegate, UITextFieldDelegate, UIAdaptivePresentationControllerDelegate {
     
     //MARK: - VARIABLES
     let taskDetailView = TaskDetailView()
     var task: Task = Task()
+    var editedTask = Task() {
+        didSet {
+            viewIfLoaded?.setNeedsLayout()
+        }
+    }
+    var hasChanges: Bool {
+        return task != editedTask
+    }
     var router: BaseRouter?
+    var rightNavButton = UIBarButtonItem()
+    var leftNavButton = UIBarButtonItem()
     
     //MARK: - LIFE CYCLE
     override func loadView() {
@@ -24,66 +34,103 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate {
         super.viewDidLoad()
         taskDetailView.delegate = self
         taskDetailView.checkListTableView.dataSource = self
-        upDateData()
         router = BaseRouter(viewController: self)
+        editedTask = task
+        
+        taskDetailView.taskDateTextField.delegate = self
+        taskDetailView.taskNameTextView.delegate = self
+        taskDetailView.taskDescriptionTextView.delegate = self
+        
+        updateData()
+
+        navigationController!.navigationBar.barTintColor = Main.instance.themeService.getTheme().interfaceColor
+        leftNavButton = UIBarButtonItem(title: "Скрыть", style: .plain, target: self, action: #selector(cancel))
+        self.navigationItem.leftBarButtonItem  = leftNavButton
+        leftNavButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
+        
+        rightNavButton = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(handleDoneTouchUpInside))
+        self.navigationItem.rightBarButtonItem  = rightNavButton
+        rightNavButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
+        rightNavButton.isEnabled = hasChanges
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         taskDetailView.changeTheme()
     }
     
-    func taskDetailDismiss(){
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        isModalInPresentation = hasChanges
+        rightNavButton.isEnabled = hasChanges
+    }
+    
+    @objc func taskDetailDismiss(){
         router?.dismiss()
     }
     
-    //MARK: - ACTION SET UP
-    func upDateData(){
+    //MARK: - DELEGATE TEXT OBSERVER
+    func textViewDidChange(_ textView: UITextView) {
+        editedTask.name = taskDetailView.taskNameTextView.text
+        editedTask.taskDescription = taskDetailView.taskDescriptionTextView.text
+    }
+    
+    func textFieldDidChange(_ textField: UITextField) {
+        editedTask.notificationDate = taskDetailView.taskDateTextField.text
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        editedTask.notificationDate = taskDetailView.taskDateTextField.text
+    }
+    
+    //MARK: - ACTION SETUP
+    func updateData(){
         taskDetailView.taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
-        taskDetailView.taskNameTextView.text = (task.name != "" ? task.name : "Напишите название задачи")
-        taskDetailView.taskCreationDateLabel.text = taskDetailView.dateFormatter.string(from: task.creationDate)
-        taskDetailView.taskDateTextField.text = task.notificationDate
-        taskDetailView.taskDescriptionTextView.text = (task.taskDescription != "" ? task.taskDescription : "Напишите описание задачи")
+        taskDetailView.taskNameTextView.text = (editedTask.name != "" ? editedTask.name : "Напишите название задачи")
+        taskDetailView.taskCreationDateLabel.text = taskDetailView.dateFormatter.string(from: editedTask.creationDate)
+        taskDetailView.taskDateTextField.text = editedTask.notificationDate
+        taskDetailView.taskDescriptionTextView.text = (editedTask.taskDescription != "" ? editedTask.taskDescription : "Напишите описание задачи")
         taskDetailView.addCheckButton.addTarget(self,
                                 action: #selector(checkTablePlusAction),
                                                 for: .touchUpInside)
-        taskDetailView.doneButton.addTarget(self,
-                                action: #selector(handleDoneTouchUpInside),
-                                for: .touchUpInside)
         taskDetailView.checkListTableView.reloadData()
     }
     
     //MARK: - ACTIONS
-    @objc func handleDoneTouchUpInside(){
-        task.name = (taskDetailView.taskNameTextView.text == "Напишите название задачи" ? "" : taskDetailView.taskNameTextView.text)
-        task.taskDescription = (taskDetailView.taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDetailView.taskDescriptionTextView.text)
+    @objc func handleDoneTouchUpInside() {
+        editedTask.name = (taskDetailView.taskNameTextView.text == "Напишите название задачи" ? "" : taskDetailView.taskNameTextView.text)
+        editedTask.taskDescription = (taskDetailView.taskDescriptionTextView.text == "Напишите описание задачи" ? "" : taskDetailView.taskDescriptionTextView.text)
             
-        if task.notificationDate == "" {
+        if editedTask.notificationDate == "" {
             if taskDetailView.taskDateTextField.text != "" {
                 print("New notif")
-                task.notificationDate = taskDetailView.taskDateTextField.text
-                task.notificationID = UUID().uuidString
-                task.notificationID = taskDetailView.notificationService.sendNotificationRequest(task: task)
+                editedTask.notificationDate = taskDetailView.taskDateTextField.text
+                editedTask.notificationID = UUID().uuidString
+                editedTask.notificationID = taskDetailView.notificationService.sendNotificationRequest(task: editedTask)
             }
         } else {
             if taskDetailView.taskDateTextField.text != "" {
-                if taskDetailView.taskDateTextField.text != task.notificationDate {
+                if taskDetailView.taskDateTextField.text != editedTask.notificationDate {
                     print("Update notif")
-                    task.notificationDate = taskDetailView.taskDateTextField.text
-                    task.notificationID = taskDetailView.notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
+                    editedTask.notificationDate = taskDetailView.taskDateTextField.text
+                    editedTask.notificationID = taskDetailView.notificationService.updateNotificationRequest(task: editedTask, notificationIdentifier: editedTask.notificationID!)
                 }
         } else {
             print("Delete notif")
-            taskDetailView.notificationService.deleteNotificationRequest(notificationIdentifier: (task.notificationID)!)
-            task.notificationDate = ""
-            task.notificationID = ""
+            taskDetailView.notificationService.deleteNotificationRequest(notificationIdentifier: (editedTask.notificationID)!)
+            editedTask.notificationDate = ""
+            editedTask.notificationID = ""
             taskDetailView.taskDateTextField.text = ""
             }
         }
         
-        task.notificationDate = taskDetailView.taskDateTextField.text
+        editedTask.notificationDate = taskDetailView.taskDateTextField.text
         
-        try? Main.instance.updateTask(task: task)
+        try? Main.instance.updateTask(task: editedTask)
         taskDetailView.delegate?.taskDetailDismiss()
     }
     
@@ -98,14 +145,39 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate {
         taskDetailView.endEditing(true)
     }
     
-    @objc func checkTablePlusAction(){
-        let id = (task.checkList.max()?.id ?? 0) + 1
+    @objc func checkTablePlusAction() {
+        let id = (editedTask.checkList.max()?.id ?? 0) + 1
         print("plus id: ", id)
         let checkMark = CheckMark(id: id, title: taskDetailView.addCheckElementTextField.text ?? "", isMarkSelected: false)
-        task.checkList.append(checkMark)
+        editedTask.checkList.append(checkMark)
         taskDetailView.addCheckElementTextField.text = ""
         taskDetailView.addCheckElementTextField.becomeFirstResponder()
         taskDetailView.checkListTableView.reloadData()
     }
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        confirmCancel()
+    }
 
+    // MARK: - Cancellation Confirmation
+    
+    @objc func confirmCancel() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Сохранить", style: .default) { _ in
+            self.handleDoneTouchUpInside()
+        })
+        alert.addAction(UIAlertAction(title: "Отменить изменения", style: .destructive) { _ in
+            self.taskDetailDismiss()
+        })
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func cancel() {
+        if hasChanges {
+            confirmCancel()
+        } else {
+            taskDetailDismiss()
+        }
+    }
 }

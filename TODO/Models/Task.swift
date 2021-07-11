@@ -34,7 +34,28 @@ class CheckMarkRealm: EmbeddedObject {
     @objc dynamic var title: String = ""
 }
 
-struct Task {
+struct Task: Comparable {
+    static func < (lhs: Task, rhs: Task) -> Bool {
+        lhs.id < rhs.id
+    }
+    
+    static func != (lhs: Task, rhs: Task) -> Bool {
+        if
+        lhs.id != rhs.id ||
+        lhs.name != rhs.name ||
+        lhs.backgroundColor != rhs.backgroundColor ||
+        lhs.taskDescription != rhs.taskDescription ||
+        lhs.creationDate != rhs.creationDate ||
+        lhs.notificationID != rhs.notificationID ||
+        lhs.notificationDate != rhs.notificationDate ||
+        lhs.checkList != rhs.checkList ||
+        lhs.markSelectedCount != rhs.markSelectedCount {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
     var id: Int = -1
     var name: String = ""
