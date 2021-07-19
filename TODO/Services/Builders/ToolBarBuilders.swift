@@ -70,20 +70,12 @@ extension UIViewController {
         let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(TaskDetailViewController.chooseNotificationAction))
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
         doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .highlighted)
+        let deleteButton = UIBarButtonItem(title: "Удалить", style: .plain, target: self, action: #selector(TaskDetailViewController.deleteNotificationAction))
+        deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
+        deleteButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .highlighted)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.setItems([flexSpace, doneButton], animated: true)
+        toolBar.setItems([deleteButton, flexSpace, doneButton], animated: true)
         return toolBar
     }
     
 }
-//extension UIView {
-//    func makeToolBarNotificationsDetail() -> UIToolbar {
-//        let toolBar = ToolBarBuilder.configDoneButton()
-//        let doneButton = UIBarButtonItem(title: "Готово", style: .plain, target: self, action: #selector(TaskDetailView.chooseNotificationAction))
-//        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .normal)
-//        doneButton.setTitleTextAttributes(ToolBarBuilder.setAttributedString(textSize: CGFloat(ToolBarBuilder.size1)), for: .highlighted)
-//        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        toolBar.setItems([flexSpace, doneButton], animated: true)
-//        return toolBar
-//    }
-//}

@@ -123,12 +123,12 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
                     editedTask.notificationDate = taskDetailView.taskDateTextField.text
                     editedTask.notificationID = taskDetailView.notificationService.updateNotificationRequest(task: editedTask, notificationIdentifier: editedTask.notificationID!)
                 }
-        } else {
-            print("Delete notif")
-            taskDetailView.notificationService.deleteNotificationRequest(notificationIdentifier: (editedTask.notificationID)!)
-            editedTask.notificationDate = ""
-            editedTask.notificationID = ""
-            taskDetailView.taskDateTextField.text = ""
+            } else {
+                print("Delete notif")
+                taskDetailView.notificationService.deleteNotificationRequest(notificationIdentifier: (editedTask.notificationID)!)
+                editedTask.notificationDate = ""
+                editedTask.notificationID = ""
+                taskDetailView.taskDateTextField.text = ""
             }
         }
         
@@ -146,6 +146,12 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
             }
         }
         taskDetailView.taskDateTextField.text = taskDetailView.dateFormatter.string(from: taskDetailView.notificationPicker.date)
+        taskDetailView.endEditing(true)
+    }
+    
+    @objc func deleteNotificationAction() {
+        taskDetailView.taskDateTextField.text = ""
+        
         taskDetailView.endEditing(true)
     }
     
