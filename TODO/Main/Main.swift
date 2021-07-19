@@ -103,7 +103,7 @@ extension Main: LocalDataBaseService {
             objectRealm.notificationID = task.notificationID
         } else {
             if task.notificationDate != "" {
-                objectRealm.notificationID = notificationService.updateNotificationRequest(task: task, notificationIdentifier: task.notificationID!)
+                objectRealm.notificationID = notificationService.updateNotificationRequest(task: task)
             }
         }
         try realm.write {

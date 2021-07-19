@@ -152,10 +152,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                     tempMarkSelectedCount += 1
                 }
             }
-            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
+            guard var task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
 
             if task.notificationDate != "" {
-                notificationService.sendNotificationRequest(task: task)
+                task.notificationID = notificationService.sendNotificationRequest(task: task)
             }
 
             guard let sectionsCount = sections?.count else { return }
