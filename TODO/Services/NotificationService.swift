@@ -32,7 +32,7 @@ class NotificationService {
     func sendNotificationRequest(
         task: Task) -> String {
         
-        let identifier = task.notificationID!
+        let identifier = UUID().uuidString
         let content = makeNotificationContent(title: task.name)
         let triggerInterval =  makeIntervalNotificationTrigger(pickedTime: dateFormatter.date(from: task.notificationDate ?? "")?.timeIntervalSince1970 ?? Date().timeIntervalSince1970)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: triggerInterval, repeats: false)
@@ -50,15 +50,15 @@ class NotificationService {
         return identifier
     }
     
-    func updateNotificationRequest(task: Task, notificationIdentifier: String) -> String {
-        deleteNotificationRequest(notificationIdentifier: notificationIdentifier)
+    func updateNotificationRequest(task: Task) -> String {
+        deleteNotificationRequest(task: task)
         return sendNotificationRequest(task: task)
     }
     
-    func deleteNotificationRequest(notificationIdentifier: String) {
+    func deleteNotificationRequest(task: Task) {
         Main.instance.notifBadgeCount -= 1
         let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
+        center.removePendingNotificationRequests(withIdentifiers: [task.notificationID!])
     }
 }
 
