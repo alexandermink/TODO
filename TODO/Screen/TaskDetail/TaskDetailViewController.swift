@@ -43,19 +43,7 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         
         updateData()
 
-        navigationController!.navigationBar.barTintColor = Main.instance.themeService.getTheme().interfaceColor
-        leftNavButton = UIBarButtonItem(title: "Скрыть", style: .plain, target: self, action: #selector(cancel))
-        self.navigationItem.leftBarButtonItem  = leftNavButton
-        leftNavButton.setTitleTextAttributes(
-            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
-        
-        rightNavButton = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(handleDoneTouchUpInside))
-        self.navigationItem.rightBarButtonItem  = rightNavButton
-        rightNavButton.setTitleTextAttributes(
-            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
-             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
-        rightNavButton.isEnabled = hasChanges
+        navigationBarSetUp()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +86,22 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
                                 action: #selector(checkTablePlusAction),
                                                 for: .touchUpInside)
         taskDetailView.checkListTableView.reloadData()
+    }
+    
+    func navigationBarSetUp() {
+        navigationController!.navigationBar.barTintColor = Main.instance.themeService.getTheme().interfaceColor
+        leftNavButton = UIBarButtonItem(title: "Скрыть", style: .plain, target: self, action: #selector(cancel))
+        self.navigationItem.leftBarButtonItem  = leftNavButton
+        leftNavButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
+        
+        rightNavButton = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(handleDoneTouchUpInside))
+        self.navigationItem.rightBarButtonItem  = rightNavButton
+        rightNavButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: Main.instance.themeService.getTheme().backgroundColor], for: .normal)
+        rightNavButton.isEnabled = hasChanges
     }
     
     //MARK: - ACTIONS
