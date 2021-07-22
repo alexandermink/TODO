@@ -29,7 +29,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let dataSource = GeneralCellDataSource()
-//    weak var delegate: UIAdaptivePresentationControllerDelegate?
     
     
     //MARK: - LIFE CYCLE
