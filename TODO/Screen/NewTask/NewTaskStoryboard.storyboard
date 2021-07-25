@@ -318,9 +318,6 @@
                                 <state key="normal" title="Create">
                                     <color key="titleColor" systemColor="systemYellowColor"/>
                                 </state>
-                                <connections>
-                                    <action selector="createNewTaskButton777:" destination="ZIG-J0-Jce" eventType="touchUpInside" id="JfC-an-0hy"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="B9L-pa-vsv"/>
@@ -364,7 +361,6 @@
                         <outlet property="checkToolBarView" destination="uZA-16-wN4" id="xnw-kh-CMx"/>
                         <outlet property="checkToolBarrTextField" destination="ipK-ab-ReT" id="lzc-zj-pOT"/>
                         <outlet property="coverButton" destination="3VI-PW-BYs" id="ccv-17-9oo"/>
-                        <outlet property="createButton" destination="Hb3-NG-4sk" id="cTb-JV-dD3"/>
                         <outlet property="descriptionTextField" destination="2tT-nH-U0R" id="4S1-4x-ChS"/>
                         <outlet property="mainBGHeightConstraint" destination="Gr4-Vs-1iC" id="BMo-Rp-bny"/>
                         <outlet property="mainBGImageView" destination="wNf-XR-lr7" id="xfI-8q-DfL"/>

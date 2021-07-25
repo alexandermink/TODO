@@ -43,10 +43,12 @@ class MenuViewController: UIViewController {
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
         ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Назад"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.title = "Настройки"
         mainBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 - 500)
         minorBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 - 300)
         changeTheme()
@@ -88,8 +90,6 @@ class MenuViewController: UIViewController {
         mainBGHeightConstraint.constant = view.frame.width*1.8
         minorBGWidthConstraint.constant = view.frame.width*3.2
         minorBGHeightConstraint.constant = view.frame.width*1.8
-
-
     }
 }
 
@@ -122,7 +122,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let destinationVC = storyboard.instantiateViewController(identifier: "Themes") as! ThemesViewController
         switch indexPath {
         case [0, 0]:
-            router?.present(vc: destinationVC, animated: true)
+            router?.push(vc: destinationVC, animated: true)
         case [1, 0]:
             print("кнопка очистить данные нажата")
             deleteAllData()
