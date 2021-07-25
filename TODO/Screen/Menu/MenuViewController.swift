@@ -88,8 +88,6 @@ class MenuViewController: UIViewController {
         mainBGHeightConstraint.constant = view.frame.width*1.8
         minorBGWidthConstraint.constant = view.frame.width*3.2
         minorBGHeightConstraint.constant = view.frame.width*1.8
-
-
     }
 }
 
