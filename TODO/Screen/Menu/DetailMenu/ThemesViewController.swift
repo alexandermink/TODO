@@ -13,7 +13,7 @@ class ThemesViewController: UIViewController {
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet var containerView: UIView!
     
-    private var rootController: UIViewController?
+    private var rootController: UIViewController = UINavigationController()
     
     private var currentTheme: Theme = Theme()
     
@@ -21,14 +21,12 @@ class ThemesViewController: UIViewController {
         super.viewDidLoad()
         segment.selectedSegmentIndex = Main.instance.themeService.getState().rawValue
         
-        updatePresentationController()
     }
-    
     override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        guard let rootView = rootController?.view else { return }
-        rootView.frame = containerView.bounds
+        updateTheme(state: Main.instance.themeService.getState())
+        let backItem = UIBarButtonItem()
+        backItem.title = "Настройки"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backItem
     }
     
     @IBAction func themesSegmentAction(_ sender: UISegmentedControl) {
@@ -59,6 +57,7 @@ class ThemesViewController: UIViewController {
     }
     
     func updatePresentationController() {
+        let theme = Main.instance.themeService.getTheme()
         let navigationController = UINavigationController()
         let presentationGeneralViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GeneralTableViewController") as! GeneralTableViewController
         navigationController.viewControllers = [ presentationGeneralViewController ]
@@ -71,5 +70,22 @@ class ThemesViewController: UIViewController {
         navigationController.didMove(toParent: self)
         
         self.rootController = navigationController
+        
+        let rootView = rootController.view
+        rootView?.frame = containerView.bounds
+        rootView?.layer.cornerRadius = 16
+        rootView?.layer.borderWidth = 2
+        rootView?.layer.borderColor = theme.interfaceColor.cgColor
+        view.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
+        containerView.backgroundColor = .mainBackground
+        containerView.layer.cornerRadius = 16
+        self.navigationController?.navigationBar.barTintColor = theme.backgroundColor
+        self.navigationController?.navigationBar.tintColor = theme.interfaceColor
+        segment.backgroundColor = theme.backgroundColor
+        segment.tintColor = theme.interfaceColor
+        segment.setTitleTextAttributes(
+            [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 15),
+             NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
+        segment.selectedSegmentTintColor = .mainBackground
     }
 }
