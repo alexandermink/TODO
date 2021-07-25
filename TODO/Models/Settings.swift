@@ -31,6 +31,10 @@ final class SettingsFactory {
             SettingsField(name: "что-то", state: nil, picture: "", isDisclosure: false)
         ])
         
-        return [themes, some]
+        let test = SettingsCategory(name: "test", settingsFields: [
+            SettingsField(name: "test", state: nil, picture: "", isDisclosure: false)
+        ])
+        
+        return [themes, some, test]
     }
 }
