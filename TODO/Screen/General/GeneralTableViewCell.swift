@@ -17,7 +17,6 @@ class GeneralTableViewCell: UITableViewCell {
     
     public func configure(theme: String) {
         let theme = Main.instance.themeService.getTheme()
-//        notificationLabel.textColor = theme.interfaceColor
         notificationLabel.textColor = .black
         notificationLabel.backgroundColor = theme.interfaceColor
         checkProgressBar.tintColor = theme.interfaceColor

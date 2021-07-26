@@ -101,7 +101,6 @@ class TaskRealmConverter {
     func convert(_ checksMarkRealm: List<CheckMarkRealm>) -> [CheckMark] {
         var checkMark: [CheckMark] = []
         for checkMarkRealm in checksMarkRealm {
-//            checkMark.append(convert(taskRealm))
              checkMark.append(convert(checkMarkRealm))
         }
         return checkMark

@@ -29,7 +29,6 @@ import UIKit
     }
     
     
-    
     func updateColors() {
         self.roundedLayer.borderColor = self.color.cgColor
     }

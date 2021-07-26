@@ -16,12 +16,12 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewTrailingConstr: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
-//
+
     @IBOutlet weak var mainBGImageView: UIImageView!
     @IBOutlet weak var mainBGWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainBGLeadingConstraint: NSLayoutConstraint!
-//
+
     @IBOutlet weak var minorBGImageView: UIImageView!
     @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var minorBGWidthConstraint: NSLayoutConstraint!

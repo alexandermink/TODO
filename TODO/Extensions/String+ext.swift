@@ -13,9 +13,3 @@ extension String {
         return (self as NSString).floatValue
     }
 }
-
-//extension Date { // для локализации времени (оно приходит по всему миру в базовом часовом поясе)
-//    func localString(dateStyle: DateFormatter.Style = .short, timeStyle: DateFormatter.Style = .short) -> String {
-//        return DateFormatter.localizedString(from: self, dateStyle: dateStyle, timeStyle: timeStyle)
-//    }
-//}
