@@ -15,8 +15,6 @@ class ThemesViewController: UIViewController {
     
     private var rootController: UIViewController = UINavigationController()
     
-    private var currentTheme: Theme = Theme()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         segment.selectedSegmentIndex = Main.instance.themeService.getState().rawValue

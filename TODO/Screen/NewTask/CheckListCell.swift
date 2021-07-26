@@ -12,5 +12,8 @@ class CheckListCell: UITableViewCell {
 
     @IBOutlet weak var checkMarkButton: UIButton!    
     @IBOutlet weak var titleLabel: UILabel!
+    
+    //TODO
+    //СДЕЛАТЬ СМЕНУ ТЕМЫ
 }
 

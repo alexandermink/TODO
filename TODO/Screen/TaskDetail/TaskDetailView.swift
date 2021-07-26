@@ -35,7 +35,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
     let dateFormatter = Main.instance.dateFormatter
     var notificationPicker = UIDatePicker()
     let notificationService = Main.instance.notificationService
-    private var currentTheme : String?
+
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var delegate: TaskDetailDelegate?
     

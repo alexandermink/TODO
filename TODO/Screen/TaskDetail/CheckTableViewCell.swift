@@ -12,8 +12,6 @@ class CheckTableViewCell: UITableViewCell {
 
     var checkListItemTextField = UITextField()
     var checkMarkButton =  UIButton()
-
-    private var currentTheme : String?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

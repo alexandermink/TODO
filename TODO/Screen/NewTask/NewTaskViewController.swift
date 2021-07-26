@@ -62,7 +62,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var selectedBackgroundColor: UIColor? = UIColor.clear
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var isKeyboard = false
-    private var currentTheme : String?
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
