@@ -124,6 +124,9 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         case [0, 0]:
             router?.push(vc: destinationVC, animated: true)
         case [1, 0]:
+            guard let url = URL(string: "https://vk.com/public206096643") else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        case [2, 0]:
             print("кнопка очистить данные нажата")
             deleteAllData()
         default:

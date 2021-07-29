@@ -24,6 +24,7 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
     var router: BaseRouter?
     var rightNavButton = UIBarButtonItem()
     var leftNavButton = UIBarButtonItem()
+    let dateFormatter = Main.instance.dateFormatter
     
     let theme = Main.instance.themeService.getTheme()
     
@@ -77,7 +78,7 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
     func updateData(){
         taskDetailView.taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
         taskDetailView.taskNameTextView.text = (editedTask.name != "" ? editedTask.name : "Напишите название задачи")
-        taskDetailView.taskCreationDateLabel.text = taskDetailView.dateFormatter.string(from: editedTask.creationDate)
+        taskDetailView.taskCreationDateLabel.text = dateFormatter.string(from: editedTask.creationDate)
         taskDetailView.taskDateTextField.text = editedTask.notificationDate
         taskDetailView.taskDescriptionTextView.text = (editedTask.taskDescription != "" ? editedTask.taskDescription : "Напишите описание задачи")
         taskDetailView.addCheckButton.addTarget(self,
@@ -133,7 +134,7 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
                 return
             }
         }
-        taskDetailView.taskDateTextField.text = taskDetailView.dateFormatter.string(from: taskDetailView.notificationPicker.date)
+        taskDetailView.taskDateTextField.text = dateFormatter.string(from: taskDetailView.notificationPicker.date)
         taskDetailView.endEditing(true)
     }
     

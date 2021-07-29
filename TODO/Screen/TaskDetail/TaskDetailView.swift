@@ -32,7 +32,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
     let addCheckElementTextField = UITextField()
     let checkListTableView = UITableView()
     
-    let dateFormatter = Main.instance.dateFormatter
     var notificationPicker = UIDatePicker()
     let notificationService = Main.instance.notificationService
 

@@ -27,10 +27,14 @@ final class SettingsFactory {
             SettingsField(name: "Выбор темы", state: nil, picture: "sun.min", isDisclosure: true)
         ])
         
+        let social = SettingsCategory(name: "Обратная связь", settingsFields: [
+            SettingsField(name: "Сайт проекта", state: nil, picture: "newspaper", isDisclosure: false)
+        ])
+        
         let data = SettingsCategory(name: "Данные", settingsFields: [
             SettingsField(name: "Очистить данные", state: nil, picture: "trash", isDisclosure: false)
         ])
         
-        return [interface, data]
+        return [interface, social, data]
     }
 }
