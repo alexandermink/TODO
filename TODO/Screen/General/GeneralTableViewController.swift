@@ -129,6 +129,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         minorBGHeightConstraint.constant = view.frame.width*1.8
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .done, target: self, action: #selector(checkMenu))
         view.backgroundColor = nil
+        
     }
     
     @objc func checkMenu() {

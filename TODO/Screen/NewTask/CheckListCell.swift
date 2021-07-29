@@ -13,7 +13,10 @@ class CheckListCell: UITableViewCell {
     @IBOutlet weak var checkMarkButton: UIButton!    
     @IBOutlet weak var titleLabel: UILabel!
     
-    //TODO
-    //СДЕЛАТЬ СМЕНУ ТЕМЫ
+    public func configure() {
+        let theme = Main.instance.themeService.getTheme()
+        checkMarkButton.tintColor = theme.interfaceColor
+        titleLabel.textColor = theme.interfaceColor
+    }
 }
 
