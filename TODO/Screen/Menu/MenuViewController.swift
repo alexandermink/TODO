@@ -16,12 +16,12 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewTrailingConstr: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
-//
+
     @IBOutlet weak var mainBGImageView: UIImageView!
     @IBOutlet weak var mainBGWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainBGLeadingConstraint: NSLayoutConstraint!
-//
+
     @IBOutlet weak var minorBGImageView: UIImageView!
     @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var minorBGWidthConstraint: NSLayoutConstraint!
@@ -124,6 +124,9 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         case [0, 0]:
             router?.push(vc: destinationVC, animated: true)
         case [1, 0]:
+            guard let url = URL(string: "https://vk.com/public206096643") else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        case [2, 0]:
             print("кнопка очистить данные нажата")
             deleteAllData()
         default:

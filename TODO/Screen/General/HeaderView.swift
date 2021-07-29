@@ -20,16 +20,6 @@ class HeaderView: UITableViewHeaderFooterView {
         
         contentView.backgroundColor = theme.interfaceColor
         
-//        switch theme {
-//        case "1":
-//            contentView.backgroundColor = .systemYellow
-//        case "2":
-//            contentView.backgroundColor = .alexeyBackground
-//        case "3":
-//            contentView.backgroundColor = .red
-//        default:
-//            break
-//        }
     }
 
 }

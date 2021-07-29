@@ -27,7 +27,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var backLayer: Rounding!
-    @IBOutlet weak var createButton: UIButton!
     
     @IBOutlet weak var mainBGImageView: UIImageView!
     @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
@@ -45,10 +44,18 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var backLayerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var checkTableTopConstraints: NSLayoutConstraint!
     @IBOutlet weak var checkBlurView: UIVisualEffectView!
-    @IBOutlet weak var checkPlusButton: UIButton!
+    
+    //Checklist IBOutlet
     @IBOutlet weak var checkToolBarView: UIView!
+    
+    @IBOutlet weak var checkToolBarTextField: UITextField!
+    
+    @IBOutlet weak var checklistHideButton: UIButton!
+    @IBOutlet weak var checkPlusButton: UIButton!
+    @IBOutlet weak var checklistDoneButton: UIButton!
+    
     @IBOutlet weak var checkListTableView: UITableView!
-    @IBOutlet weak var checkToolBarrTextField: UITextField!
+    
     @IBOutlet weak var blurBGView: UIView!
     
     
@@ -62,7 +69,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var selectedBackgroundColor: UIColor? = UIColor.clear
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var isKeyboard = false
-    private var currentTheme : String?
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
@@ -228,7 +234,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print("Нажата кнопка создания чек-листа")
         checkTableTopConstraints.constant = view.frame.height / 1.5
         checkListTableView.reloadData()
-        checkToolBarrTextField.becomeFirstResponder()
+        checkToolBarTextField.becomeFirstResponder()
         
     }
     
@@ -240,19 +246,24 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @IBAction func checkTableDoneAction(_ sender: Any) {
         print("Нажата кнопка готово")
+        checkTablePlusAction(sender)
+        dismissKeyboard()
         checkListTableView.reloadData()
         checkTableTopConstraints.constant = 0
     }
     
     @IBAction func checkTablePlusAction(_ sender: Any) {
-        print("Нажата кнопка плюс (добавление доп строки)")
-        let id = (Main.instance.tempCheckList.max()?.id ?? 0) + 1
-        print("plus id: ", id)
-        let checkMark = CheckMark(id: id, title: checkToolBarrTextField.text ?? "", isMarkSelected: false)
-        Main.instance.tempCheckList.append(checkMark)
-        checkToolBarrTextField.text = ""
-        checkToolBarrTextField.becomeFirstResponder()
-        checkListTableView.reloadData()
+        
+        if checkToolBarTextField.text != "" {
+            print("Нажата кнопка плюс (добавление доп строки)")
+            let id = (Main.instance.tempCheckList.max()?.id ?? 0) + 1
+            print("plus id: ", id)
+            let checkMark = CheckMark(id: id, title: checkToolBarTextField.text ?? "", isMarkSelected: false)
+            Main.instance.tempCheckList.append(checkMark)
+            checkToolBarTextField.text = ""
+            checkToolBarTextField.becomeFirstResponder()
+            checkListTableView.reloadData()
+        }
     }
     
     @objc func methodOfReceivedNotification(_ notification: Notification) {
@@ -305,6 +316,23 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
         minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
+        
+        //        @IBOutlet weak var checkToolBarView: UIView!
+        //
+        //        @IBOutlet weak var checkToolBarTextField: UITextField!
+        //
+        //        @IBOutlet weak var checklistHideButton: UIButton!
+        //        @IBOutlet weak var checkPlusButton: UIButton!
+        //        @IBOutlet weak var checklistDoneButton: UIButton!
+        
+        checkToolBarView.backgroundColor = theme.backgroundColor
+        checkToolBarTextField.textColor = theme.interfaceColor
+        checkToolBarTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Введите текст", attributes: [NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+        checklistHideButton.setTitleColor(theme.interfaceColor, for: .normal)
+        checklistHideButton.setTitleColor(theme.interfaceColor, for: .highlighted)
+        checkPlusButton.tintColor = theme.interfaceColor
+        checklistDoneButton.setTitleColor(theme.interfaceColor, for: .normal)
+        checklistDoneButton.setTitleColor(theme.interfaceColor, for: .highlighted)
     }
     
     // MARK: - SET VIEW SCREEN
@@ -379,8 +407,13 @@ extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.attributedText = checkMark.isMarkSelected ? strikedText : normalText
         cell.checkMarkButton.addTarget(self, action: #selector(NewTaskViewController.toggleSelected(button:)), for: .touchUpInside)
         cell.checkMarkButton.tag = indexPath.row
+        cell.configure()
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 46
+//    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

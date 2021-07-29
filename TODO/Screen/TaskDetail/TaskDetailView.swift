@@ -32,10 +32,9 @@ class TaskDetailView: UIView, UITableViewDelegate {
     let addCheckElementTextField = UITextField()
     let checkListTableView = UITableView()
     
-    let dateFormatter = Main.instance.dateFormatter
     var notificationPicker = UIDatePicker()
     let notificationService = Main.instance.notificationService
-    private var currentTheme : String?
+
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var delegate: TaskDetailDelegate?
     
@@ -94,7 +93,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
         taskDateTitleLabel = labelFactory(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         
         taskDateTextField.translatesAutoresizingMaskIntoConstraints = false
-        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
         taskDateTextField.textColor = .systemYellow
         taskDateTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         taskDateTextField.inputView = notificationPicker
@@ -135,7 +134,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
         toolBarView.addSubview(toolBarStackView)
         
         addCheckElementTextField.translatesAutoresizingMaskIntoConstraints = false
-        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
         addCheckElementTextField.text = ""
         addCheckElementTextField.textColor = .systemYellow
         addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 15)
@@ -237,8 +236,8 @@ class TaskDetailView: UIView, UITableViewDelegate {
         toolBarView.backgroundColor = theme.interfaceColor
         self.backgroundColor = theme.interfaceColor
         self.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
-        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
-        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
     }
     
 }
