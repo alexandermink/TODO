@@ -10,7 +10,7 @@ import UIKit
 
 class HeaderView: UITableViewHeaderFooterView {
     
-    public func configure(theme: String, sameColorView: UIView?) {
+    public func configure(sameColorView: UIView?) {
         let theme = Main.instance.themeService.getTheme()
         
         contentView.layer.shadowColor = UIColor.black.cgColor
