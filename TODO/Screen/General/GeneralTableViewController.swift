@@ -25,7 +25,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
     
     
-    private var currentTheme : String? {didSet {tableView.reloadData()}}
     let realm = try! Realm()
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
@@ -120,7 +119,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     func numberOfSections(in tableView: UITableView) -> Int { Main.instance.userSession.tasks.count }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.dataSource.getCell(at: tableView, indexPath: indexPath, currentTheme: currentTheme ?? "1")
+        self.dataSource.getCell(at: tableView, indexPath: indexPath)
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         self.dataSource.isEditRow(tableView, canEditRowAt: indexPath)
@@ -132,7 +131,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         Main.instance.userSession.tasks[section].sectionName
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        self.dataSource.viewHeaderSection(tableView, viewForHeaderInSection: section, currentTheme: currentTheme ?? "1")
+        self.dataSource.viewHeaderSection(tableView, viewForHeaderInSection: section)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.dataSource.selectRow(tableView, didSelectRowAt: indexPath, router: router!)
@@ -165,6 +164,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         navSeparatorView.backgroundColor = theme.interfaceColor
         mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
         minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = theme.userInterfaceStyle
+        }
     }
     
     //MARK: - SET VIEW SCREEN

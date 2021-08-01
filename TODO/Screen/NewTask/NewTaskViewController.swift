@@ -316,15 +316,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
         minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
-        
-        //        @IBOutlet weak var checkToolBarView: UIView!
-        //
-        //        @IBOutlet weak var checkToolBarTextField: UITextField!
-        //
-        //        @IBOutlet weak var checklistHideButton: UIButton!
-        //        @IBOutlet weak var checkPlusButton: UIButton!
-        //        @IBOutlet weak var checklistDoneButton: UIButton!
-        
+
         checkToolBarView.backgroundColor = theme.backgroundColor
         checkToolBarTextField.textColor = theme.interfaceColor
         checkToolBarTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Введите текст", attributes: [NSAttributedString.Key.foregroundColor: theme.interfaceColor]))

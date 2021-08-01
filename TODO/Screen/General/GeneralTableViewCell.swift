@@ -15,7 +15,7 @@ class GeneralTableViewCell: UITableViewCell {
     @IBOutlet weak var notificationLabel: UILabel!
     @IBOutlet weak var checkProgressBar: UIProgressView!
     
-    public func configure(theme: String) {
+    public func configure() {
         let theme = Main.instance.themeService.getTheme()
         notificationLabel.textColor = .black
         notificationLabel.backgroundColor = theme.interfaceColor

@@ -19,12 +19,13 @@ class ThemesViewController: UIViewController {
         super.viewDidLoad()
         segment.selectedSegmentIndex = Main.instance.themeService.getState().rawValue
         
-    }
-    override func viewWillLayoutSubviews() {
-        updateTheme(state: Main.instance.themeService.getState())
         let backItem = UIBarButtonItem()
         backItem.title = "Настройки"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backItem
+    }
+    override func viewWillLayoutSubviews() {
+        updateTheme(state: Main.instance.themeService.getState())
+        
     }
     
     @IBAction func themesSegmentAction(_ sender: UISegmentedControl) {

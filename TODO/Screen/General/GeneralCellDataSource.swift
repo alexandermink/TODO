@@ -11,7 +11,8 @@ import UIKit
 class GeneralCellDataSource {
     
     
-    func getCell (at tableView: UITableView, indexPath: IndexPath, currentTheme: String) -> UITableViewCell {
+    func getCell (at tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
             let theme = Main.instance.themeService.getTheme()
@@ -36,7 +37,7 @@ class GeneralCellDataSource {
             cell.notificationLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
             cell.notificationLabel.layer.cornerRadius = 6
             cell.backgroundColor = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
-            cell.configure(theme: currentTheme)
+            cell.configure()
             
             let markSelectedCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
             let allMarkCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
@@ -87,9 +88,9 @@ class GeneralCellDataSource {
         tableView.reloadData()
     }
     
-    func viewHeaderSection(_ tableView: UITableView, viewForHeaderInSection section: Int, currentTheme: String) -> UIView? {
+    func viewHeaderSection(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "someHeaderViewIdentifier") as? HeaderView else { return nil }
-        headerView.configure(theme: currentTheme, sameColorView: nil)
+        headerView.configure(sameColorView: nil)
         return headerView
     }
 }

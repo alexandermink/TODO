@@ -16,13 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let mainViewContoller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GeneralTableViewController") as! GeneralTableViewController
+        let mainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GeneralTableViewController") as! GeneralTableViewController
         
-        let baseRouter = BaseRouter(viewController: mainViewContoller)
-        mainViewContoller.router = baseRouter
+        let baseRouter = BaseRouter(viewController: mainViewController)
+        mainViewController.router = baseRouter
         
         let theme = Main.instance.themeService.getTheme()
-        let navigationController = CustomNavigationController(rootViewController: mainViewContoller)
+        let navigationController = CustomNavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.tintColor = theme.interfaceColor
                 
         window = UIWindow(windowScene: windowScene)
