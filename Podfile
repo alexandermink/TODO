@@ -7,6 +7,7 @@ target 'TODO' do
 
   pod 'RealmSwift', '= 10.7.2'
   pod 'IQKeyboardManagerSwift', '6.5.6'
+  pod 'lottie-ios'
   
   # Pods for TODO
 

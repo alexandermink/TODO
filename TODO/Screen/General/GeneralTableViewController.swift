@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Lottie
 
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -29,11 +30,32 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let dataSource = GeneralCellDataSource()
+//    weak var delegate: UIAdaptivePresentationControllerDelegate?
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        blurEffectView.contentView.addSubview(vibrancyView)
+        
+        return blurEffectView
+    }()
+    let anView = AnimationView()
     
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        startAnimation()
+        anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
+        blurEffectView.frame = view.bounds
+        anView.center = view.center
+        anView.backgroundColor = .clear
+        blurEffectView.alpha = 0.8
+        view.addSubview(blurEffectView)
+        view.addSubview(anView)
+        
         router = BaseRouter(viewController: self)
         setViewScreen()
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
@@ -49,6 +71,25 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             case .error(_): break
             }
         })
+        
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        newTaskButton.isEnabled = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+            
+            self.anView.removeFromSuperview()
+//            self.blurEffectView.removeFromSuperview()
+            self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.newTaskButton.isEnabled = true
+            UIView.animate(withDuration: 0.5) {
+                self.blurEffectView.alpha = 0
+            } completion: { finish in
+                if finish {
+                    self.blurEffectView.removeFromSuperview()
+                }
+            }
+
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +102,16 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillDisappear(_ animated: Bool) {
         view.dismissKeyboard()
+    }
+    
+    private func startAnimation() {
+        let animation = Animation.named("anim")
+        anView.frame = view.bounds
+        anView.backgroundColor = .white
+        anView.animation = animation
+        anView.contentMode = .scaleAspectFit
+        anView.loopMode = .loop
+        anView.play()
     }
     
     //MARK: - TABLE
@@ -127,7 +178,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         mainBGHeightConstraint.constant = view.frame.width*1.8
         minorBGWidthConstraint.constant = view.frame.width*3.2
         minorBGHeightConstraint.constant = view.frame.width*1.8
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .done, target: self, action: #selector(checkMenu))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(checkMenu))
         view.backgroundColor = nil
         
     }

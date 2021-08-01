@@ -129,8 +129,26 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         case [2, 0]:
             print("кнопка очистить данные нажата")
             deleteAllData()
+        case [2, 0]:
+            
+            Page.addViewControllersFromStoryBoard(with: ["Themes"], storyboardName: "Themes")
+            Page.addViewControllersFromStoryBoard(with: ["NewTaskViewController"], storyboardName: "NewTaskStoryboard")
+            Page.addViewControllersFromStoryBoard(with: ["GeneralTableViewController"], storyboardName: "Main")
+            Page.addViewControllersFromStoryBoard(with: ["Themes"], storyboardName: "Themes")
+
+            Page.setActiveViewController(index: 2)
+
+            
+            
+            guard let dotsVC = UIStoryboard(name: "ScrollPage", bundle: nil).instantiateViewController(identifier: "Dots") as? Dots else { return }
+            router?.present(vc: dotsVC, animated: true)
+            
+            
+            
+            
         default:
             break
         }
     }
 }
+
