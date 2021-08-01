@@ -23,18 +23,19 @@ struct SettingsField {
 final class SettingsFactory {
     static func makeSetting() -> [SettingsCategory] {
         
-        let themes = SettingsCategory(name: "Внешний вид", settingsFields: [
+        let interface = SettingsCategory(name: "Интерфейс", settingsFields: [
             SettingsField(name: "Выбор темы", state: nil, picture: "sun.min", isDisclosure: true)
         ])
         
-        let some = SettingsCategory(name: "Some", settingsFields: [
-            SettingsField(name: "что-то", state: nil, picture: "", isDisclosure: false)
+        let social = SettingsCategory(name: "Обратная связь", settingsFields: [
+            SettingsField(name: "Сайт проекта", state: nil, picture: "newspaper", isDisclosure: false)
         ])
         
-        let test = SettingsCategory(name: "test", settingsFields: [
-            SettingsField(name: "test", state: nil, picture: "", isDisclosure: false)
+
+        let data = SettingsCategory(name: "Данные", settingsFields: [
+            SettingsField(name: "Очистить данные", state: nil, picture: "trash", isDisclosure: false)
         ])
         
-        return [themes, some, test]
+        return [interface, social, data]
     }
 }

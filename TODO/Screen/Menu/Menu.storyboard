@@ -120,7 +120,9 @@
                             <constraint firstItem="IYi-QC-UOl" firstAttribute="top" secondItem="Orf-9P-x3t" secondAttribute="top" id="zl1-IB-wNl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Ucw-dC-ANC"/>
+                    <navigationItem key="navigationItem" id="Ucw-dC-ANC">
+                        <barButtonItem key="backBarButtonItem" id="XOb-U3-qPC"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="blurView" destination="Vp0-7Z-Tyk" id="npt-9e-7M4"/>
                         <outlet property="blurViewTrailingConstr" destination="XWl-BJ-0kk" id="JeN-DY-V6B"/>

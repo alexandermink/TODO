@@ -258,7 +258,7 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rlx-N9-ZNs">
-                                                                <rect key="frame" x="64" y="29" width="322" height="44"/>
+                                                                <rect key="frame" x="64" y="13" width="322" height="76"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -276,8 +276,8 @@
                                                             <constraint firstAttribute="trailingMargin" secondItem="Rlx-N9-ZNs" secondAttribute="trailing" constant="8" id="0Mi-M9-alb"/>
                                                             <constraint firstItem="816-E1-YBi" firstAttribute="centerY" secondItem="Mts-lS-McD" secondAttribute="centerY" id="1Yc-6A-Qfh"/>
                                                             <constraint firstItem="Rlx-N9-ZNs" firstAttribute="leading" secondItem="816-E1-YBi" secondAttribute="trailing" constant="8" id="NOX-e5-PXn"/>
-                                                            <constraint firstAttribute="bottomMargin" secondItem="Rlx-N9-ZNs" secondAttribute="bottom" constant="18" id="X2e-Ug-3wB"/>
-                                                            <constraint firstItem="Rlx-N9-ZNs" firstAttribute="top" secondItem="Mts-lS-McD" secondAttribute="topMargin" constant="18" id="ei1-9X-pyY"/>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="Rlx-N9-ZNs" secondAttribute="bottom" constant="2" id="X2e-Ug-3wB"/>
+                                                            <constraint firstItem="Rlx-N9-ZNs" firstAttribute="top" secondItem="Mts-lS-McD" secondAttribute="topMargin" constant="2" id="ei1-9X-pyY"/>
                                                             <constraint firstItem="816-E1-YBi" firstAttribute="leading" secondItem="Mts-lS-McD" secondAttribute="leading" constant="8" id="k8E-Wv-Qdi"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
@@ -318,9 +318,6 @@
                                 <state key="normal" title="Create">
                                     <color key="titleColor" systemColor="systemYellowColor"/>
                                 </state>
-                                <connections>
-                                    <action selector="createNewTaskButton777:" destination="ZIG-J0-Jce" eventType="touchUpInside" id="JfC-an-0hy"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="B9L-pa-vsv"/>
@@ -361,10 +358,11 @@
                         <outlet property="checkListTableView" destination="IDh-J2-7xl" id="LeS-Cc-VkH"/>
                         <outlet property="checkPlusButton" destination="bAo-a1-mK5" id="Of0-6v-MRw"/>
                         <outlet property="checkTableTopConstraints" destination="phj-TQ-BiZ" id="VyX-i6-WUg"/>
+                        <outlet property="checkToolBarTextField" destination="ipK-ab-ReT" id="lzc-zj-pOT"/>
                         <outlet property="checkToolBarView" destination="uZA-16-wN4" id="xnw-kh-CMx"/>
-                        <outlet property="checkToolBarrTextField" destination="ipK-ab-ReT" id="lzc-zj-pOT"/>
+                        <outlet property="checklistDoneButton" destination="CmU-mo-hmq" id="RNO-Lz-07l"/>
+                        <outlet property="checklistHideButton" destination="fp2-FH-zb8" id="0Op-sf-NtL"/>
                         <outlet property="coverButton" destination="3VI-PW-BYs" id="ccv-17-9oo"/>
-                        <outlet property="createButton" destination="Hb3-NG-4sk" id="cTb-JV-dD3"/>
                         <outlet property="descriptionTextField" destination="2tT-nH-U0R" id="4S1-4x-ChS"/>
                         <outlet property="mainBGHeightConstraint" destination="Gr4-Vs-1iC" id="BMo-Rp-bny"/>
                         <outlet property="mainBGImageView" destination="wNf-XR-lr7" id="xfI-8q-DfL"/>

@@ -78,12 +78,5 @@ class ThemeService {
         }
         UIApplication.shared.windows.first?.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         print("backgroundColor = ", theme.backgroundColor, ", interfaceColor = ", theme.interfaceColor)
-        
-        updateInterface()
-    }
-    
-    //Функция под вопросом, возможно стоит проверять state при инициализации контроллеров
-    private func updateInterface() {
-        print("Заглушка")
     }
 }

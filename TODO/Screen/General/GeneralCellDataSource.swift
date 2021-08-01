@@ -34,6 +34,7 @@ class GeneralCellDataSource {
             cell.taskNameLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
             cell.descriptionLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
             cell.notificationLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
+            cell.notificationLabel.layer.cornerRadius = 6
             cell.backgroundColor = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
             cell.configure(theme: currentTheme)
             
@@ -61,14 +62,6 @@ class GeneralCellDataSource {
                 let navigationController = UINavigationController()
                 let destinationViewController = TaskDetailViewController()
                 
-//                navigationController.navigationBar.barTintColor = .systemYellow
-//                navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Скрыть", style: .done, target: destinationViewController, action: #selector(destinationViewController.taskDetailDismiss))
-                
-                
-                
-                
-                
-//                let destinationViewController = TaskDetailViewController()
                 navigationController.viewControllers.append(destinationViewController)
                 navigationController.presentationController?.delegate = destinationViewController
                 let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]

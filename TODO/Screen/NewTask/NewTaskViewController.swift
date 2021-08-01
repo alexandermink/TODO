@@ -27,7 +27,6 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var backLayer: Rounding!
-    @IBOutlet weak var createButton: UIButton!
     
     @IBOutlet weak var mainBGImageView: UIImageView!
     @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
@@ -45,10 +44,18 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var backLayerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var checkTableTopConstraints: NSLayoutConstraint!
     @IBOutlet weak var checkBlurView: UIVisualEffectView!
-    @IBOutlet weak var checkPlusButton: UIButton!
+    
+    //Checklist IBOutlet
     @IBOutlet weak var checkToolBarView: UIView!
+    
+    @IBOutlet weak var checkToolBarTextField: UITextField!
+    
+    @IBOutlet weak var checklistHideButton: UIButton!
+    @IBOutlet weak var checkPlusButton: UIButton!
+    @IBOutlet weak var checklistDoneButton: UIButton!
+    
     @IBOutlet weak var checkListTableView: UITableView!
-    @IBOutlet weak var checkToolBarrTextField: UITextField!
+    
     @IBOutlet weak var blurBGView: UIView!
     
     
@@ -62,20 +69,16 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var selectedBackgroundColor: UIColor? = UIColor.clear
     let minDate = Calendar.current.date(byAdding: .minute, value: 2, to: Date())
     var isKeyboard = false
-    private var currentTheme : String?
-//    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
-    
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        let backItem = UIBarButtonItem()
+        backItem.title = "Назад"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backItem
         view.backgroundColor = nil
         try? Main.instance.deleteSection(delSectionName: "")
-//        boatImageView.isHidden = true
         setViewScreen()
-//        changeState(state: Main.instance.state ?? "1")
-        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
-        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
         categoryPicker.delegate = self
         categoryPicker.selectedRow(inComponent: 0)
         calendar.timeZone = .autoupdatingCurrent
@@ -89,9 +92,9 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        effectView.frame = CGRect(x: 0, y: 0, width: blurBGView!.bounds.width, height: blurBGView.bounds.height)
-//        effectView.alpha = 0.95
-//        blurBGView.addSubview(effectView)
+        super.viewWillAppear(animated)
+        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
+        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
         mainBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 + 300)
         minorBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 + 300)
         changeTheme()
@@ -100,50 +103,11 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     override func viewWillDisappear(_ animated: Bool) {
         view.dismissKeyboard()
+        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 0)
+        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: 0)
     }
     
     // MARK: - ACTIONS
-    
-    @IBAction func createNewTaskButton777(_ sender: Any) {
-//        func tempAddTask(sectionName: String) {
-//            var tempMarkSelectedCount = 0
-//            for mark in Main.instance.tempCheckList {
-//                if mark.isMarkSelected {
-//                    tempMarkSelectedCount += 1
-//                }
-//            }
-//            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
-//
-//            if task.notificationDate != "" {
-//                notificationService.sendNotificationRequest(task: task)
-//            }
-//
-//            guard let sectionsCount = sections?.count else { return }
-//            if sectionsCount > 0 {
-//                try? Main.instance.deleteSection(delSectionName: "")
-//            }
-//            router?.pop(animated: true)
-//        }
-//
-//        if notificationTextField.text != "" {
-//            let pickedDate: Double = dateFormatter.date(from: notificationTextField.text ?? "")?.timeIntervalSince1970 ?? 0
-//            let interval = pickedDate - Date().timeIntervalSince1970
-//            if interval <= 1 {
-//                return showAlert(title: "Ошибка", message: "Выбрано прошедшее время")
-//            }
-//        }
-//        if newTaskNameTextField.text == "" {
-//            showAlert(title: "Ошибка", message: "Не заполнено поле: Название")
-//        } else if substituteCategoryTextField.text != ""{
-//            tempAddTask(sectionName: substituteCategoryTextField.text ?? "")
-//        } else if newSectionTextField.text != "" {
-//            tempAddTask(sectionName: newSectionTextField.text ?? "")
-//        } else {
-//            showAlert(title: "Ошибка", message: "Не заполнено поле: Секция")
-//        }
-    }
-    
-    
     @objc func createNewTaskButton() {
         func tempAddTask(sectionName: String) {
             var tempMarkSelectedCount = 0
@@ -152,10 +116,10 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                     tempMarkSelectedCount += 1
                 }
             }
-            guard let task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
+            guard var task = try? Main.instance.addTask(sectionName: sectionName, name: newTaskNameTextField.text!, backgroundColor: selectedBackgroundColor, taskDescription: descriptionTextField.text, notificationDate: notificationTextField.text, checkList: Main.instance.tempCheckList, markSelectedCount: tempMarkSelectedCount) else { return }
 
             if task.notificationDate != "" {
-                notificationService.sendNotificationRequest(task: task)
+                task.notificationID = notificationService.sendNotificationRequest(task: task)
             }
 
             guard let sectionsCount = sections?.count else { return }
@@ -270,7 +234,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print("Нажата кнопка создания чек-листа")
         checkTableTopConstraints.constant = view.frame.height / 1.5
         checkListTableView.reloadData()
-        checkToolBarrTextField.becomeFirstResponder()
+        checkToolBarTextField.becomeFirstResponder()
         
     }
     
@@ -282,19 +246,24 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     @IBAction func checkTableDoneAction(_ sender: Any) {
         print("Нажата кнопка готово")
+        checkTablePlusAction(sender)
+        dismissKeyboard()
         checkListTableView.reloadData()
         checkTableTopConstraints.constant = 0
     }
     
     @IBAction func checkTablePlusAction(_ sender: Any) {
-        print("Нажата кнопка плюс (добавление доп строки)")
-        let id = (Main.instance.tempCheckList.max()?.id ?? 0) + 1
-        print("plus id: ", id)
-        let checkMark = CheckMark(id: id, title: checkToolBarrTextField.text ?? "", isMarkSelected: false)
-        Main.instance.tempCheckList.append(checkMark)
-        checkToolBarrTextField.text = ""
-        checkToolBarrTextField.becomeFirstResponder()
-        checkListTableView.reloadData()
+        
+        if checkToolBarTextField.text != "" {
+            print("Нажата кнопка плюс (добавление доп строки)")
+            let id = (Main.instance.tempCheckList.max()?.id ?? 0) + 1
+            print("plus id: ", id)
+            let checkMark = CheckMark(id: id, title: checkToolBarTextField.text ?? "", isMarkSelected: false)
+            Main.instance.tempCheckList.append(checkMark)
+            checkToolBarTextField.text = ""
+            checkToolBarTextField.becomeFirstResponder()
+            checkListTableView.reloadData()
+        }
     }
     
     @objc func methodOfReceivedNotification(_ notification: Notification) {
@@ -344,26 +313,34 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         coverButton.setTitleColor(theme.interfaceColor, for: .highlighted)
         checkListButton.setTitleColor(theme.interfaceColor, for: .normal)
         checkListButton.setTitleColor(theme.interfaceColor, for: .highlighted)
-        createButton.setTitleColor(theme.interfaceColor, for: .normal)
-        createButton.setTitleColor(theme.interfaceColor, for: .highlighted)
         
         mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
         minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
+        
+        //        @IBOutlet weak var checkToolBarView: UIView!
+        //
+        //        @IBOutlet weak var checkToolBarTextField: UITextField!
+        //
+        //        @IBOutlet weak var checklistHideButton: UIButton!
+        //        @IBOutlet weak var checkPlusButton: UIButton!
+        //        @IBOutlet weak var checklistDoneButton: UIButton!
+        
+        checkToolBarView.backgroundColor = theme.backgroundColor
+        checkToolBarTextField.textColor = theme.interfaceColor
+        checkToolBarTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Введите текст", attributes: [NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+        checklistHideButton.setTitleColor(theme.interfaceColor, for: .normal)
+        checklistHideButton.setTitleColor(theme.interfaceColor, for: .highlighted)
+        checkPlusButton.tintColor = theme.interfaceColor
+        checklistDoneButton.setTitleColor(theme.interfaceColor, for: .normal)
+        checklistDoneButton.setTitleColor(theme.interfaceColor, for: .highlighted)
     }
     
     // MARK: - SET VIEW SCREEN
     func setViewScreen() {
-//        view.applyGradient(colours: [.vitDarkBrown, .vitBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         backLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
-        
-        createButton.setTitle("Создать", for: .normal)
-        createButton.backgroundColor = .darkGray
-        createButton.layer.cornerRadius = 8
-        createButton.layer.borderWidth = 2
-        createButton.layer.borderColor = UIColor.lightGray.cgColor
         
         mainBGWidthConstraint.constant = view.frame.width*3.2
         mainBGHeightConstraint.constant = view.frame.width*1.8
@@ -430,8 +407,13 @@ extension NewTaskViewController: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.attributedText = checkMark.isMarkSelected ? strikedText : normalText
         cell.checkMarkButton.addTarget(self, action: #selector(NewTaskViewController.toggleSelected(button:)), for: .touchUpInside)
         cell.checkMarkButton.tag = indexPath.row
+        cell.configure()
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 46
+//    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
