@@ -81,6 +81,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="256" height="499"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2pB-B7-T8a">
+                                            <rect key="frame" x="16" y="160" width="204" height="279"/>
+                                        </imageView>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Xh-e1-QHr">
                                             <rect key="frame" x="0.0" y="0.0" width="256" height="499"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -214,9 +217,13 @@
                                         </tableView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="2pB-B7-T8a" firstAttribute="leading" secondItem="R4c-y0-lxd" secondAttribute="leading" constant="16" id="Msl-OF-d5U"/>
                                         <constraint firstAttribute="trailing" secondItem="0Xh-e1-QHr" secondAttribute="trailing" id="Tg8-qB-EO7"/>
+                                        <constraint firstItem="2pB-B7-T8a" firstAttribute="top" secondItem="R4c-y0-lxd" secondAttribute="top" constant="160" id="a05-7x-bVo"/>
                                         <constraint firstItem="0Xh-e1-QHr" firstAttribute="top" secondItem="R4c-y0-lxd" secondAttribute="top" id="bh6-ct-Drm"/>
                                         <constraint firstAttribute="bottom" secondItem="0Xh-e1-QHr" secondAttribute="bottom" id="g8T-p8-lQ1"/>
+                                        <constraint firstAttribute="bottom" secondItem="2pB-B7-T8a" secondAttribute="bottom" constant="60" id="tA5-jB-Ru7"/>
+                                        <constraint firstAttribute="trailing" secondItem="2pB-B7-T8a" secondAttribute="trailing" constant="36" id="y6n-ns-f2q"/>
                                         <constraint firstItem="0Xh-e1-QHr" firstAttribute="leading" secondItem="R4c-y0-lxd" secondAttribute="leading" id="zci-63-lBO"/>
                                     </constraints>
                                 </view>
@@ -265,6 +272,7 @@
                         <outlet property="minorBGWidthConstraint" destination="knz-9b-Vfi" id="d7b-mt-awU"/>
                         <outlet property="navSeparatorView" destination="jd0-ou-lju" id="gZS-D9-TFK"/>
                         <outlet property="newTaskButton" destination="Thb-en-nUn" id="o6o-RF-BZP"/>
+                        <outlet property="previewImage" destination="2pB-B7-T8a" id="6Us-pE-UeN"/>
                         <outlet property="tableView" destination="0Xh-e1-QHr" id="Bdh-WR-BlZ"/>
                     </connections>
                 </viewController>

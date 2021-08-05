@@ -23,13 +23,12 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var minorBGImageView: UIImageView!
     @IBOutlet weak var minorBGWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
-    
-    
+
+
     let realm = try! Realm()
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let dataSource = GeneralCellDataSource()
-//    weak var delegate: UIAdaptivePresentationControllerDelegate?
     let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -41,11 +40,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         return blurEffectView
     }()
     let anView = AnimationView()
-    
+    let isFirstStart = UserDefaults.standard.bool(forKey: "isFirstStart")
+    var isAnimation: Bool = true
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
         startAnimation()
         anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
         blurEffectView.frame = view.bounds
@@ -54,7 +56,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         blurEffectView.alpha = 0.8
         view.addSubview(blurEffectView)
         view.addSubview(anView)
-        
+        if isAnimation {
+            startAnimation()
+        }
+                
         router = BaseRouter(viewController: self)
         setViewScreen()
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
@@ -71,23 +76,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             }
         })
         
-        navigationItem.leftBarButtonItem?.isEnabled = false
-        newTaskButton.isEnabled = false
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-            
-            self.anView.removeFromSuperview()
-//            self.blurEffectView.removeFromSuperview()
-            self.navigationItem.leftBarButtonItem?.isEnabled = true
-            self.newTaskButton.isEnabled = true
-            UIView.animate(withDuration: 0.5) {
-                self.blurEffectView.alpha = 0
-            } completion: { finish in
-                if finish {
-                    self.blurEffectView.removeFromSuperview()
-                }
-            }
-
+        if !isFirstStart {
+            MockDataFactory.makeMockData(sections: MockDataFactory.mockDataSet)
+            UserDefaults.standard.set(true, forKey: "isFirstStart")
         }
     }
     
@@ -96,7 +87,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.bounds.size.height = view.bounds.size.height
         changeTheme()
         self.tableView.reloadData()
-        TableRowsAnimation.animateTable(table: tableView)
+        if isAnimation {
+            TableRowsAnimation.animateTable(table: tableView)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,6 +104,32 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         anView.contentMode = .scaleAspectFit
         anView.loopMode = .loop
         anView.play()
+        
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        newTaskButton.isEnabled = false
+        
+        anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
+        blurEffectView.frame = view.bounds
+        anView.center = view.center
+        anView.backgroundColor = .clear
+        blurEffectView.alpha = 0.8
+        view.addSubview(blurEffectView)
+        view.addSubview(anView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+            
+            self.anView.removeFromSuperview()
+//            self.blurEffectView.removeFromSuperview()
+            self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.newTaskButton.isEnabled = true
+            UIView.animate(withDuration: 0.5) {
+                self.blurEffectView.alpha = 0
+            } completion: { finish in
+                if finish {
+                    self.blurEffectView.removeFromSuperview()
+                }
+            }
+        }
     }
     
     //MARK: - TABLE
@@ -135,6 +154,37 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.dataSource.selectRow(tableView, didSelectRowAt: indexPath, router: router!)
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: { () -> UIViewController in
+            let navigationController = UINavigationController()
+            let destinationViewController = TaskDetailViewController()
+            navigationController.viewControllers.append(destinationViewController)
+            
+            return navigationController
+        }) { actions -> UIMenu? in
+            let first = UIAction(title: "Пункт № 1", image: UIImage(systemName: "book.circle.fill"), discoverabilityTitle: "подзаголовок", attributes: .disabled, state: .on) { action in
+                //
+            }
+            let second = UIAction(title: "Какое-то действие", image: nil, attributes: .disabled, state: .mixed) { action in
+                //
+            }
+            let third = UIAction(title: "Сделать что-то", image: UIImage(systemName: "person.3"), discoverabilityTitle: "неизвестно что...", attributes: .destructive, state: .off) { action in
+                //
+            }
+            return UIMenu(title: "Menu", image: nil, identifier: nil, options: .displayInline, children: [first, second, third])
+        }
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        animator.addCompletion {
+            let navigationController = UINavigationController()
+            let destinationViewController = TaskDetailViewController()
+            navigationController.viewControllers.append(destinationViewController)
+            self.router?.present(vc: navigationController)
+        }
     }
     
     //MARK: - ACTIONS
