@@ -49,7 +49,9 @@ struct Task: Comparable {
         lhs.notificationID != rhs.notificationID ||
         lhs.notificationDate != rhs.notificationDate ||
         lhs.checkList != rhs.checkList ||
-        lhs.markSelectedCount != rhs.markSelectedCount {
+        lhs.markSelectedCount != rhs.markSelectedCount ||
+        lhs.isFavorite != rhs.isFavorite ||
+        lhs.isDone != rhs.isDone {
             return true
         } else {
             return false
@@ -66,10 +68,12 @@ struct Task: Comparable {
     var notificationID: String? = ""
     var checkList: [CheckMark] = []
     var markSelectedCount: Int = 0
+    var isFavorite: Bool = false
+    var isDone: Bool = false
     // TODO: сделать авторизацию
 //    var members: [String]?
     
-    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?, notificationID: String?, checkList: [CheckMark], markSelectedCount: Int) {
+    init(id: Int, name: String, backgroundColor: UIColor?, taskDescription: String?, creationDate: Date, notificationDate: String?, notificationID: String?, checkList: [CheckMark], markSelectedCount: Int, isFavorite: Bool, isDone: Bool) {
         self.id = id
         self.name = name
         self.backgroundColor = backgroundColor
@@ -79,6 +83,8 @@ struct Task: Comparable {
         self.notificationID = notificationID
         self.checkList = checkList
         self.markSelectedCount = markSelectedCount
+        self.isFavorite = isFavorite
+        self.isDone = isDone
 //        self.members = members
     }
     
@@ -96,6 +102,8 @@ class TaskRealm: Object {
     @objc dynamic var notificationID: String? = ""
     let checkList = List<CheckMarkRealm>()
     @objc dynamic var markSelectedCount: Int = 0
+    @objc dynamic var isFavorite: Bool = false
+    @objc dynamic var isDone: Bool = false
 //    var members = List<String>()
     
     override class func primaryKey() -> String? {

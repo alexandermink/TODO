@@ -119,7 +119,6 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
             
             self.anView.removeFromSuperview()
-//            self.blurEffectView.removeFromSuperview()
             self.navigationItem.leftBarButtonItem?.isEnabled = true
             self.newTaskButton.isEnabled = true
             UIView.animate(withDuration: 0.5) {
@@ -157,6 +156,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: { () -> UIViewController in
             let navigationController = UINavigationController()
             let destinationViewController = TaskDetailViewController()
@@ -169,15 +169,22 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             
             return navigationController
         }) { actions -> UIMenu? in
-            let first = UIAction(title: "Пункт № 1", image: UIImage(systemName: "book.circle.fill"), discoverabilityTitle: "подзаголовок", attributes: .disabled, state: .on) { action in
-                //
+            
+            let first = UIAction(title: "Задание выполнено", image: nil) { action in
+                task.isDone.toggle()
+                try? Main.instance.updateTask(task: task)
+                print("KEy one")
             }
-            let second = UIAction(title: "Какое-то действие", image: nil, attributes: .disabled, state: .mixed) { action in
-                //
+            let second = UIAction(title: "Добавить в избранное", image: nil) { action in
+                task.isFavorite.toggle()
+                try? Main.instance.updateTask(task: task)
+                print("KEy two")
             }
-            let third = UIAction(title: "Сделать что-то", image: UIImage(systemName: "person.3"), discoverabilityTitle: "неизвестно что...", attributes: .destructive, state: .off) { action in
-                //
+            let third = UIAction(title: "Удалить задание", image: nil, attributes: .destructive) { action in
+                try? Main.instance.deleteTask(task: task)
+                print("KEy three")
             }
+            
             return UIMenu(title: "Menu", image: nil, identifier: nil, options: .displayInline, children: [first, second, third])
         }
         return configuration

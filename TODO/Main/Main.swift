@@ -69,7 +69,7 @@ extension Main: LocalDataBaseService {
             }?.id ?? 0) + 1
             let creationDate = Date()
             let tempNotificationID = notificationDate == "" ? "" : UUID().uuidString
-            let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID, checkList: checkList, markSelectedCount: markSelectedCount)
+            let task = Task(id: id, name: name, backgroundColor: backgroundColor, taskDescription: taskDescription, creationDate: creationDate, notificationDate: notificationDate, notificationID: tempNotificationID, checkList: checkList, markSelectedCount: markSelectedCount, isFavorite: false, isDone: false)
             
             //Создание таски в базе данных Realm
             try realm.write {
