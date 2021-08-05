@@ -23,14 +23,12 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var minorBGImageView: UIImageView!
     @IBOutlet weak var minorBGWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var minorBGHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var previewImage: UIImageView!
-    
-    
+
+
     let realm = try! Realm()
     var realmTokenSections: NotificationToken?
     var router: BaseRouter?
     let dataSource = GeneralCellDataSource()
-//    weak var delegate: UIAdaptivePresentationControllerDelegate?
     let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -42,17 +40,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         return blurEffectView
     }()
     let anView = AnimationView()
-    
+    let isFirstStart = UserDefaults.standard.bool(forKey: "isFirstStart")
+    var isAnimation: Bool = true
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let interaction = UIContextMenuInteraction(delegate: self)
-//        previewImage.addInteraction(interaction)
-//        if UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.traitCollection.forceTouchCapability == UIForceTouchCapability.available {
-//            registerForPreviewing(with: self, sourceView: view)
-//        }
-        
+
         
         startAnimation()
         anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
@@ -62,7 +56,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         blurEffectView.alpha = 0.8
         view.addSubview(blurEffectView)
         view.addSubview(anView)
-        
+        if isAnimation {
+            startAnimation()
+        }
+                
         router = BaseRouter(viewController: self)
         setViewScreen()
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
@@ -79,23 +76,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             }
         })
         
-        navigationItem.leftBarButtonItem?.isEnabled = false
-        newTaskButton.isEnabled = false
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-            
-            self.anView.removeFromSuperview()
-//            self.blurEffectView.removeFromSuperview()
-            self.navigationItem.leftBarButtonItem?.isEnabled = true
-            self.newTaskButton.isEnabled = true
-            UIView.animate(withDuration: 0.5) {
-                self.blurEffectView.alpha = 0
-            } completion: { finish in
-                if finish {
-                    self.blurEffectView.removeFromSuperview()
-                }
-            }
-
+        if !isFirstStart {
+            MockDataFactory.makeMockData(sections: MockDataFactory.mockDataSet)
+            UserDefaults.standard.set(true, forKey: "isFirstStart")
         }
     }
     
@@ -104,7 +87,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.bounds.size.height = view.bounds.size.height
         changeTheme()
         self.tableView.reloadData()
-        TableRowsAnimation.animateTable(table: tableView)
+        if isAnimation {
+            TableRowsAnimation.animateTable(table: tableView)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,6 +104,32 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         anView.contentMode = .scaleAspectFit
         anView.loopMode = .loop
         anView.play()
+        
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        newTaskButton.isEnabled = false
+        
+        anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
+        blurEffectView.frame = view.bounds
+        anView.center = view.center
+        anView.backgroundColor = .clear
+        blurEffectView.alpha = 0.8
+        view.addSubview(blurEffectView)
+        view.addSubview(anView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+            
+            self.anView.removeFromSuperview()
+//            self.blurEffectView.removeFromSuperview()
+            self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.newTaskButton.isEnabled = true
+            UIView.animate(withDuration: 0.5) {
+                self.blurEffectView.alpha = 0
+            } completion: { finish in
+                if finish {
+                    self.blurEffectView.removeFromSuperview()
+                }
+            }
+        }
     }
     
     //MARK: - TABLE
