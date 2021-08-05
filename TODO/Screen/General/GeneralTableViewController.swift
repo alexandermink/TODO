@@ -42,20 +42,12 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     let anView = AnimationView()
     let isFirstStart = UserDefaults.standard.bool(forKey: "isFirstStart")
     var isAnimation: Bool = true
+    var index: IndexPath = [0,0]
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        startAnimation()
-        anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
-        blurEffectView.frame = view.bounds
-        anView.center = view.center
-        anView.backgroundColor = .clear
-        blurEffectView.alpha = 0.8
-        view.addSubview(blurEffectView)
-        view.addSubview(anView)
         if isAnimation {
             startAnimation()
         }
@@ -104,6 +96,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         anView.contentMode = .scaleAspectFit
         anView.loopMode = .loop
         anView.play()
+        
+        anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
+        blurEffectView.frame = view.bounds
+        anView.center = view.center
+        anView.backgroundColor = .clear
+        blurEffectView.alpha = 0.8
+        view.addSubview(blurEffectView)
+        view.addSubview(anView)
         
         navigationItem.leftBarButtonItem?.isEnabled = false
         newTaskButton.isEnabled = false
@@ -162,6 +162,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let destinationViewController = TaskDetailViewController()
             navigationController.viewControllers.append(destinationViewController)
             
+            self.index = indexPath
+            
+            let object = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
+            destinationViewController.task = object
+            
             return navigationController
         }) { actions -> UIMenu? in
             let first = UIAction(title: "Пункт № 1", image: UIImage(systemName: "book.circle.fill"), discoverabilityTitle: "подзаголовок", attributes: .disabled, state: .on) { action in
@@ -182,6 +187,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         animator.addCompletion {
             let navigationController = UINavigationController()
             let destinationViewController = TaskDetailViewController()
+            navigationController.presentationController?.delegate = destinationViewController
+            let object = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
+            destinationViewController.task = object
             navigationController.viewControllers.append(destinationViewController)
             self.router?.present(vc: navigationController)
         }
