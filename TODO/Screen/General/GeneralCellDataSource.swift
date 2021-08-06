@@ -27,20 +27,27 @@ class GeneralCellDataSource {
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralCell", for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
+            
+            let task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+            
             cell.selectedBackgroundView = {
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.size.width, height: cell.frame.size.height))
                 view.backgroundColor = UIColor.hexStringToUIColor(hex: "#fcdab7")
                 return view
             }()
-            cell.taskNameLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].name
-            cell.descriptionLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].taskDescription
-            cell.notificationLabel.text = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].notificationDate
-            cell.notificationLabel.layer.cornerRadius = 6
-            cell.backgroundColor = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor
             cell.configure()
             
-            let markSelectedCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].markSelectedCount)
-            let allMarkCount = Float(Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].checkList.count)
+            cell.taskNameLabel.text = task.name
+            cell.descriptionLabel.text = task.taskDescription
+            cell.notificationLabel.text = task.notificationDate
+            cell.notificationLabel.layer.cornerRadius = 6
+            cell.backgroundColor = task.backgroundColor
+            
+            let markSelectedCount = Float(task.markSelectedCount)
+            let allMarkCount = Float(task.checkList.count)
+            
+            cell.isFavoriteImage.image = UIImage(systemName: task.isFavorite ? "star.fill" : "star")
+            cell.isDoneImage.image = UIImage(systemName: task.isDone ? "bookmark.fill" : "bookmark")
             
             var progress: Float = 0
             if allMarkCount > 0  {

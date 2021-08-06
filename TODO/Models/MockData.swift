@@ -12,11 +12,11 @@ class MockDataFactory {
     
     static let mockDataSet: [SectionTask] = [
         SectionTask(sectionName: "fghjk", tasks: [
-            Task(id: 1, name: "First task", backgroundColor: .clear, taskDescription: "fghjkjhgfghjioiuy tyutghj  hgfghjiutyu", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0),
-            Task(id: 1, name: "Second task", backgroundColor: .clear, taskDescription: "djwjdjwdj hgfghjiutyu", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0)
+            Task(id: 1, name: "First task", backgroundColor: .clear, taskDescription: "fghjkjhgfghjioiuy tyutghj  hgfghjiutyu", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0, isFavorite: false, isDone: false),
+            Task(id: 1, name: "Second task", backgroundColor: .clear, taskDescription: "djwjdjwdj hgfghjiutyu", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0, isFavorite: false, isDone: false)
         ]),
         SectionTask(sectionName: "ertyuio", tasks: [
-            Task(id: 2, name: "dfghjkoeir", backgroundColor: .red, taskDescription: "hdwidowjdkow", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0)
+            Task(id: 2, name: "dfghjkoeir", backgroundColor: .red, taskDescription: "hdwidowjdkow", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0, isFavorite: false, isDone: false)
         ])
     ]
     

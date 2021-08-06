@@ -23,6 +23,8 @@ class TaskRealmConverter {
         taskRealm.notificationDate = task.notificationDate
         taskRealm.notificationID = task.notificationID
         taskRealm.markSelectedCount = task.markSelectedCount
+        taskRealm.isFavorite = task.isFavorite
+        taskRealm.isDone = task.isDone
         
         for checkMark in task.checkList {
             taskRealm.checkList.append(convert(checkMark))
@@ -52,6 +54,8 @@ class TaskRealmConverter {
         task.notificationDate = taskRealm.notificationDate
         task.notificationID = taskRealm.notificationID
         task.markSelectedCount = taskRealm.markSelectedCount
+        task.isFavorite = taskRealm.isFavorite
+        task.isDone = taskRealm.isDone
         
         
         for checkMarkRealm in taskRealm.checkList {
