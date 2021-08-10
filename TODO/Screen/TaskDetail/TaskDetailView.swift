@@ -77,10 +77,9 @@ class TaskDetailView: UIView, UITableViewDelegate {
         taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
         
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
-        taskNameTextView.backgroundColor = UIColor.clear
+        taskNameTextView.backgroundColor = .quaternarySystemFill
         taskNameTextView.isEditable = true
         taskNameTextView.isScrollEnabled = true
-        taskNameTextView.textColor = .systemYellow
         taskNameTextView.contentInsetAdjustmentBehavior = .automatic
         taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         taskNameTextView.keyboardAppearance = .dark
@@ -89,11 +88,12 @@ class TaskDetailView: UIView, UITableViewDelegate {
         taskCreationDateTitleLabel = labelFactory(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
         
         taskCreationDateLabel = labelFactory(lab: self.taskCreationDateLabel, text: "", color: .systemYellow)
+        taskCreationDateLabel.backgroundColor = .quaternarySystemFill
         
         taskDateTitleLabel = labelFactory(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         
         taskDateTextField.translatesAutoresizingMaskIntoConstraints = false
-        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+        taskDateTextField.backgroundColor = .quaternarySystemFill
         taskDateTextField.textColor = .systemYellow
         taskDateTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         taskDateTextField.inputView = notificationPicker
@@ -105,7 +105,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
         taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
         
         taskDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
-        taskDescriptionTextView.backgroundColor = UIColor.clear
+        taskDescriptionTextView.backgroundColor = .quaternarySystemFill
         taskDescriptionTextView.contentInsetAdjustmentBehavior = .automatic
         taskDescriptionTextView.isEditable = true
         taskDescriptionTextView.isScrollEnabled = true
@@ -237,7 +237,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
         self.backgroundColor = theme.interfaceColor
         self.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
-        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
     }
     
 }
