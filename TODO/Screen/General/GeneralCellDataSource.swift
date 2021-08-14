@@ -10,10 +10,16 @@ import UIKit
 
 class GeneralCellDataSource {
     
+    var isFilteredFavorite: Bool = false
+    var isFilteredDone: Bool = false
+    var filteredSection: SectionTask = SectionTask()
+    var isFiltered: Bool {
+        return isFilteredDone || isFilteredFavorite
+    }
     
     func getCell (at tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
+        func createAddButtonCell() -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
             let theme = Main.instance.themeService.getTheme()
             cell.addFastTaskNameTextField.textColor = theme.interfaceColor
@@ -25,10 +31,18 @@ class GeneralCellDataSource {
                 cell.setEditing(false, animated: false)
             }
             return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralCell", for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
+        }
+        
+        func createTaskCell() -> UITableViewCell {
             
-            let task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+            var task: Task = Task()
+            if isFiltered {
+                task = filteredSection.sectionTasks[indexPath.row]
+            } else {
+                task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+            }
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralCell", for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
             
             cell.selectedBackgroundView = {
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.size.width, height: cell.frame.size.height))
@@ -46,8 +60,10 @@ class GeneralCellDataSource {
             let markSelectedCount = Float(task.markSelectedCount)
             let allMarkCount = Float(task.checkList.count)
             
-            cell.isFavoriteImage.image = UIImage(systemName: task.isFavorite ? "star.fill" : "star")
-            cell.isDoneImage.image = UIImage(systemName: task.isDone ? "bookmark.fill" : "bookmark")
+            let favoriteImage = UIImage(systemName: task.isFavorite ? "star.fill" : "")
+            
+            cell.isFavoriteImage.image = favoriteImage
+            cell.isDoneImage.image = UIImage(systemName: task.isDone ? "bookmark.fill" : "")
             
             var progress: Float = 0
             if allMarkCount > 0  {
@@ -55,6 +71,16 @@ class GeneralCellDataSource {
             }
             cell.checkProgressBar.setProgress(progress, animated: true)
             return cell
+        }
+        
+        if isFiltered {
+            return createTaskCell()
+        } else {
+            if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
+                return createAddButtonCell()
+            } else {
+                return createTaskCell()
+            }
         }
     }
     

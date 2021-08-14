@@ -16,6 +16,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var backLayer: Rounding!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var newTaskButton: UIBarButtonItem!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var mainBGImageView: UIImageView!
     @IBOutlet weak var mainBGWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainBGHeightConstraint: NSLayoutConstraint!
@@ -43,6 +44,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     let isFirstStart = UserDefaults.standard.bool(forKey: "isFirstStart")
     var isAnimation: Bool = true
     var index: IndexPath = [0,0]
+    
+    var filteredSection: SectionTask = SectionTask()
+    var isFilteredFavorite: Bool = false
+    var isFilteredDone: Bool = false
+    
     
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
@@ -133,11 +139,25 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - TABLE
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Main.instance.userSession.tasks[section].sectionTasks.count + 1
+        if self.isFilteredDone || self.isFilteredFavorite {
+            return filteredSection.sectionTasks.count
+        } else {
+            return Main.instance.userSession.tasks[section].sectionTasks.count + 1
+        }
+        
     }
-    func numberOfSections(in tableView: UITableView) -> Int { Main.instance.userSession.tasks.count }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if self.isFilteredDone || self.isFilteredFavorite {
+            return 1
+        } else {
+            return Main.instance.userSession.tasks.count
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.dataSource.getCell(at: tableView, indexPath: indexPath)
+        self.dataSource.isFilteredFavorite = self.isFilteredFavorite
+        self.dataSource.isFilteredDone = self.isFilteredDone
+        self.dataSource.filteredSection = self.filteredSection
+        return self.dataSource.getCell(at: tableView, indexPath: indexPath)
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         self.dataSource.isEditRow(tableView, canEditRowAt: indexPath)
@@ -146,7 +166,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         self.dataSource.editingStyle(tableView, commit: editingStyle, forRowAt: indexPath)
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        Main.instance.userSession.tasks[section].sectionName
+        if self.isFilteredDone || self.isFilteredFavorite {
+            return filteredSection.sectionName
+        } else {
+            return Main.instance.userSession.tasks[section].sectionName
+        }
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         self.dataSource.viewHeaderSection(tableView, viewForHeaderInSection: section)
@@ -240,7 +264,51 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         blurView.layer.cornerRadius = 24
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
-        newTaskButton.title = "Новая задача"
+        
+        let isFavorite = UIAction(title: "Избранные", image: nil) { action in
+            self.filteredSection = SectionTask()
+            self.isFilteredFavorite = true
+            self.isFilteredDone = false
+            self.filteredSection.sectionName = "Избранные"
+            try? Main.instance.getTasksFromRealm()
+            for section in Main.instance.userSession.tasks {
+                for task in section.sectionTasks {
+                    if task.isFavorite {
+                        self.filteredSection.addTaskInSection(task: task)
+                    }
+                }
+            }
+            self.tableView.reloadData()
+            print("KEy one")
+        }
+        let isDone = UIAction(title: "Завершенные", image: nil) { action in
+            self.filteredSection = SectionTask()
+            self.isFilteredFavorite = false
+            self.isFilteredDone = true
+            self.filteredSection.sectionName = "Завершенные"
+            try? Main.instance.getTasksFromRealm()
+            for section in Main.instance.userSession.tasks {
+                for task in section.sectionTasks {
+                    if task.isDone {
+                        self.filteredSection.addTaskInSection(task: task)
+                    }
+                }
+            }
+            self.tableView.reloadData()
+            print("KEy two")
+        }
+        let clearFilter = UIAction(title: "Сбросить фильтры", image: nil, attributes: .destructive) { action in
+            self.filteredSection = SectionTask()
+            self.isFilteredFavorite = false
+            self.isFilteredDone = false
+            self.filteredSection.sectionName = ""
+            self.tableView.reloadData()
+            print("KEy three")
+        }
+        
+        filterButton.primaryAction = nil
+        filterButton.menu = UIMenu(title: "Фильтры", children: [isFavorite, isDone, clearFilter])
+        
         mainBGWidthConstraint.constant = view.frame.width*3.2
         mainBGHeightConstraint.constant = view.frame.width*1.8
         minorBGWidthConstraint.constant = view.frame.width*3.2
