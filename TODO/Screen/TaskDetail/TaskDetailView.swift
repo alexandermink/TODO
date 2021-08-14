@@ -98,7 +98,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
         taskDateTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         taskDateTextField.inputView = notificationPicker
         taskDateTextField.clearsOnBeginEditing = true
-        if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
+        if #available(iOS 13.0, *) {notificationPicker.preferredDatePickerStyle = .wheels}
         taskDateTextField.keyboardAppearance = .dark
         detailContentView.addSubview(taskDateTextField)
         
@@ -180,7 +180,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
             taskNameTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             taskNameTextView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
-            taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 58),
+            taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 64),
             taskCreationDateTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
             taskCreationDateLabel.topAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 26),
@@ -201,7 +201,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
             taskDescriptionTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             taskDescriptionTextView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
-            checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 124),
+            checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 128),
             checkBlurView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 0),
             checkBlurView.bottomAnchor.constraint(equalTo: detailContentView.bottomAnchor, constant: -300),
             checkBlurView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: 0),
