@@ -28,7 +28,8 @@ final class SettingsFactory {
         ])
         
         let social = SettingsCategory(name: "Обратная связь", settingsFields: [
-            SettingsField(name: "Сайт проекта", state: nil, picture: "newspaper", isDisclosure: false)
+            SettingsField(name: "Сайт проекта", state: nil, picture: "newspaper", isDisclosure: false),
+            SettingsField(name: "О разработчиках", state: true, picture: "person.3", isDisclosure: true)
         ])
         
 

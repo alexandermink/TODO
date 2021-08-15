@@ -170,19 +170,26 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             return navigationController
         }) { actions -> UIMenu? in
             
-            let first = UIAction(title: "Задание выполнено", image: nil) { action in
+            let first = UIAction(title: "Выполнено", image: nil, state: task.isDone ? .on : .off) { action in
                 task.isDone.toggle()
                 try? Main.instance.updateTask(task: task)
                 print("KEy one")
             }
-            let second = UIAction(title: "Добавить в избранное", image: nil) { action in
+            let second = UIAction(title: "Избранное", image: nil, state: task.isFavorite ? .on : .off) { action in
                 task.isFavorite.toggle()
                 try? Main.instance.updateTask(task: task)
                 print("KEy two")
             }
-            let third = UIAction(title: "Удалить задание", image: nil, attributes: .destructive) { action in
-                try? Main.instance.deleteTask(task: task)
+            let third = UIAction(title: "Удалить", image: nil, attributes: .destructive) { action in
                 print("KEy three")
+                let secondAlert = UIAlertController(title: "Внимание", message: "Подтвердить удаление?", preferredStyle: .alert)
+                secondAlert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { action in
+                    try? Main.instance.deleteTask(task: task)
+                }))
+                secondAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { action in
+                    return
+                }))
+                self.present(secondAlert, animated: true, completion: nil)
             }
             
             return UIMenu(title: "Menu", image: nil, identifier: nil, options: .displayInline, children: [first, second, third])

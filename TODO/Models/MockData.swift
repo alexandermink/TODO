@@ -12,7 +12,7 @@ class MockDataFactory {
     
     static let mockDataSet: [SectionTask] = [
         SectionTask(sectionName: "Список задач", tasks: [
-            Task(id: 1, name: "Здравствуйте!", backgroundColor: .clear, taskDescription: "Вы можете редактировать название задачи и ее описание. Свайп влева позволяет поменять цвет Вашей задачи. Так же Вы можете названачать дату уведомления для Вашей задачи.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [CheckMark(id: 1, title: "Ваша выполненые задача", isMarkSelected: true), CheckMark(id: 2, title: "Задача, которую предстоит выолноить", isMarkSelected: false)], markSelectedCount: 0, isFavorite: false, isDone: false)
+            Task(id: 1, name: "Здравствуйте!", backgroundColor: .clear, taskDescription: "Вы можете редактировать название задачи и ее описание. Свайп влева позволяет поменять цвет Вашей задачи. Так же Вы можете названачать дату уведомления для Вашей задачи.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [CheckMark(id: 1, title: "Ваша выполненые задача", isMarkSelected: true), CheckMark(id: 2, title: "Задача, которую предстоит выолноить", isMarkSelected: false)], markSelectedCount: 1, isFavorite: false, isDone: false)
         ])
     ]
     

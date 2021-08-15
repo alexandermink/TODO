@@ -21,6 +21,8 @@ struct Theme {
     var interfaceColor: UIColor = .clear
     var mainBackgroundImageName: String = ""
     var minorBackgroundImageName: String = ""
+    var isFavouriteImageName = ""
+    var isDoneImageName = ""
 }
 
 class ThemeService {
@@ -54,11 +56,13 @@ class ThemeService {
         switch state {
         case .Vitaliy:
             print("Vitaliy")
-            theme.userInterfaceStyle = .light
+            theme.userInterfaceStyle = .dark
             theme.backgroundColor = UIColor.vitBackground
             theme.interfaceColor = UIColor.vitInterface
             theme.mainBackgroundImageName = "888"
             theme.minorBackgroundImageName = "def"
+            theme.isFavouriteImageName = "star-0"
+            theme.isDoneImageName = "done-0"
         case .Alexey:
             print("Alexey")
             theme.userInterfaceStyle = .light
@@ -66,6 +70,8 @@ class ThemeService {
             theme.interfaceColor = UIColor.alexeyInterface
             theme.mainBackgroundImageName = "boat2"
             theme.minorBackgroundImageName = "def"
+            theme.isFavouriteImageName = "star-1"
+            theme.isDoneImageName = "done-1"
         case .Alexander:
             print("Alexander")
             theme.userInterfaceStyle = .dark
@@ -73,6 +79,8 @@ class ThemeService {
             theme.interfaceColor = UIColor.alexanderInterface
             theme.mainBackgroundImageName = "Alex_layer1"
             theme.minorBackgroundImageName = "Alex_layer2"
+            theme.isFavouriteImageName = "star-2"
+            theme.isDoneImageName = "done-2"
         }
         UIApplication.shared.windows.forEach { window in
             window.overrideUserInterfaceStyle = theme.userInterfaceStyle

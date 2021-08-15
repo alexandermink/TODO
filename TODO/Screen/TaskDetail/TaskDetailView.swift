@@ -106,9 +106,10 @@ class TaskDetailView: UIView, UITableViewDelegate {
         
         taskDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         taskDescriptionTextView.backgroundColor = .quaternarySystemFill
-        taskDescriptionTextView.contentInsetAdjustmentBehavior = .automatic
+        taskDescriptionTextView.contentInsetAdjustmentBehavior = .scrollableAxes
         taskDescriptionTextView.isEditable = true
-        taskDescriptionTextView.isScrollEnabled = true
+        taskDescriptionTextView.isScrollEnabled = false
+        taskDescriptionTextView.sizeToFit()
         taskDescriptionTextView.textAlignment = .left
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)

@@ -126,6 +126,12 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         case [1, 0]:
             guard let url = URL(string: "https://vk.com/public206096643") else { return }
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        case[1, 1]:
+//            let storyboard = UIStoryboard(name: "Developers", bundle: nil)
+//            let developerVC = storyboard.instantiateViewController(identifier: "Developers") as! DevelopersMenuVC
+            let storyboard = UIStoryboard(name: "Developers", bundle: nil)
+            let developerVC = storyboard.instantiateViewController(identifier: "TestVC") as! TestVC
+            router?.push(vc: developerVC)
         case [2, 0]:
             print("кнопка очистить данные нажата")
             deleteAllData()
