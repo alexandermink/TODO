@@ -19,12 +19,9 @@ class GeneralCellDataSource {
     
     func getCell (at tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-
         let theme = Main.instance.themeService.getTheme()
-        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
-
+        
         func createAddButtonCell() -> UITableViewCell {
-
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell", for: indexPath) as? AddButtonTableViewCell else { return UITableViewCell() }
             cell.addFastTaskNameTextField.textColor = theme.interfaceColor
             cell.addButton.setTitleColor(theme.interfaceColor, for: .normal)
@@ -64,9 +61,20 @@ class GeneralCellDataSource {
             let markSelectedCount = Float(task.markSelectedCount)
             let allMarkCount = Float(task.checkList.count)
             
+            
             cell.isFavoriteImage.image = UIImage(named: task.isFavorite ? theme.isFavouriteImageName : "def")
             cell.isDoneImage.image = UIImage(named: task.isDone ? theme.isDoneImageName : "def")
-
+            
+            
+//            let favoriteImage = UIImage(systemName: task.isFavorite ? "star.fill" : "")
+//
+//            cell.isFavoriteImage.image = favoriteImage
+//            cell.isDoneImage.image = UIImage(systemName: task.isDone ? "bookmark.fill" : "")
+            
+            
+            
+            
+            
             
             var progress: Float = 0
             if allMarkCount > 0  {
