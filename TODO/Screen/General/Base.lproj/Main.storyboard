@@ -277,16 +277,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="q9Y-x2-7Ne">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="Новая задача" id="Thb-en-nUn">
-                            <color key="tintColor" red="0.41458874940000001" green="0.1026140079" blue="0.086256317789999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <connections>
-                                <action selector="newTaskBarButton:" destination="Xc2-F3-y3F" id="wbf-EL-t33"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="plus" catalog="system" id="Thb-en-nUn">
+                                <connections>
+                                    <action selector="newTaskBarButton:" destination="Xc2-F3-y3F" id="wbf-EL-t33"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="camera.filters" catalog="system" id="jot-2G-vvH"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="backLayer" destination="n4a-mQ-BJW" id="HCq-wd-61L"/>
                         <outlet property="blurView" destination="hPa-VJ-bCE" id="Jiz-mV-HDn"/>
+                        <outlet property="filterButton" destination="jot-2G-vvH" id="ned-sT-WIm"/>
                         <outlet property="mainBGHeightConstraint" destination="vT2-Cm-vCQ" id="kws-AX-07l"/>
                         <outlet property="mainBGImageView" destination="MGk-aQ-yaO" id="URC-8m-WPH"/>
                         <outlet property="mainBGWidthConstraint" destination="Ztc-YD-zR9" id="0dY-k5-hp9"/>
@@ -306,6 +309,7 @@
     <resources>
         <image name="888" width="1200" height="900"/>
         <image name="Alex_layer2" width="1200" height="900"/>
+        <image name="camera.filters" catalog="system" width="128" height="116"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
