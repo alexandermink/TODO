@@ -34,6 +34,7 @@ class CheckTableViewCell: UITableViewCell {
         checkListItemTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         checkListItemTextField.textColor = .systemYellow
         checkListItemTextField.keyboardAppearance = .dark
+        checkListItemTextField.adjustsFontSizeToFitWidth = true
         contentView.addSubview(checkListItemTextField)
         
         checkMarkButton.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +49,7 @@ class CheckTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             checkListItemTextField.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             checkListItemTextField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 50),
+            checkListItemTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 4),
             
             checkMarkButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             checkMarkButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),

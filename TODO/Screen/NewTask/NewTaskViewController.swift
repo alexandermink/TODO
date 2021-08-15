@@ -21,10 +21,12 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         notificationPicker.minimumDate = minDate
         if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}}}
     @IBOutlet weak var newTaskNameTextField: UITextField! {didSet{
+        newTaskNameTextField.inputAccessoryView = makeBaseToolBar()
         newTaskNameTextField.delegate = self}}
     @IBOutlet weak var checkListButton: UIButton!
     @IBOutlet weak var coverButton: UIButton!
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField! {didSet {
+            descriptionTextField.inputAccessoryView = makeBaseToolBar()}}
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var backLayer: Rounding!
     

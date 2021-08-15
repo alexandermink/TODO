@@ -74,41 +74,42 @@ class TaskDetailView: UIView, UITableViewDelegate {
         detailContentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(detailContentView)
         
-        taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Задача", color: .systemGray)
+        taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Название:", color: .systemGray)
         
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
-        taskNameTextView.backgroundColor = UIColor.clear
+        taskNameTextView.backgroundColor = .quaternarySystemFill
         taskNameTextView.isEditable = true
         taskNameTextView.isScrollEnabled = true
-        taskNameTextView.textColor = .systemYellow
         taskNameTextView.contentInsetAdjustmentBehavior = .automatic
         taskNameTextView.font = UIFont(name: "HelveticaNeue", size: 17)
         taskNameTextView.keyboardAppearance = .dark
         detailContentView.addSubview(taskNameTextView)
         
-        taskCreationDateTitleLabel = labelFactory(lab: self.taskCreationDateTitleLabel, text: "Дата регестрации задачи:", color: .systemGray)
+        taskCreationDateTitleLabel = labelFactory(lab: self.taskCreationDateTitleLabel, text: "Дата регистрации задачи:", color: .systemGray)
         
         taskCreationDateLabel = labelFactory(lab: self.taskCreationDateLabel, text: "", color: .systemYellow)
         
         taskDateTitleLabel = labelFactory(lab: self.taskDateTitleLabel, text: "Дата уведомления задачи:", color: .systemGray)
         
         taskDateTextField.translatesAutoresizingMaskIntoConstraints = false
-        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
+        taskDateTextField.indent(size: 4)
+        taskDateTextField.backgroundColor = .quaternarySystemFill
         taskDateTextField.textColor = .systemYellow
         taskDateTextField.font = UIFont(name: "HelveticaNeue", size: 17)
         taskDateTextField.inputView = notificationPicker
         taskDateTextField.clearsOnBeginEditing = true
-        if #available(iOS 13.4, *) {notificationPicker.preferredDatePickerStyle = .wheels}
+        if #available(iOS 13.0, *) {notificationPicker.preferredDatePickerStyle = .wheels}
         taskDateTextField.keyboardAppearance = .dark
         detailContentView.addSubview(taskDateTextField)
         
-        taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание задачи:", color: .systemGray)
+        taskDescriptionTitleLabel = labelFactory(lab: self.taskDescriptionTitleLabel, text: "Описание:", color: .systemGray)
         
         taskDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
-        taskDescriptionTextView.backgroundColor = UIColor.clear
-        taskDescriptionTextView.contentInsetAdjustmentBehavior = .automatic
+        taskDescriptionTextView.backgroundColor = .quaternarySystemFill
+        taskDescriptionTextView.contentInsetAdjustmentBehavior = .scrollableAxes
         taskDescriptionTextView.isEditable = true
-        taskDescriptionTextView.isScrollEnabled = true
+        taskDescriptionTextView.isScrollEnabled = false
+        taskDescriptionTextView.sizeToFit()
         taskDescriptionTextView.textAlignment = .left
         taskDescriptionTextView.textColor = .systemYellow
         taskDescriptionTextView.font = UIFont(name: "HelveticaNeue", size: 17)
@@ -172,35 +173,36 @@ class TaskDetailView: UIView, UITableViewDelegate {
             detailContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             detailContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
-            taskNameTitleLabel.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 20),
+            taskNameTitleLabel.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 16),
             taskNameTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
-            taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 20),
-            taskNameTextView.bottomAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 2),
-            taskNameTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 8),
+            taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 26),
+            taskNameTextView.bottomAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: -14),
+            taskNameTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             taskNameTextView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
-            taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 48),
+            taskCreationDateTitleLabel.topAnchor.constraint(equalTo: taskNameTextView.topAnchor, constant: 64),
             taskCreationDateTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
-            taskCreationDateLabel.topAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 28),
+            taskCreationDateLabel.topAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: 26),
             taskCreationDateLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
-            taskDateTitleLabel.topAnchor.constraint(equalTo: taskCreationDateLabel.topAnchor, constant: 36),
+            taskDateTitleLabel.topAnchor.constraint(equalTo: taskCreationDateLabel.topAnchor, constant: 34),
             taskDateTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
-            taskDateTextField.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 28),
+            taskDateTextField.topAnchor.constraint(equalTo: taskDateTitleLabel.topAnchor, constant: 26),
             taskDateTextField.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
+            taskDateTextField.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
             taskDescriptionTitleLabel.topAnchor.constraint(equalTo: taskDateTextField.topAnchor, constant: 36),
             taskDescriptionTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             
-            taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 20),
-            taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: -4),
-            taskDescriptionTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 8),
+            taskDescriptionTextView.topAnchor.constraint(equalTo: taskDescriptionTitleLabel.topAnchor, constant: 26),
+            taskDescriptionTextView.bottomAnchor.constraint(equalTo: checkBlurView.topAnchor, constant: -18),
+            taskDescriptionTextView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
             taskDescriptionTextView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
             
-            checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 116),
+            checkBlurView.topAnchor.constraint(equalTo: taskDescriptionTextView.topAnchor, constant: 128),
             checkBlurView.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 0),
             checkBlurView.bottomAnchor.constraint(equalTo: detailContentView.bottomAnchor, constant: -300),
             checkBlurView.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: 0),
@@ -237,7 +239,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
         self.backgroundColor = theme.interfaceColor
         self.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
-        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Дата уведомления не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
+        taskDateTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Не назначена", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: theme.interfaceColor]))
     }
     
 }

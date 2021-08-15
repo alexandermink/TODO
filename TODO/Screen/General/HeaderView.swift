@@ -14,9 +14,9 @@ class HeaderView: UITableViewHeaderFooterView {
         let theme = Main.instance.themeService.getTheme()
         
         contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowRadius = 8
+        contentView.layer.shadowRadius = 6
         contentView.layer.shadowOpacity = 0.8
-        contentView.layer.shadowOffset = CGSize(width: 3, height: 13)
+        contentView.layer.shadowOffset = CGSize(width: 3, height: 8)
         
         contentView.backgroundColor = theme.interfaceColor
         
