@@ -272,7 +272,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         blurView.layer.borderWidth = 1
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         
-        let isFavorite = UIAction(title: "Избранные", image: nil) { action in
+        let favoriteState: UIMenuElement.State = self.isFilteredFavorite ? .on : .off // не работает, фильтры назначаются позже, чем идет проверка
+        let isFavorite = UIAction(title: "Избранные", image: nil, state: favoriteState) { action in
             self.filteredSection = SectionTask()
             self.isFilteredFavorite = true
             self.isFilteredDone = false
@@ -288,7 +289,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             self.tableView.reloadData()
             print("KEy one")
         }
-        let isDone = UIAction(title: "Завершенные", image: nil) { action in
+        let doneState: UIMenuElement.State = self.isFilteredDone ? .on : .off // не работает, фильтры назначаются позже, чем идет проверка
+        let isDone = UIAction(title: "Завершенные", image: nil, state: doneState) { action in
             self.filteredSection = SectionTask()
             self.isFilteredFavorite = false
             self.isFilteredDone = true

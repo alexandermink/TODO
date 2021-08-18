@@ -189,9 +189,9 @@
 		5D83C3AB26C9563D00108100 /* DevelopersMenu */ = {
 			isa = PBXGroup;
 			children = (
-				5D83C3AC26C9566900108100 /* Developers.storyboard */,
 				5D83C3AE26C9586400108100 /* DevelopersMenuVC.swift */,
 				5D83C3B026C9845500108100 /* TestVC.swift */,
+				5D83C3AC26C9566900108100 /* Developers.storyboard */,
 			);
 			path = DevelopersMenu;
 			sourceTree = "<group>";

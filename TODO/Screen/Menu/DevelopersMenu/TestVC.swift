@@ -13,6 +13,7 @@ class TestVC: UIViewController {
     @IBOutlet weak var first: UIView!
     @IBOutlet weak var second: UIView!
     @IBOutlet weak var third: UIView!
+    
     @IBOutlet weak var firstIm: UIImageView!
     @IBOutlet weak var firstSh: UIView!
     @IBOutlet weak var firstBlur: UIVisualEffectView!
@@ -24,6 +25,19 @@ class TestVC: UIViewController {
     @IBOutlet weak var thirdBlur: UIVisualEffectView!
     @IBOutlet weak var vitalyButtonStack: UIStackView!
     
+    
+    @IBOutlet weak var firstX: NSLayoutConstraint!
+    @IBOutlet weak var firstY: NSLayoutConstraint!
+    @IBOutlet weak var firstW: NSLayoutConstraint!
+    @IBOutlet weak var firstH: NSLayoutConstraint!
+    
+    
+    
+    
+    @IBOutlet weak var secondX: NSLayoutConstraint!
+    @IBOutlet weak var secondY: NSLayoutConstraint!
+    @IBOutlet weak var thirdY: NSLayoutConstraint!
+    @IBOutlet weak var thirdX: NSLayoutConstraint!
     
     
     
@@ -76,9 +90,9 @@ class TestVC: UIViewController {
         second.layer.shadowOpacity = 1
         third.layer.shadowOpacity = 1
         
-        first.backgroundColor = .systemYellow.withAlphaComponent(0.7)
-        second.backgroundColor = .alexeyInterface.withAlphaComponent(0.7)
-        third.backgroundColor = .red.withAlphaComponent(0.7)
+        first.backgroundColor = UIColor.systemYellow.withAlphaComponent(0.7)
+        second.backgroundColor = UIColor.alexeyInterface.withAlphaComponent(0.7)
+        third.backgroundColor = UIColor.red.withAlphaComponent(0.7)
         
         
         
@@ -105,6 +119,26 @@ class TestVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        
+        firstX.constant = 20
+        firstY.constant = -width / 2
+        firstW.constant = width - 60
+        firstH.constant = width / 2
+        
+        
+        
+        
+        
+        second.frame = CGRect(x: 0, y: 0, width: width / 2, height: width / 1.7)
+        second.center = view.center
+    }
+    
     @objc func mailToDeveloper(sender: UIButton) {
         var email = ""
         switch sender.tag {
@@ -117,9 +151,8 @@ class TestVC: UIViewController {
         default:
             break
         }
-        if let url = URL(string: "mailto:\(email)") {
-            UIApplication.shared.open(url)
-        }
+        guard let url = URL(string: "mailto:\(email)") else { return }
+        UIApplication.shared.open(url)
     }
     
     @objc func linkToVK(sender: UIButton) {

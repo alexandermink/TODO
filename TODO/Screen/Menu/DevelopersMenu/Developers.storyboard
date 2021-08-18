@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cal-gZ-Dc3" customClass="Shadow" customModule="TODO" customModuleProvider="target">
-                                <rect key="frame" x="20" y="202" width="334" height="170"/>
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GO8-a3-yg0" customClass="Rounding" customModule="TODO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="170"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="radius">
@@ -29,16 +29,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-Im-Ryq">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="170"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAH-0M-oEN">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="170"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gl2-vb-4sX">
-                                            <rect key="frame" x="0.0" y="0.0" width="334" height="170"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кулагин Виталий" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvF-Wq-apI">
-                                                    <rect key="frame" x="22" y="22" width="290" height="23.5"/>
+                                                    <rect key="frame" x="22" y="22" width="156" height="23.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="23.5" id="IEv-Oo-YK4"/>
                                                     </constraints>
@@ -49,16 +49,16 @@
                                                     <size key="shadowOffset" width="2" height="3"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="left" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="R5B-kE-BFF">
-                                                    <rect key="frame" x="22" y="49.5" width="32" height="76.5"/>
+                                                    <rect key="frame" x="22" y="49.5" width="32" height="106.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="ODo-ty-k5a"/>
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZXv-8m-8Bl">
-                                                    <rect key="frame" x="60" y="49.5" width="262" height="76.5"/>
+                                                    <rect key="frame" x="60" y="49.5" width="128" height="106.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="karl_karlsson@bk.ru" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mx5-vf-mxf">
-                                                            <rect key="frame" x="0.0" y="0.0" width="262" height="38.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="53.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -66,7 +66,7 @@
                                                             <size key="shadowOffset" width="2" height="3"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vk.com/metttwilight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drp-WU-V2m">
-                                                            <rect key="frame" x="0.0" y="38.5" width="262" height="38"/>
+                                                            <rect key="frame" x="0.0" y="53.5" width="128" height="53"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -103,7 +103,9 @@
                                     <constraint firstAttribute="trailing" secondItem="PLo-Im-Ryq" secondAttribute="trailing" id="cs8-zL-POJ"/>
                                     <constraint firstAttribute="trailing" secondItem="GO8-a3-yg0" secondAttribute="trailing" id="dI2-ut-TFB"/>
                                     <constraint firstAttribute="bottom" secondItem="GO8-a3-yg0" secondAttribute="bottom" id="hgg-tZ-nga"/>
+                                    <constraint firstAttribute="height" constant="200" id="hmh-ic-T6j"/>
                                     <constraint firstItem="aAH-0M-oEN" firstAttribute="leading" secondItem="Cal-gZ-Dc3" secondAttribute="leading" id="nhe-GR-EHl"/>
+                                    <constraint firstAttribute="width" constant="200" id="t64-FJ-xdg"/>
                                     <constraint firstItem="aAH-0M-oEN" firstAttribute="top" secondItem="Cal-gZ-Dc3" secondAttribute="top" id="tME-Vs-Oel"/>
                                     <constraint firstItem="GO8-a3-yg0" firstAttribute="leading" secondItem="Cal-gZ-Dc3" secondAttribute="leading" id="z1G-e1-Iy5"/>
                                 </constraints>
@@ -123,10 +125,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="idA-Uz-UC7" customClass="Shadow" customModule="TODO" customModuleProvider="target">
-                                <rect key="frame" x="49" y="334" width="345" height="195"/>
+                                <rect key="frame" x="19.5" y="342.5" width="375" height="211"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2g5-Ut-7fa" customClass="Rounding" customModule="TODO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="195"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="radius">
@@ -135,16 +137,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first" translatesAutoresizingMaskIntoConstraints="NO" id="7jv-WO-NYA">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="195"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9VM-AE-Y9N">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="195"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="chf-ck-yAz">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="195"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мальков Алексей" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ils-6b-yPY">
-                                                    <rect key="frame" x="22" y="22" width="301" height="23.5"/>
+                                                    <rect key="frame" x="22" y="22" width="331" height="23.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -192,10 +194,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l9q-lg-6dH" customClass="Shadow" customModule="TODO" customModuleProvider="target">
-                                <rect key="frame" x="35" y="484" width="341" height="194"/>
+                                <rect key="frame" x="19.5" y="342.5" width="375" height="211"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dw0-a1-K7Y" customClass="Rounding" customModule="TODO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="341" height="194"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="radius">
@@ -204,16 +206,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first" translatesAutoresizingMaskIntoConstraints="NO" id="9Pt-Hf-Vhh">
-                                        <rect key="frame" x="0.0" y="0.0" width="341" height="194"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhQ-8g-1Su">
-                                        <rect key="frame" x="0.0" y="0.0" width="341" height="194"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2e1-LW-rUK">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="194"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Минк Александр" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ib7-sW-Gjb">
-                                                    <rect key="frame" x="22" y="22" width="297" height="23.5"/>
+                                                    <rect key="frame" x="22" y="22" width="331" height="23.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -264,33 +266,35 @@
                         <viewLayoutGuide key="safeArea" id="W7E-nU-iQR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Cal-gZ-Dc3" firstAttribute="leading" secondItem="7J2-aK-0Pb" secondAttribute="leadingMargin" id="0CX-J7-8uF"/>
-                            <constraint firstItem="W7E-nU-iQR" firstAttribute="trailing" secondItem="l9q-lg-6dH" secondAttribute="trailing" constant="38" id="1uv-q9-QmD"/>
-                            <constraint firstAttribute="bottom" secondItem="Cal-gZ-Dc3" secondAttribute="bottom" constant="524" id="4rq-fC-SeH"/>
-                            <constraint firstItem="idA-Uz-UC7" firstAttribute="trailing" secondItem="7J2-aK-0Pb" secondAttribute="trailingMargin" id="7Ad-9y-kPR"/>
-                            <constraint firstItem="idA-Uz-UC7" firstAttribute="leading" secondItem="W7E-nU-iQR" secondAttribute="leading" constant="49" id="96Y-Eq-Qw6"/>
-                            <constraint firstItem="idA-Uz-UC7" firstAttribute="top" secondItem="W7E-nU-iQR" secondAttribute="top" constant="290" id="K7d-bd-SKI"/>
-                            <constraint firstItem="W7E-nU-iQR" firstAttribute="bottom" secondItem="idA-Uz-UC7" secondAttribute="bottom" constant="333" id="UWS-Kw-YlI"/>
-                            <constraint firstItem="l9q-lg-6dH" firstAttribute="leading" secondItem="W7E-nU-iQR" secondAttribute="leading" constant="35" id="beq-JU-Zc8"/>
-                            <constraint firstItem="l9q-lg-6dH" firstAttribute="top" secondItem="Cal-gZ-Dc3" secondAttribute="bottom" constant="112" id="bf4-xw-NkS"/>
-                            <constraint firstItem="W7E-nU-iQR" firstAttribute="trailing" secondItem="Cal-gZ-Dc3" secondAttribute="trailing" constant="60" id="qe0-JD-cts"/>
-                            <constraint firstItem="Cal-gZ-Dc3" firstAttribute="top" secondItem="W7E-nU-iQR" secondAttribute="top" constant="158" id="vGD-5g-LFe"/>
-                            <constraint firstItem="W7E-nU-iQR" firstAttribute="bottom" secondItem="l9q-lg-6dH" secondAttribute="bottom" constant="184" id="z1L-4a-sgk"/>
+                            <constraint firstItem="l9q-lg-6dH" firstAttribute="centerY" secondItem="7J2-aK-0Pb" secondAttribute="centerY" id="bk9-ho-Voj"/>
+                            <constraint firstItem="idA-Uz-UC7" firstAttribute="centerX" secondItem="7J2-aK-0Pb" secondAttribute="centerX" id="feV-Kl-hLD"/>
+                            <constraint firstItem="l9q-lg-6dH" firstAttribute="centerX" secondItem="7J2-aK-0Pb" secondAttribute="centerX" id="giE-ks-lA1"/>
+                            <constraint firstItem="idA-Uz-UC7" firstAttribute="centerY" secondItem="7J2-aK-0Pb" secondAttribute="centerY" id="m9F-sc-eRe"/>
+                            <constraint firstItem="Cal-gZ-Dc3" firstAttribute="centerX" secondItem="7J2-aK-0Pb" secondAttribute="centerX" id="mAh-Kt-uvq"/>
+                            <constraint firstItem="Cal-gZ-Dc3" firstAttribute="centerY" secondItem="7J2-aK-0Pb" secondAttribute="centerY" id="s51-iP-BXP"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="first" destination="Cal-gZ-Dc3" id="VI6-Rs-Tbz"/>
                         <outlet property="firstBlur" destination="aAH-0M-oEN" id="a1I-iz-OJH"/>
+                        <outlet property="firstH" destination="hmh-ic-T6j" id="NrE-wt-B45"/>
                         <outlet property="firstIm" destination="PLo-Im-Ryq" id="bkx-4D-Pjo"/>
                         <outlet property="firstSh" destination="GO8-a3-yg0" id="h87-mk-GnF"/>
+                        <outlet property="firstW" destination="t64-FJ-xdg" id="Szk-IV-oOS"/>
+                        <outlet property="firstX" destination="mAh-Kt-uvq" id="JAF-ds-kn7"/>
+                        <outlet property="firstY" destination="s51-iP-BXP" id="xfQ-gc-1nw"/>
                         <outlet property="second" destination="idA-Uz-UC7" id="mP1-Ba-PWC"/>
                         <outlet property="secondBlur" destination="9VM-AE-Y9N" id="Gbd-Zf-BwF"/>
                         <outlet property="secondIm" destination="7jv-WO-NYA" id="ide-Cu-Fj7"/>
                         <outlet property="secondSh" destination="2g5-Ut-7fa" id="aqy-d1-NPL"/>
+                        <outlet property="secondX" destination="feV-Kl-hLD" id="yY2-9U-VYx"/>
+                        <outlet property="secondY" destination="m9F-sc-eRe" id="4Mr-Gc-EGT"/>
                         <outlet property="third" destination="l9q-lg-6dH" id="phP-Ns-8do"/>
                         <outlet property="thirdBlur" destination="EhQ-8g-1Su" id="gSK-jy-lP7"/>
                         <outlet property="thirdIm" destination="9Pt-Hf-Vhh" id="GRT-S5-MPD"/>
                         <outlet property="thirdSh" destination="Dw0-a1-K7Y" id="6DP-Cs-Rja"/>
+                        <outlet property="thirdX" destination="giE-ks-lA1" id="U9P-rK-5tf"/>
+                        <outlet property="thirdY" destination="bk9-ho-Voj" id="sGM-6a-V41"/>
                         <outlet property="vitalyButtonStack" destination="R5B-kE-BFF" id="jpO-VQ-Obq"/>
                     </connections>
                 </viewController>
