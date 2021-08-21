@@ -9,132 +9,73 @@
 import UIKit
 
 class TestVC: UIViewController {
-
-    @IBOutlet weak var first: UIView!
-    @IBOutlet weak var second: UIView!
-    @IBOutlet weak var third: UIView!
-    @IBOutlet weak var firstIm: UIImageView!
-    @IBOutlet weak var firstSh: UIView!
-    @IBOutlet weak var firstBlur: UIVisualEffectView!
-    @IBOutlet weak var secondSh: Rounding!
-    @IBOutlet weak var thirdSh: Rounding!
-    @IBOutlet weak var secondIm: UIImageView!
-    @IBOutlet weak var thirdIm: UIImageView!
-    @IBOutlet weak var secondBlur: UIVisualEffectView!
-    @IBOutlet weak var thirdBlur: UIVisualEffectView!
-    @IBOutlet weak var vitalyButtonStack: UIStackView!
     
-    
-    
-    
+    let data = DevelopersViewBuilder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let theme = Main.instance.themeService.getTheme()
         view.applyGradient(colours: [theme.backgroundColor, .mainBackground], startX: 0.5, startY: -1.2, endX: 0.5, endY: 0.7)
         
-        firstIm.layer.cornerRadius = 16
-        firstSh.layer.cornerRadius = 16
-        firstBlur.layer.cornerRadius = 16
-        firstIm.alpha = 0.8
+//        MARK: - FIRST
+        let fir = Shadow()
+        data.makeParentView(view, fir, xDef: 9, yDef: 2, xSE: 7.5, ySE: 3.2)
+        let firRound = Rounding()
+        data.makeRoundingView(firRound, parent: fir)
+        let firIm = UIImageView()
+        data.makeImageView(firIm, parent: fir)
+        let firBlur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        data.makeBlurView(firBlur, parent: fir, c: .systemYellow)
+        let firStack = UIStackView()
+        data.makeMainStack(firStack, parent: fir)
+        let firLabel = UILabel()
+        let firLabel2 = UILabel()
+        data.makeLabels(firLabel, "karl_karlsson@bk.ru")
+        data.makeLabels(firLabel2, "https://vk.com/metttwilight")
+        let firBStack = UIStackView()
+        let firLStack = UIStackView()
+        data.makeButtonsStack(firBStack, firLStack, parent: firStack, [data.makeMailButton(0), data.makeVKButton(0)], [firLabel, firLabel2])
+        fir.addSubview(data.makeNameLabel(fir, "Виталий Кулагин"))
         
-        secondIm.layer.cornerRadius = 16
-        secondSh.layer.cornerRadius = 16
-        secondBlur.layer.cornerRadius = 16
-        secondIm.alpha = 0.8
+//        MARK: - SECOND
+        let sec = Shadow()
+        data.makeParentView(view, sec, xDef: 2.1, yDef: 2, xSE: -150, ySE: 1.5)
+        sec.center = CGPoint(x: view.frame.width / 2 - 20, y: view.frame.height / 2)
+        let secRound = Rounding()
+        data.makeRoundingView(secRound, parent: sec)
+        let secIm = UIImageView()
+        data.makeImageView(secIm, parent: sec)
+        let secBlur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        data.makeBlurView(secBlur, parent: sec, c: .alexeyInterface)
+        let secStack = UIStackView()
+        data.makeMainStack(secStack, parent: sec)
+        let secLabel = UILabel()
+        let secLabel2 = UILabel()
+        data.makeLabels(secLabel, "marlowe.wind@gmail.com")
+        data.makeLabels(secLabel2, "https://vk.com/bloodpyro")
+        let secBStack = UIStackView()
+        let secLStack = UIStackView()
+        data.makeButtonsStack(secBStack, secLStack, parent: secStack, [data.makeMailButton(1), data.makeVKButton(1)], [secLabel, secLabel2])
+        sec.addSubview(data.makeNameLabel(sec, "Алексей Мальков"))
         
-        thirdIm.layer.cornerRadius = 16
-        thirdSh.layer.cornerRadius = 16
-        thirdBlur.layer.cornerRadius = 16
-        thirdIm.alpha = 0.8
-        
-        first.layer.cornerRadius = 16
-        second.layer.cornerRadius = 16
-        third.layer.cornerRadius = 16
-        
-        first.layer.borderWidth = 1
-        second.layer.borderWidth = 1
-        third.layer.borderWidth = 1
-        
-        first.layer.borderColor = UIColor.darkGray.cgColor
-        second.layer.borderColor = UIColor.darkGray.cgColor
-        third.layer.borderColor = UIColor.darkGray.cgColor
-        
-        first.layer.shadowColor = UIColor.black.cgColor
-        second.layer.shadowColor = UIColor.black.cgColor
-        third.layer.shadowColor = UIColor.black.cgColor
-        
-        first.layer.shadowRadius = 8
-        second.layer.shadowRadius = 8
-        third.layer.shadowRadius = 8
-        
-        first.layer.shadowOffset = CGSize(width: -6, height: -6)
-        second.layer.shadowOffset = CGSize(width: -6, height: -6)
-        third.layer.shadowOffset = CGSize(width: -6, height: -6)
-        
-        first.layer.shadowOpacity = 1
-        second.layer.shadowOpacity = 1
-        third.layer.shadowOpacity = 1
-        
-        first.backgroundColor = .systemYellow.withAlphaComponent(0.7)
-        second.backgroundColor = .alexeyInterface.withAlphaComponent(0.7)
-        third.backgroundColor = .red.withAlphaComponent(0.7)
-        
-        
-        
-//        MARK: - Vitaly
-        let mailButton0 = UIButton()
-        mailButton0.tag = 0
-        mailButton0.tintColor = .lightGray
-        mailButton0.setImage(UIImage(systemName: "envelope.open"), for: .normal)
-        mailButton0.addTarget(self, action: #selector(mailToDeveloper), for: .touchUpInside)
-        
-        let vkButton0 = UIButton()
-        vkButton0.tag = 0
-        vkButton0.tintColor = .lightGray
-        vkButton0.setImage(UIImage(systemName: "paperplane"), for: .normal)
-        vkButton0.addTarget(self, action: #selector(linkToVK), for: .touchUpInside)
-        
-        vitalyButtonStack.addArrangedSubview(mailButton0)
-//        alexeyButtonsStackView.addArrangedSubview(mailButton1)
-//        alexanderButtonsStackView.addArrangedSubview(mailButton2)
-        
-        vitalyButtonStack.addArrangedSubview(vkButton0)
-//        alexeyButtonsStackView.addArrangedSubview(vkButton1)
-//        alexanderButtonsStackView.addArrangedSubview(vkButton2)
-        
-    }
-    
-    @objc func mailToDeveloper(sender: UIButton) {
-        var email = ""
-        switch sender.tag {
-        case 0:
-            email = "karl_karlsson@bk.ru"
-        case 1:
-            email = "marlowe.wind@gmail.com"
-        case 2:
-            email = "alexander.mink1@gmail.com"
-        default:
-            break
-        }
-        if let url = URL(string: "mailto:\(email)") {
-            UIApplication.shared.open(url)
-        }
-    }
-    
-    @objc func linkToVK(sender: UIButton) {
-        var link = ""
-        switch sender.tag {
-        case 0:
-            link = "https://vk.com/metttwilight"
-        case 1:
-            link = "https://vk.com/bloodpyro"
-        case 2:
-            link = "https://vk.com/alexandermink"
-        default:
-            break
-        }
-        guard let url = URL(string: link) else { return }
-        UIApplication.shared.open(url)
+//        MARK: - THIRD
+        let thi = Shadow()
+        data.makeParentView(view, thi, xDef: 10, yDef: 0.8, xSE: 10, ySE: 0.95)
+        let thiRound = Rounding()
+        data.makeRoundingView(thiRound, parent: thi)
+        let thiIm = UIImageView()
+        data.makeImageView(thiIm, parent: thi)
+        let thiBlur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        data.makeBlurView(thiBlur, parent: thi, c: .red)
+        let thiStack = UIStackView()
+        data.makeMainStack(thiStack, parent: thi)
+        let thiLabel = UILabel()
+        let thiLabel2 = UILabel()
+        data.makeLabels(thiLabel, "alexander.mink1@gmail.com")
+        data.makeLabels(thiLabel2, "https://vk.com/alexandermink")
+        let thiBStack = UIStackView()
+        let thiLStack = UIStackView()
+        data.makeButtonsStack(thiBStack, thiLStack, parent: thiStack, [data.makeMailButton(2), data.makeVKButton(2)], [thiLabel, thiLabel2])
+        thi.addSubview(data.makeNameLabel(thi, "Александр Минк"))
     }
 }

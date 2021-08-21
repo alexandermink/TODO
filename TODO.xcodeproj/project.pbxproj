@@ -26,12 +26,13 @@
 		5D34CCAC2628025100FBA762 /* ParalaxEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D34CCAB2628025100FBA762 /* ParalaxEffect.swift */; };
 		5D43B51E26B70EF5007E7384 /* anim.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D43B51D26B70EF5007E7384 /* anim.json */; };
 		5D44F0F42662747A00A4A669 /* GeneralCellDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D44F0F32662747A00A4A669 /* GeneralCellDataSource.swift */; };
+		5D5336D926D0ED6300C80C82 /* Device model+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5336D826D0ED6300C80C82 /* Device model+ext.swift */; };
+		5D5BFA9A26D14032007A3F57 /* DevelopersViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5BFA9926D14032007A3F57 /* DevelopersViewBuilder.swift */; };
 		5D6730252657F625002FA390 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D6730242657F625002FA390 /* Menu.storyboard */; };
 		5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D71D3232639B8A90084F464 /* CheckListCell.swift */; };
 		5D80F794265E9C6A00B3A7E4 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D80F793265E9C6A00B3A7E4 /* SettingsTableViewCell.swift */; };
 		5D80F798265EA0E600B3A7E4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D80F797265EA0E600B3A7E4 /* Settings.swift */; };
 		5D83C3AD26C9566900108100 /* Developers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D83C3AC26C9566900108100 /* Developers.storyboard */; };
-		5D83C3AF26C9586400108100 /* DevelopersMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D83C3AE26C9586400108100 /* DevelopersMenuVC.swift */; };
 		5D83C3B126C9845500108100 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D83C3B026C9845500108100 /* TestVC.swift */; };
 		5D977704261D972C00F74E53 /* UIView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D977703261D972C00F74E53 /* UIView+ext.swift */; };
 		5D977708261D979200F74E53 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D977707261D979200F74E53 /* UIColor.swift */; };
@@ -82,12 +83,13 @@
 		5D34CCAB2628025100FBA762 /* ParalaxEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParalaxEffect.swift; sourceTree = "<group>"; };
 		5D43B51D26B70EF5007E7384 /* anim.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim.json; sourceTree = "<group>"; };
 		5D44F0F32662747A00A4A669 /* GeneralCellDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCellDataSource.swift; sourceTree = "<group>"; };
+		5D5336D826D0ED6300C80C82 /* Device model+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device model+ext.swift"; sourceTree = "<group>"; };
+		5D5BFA9926D14032007A3F57 /* DevelopersViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewBuilder.swift; sourceTree = "<group>"; };
 		5D6730242657F625002FA390 /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		5D71D3232639B8A90084F464 /* CheckListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListCell.swift; sourceTree = "<group>"; };
 		5D80F793265E9C6A00B3A7E4 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		5D80F797265EA0E600B3A7E4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5D83C3AC26C9566900108100 /* Developers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Developers.storyboard; sourceTree = "<group>"; };
-		5D83C3AE26C9586400108100 /* DevelopersMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersMenuVC.swift; sourceTree = "<group>"; };
 		5D83C3B026C9845500108100 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		5D977703261D972C00F74E53 /* UIView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ext.swift"; sourceTree = "<group>"; };
 		5D977707261D979200F74E53 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -190,8 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				5D83C3AC26C9566900108100 /* Developers.storyboard */,
-				5D83C3AE26C9586400108100 /* DevelopersMenuVC.swift */,
 				5D83C3B026C9845500108100 /* TestVC.swift */,
+				5D5BFA9926D14032007A3F57 /* DevelopersViewBuilder.swift */,
 			);
 			path = DevelopersMenu;
 			sourceTree = "<group>";
@@ -206,6 +208,7 @@
 				5D294214261EF64B001C1021 /* Shadow.swift */,
 				5D294217261EF684001C1021 /* Rounding.swift */,
 				96A0028726C843D400240CA0 /* UITextField+ext.swift */,
+				5D5336D826D0ED6300C80C82 /* Device model+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -496,7 +499,6 @@
 				5D977704261D972C00F74E53 /* UIView+ext.swift in Sources */,
 				5D0400C92653F90300ED26F8 /* MenuViewController.swift in Sources */,
 				9655293B253D86CF0013F834 /* Task.swift in Sources */,
-				5D83C3AF26C9586400108100 /* DevelopersMenuVC.swift in Sources */,
 				5D977708261D979200F74E53 /* UIColor.swift in Sources */,
 				5D34CCAC2628025100FBA762 /* ParalaxEffect.swift in Sources */,
 				5DEB6F84264E7ED70012B820 /* TableRowsAnimation.swift in Sources */,
@@ -511,6 +513,7 @@
 				96DEFDF126BB131100AAF0A6 /* MockData.swift in Sources */,
 				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
 				5DE89D4A26610D1A0079C4C7 /* ThemesViewController.swift in Sources */,
+				5D5BFA9A26D14032007A3F57 /* DevelopersViewBuilder.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,
 				5D31C5F12670A5410093ACEA /* ColorPickerDelegate.swift in Sources */,
 				5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */,
@@ -521,6 +524,7 @@
 				96D934CA261C8AF70093FF47 /* LocalDataBaseService.swift in Sources */,
 				5DCF0838265A814E008EAE9D /* TransitionAnimator.swift in Sources */,
 				152DB631263AEDE900B8F1E0 /* CheckTableViewCell.swift in Sources */,
+				5D5336D926D0ED6300C80C82 /* Device model+ext.swift in Sources */,
 				5D32F3D32616E43D008C1A58 /* NotificationService.swift in Sources */,
 				5D294215261EF64B001C1021 /* Shadow.swift in Sources */,
 				969C87992632481C0036A2A5 /* AddButtonTableViewCell.swift in Sources */,
