@@ -10,21 +10,11 @@ import Foundation
 
 class UserSession{
     
-    var tasks: [TasksStruct] = []
+    var tasks: [SectionTask] = []
     
     init() { }
     
-    init(tasksRealm: [TasksStruct]) {
-         
-        
-//        jhgjhg
-//        test
-        
-        
-        
+    init(tasksRealm: [SectionTask]) {
         self.tasks = tasksRealm
     }
-    
-    
-    
 }
