@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import Lottie
+import Drops
 
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,13 +42,14 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         return blurEffectView
     }()
     let anView = AnimationView()
-    let isFirstStart = UserDefaults.standard.bool(forKey: "isFirstStart")
     var isAnimation: Bool = true
     var index: IndexPath = [0,0]
     
     var filteredSection: SectionTask = SectionTask()
     var isFilteredFavorite: Bool = false
     var isFilteredDone: Bool = false
+    let theme = Main.instance.themeService.getTheme()
+    let dropsData = DropsData()
     
     
     //MARK: - LIFE CYCLE
@@ -56,6 +58,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
 
         if isAnimation {
             startAnimation()
+            dropsData.makeGreatingDrop()
         }
                 
         router = BaseRouter(viewController: self)
@@ -74,7 +77,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             }
         })
         
-        if !isFirstStart {
+        if !dropsData.isFirstStart777 {
             MockDataFactory.makeMockData(sections: MockDataFactory.mockDataSet)
             UserDefaults.standard.set(true, forKey: "isFirstStart")
         }
@@ -181,6 +184,11 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+        
+        let imgMark = UIImage(systemName: "checkmark")
+        let dropDone = Drop(title: task.isDone ? "Не выполнено" : "Выполнено", subtitle: task.name, icon: task.isDone ? nil : imgMark, position: .top)
+        let dropFavorite = Drop(title: task.isFavorite ? "Удалено из избранного" : "Добавлено в избранное", subtitle: task.name, icon: task.isFavorite ? nil : imgMark, position: .top)
+        
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: { () -> UIViewController in
             let navigationController = UINavigationController()
             let destinationViewController = TaskDetailViewController()
@@ -197,11 +205,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let first = UIAction(title: "Выполнено", image: nil, state: task.isDone ? .on : .off) { action in
                 task.isDone.toggle()
                 try? Main.instance.updateTask(task: task)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {Drops.show(dropDone)}
                 print("KEy one")
             }
             let second = UIAction(title: "Избранное", image: nil, state: task.isFavorite ? .on : .off) { action in
                 task.isFavorite.toggle()
                 try? Main.instance.updateTask(task: task)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {Drops.show(dropFavorite)}
                 print("KEy two")
             }
             let third = UIAction(title: "Удалить", image: nil, attributes: .destructive) { action in

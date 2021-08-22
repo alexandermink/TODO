@@ -43,6 +43,7 @@
 		5DE89D4A26610D1A0079C4C7 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE89D4926610D1A0079C4C7 /* ThemesViewController.swift */; };
 		5DE89D4E26610D370079C4C7 /* Themes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DE89D4D26610D370079C4C7 /* Themes.storyboard */; };
 		5DEB6F84264E7ED70012B820 /* TableRowsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEB6F83264E7ED70012B820 /* TableRowsAnimation.swift */; };
+		5DFD1E7D26D2290D0027C6AF /* DropsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFD1E7C26D2290D0027C6AF /* DropsData.swift */; };
 		875DEC27DBB556E1B9DD43A7 /* Pods_TODO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF261960F9984306264C1D /* Pods_TODO.framework */; };
 		9655293B253D86CF0013F834 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9655293A253D86CF0013F834 /* Task.swift */; };
 		96552941253D89760013F834 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96552940253D89760013F834 /* UserSession.swift */; };
@@ -100,6 +101,7 @@
 		5DE89D4926610D1A0079C4C7 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		5DE89D4D26610D370079C4C7 /* Themes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Themes.storyboard; sourceTree = "<group>"; };
 		5DEB6F83264E7ED70012B820 /* TableRowsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowsAnimation.swift; sourceTree = "<group>"; };
+		5DFD1E7C26D2290D0027C6AF /* DropsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropsData.swift; sourceTree = "<group>"; };
 		72F18A26507E7F4027B94B8E /* Pods-TODO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TODO.release.xcconfig"; path = "Target Support Files/Pods-TODO/Pods-TODO.release.xcconfig"; sourceTree = "<group>"; };
 		7AAF261960F9984306264C1D /* Pods_TODO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TODO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E5ADFB46BB8A24CEC3E1D1 /* Pods-TODO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TODO.debug.xcconfig"; path = "Target Support Files/Pods-TODO/Pods-TODO.debug.xcconfig"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				9655293A253D86CF0013F834 /* Task.swift */,
 				5D80F797265EA0E600B3A7E4 /* Settings.swift */,
 				96DEFDF026BB131100AAF0A6 /* MockData.swift */,
+				5DFD1E7C26D2290D0027C6AF /* DropsData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				5D80F798265EA0E600B3A7E4 /* Settings.swift in Sources */,
 				96DEFDF126BB131100AAF0A6 /* MockData.swift in Sources */,
 				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
+				5DFD1E7D26D2290D0027C6AF /* DropsData.swift in Sources */,
 				5DE89D4A26610D1A0079C4C7 /* ThemesViewController.swift in Sources */,
 				5D5BFA9A26D14032007A3F57 /* DevelopersViewBuilder.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,

@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "stae-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "star-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

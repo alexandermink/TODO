@@ -15,7 +15,7 @@ extension UIColor {
 
     static let vitBackground = UIColor.rgb(r: 79, g: 52, b: 11)
     static let vitDarkBrown = UIColor.rgb(r: 79, g: 52, b: 11)
-    static let vitInterface = UIColor.systemYellow
+    static let vitInterface = UIColor.systemYellow // (255, 204, 0)
     
     static let alexeyBackground = UIColor.rgb(r: 185, g: 196, b: 201)
     static let alexeyFog = UIColor.rgb(r: 185, g: 196, b: 201)
@@ -28,7 +28,7 @@ extension UIColor {
     static let alexLightGray = UIColor.rgb(r: 212, g: 212, b: 212)
     
     static let alexanderBackground = UIColor.rgb(r: 31, g: 31, b: 31)
-    static let alexanderInterface = UIColor.red
+    static let alexanderInterface = UIColor.red // (155, 38, 0)
     
     
     
