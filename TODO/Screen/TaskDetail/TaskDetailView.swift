@@ -108,7 +108,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
         taskDescriptionTextView.backgroundColor = .quaternarySystemFill
         taskDescriptionTextView.contentInsetAdjustmentBehavior = .scrollableAxes
         taskDescriptionTextView.isEditable = true
-        taskDescriptionTextView.isScrollEnabled = false
+        taskDescriptionTextView.isScrollEnabled = true
         taskDescriptionTextView.sizeToFit()
         taskDescriptionTextView.textAlignment = .left
         taskDescriptionTextView.textColor = .systemYellow

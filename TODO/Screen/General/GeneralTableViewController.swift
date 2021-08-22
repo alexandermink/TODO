@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 import Lottie
-import Drops
+//import Drops
 
 class GeneralTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

@@ -19,6 +19,9 @@ class HeaderView: UITableViewHeaderFooterView {
         contentView.layer.shadowOffset = CGSize(width: 3, height: 8)
         
         contentView.backgroundColor = theme.interfaceColor
+        if Main.instance.themeService.getState() == .Vitaliy {
+            contentView.backgroundColor = theme.minorColor
+        }
         
     }
 

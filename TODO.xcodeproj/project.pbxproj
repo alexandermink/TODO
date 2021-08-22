@@ -37,6 +37,17 @@
 		5D977704261D972C00F74E53 /* UIView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D977703261D972C00F74E53 /* UIView+ext.swift */; };
 		5D977708261D979200F74E53 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D977707261D979200F74E53 /* UIColor.swift */; };
 		5DBD9042261458DA00732A50 /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBD9041261458DA00732A50 /* String+ext.swift */; };
+		5DBEBFF526D28E8400445550 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEBFF426D28E8400445550 /* AnimationContext.swift */; };
+		5DBEBFF726D28E9B00445550 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEBFF626D28E9B00445550 /* Animator.swift */; };
+		5DBEBFF926D28EB000445550 /* Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEBFF826D28EB000445550 /* Drop.swift */; };
+		5DBEBFFB26D28EC500445550 /* Drops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEBFFA26D28EC500445550 /* Drops.swift */; };
+		5DBEBFFD26D28EDF00445550 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEBFFC26D28EDF00445550 /* DropView.swift */; };
+		5DBEBFFF26D28EFB00445550 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEBFFE26D28EFB00445550 /* PassthroughView.swift */; };
+		5DBEC00126D28F1300445550 /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEC00026D28F1300445550 /* PassthroughWindow.swift */; };
+		5DBEC00326D28F2900445550 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEC00226D28F2900445550 /* Presenter.swift */; };
+		5DBEC00526D28F3F00445550 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEC00426D28F3F00445550 /* UIView+Extensions.swift */; };
+		5DBEC00726D28F5400445550 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEC00626D28F5400445550 /* Weak.swift */; };
+		5DBEC00926D28F6700445550 /* WindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEC00826D28F6700445550 /* WindowViewController.swift */; };
 		5DCF0838265A814E008EAE9D /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF0837265A814E008EAE9D /* TransitionAnimator.swift */; };
 		5DCF083C265A81BC008EAE9D /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF083B265A81BC008EAE9D /* CustomNavigationController.swift */; };
 		5DCF0840265A8203008EAE9D /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF083F265A8203008EAE9D /* InteractiveTransition.swift */; };
@@ -95,6 +106,17 @@
 		5D977703261D972C00F74E53 /* UIView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ext.swift"; sourceTree = "<group>"; };
 		5D977707261D979200F74E53 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5DBD9041261458DA00732A50 /* String+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ext.swift"; sourceTree = "<group>"; };
+		5DBEBFF426D28E8400445550 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		5DBEBFF626D28E9B00445550 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		5DBEBFF826D28EB000445550 /* Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drop.swift; sourceTree = "<group>"; };
+		5DBEBFFA26D28EC500445550 /* Drops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drops.swift; sourceTree = "<group>"; };
+		5DBEBFFC26D28EDF00445550 /* DropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
+		5DBEBFFE26D28EFB00445550 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		5DBEC00026D28F1300445550 /* PassthroughWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughWindow.swift; sourceTree = "<group>"; };
+		5DBEC00226D28F2900445550 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		5DBEC00426D28F3F00445550 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		5DBEC00626D28F5400445550 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		5DBEC00826D28F6700445550 /* WindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowViewController.swift; sourceTree = "<group>"; };
 		5DCF0837265A814E008EAE9D /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		5DCF083B265A81BC008EAE9D /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		5DCF083F265A8203008EAE9D /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
@@ -215,6 +237,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5DBEBFC626D28D9F00445550 /* Drops */ = {
+			isa = PBXGroup;
+			children = (
+				5DBEBFF426D28E8400445550 /* AnimationContext.swift */,
+				5DBEBFF626D28E9B00445550 /* Animator.swift */,
+				5DBEBFF826D28EB000445550 /* Drop.swift */,
+				5DBEBFFA26D28EC500445550 /* Drops.swift */,
+				5DBEBFFC26D28EDF00445550 /* DropView.swift */,
+				5DBEBFFE26D28EFB00445550 /* PassthroughView.swift */,
+				5DBEC00026D28F1300445550 /* PassthroughWindow.swift */,
+				5DBEC00226D28F2900445550 /* Presenter.swift */,
+				5DBEC00426D28F3F00445550 /* UIView+Extensions.swift */,
+				5DBEC00626D28F5400445550 /* Weak.swift */,
+				5DBEC00826D28F6700445550 /* WindowViewController.swift */,
+			);
+			path = Drops;
+			sourceTree = "<group>";
+		};
 		5DC7C75B2623883B007152B6 /* AnimationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +268,7 @@
 		5DCF083A265A8194008EAE9D /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
+				5DBEBFC626D28D9F00445550 /* Drops */,
 				5DCF083B265A81BC008EAE9D /* CustomNavigationController.swift */,
 				5DCF083F265A8203008EAE9D /* InteractiveTransition.swift */,
 			);
@@ -492,16 +533,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DCF083C265A81BC008EAE9D /* CustomNavigationController.swift in Sources */,
+				5DBEBFFD26D28EDF00445550 /* DropView.swift in Sources */,
+				5DBEC00726D28F5400445550 /* Weak.swift in Sources */,
 				96600B50253D057E00F3FDC1 /* AppDelegate.swift in Sources */,
 				5DBD9042261458DA00732A50 /* String+ext.swift in Sources */,
 				5D294218261EF684001C1021 /* Rounding.swift in Sources */,
 				96600B70253D0BCC00F3FDC1 /* GeneralTableViewController.swift in Sources */,
+				5DBEBFF726D28E9B00445550 /* Animator.swift in Sources */,
 				5D32F3CF2616DE23008C1A58 /* ToolBarBuilders.swift in Sources */,
 				96552943253D8C490013F834 /* Main.swift in Sources */,
+				5DBEBFF926D28EB000445550 /* Drop.swift in Sources */,
 				9664687625A6967300443B81 /* NewTaskViewController.swift in Sources */,
 				5D977704261D972C00F74E53 /* UIView+ext.swift in Sources */,
 				5D0400C92653F90300ED26F8 /* MenuViewController.swift in Sources */,
+				5DBEC00926D28F6700445550 /* WindowViewController.swift in Sources */,
 				9655293B253D86CF0013F834 /* Task.swift in Sources */,
+				5DBEC00526D28F3F00445550 /* UIView+Extensions.swift in Sources */,
 				5D977708261D979200F74E53 /* UIColor.swift in Sources */,
 				5D34CCAC2628025100FBA762 /* ParalaxEffect.swift in Sources */,
 				5DEB6F84264E7ED70012B820 /* TableRowsAnimation.swift in Sources */,
@@ -518,16 +565,21 @@
 				5DFD1E7D26D2290D0027C6AF /* DropsData.swift in Sources */,
 				5DE89D4A26610D1A0079C4C7 /* ThemesViewController.swift in Sources */,
 				5D5BFA9A26D14032007A3F57 /* DevelopersViewBuilder.swift in Sources */,
+				5DBEBFFB26D28EC500445550 /* Drops.swift in Sources */,
 				96600B72253D0BE400F3FDC1 /* GeneralTableViewCell.swift in Sources */,
+				5DBEC00126D28F1300445550 /* PassthroughWindow.swift in Sources */,
 				5D31C5F12670A5410093ACEA /* ColorPickerDelegate.swift in Sources */,
+				5DBEC00326D28F2900445550 /* Presenter.swift in Sources */,
 				5D71D3242639B8A90084F464 /* CheckListCell.swift in Sources */,
 				5D32F3D62616E7A2008C1A58 /* AlertBuilder.swift in Sources */,
 				156CD74D266FA0EE00006856 /* TaskDetailView.swift in Sources */,
 				96A0028826C843D400240CA0 /* UITextField+ext.swift in Sources */,
 				96600B52253D057E00F3FDC1 /* SceneDelegate.swift in Sources */,
+				5DBEBFFF26D28EFB00445550 /* PassthroughView.swift in Sources */,
 				96D934CA261C8AF70093FF47 /* LocalDataBaseService.swift in Sources */,
 				5DCF0838265A814E008EAE9D /* TransitionAnimator.swift in Sources */,
 				152DB631263AEDE900B8F1E0 /* CheckTableViewCell.swift in Sources */,
+				5DBEBFF526D28E8400445550 /* AnimationContext.swift in Sources */,
 				5D5336D926D0ED6300C80C82 /* Device model+ext.swift in Sources */,
 				5D32F3D32616E43D008C1A58 /* NotificationService.swift in Sources */,
 				5D294215261EF64B001C1021 /* Shadow.swift in Sources */,
