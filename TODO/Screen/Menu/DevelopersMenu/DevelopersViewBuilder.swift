@@ -12,7 +12,7 @@ class DevelopersViewBuilder {
     
     func makeParentView(_ superView: UIView, _ v: UIView, xDef: CGFloat, yDef: CGFloat, xSE: CGFloat, ySE: CGFloat) {
         switch UIDevice().type {
-        case .iPhoneSE, .iPhoneSE2:
+        case .iPhoneSE, .iPhoneSE2, .iPhone8Plus, .iPhone8, .iPhone5, .iPhone5S, .iPhone5C, .iPhone6SPlus, .iPhone6S, .iPhone6, .iPhone6Plus, .iPhone7, .iPhone7Plus, .iPod7:
             v.frame = CGRect(x: superView.frame.width / xSE, y: superView.frame.width / ySE, width: superView.frame.width - 60, height: superView.frame.width / 2.2)
         default:
             v.frame = CGRect(x: superView.frame.width / xDef, y: superView.frame.width / yDef, width: superView.frame.width - 60, height: superView.frame.width / 2.2)
@@ -53,7 +53,7 @@ class DevelopersViewBuilder {
     }
     
     func makeMainStack(_ v: UIStackView, parent: UIView) {
-        v.frame = CGRect(x: 12, y: parent.frame.height / 4.2, width: parent.frame.width, height: parent.frame.height / 2.2)
+        v.frame = CGRect(x: 0, y: parent.frame.height / 4, width: parent.frame.width, height: parent.frame.height / 2.2)
         v.axis = .horizontal
         v.spacing = 12
         parent.addSubview(v)

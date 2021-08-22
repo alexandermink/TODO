@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Drops
+//import Drops
 
 class DropsData {
     
@@ -15,6 +15,9 @@ class DropsData {
     
     func makeGreatingDrop() {
         if !isFirstStart777 {
+            
+//            let tit = UILabel
+            
             let dropFirst = Drop(title: "Приветствуем!", subtitle: "Это ознакомительный режим.", icon: UIImage(systemName: "hand.raised"), action: .init(handler: {
                 Drops.hideCurrent()
             }), position: .top, duration: 3.0)

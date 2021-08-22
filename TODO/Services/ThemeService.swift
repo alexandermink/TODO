@@ -19,6 +19,7 @@ struct Theme {
     
     var backgroundColor: UIColor = .clear
     var interfaceColor: UIColor = .clear
+    var minorColor: UIColor?
     var mainBackgroundImageName: String = ""
     var minorBackgroundImageName: String = ""
     var isFavouriteImageName = ""
@@ -59,6 +60,7 @@ class ThemeService {
             theme.userInterfaceStyle = .dark
             theme.backgroundColor = UIColor.vitBackground
             theme.interfaceColor = UIColor.vitInterface
+            theme.minorColor = .vitMinor
             theme.mainBackgroundImageName = "888"
             theme.minorBackgroundImageName = "def"
             theme.isFavouriteImageName = "star-0"

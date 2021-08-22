@@ -8,7 +8,6 @@ target 'TODO' do
   pod 'RealmSwift', '= 10.7.2'
   pod 'IQKeyboardManagerSwift', '6.5.6'
   pod 'lottie-ios'
-  pod 'Drops', :git => 'https://github.com/omaralbeik/Drops.git', :tag => '1.2.1'
   
   # Pods for TODO
 
