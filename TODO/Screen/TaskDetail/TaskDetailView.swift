@@ -135,7 +135,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
         toolBarView.addSubview(toolBarStackView)
         
         addCheckElementTextField.translatesAutoresizingMaskIntoConstraints = false
-        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
         addCheckElementTextField.text = ""
         addCheckElementTextField.textColor = .systemYellow
         addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 15)

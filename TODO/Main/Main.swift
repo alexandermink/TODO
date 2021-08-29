@@ -122,6 +122,10 @@ extension Main: LocalDataBaseService {
     }
     
     func deleteTask(task: Task) throws {
+        if task.notificationID != "" {
+            notificationService.deleteNotificationRequest(task: task)
+        }
+        
         let realm = try Realm()
         guard let delTask = realm.objects(TaskRealm.self).filter("id = \(task.id)").first else { return }
         
