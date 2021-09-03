@@ -47,6 +47,8 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         updateData()
 
         navigationBarSetUp()
+        
+        print(task.isDone)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +87,8 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
                                 action: #selector(checkTablePlusAction),
                                                 for: .touchUpInside)
         taskDetailView.checkListTableView.reloadData()
+        taskDetailView.isDoneImage.image = UIImage(named: task.isDone ? theme.isDoneImageName : "def")
+        taskDetailView.isFavoriteImage.image = UIImage(named: task.isFavorite ? theme.isFavouriteImageName : "def")
     }
     
     func navigationBarSetUp() {
