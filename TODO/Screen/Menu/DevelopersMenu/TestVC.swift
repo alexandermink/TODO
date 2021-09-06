@@ -77,5 +77,9 @@ class TestVC: UIViewController {
         let thiLStack = UIStackView()
         data.makeButtonsStack(thiBStack, thiLStack, parent: thiStack, [data.makeMailButton(2), data.makeVKButton(2)], [thiLabel, thiLabel2])
         thi.addSubview(data.makeNameLabel(thi, "Александр Минк"))
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Настройки"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backItem
     }
 }
