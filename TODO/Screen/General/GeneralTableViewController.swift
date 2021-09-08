@@ -77,10 +77,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             }
         })
         
-        if !dropsData.isFirstStart777 {
-            MockDataFactory.makeMockData(sections: MockDataFactory.mockDataSet)
-            UserDefaults.standard.set(true, forKey: "isFirstStart")
-        }
+//        if !dropsData.isFirstStart777 {
+//            MockDataFactory.makeMockData(sections: MockDataFactory.mockDataSet)
+//            UserDefaults.standard.set(true, forKey: "isFirstStart")
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -330,7 +330,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         mainBGHeightConstraint.constant = view.frame.width*1.8
         minorBGWidthConstraint.constant = view.frame.width*3.2
         minorBGHeightConstraint.constant = view.frame.width*1.8
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(checkMenu))
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(checkMenu)), UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(info))]
         view.backgroundColor = nil
         
     }
@@ -340,5 +340,10 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         let destinationVC = storyboard.instantiateViewController(identifier: "Menu") as! MenuViewController
         Main.instance.transitionSide = "left"
         router?.push(vc: destinationVC, animated: true)
+    }
+    
+    @objc func info() {
+        let destinationViewController = InfoViewController()
+        router?.present(vc: destinationViewController)
     }
 }
