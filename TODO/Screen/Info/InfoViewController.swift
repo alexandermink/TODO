@@ -16,6 +16,13 @@ class InfoViewController: UIViewController {
         view = infoView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let backItem = UIBarButtonItem()
+        backItem.title = "Настройки"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backItem
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         infoView.changeTheme()

@@ -48,6 +48,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var filteredSection: SectionTask = SectionTask()
     var isFilteredFavorite: Bool = false
     var isFilteredDone: Bool = false
+    var isFiltered: Bool {
+        return isFilteredDone || isFilteredFavorite
+    }
     let theme = Main.instance.themeService.getTheme()
     let dropsData = DropsData()
     
@@ -70,7 +73,25 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
+                
                 try? Main.instance.getTasksFromRealm()
+                if self.isFiltered {
+                    let sectionName = self.isFilteredDone ? "Завершенные" : "Избранные"
+                    self.filteredSection = SectionTask(sectionName: sectionName, tasks: [])
+                    for section in Main.instance.userSession.tasks {
+                        for task in section.sectionTasks {
+                            if self.isFilteredDone {
+                                if task.isDone {
+                                    self.filteredSection.addTaskInSection(task: task)
+                                }
+                            } else if self.isFilteredFavorite {
+                                if task.isFavorite {
+                                    self.filteredSection.addTaskInSection(task: task)
+                                }
+                            }
+                        }
+                    }
+                }
                 self.tableView.reloadData()
             case .initial(_): break
             case .error(_): break
@@ -183,7 +204,12 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+        var task = Task()
+        if isFiltered {
+            task = filteredSection.sectionTasks[indexPath.row]
+        } else {
+            task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+        }
         
         let imgMark = UIImage(systemName: "checkmark")
         let dropDone = Drop(title: task.isDone ? "Не выполнено" : "Выполнено", subtitle: task.name, icon: task.isDone ? nil : imgMark, position: .top)
@@ -196,8 +222,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             
             self.index = indexPath
             
-            let object = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
-            destinationViewController.task = object
+            destinationViewController.task = task
             
             return navigationController
         }) { actions -> UIMenu? in
@@ -236,8 +261,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let navigationController = UINavigationController()
             let destinationViewController = TaskDetailViewController()
             navigationController.presentationController?.delegate = destinationViewController
-            let object = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
-            destinationViewController.task = object
+            var task = Task()
+            if self.isFiltered {
+                task = self.filteredSection.sectionTasks[self.index.row]
+            } else {
+                task = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
+            }
+            destinationViewController.task = task
             navigationController.viewControllers.append(destinationViewController)
             self.router?.present(vc: navigationController)
         }
