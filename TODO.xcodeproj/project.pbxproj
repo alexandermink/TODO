@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1501E95826E8C62300E7E2BC /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501E95726E8C62300E7E2BC /* InfoViewController.swift */; };
+		1501E95A26E8C68B00E7E2BC /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501E95926E8C68B00E7E2BC /* InfoView.swift */; };
 		152DB631263AEDE900B8F1E0 /* CheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */; };
 		15469273260E4C44007D8238 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15469272260E4C44007D8238 /* BaseRouter.swift */; };
 		156CD74D266FA0EE00006856 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD74C266FA0EE00006856 /* TaskDetailView.swift */; };
@@ -76,6 +78,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1501E95726E8C62300E7E2BC /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		1501E95926E8C68B00E7E2BC /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		152DB630263AEDE900B8F1E0 /* CheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTableViewCell.swift; sourceTree = "<group>"; };
 		15469272260E4C44007D8238 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		156CD74C266FA0EE00006856 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
@@ -160,6 +164,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1501E95626E8C5EF00E7E2BC /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				1501E95726E8C62300E7E2BC /* InfoViewController.swift */,
+				1501E95926E8C68B00E7E2BC /* InfoView.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		156EBB0F2611D04700BDC565 /* TaskDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,9 +240,9 @@
 			children = (
 				5D43B51D26B70EF5007E7384 /* anim.json */,
 				5DBD9041261458DA00732A50 /* String+ext.swift */,
+				5D294214261EF64B001C1021 /* Shadow.swift */,
 				5D977703261D972C00F74E53 /* UIView+ext.swift */,
 				5D977707261D979200F74E53 /* UIColor.swift */,
-				5D294214261EF64B001C1021 /* Shadow.swift */,
 				5D294217261EF684001C1021 /* Rounding.swift */,
 				96A0028726C843D400240CA0 /* UITextField+ext.swift */,
 				5D5336D826D0ED6300C80C82 /* Device model+ext.swift */,
@@ -371,6 +384,7 @@
 		96600B67253D083D00F3FDC1 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				1501E95626E8C5EF00E7E2BC /* Info */,
 				5D0400C42653F88400ED26F8 /* Menu */,
 				9664687425A6963100443B81 /* NewTask */,
 				96600B68253D085B00F3FDC1 /* General */,
@@ -549,6 +563,7 @@
 				5DBEC00926D28F6700445550 /* WindowViewController.swift in Sources */,
 				9655293B253D86CF0013F834 /* Task.swift in Sources */,
 				5DBEC00526D28F3F00445550 /* UIView+Extensions.swift in Sources */,
+				1501E95A26E8C68B00E7E2BC /* InfoView.swift in Sources */,
 				5D977708261D979200F74E53 /* UIColor.swift in Sources */,
 				5D34CCAC2628025100FBA762 /* ParalaxEffect.swift in Sources */,
 				5DEB6F84264E7ED70012B820 /* TableRowsAnimation.swift in Sources */,
@@ -560,6 +575,7 @@
 				5D83C3B126C9845500108100 /* TestVC.swift in Sources */,
 				5D2B3BEB262FED08006BF979 /* HeaderView.swift in Sources */,
 				5D80F798265EA0E600B3A7E4 /* Settings.swift in Sources */,
+				1501E95826E8C62300E7E2BC /* InfoViewController.swift in Sources */,
 				96DEFDF126BB131100AAF0A6 /* MockData.swift in Sources */,
 				15469273260E4C44007D8238 /* BaseRouter.swift in Sources */,
 				5DFD1E7D26D2290D0027C6AF /* DropsData.swift in Sources */,

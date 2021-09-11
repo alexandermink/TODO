@@ -34,7 +34,9 @@ final class SettingsFactory {
         
 
         let data = SettingsCategory(name: "Данные", settingsFields: [
+            SettingsField(name: "Обучение", state: nil, picture: "info.circle", isDisclosure: true),
             SettingsField(name: "Очистить данные", state: nil, picture: "trash", isDisclosure: false)
+            
         ])
         
         return [interface, social, data]

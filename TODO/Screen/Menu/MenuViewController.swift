@@ -122,6 +122,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let destinationVC = storyboard.instantiateViewController(identifier: "Themes") as! ThemesViewController
         switch indexPath {
         case [0, 0]:
+            Main.instance.transitionSide = "right"
             router?.push(vc: destinationVC, animated: true)
         case [1, 0]:
             guard let url = URL(string: "https://vk.com/public206096643") else { return }
@@ -129,10 +130,16 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         case[1, 1]:
             let storyboard = UIStoryboard(name: "Developers", bundle: nil)
             let developerVC = storyboard.instantiateViewController(identifier: "TestVC") as! TestVC
+            Main.instance.transitionSide = "right"
             router?.push(vc: developerVC)
-        case [2, 0]:
+        case [2, 1]:
             print("кнопка очистить данные нажата")
             deleteAllData()
+        case [2, 0]:
+            print("кнопка tutorial данные нажата")
+            let infoVC = InfoViewController()
+            Main.instance.transitionSide = "right"
+            router?.push(vc: infoVC)
         default:
             break
         }

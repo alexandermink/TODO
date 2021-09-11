@@ -42,12 +42,15 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         return blurEffectView
     }()
     let anView = AnimationView()
-    var isAnimation: Bool = true
+    var isAnimationFirstStart: Bool = true
     var index: IndexPath = [0,0]
     
     var filteredSection: SectionTask = SectionTask()
     var isFilteredFavorite: Bool = false
     var isFilteredDone: Bool = false
+    var isFiltered: Bool {
+        return isFilteredDone || isFilteredFavorite
+    }
     let theme = Main.instance.themeService.getTheme()
     let dropsData = DropsData()
     
@@ -56,7 +59,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if isAnimation {
+        if isAnimationFirstStart {
             startAnimation()
             dropsData.makeGreatingDrop()
         }
@@ -70,15 +73,33 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
             case .update(_, deletions: _, insertions: _, modifications: _):
+                
                 try? Main.instance.getTasksFromRealm()
+                if self.isFiltered {
+                    let sectionName = self.isFilteredDone ? "Завершенные" : "Избранные"
+                    self.filteredSection = SectionTask(sectionName: sectionName, tasks: [])
+                    for section in Main.instance.userSession.tasks {
+                        for task in section.sectionTasks {
+                            if self.isFilteredDone {
+                                if task.isDone {
+                                    self.filteredSection.addTaskInSection(task: task)
+                                }
+                            } else if self.isFilteredFavorite {
+                                if task.isFavorite {
+                                    self.filteredSection.addTaskInSection(task: task)
+                                }
+                            }
+                        }
+                    }
+                }
                 self.tableView.reloadData()
             case .initial(_): break
             case .error(_): break
             }
         })
         
-        if !dropsData.isFirstStart777 {
-            MockDataFactory.makeMockData(sections: MockDataFactory.mockDataSet)
+        if !dropsData.isFirstStart {
+//            MockDataFactory.makeMockData(sections: MockDataFactory.mockDataSet)
             UserDefaults.standard.set(true, forKey: "isFirstStart")
         }
     }
@@ -88,7 +109,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.bounds.size.height = view.bounds.size.height
         changeTheme()
         self.tableView.reloadData()
-        if isAnimation {
+        if isAnimationFirstStart {
             TableRowsAnimation.animateTable(table: tableView)
         }
     }
@@ -114,8 +135,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         view.addSubview(blurEffectView)
         view.addSubview(anView)
         
-        navigationItem.leftBarButtonItem?.isEnabled = false
-        newTaskButton.isEnabled = false
+//        navigationItem.leftBarButtonItem?.isEnabled = false
+//        newTaskButton.isEnabled = false
         
         anView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width/2, height: view.frame.size.height/2)
         blurEffectView.frame = view.bounds
@@ -128,8 +149,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
             
             self.anView.removeFromSuperview()
-            self.navigationItem.leftBarButtonItem?.isEnabled = true
-            self.newTaskButton.isEnabled = true
+//            self.navigationItem.leftBarButtonItem?.isEnabled = true
+//            self.newTaskButton.isEnabled = true
             UIView.animate(withDuration: 0.5) {
                 self.blurEffectView.alpha = 0
             } completion: { finish in
@@ -183,7 +204,12 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        var task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+        var task = Task()
+        if isFiltered {
+            task = filteredSection.sectionTasks[indexPath.row]
+        } else {
+            task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+        }
         
         let imgMark = UIImage(systemName: "checkmark")
         let dropDone = Drop(title: task.isDone ? "Не выполнено" : "Выполнено", subtitle: task.name, icon: task.isDone ? nil : imgMark, position: .top)
@@ -196,8 +222,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             
             self.index = indexPath
             
-            let object = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
-            destinationViewController.task = object
+            destinationViewController.task = task
             
             return navigationController
         }) { actions -> UIMenu? in
@@ -236,8 +261,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             let navigationController = UINavigationController()
             let destinationViewController = TaskDetailViewController()
             navigationController.presentationController?.delegate = destinationViewController
-            let object = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
-            destinationViewController.task = object
+            var task = Task()
+            if self.isFiltered {
+                task = self.filteredSection.sectionTasks[self.index.row]
+            } else {
+                task = Main.instance.userSession.tasks[self.index.section].sectionTasks[self.index.row]
+            }
+            destinationViewController.task = task
             navigationController.viewControllers.append(destinationViewController)
             self.router?.present(vc: navigationController)
         }
@@ -268,6 +298,9 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
         navSeparatorView.backgroundColor = theme.interfaceColor
+        if Main.instance.themeService.getState() == .Vitaliy {
+            navSeparatorView.backgroundColor = theme.minorColor
+        }
         mainBGImageView.image = UIImage(imageLiteralResourceName: theme.mainBackgroundImageName)
         minorBGImageView.image = UIImage(imageLiteralResourceName: theme.minorBackgroundImageName)
         UIApplication.shared.windows.forEach { window in
@@ -327,12 +360,13 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         filterButton.menu = UIMenu(title: "Фильтры", children: [isFavorite, isDone, clearFilter])
         
         mainBGWidthConstraint.constant = view.frame.width*3.2
-        mainBGHeightConstraint.constant = view.frame.width*1.8
+//        mainBGHeightConstraint.constant = view.frame.width*1.8
+        mainBGHeightConstraint.constant = view.frame.width*2
+        
         minorBGWidthConstraint.constant = view.frame.width*3.2
         minorBGHeightConstraint.constant = view.frame.width*1.8
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(checkMenu))
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(checkMenu))]
         view.backgroundColor = nil
-        
     }
     
     @objc func checkMenu() {

@@ -60,7 +60,7 @@ class ThemesViewController: UIViewController {
         let navigationController = UINavigationController()
         let presentationGeneralViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GeneralTableViewController") as! GeneralTableViewController
         navigationController.viewControllers = [ presentationGeneralViewController ]
-        presentationGeneralViewController.isAnimation = false
+        presentationGeneralViewController.isAnimationFirstStart = false
         addChild(navigationController)
         containerView.addSubview(navigationController.view)
         

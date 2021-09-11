@@ -75,16 +75,18 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
     }
     
     //MARK: - ACTION SETUP
-    func updateData(){
+    func updateData() {
         taskDetailView.taskDateTextField.inputAccessoryView = makeToolBarNotificationsDetail()
         taskDetailView.taskNameTextView.text = (editedTask.name != "" ? editedTask.name : "Напишите название задачи")
         taskDetailView.taskCreationDateLabel.text = dateFormatter.string(from: editedTask.creationDate)
         taskDetailView.taskDateTextField.text = editedTask.notificationDate
-        taskDetailView.taskDescriptionTextView.text = (editedTask.taskDescription != "" ? editedTask.taskDescription : "Напишите описание задачи")
+        taskDetailView.taskDescriptionTextView.text = editedTask.taskDescription
         taskDetailView.addCheckButton.addTarget(self,
                                 action: #selector(checkTablePlusAction),
                                                 for: .touchUpInside)
         taskDetailView.checkListTableView.reloadData()
+        taskDetailView.isDoneImage.image = UIImage(named: task.isDone ? theme.isDoneImageName : "def")
+        taskDetailView.isFavoriteImage.image = UIImage(named: task.isFavorite ? theme.isFavouriteImageName : "def")
     }
     
     func navigationBarSetUp() {

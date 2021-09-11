@@ -18,6 +18,8 @@ class TaskDetailView: UIView, UITableViewDelegate {
     let scrollView = UIScrollView()
     let detailContentView = UIView()
     var taskNameTitleLabel = UILabel()
+    var isDoneImage = UIImageView()
+    var isFavoriteImage = UIImageView()
     let taskNameTextView = UITextView()
     var taskCreationDateTitleLabel = UILabel()
     var taskCreationDateLabel = UILabel()
@@ -75,6 +77,12 @@ class TaskDetailView: UIView, UITableViewDelegate {
         scrollView.addSubview(detailContentView)
         
         taskNameTitleLabel = labelFactory(lab: self.taskNameTitleLabel, text: "Название:", color: .systemGray)
+    
+        isDoneImage.translatesAutoresizingMaskIntoConstraints = false
+        detailContentView.addSubview(isDoneImage)
+        
+        isFavoriteImage.translatesAutoresizingMaskIntoConstraints = false
+        detailContentView.addSubview(isFavoriteImage)
         
         taskNameTextView.translatesAutoresizingMaskIntoConstraints = false
         taskNameTextView.backgroundColor = .quaternarySystemFill
@@ -135,7 +143,6 @@ class TaskDetailView: UIView, UITableViewDelegate {
         toolBarView.addSubview(toolBarStackView)
         
         addCheckElementTextField.translatesAutoresizingMaskIntoConstraints = false
-        addCheckElementTextField.attributedPlaceholder = .init(attributedString: NSAttributedString(string: "Добавить элемент", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemYellow]))
         addCheckElementTextField.text = ""
         addCheckElementTextField.textColor = .systemYellow
         addCheckElementTextField.font = UIFont(name: "HelveticaNeue", size: 15)
@@ -175,6 +182,16 @@ class TaskDetailView: UIView, UITableViewDelegate {
             
             taskNameTitleLabel.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 16),
             taskNameTitleLabel.leftAnchor.constraint(equalTo: detailContentView.leftAnchor, constant: 12),
+            
+            isDoneImage.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 16),
+            isDoneImage.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -12),
+            isDoneImage.widthAnchor.constraint(equalToConstant: 20),
+            isDoneImage.heightAnchor.constraint(equalToConstant: 20),
+            
+            isFavoriteImage.topAnchor.constraint(equalTo: detailContentView.topAnchor, constant: 16),
+            isFavoriteImage.rightAnchor.constraint(equalTo: detailContentView.rightAnchor, constant: -36),
+            isFavoriteImage.widthAnchor.constraint(equalToConstant: 20),
+            isFavoriteImage.heightAnchor.constraint(equalToConstant: 20),
             
             taskNameTextView.topAnchor.constraint(equalTo: taskNameTitleLabel.topAnchor, constant: 26),
             taskNameTextView.bottomAnchor.constraint(equalTo: taskCreationDateTitleLabel.topAnchor, constant: -14),
