@@ -11,17 +11,17 @@ import UIKit
 
 class DropsData {
     
-    let isFirstStart777 = UserDefaults.standard.bool(forKey: "isFirstStart")
+    let isFirstStart = UserDefaults.standard.bool(forKey: "isFirstStart")
     
     func makeGreatingDrop() {
-        if !isFirstStart777 {
+        if !isFirstStart {
             
 //            let tit = UILabel
             
-            let dropFirst = Drop(title: "Приветствуем!", subtitle: "Это ознакомительный режим.", icon: UIImage(systemName: "hand.raised"), action: .init(handler: {
+            let dropFirst = Drop(title: "Приветствуем!", subtitle: "Надеемся Вам понравиться пользоваться приложением Memo It!", icon: UIImage(systemName: "hand.raised"), action: .init(handler: {
                 Drops.hideCurrent()
             }), position: .top, duration: 3.0)
-            let dropSecond = Drop(title: "", subtitle: "Ниже представлены ячейки, объясняющие основной функционал. После ознакомления все презентационные данные можно удалить в настройках и приступить к полноценному использованию приложения.", action: .init(handler: {
+            let dropSecond = Drop(title: "", subtitle: "Ознакомиться с функционалом приложения можно в разделе 'Настройки', в меню 'Обучение'", action: .init(handler: {
                 Drops.hideCurrent()
             }), position: .top, duration: 16.0)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

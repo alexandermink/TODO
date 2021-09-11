@@ -240,9 +240,9 @@
 			children = (
 				5D43B51D26B70EF5007E7384 /* anim.json */,
 				5DBD9041261458DA00732A50 /* String+ext.swift */,
+				5D294214261EF64B001C1021 /* Shadow.swift */,
 				5D977703261D972C00F74E53 /* UIView+ext.swift */,
 				5D977707261D979200F74E53 /* UIColor.swift */,
-				5D294214261EF64B001C1021 /* Shadow.swift */,
 				5D294217261EF684001C1021 /* Rounding.swift */,
 				96A0028726C843D400240CA0 /* UITextField+ext.swift */,
 				5D5336D826D0ED6300C80C82 /* Device model+ext.swift */,
