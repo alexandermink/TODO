@@ -132,9 +132,14 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             let developerVC = storyboard.instantiateViewController(identifier: "TestVC") as! TestVC
             Main.instance.transitionSide = "right"
             router?.push(vc: developerVC)
-        case [2, 0]:
+        case [2, 1]:
             print("кнопка очистить данные нажата")
             deleteAllData()
+        case [2, 0]:
+            print("кнопка tutorial данные нажата")
+            let infoVC = InfoViewController()
+            Main.instance.transitionSide = "right"
+            router?.push(vc: infoVC)
         default:
             break
         }

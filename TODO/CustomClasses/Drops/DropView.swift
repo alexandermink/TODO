@@ -27,12 +27,7 @@ internal final class DropView: UIView {
     required init(drop: Drop) {
         self.drop = drop
         super.init(frame: .zero)
-
-        if #available(iOS 13.0, *) {
-            backgroundColor = .secondarySystemBackground
-        } else {
-            backgroundColor = .white
-        }
+        backgroundColor = .mainBackground
 
         addSubview(stackView)
 
@@ -141,12 +136,8 @@ internal final class DropView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.textAlignment = .center
-        if #available(iOS 13.0, *) {
-            label.textColor = .label
-        } else {
-            label.textColor = .black
-        }
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.textColor = .lightGray
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.adjustsFontForContentSizeCategory = true
         return label
     }()
@@ -156,11 +147,7 @@ internal final class DropView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .center
-        if #available(iOS 13.0, *) {
-            label.textColor = UIAccessibility.isDarkerSystemColorsEnabled ? .label : .secondaryLabel
-        } else {
-            label.textColor = UIAccessibility.isDarkerSystemColorsEnabled ? .black : .darkGray
-        }
+        label.textColor = .lightGray
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         label.adjustsFontForContentSizeCategory = true
         return label
@@ -171,11 +158,7 @@ internal final class DropView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
-        if #available(iOS 13.0, *) {
-            view.tintColor = UIAccessibility.isDarkerSystemColorsEnabled ? .label : .secondaryLabel
-        } else {
-            view.tintColor = UIAccessibility.isDarkerSystemColorsEnabled ? .black : .darkGray
-        }
+        view.tintColor = .lightGray
         return view
     }()
 

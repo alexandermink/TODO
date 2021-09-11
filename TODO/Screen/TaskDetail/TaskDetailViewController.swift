@@ -47,8 +47,6 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         updateData()
 
         navigationBarSetUp()
-        
-        print(task.isDone)
     }
 
     override func viewWillAppear(_ animated: Bool) {

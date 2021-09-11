@@ -65,17 +65,6 @@ class GeneralCellDataSource {
             cell.isFavoriteImage.image = UIImage(named: task.isFavorite ? theme.isFavouriteImageName : "def")
             cell.isDoneImage.image = UIImage(named: task.isDone ? theme.isDoneImageName : "def")
             
-            
-//            let favoriteImage = UIImage(systemName: task.isFavorite ? "star.fill" : "")
-//
-//            cell.isFavoriteImage.image = favoriteImage
-//            cell.isDoneImage.image = UIImage(systemName: task.isDone ? "bookmark.fill" : "")
-            
-            
-            
-            
-            
-            
             var progress: Float = 0
             if allMarkCount > 0  {
                 progress = markSelectedCount / allMarkCount
@@ -96,28 +85,29 @@ class GeneralCellDataSource {
     }
     
     func selectRow(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, router: BaseRouter) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             print("ячейка с кнопкой 'Добавить' нажата")
         } else {
-            tableView.deselectRow(at: indexPath, animated: true)
-            if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
-                print("ячейка с кнопкой 'Добавить' нажата")
+            let navigationController = UINavigationController()
+            let destinationViewController = TaskDetailViewController()
+            
+            navigationController.viewControllers.append(destinationViewController)
+            navigationController.presentationController?.delegate = destinationViewController
+            var task = Task()
+            if isFiltered {
+                task = filteredSection.sectionTasks[indexPath.row]
             } else {
-                let navigationController = UINavigationController()
-                let destinationViewController = TaskDetailViewController()
-                
-                navigationController.viewControllers.append(destinationViewController)
-                navigationController.presentationController?.delegate = destinationViewController
-                let object = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
-                destinationViewController.task = object
-                router.present(vc: navigationController)
+                task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
             }
+            destinationViewController.task = task
+            router.present(vc: navigationController)
         }
     }
     
     func isEditRow(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count{
+        if indexPath.row == Main.instance.userSession.tasks[indexPath.section].sectionTasks.count {
             return false
         } else {
             return true
@@ -126,8 +116,16 @@ class GeneralCellDataSource {
     
     func editingStyle(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
-            try? Main.instance.deleteTask(task: Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row])
+            var task = Task()
+            if isFiltered {
+                filteredSection.sectionTasks[indexPath.row].backgroundColor = .clear
+                task = filteredSection.sectionTasks[indexPath.row]
+                
+            } else {
+                Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row].backgroundColor = .clear
+                task = Main.instance.userSession.tasks[indexPath.section].sectionTasks[indexPath.row]
+            }
+            try? Main.instance.deleteTask(task: task)
         }
         tableView.reloadData()
     }
