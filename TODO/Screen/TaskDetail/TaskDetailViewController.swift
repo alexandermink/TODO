@@ -56,6 +56,7 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        emptyCheck()
         isModalInPresentation = hasChanges
         rightNavButton.isEnabled = hasChanges
     }
@@ -87,6 +88,14 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         taskDetailView.checkListTableView.reloadData()
         taskDetailView.isDoneImage.image = UIImage(named: task.isDone ? theme.isDoneImageName : "def")
         taskDetailView.isFavoriteImage.image = UIImage(named: task.isFavorite ? theme.isFavouriteImageName : "def")
+    }
+    
+    func emptyCheck() {
+        if taskDetailView.addCheckElementTextField.text == "" {
+            taskDetailView.addCheckButton.isEnabled = false
+        } else {
+            taskDetailView.addCheckButton.isEnabled = true
+        }
     }
     
     func navigationBarSetUp() {
