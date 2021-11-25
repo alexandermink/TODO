@@ -244,6 +244,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print("Нажата кнопка скрыть")
         checkListTableView.reloadData()
         checkTableTopConstraints.constant = 0
+        view.endEditing(true)
     }
     
     @IBAction func checkTableDoneAction(_ sender: Any) {
