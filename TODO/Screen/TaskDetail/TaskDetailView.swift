@@ -31,7 +31,7 @@ class TaskDetailView: UIView, UITableViewDelegate {
     var toolBarView: UIView!
     var toolBarStackView: UIStackView!
     let addCheckButton = UIButton(type: .system)
-    let addCheckElementTextField = UITextField()
+    var addCheckElementTextField = UITextField()
     let checkListTableView = UITableView()
     
     var notificationPicker = UIDatePicker()
