@@ -98,14 +98,6 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         }
     }
     
-    @objc func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text == "" {
-            taskDetailView.addCheckButton.isEnabled = false
-        } else {
-            taskDetailView.addCheckButton.isEnabled = true
-        }
-    }
-    
     func navigationBarSetUp() {
         navigationController!.navigationBar.barTintColor = theme.backgroundColor
         leftNavButton = UIBarButtonItem(title: "Закрыть", style: .plain, target: self, action: #selector(confirmCancel))
@@ -164,13 +156,19 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
     }
     
     @objc func checkTablePlusAction() {
-        let id = (editedTask.checkList.max()?.id ?? 0) + 1
-        print("plus id: ", id)
-        let checkMark = CheckMark(id: id, title: taskDetailView.addCheckElementTextField.text ?? "", isMarkSelected: false)
-        editedTask.checkList.append(checkMark)
-        taskDetailView.addCheckElementTextField.text = ""
-        taskDetailView.addCheckElementTextField.becomeFirstResponder()
-        taskDetailView.checkListTableView.reloadData()
+        
+        if taskDetailView.addCheckElementTextField.text == "" {
+            taskDetailView.addCheckButton.isEnabled = false
+        } else {
+            taskDetailView.addCheckButton.isEnabled = true
+            let id = (editedTask.checkList.max()?.id ?? 0) + 1
+            print("plus id: ", id)
+            let checkMark = CheckMark(id: id, title: taskDetailView.addCheckElementTextField.text ?? "", isMarkSelected: false)
+            editedTask.checkList.append(checkMark)
+            taskDetailView.addCheckElementTextField.text = ""
+            taskDetailView.addCheckElementTextField.becomeFirstResponder()
+            taskDetailView.checkListTableView.reloadData()
+        }
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
