@@ -98,6 +98,14 @@ class TaskDetailViewController: UIViewController, TaskDetailDelegate, UITextView
         }
     }
     
+    @objc func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text == "" {
+            taskDetailView.addCheckButton.isEnabled = false
+        } else {
+            taskDetailView.addCheckButton.isEnabled = true
+        }
+    }
+    
     func navigationBarSetUp() {
         navigationController!.navigationBar.barTintColor = theme.backgroundColor
         leftNavButton = UIBarButtonItem(title: "Закрыть", style: .plain, target: self, action: #selector(confirmCancel))
