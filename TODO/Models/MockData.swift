@@ -21,9 +21,9 @@ class MockDataFactory {
         
         SectionTask(sectionName: "2. Новая задача", tasks: [
             Task(id: 3, name: "Создание новой задачи", backgroundColor: .clear, taskDescription: "Нажмите на кнопку '+' справа вверху экрана для перехода в раздел", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0, isFavorite: false, isDone: false),
-            Task(id: 4, name: "Работа с секциями", backgroundColor: .clear, taskDescription: "В разделе 'Секция' можно задать новый раздел, который будет группировать Ваши задачи. Просто нажмите на икоку клавиатуры. В дальнейшем, Вы сможете выбирать секции из уже имеющихся, а также удалять их.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0, isFavorite: false, isDone: false),
+            Task(id: 4, name: "Работа с секциями", backgroundColor: .clear, taskDescription: "В разделе 'Секция' можно задать новый раздел, который будет группировать Ваши задачи. Просто нажмите на иконку клавиатуры. В дальнейшем, Вы сможете выбирать секции из уже имеющихся, а также удалять их.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0, isFavorite: false, isDone: false),
             Task(id: 5, name: "Остальное", backgroundColor: .clear, taskDescription: "Вы можете задать название, описание вашей задачи, задать цвет фона и настроить дату и время напоминания", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 0, isFavorite: false, isDone: false),
-            Task(id: 6, name: "Чеклист", backgroundColor: .clear, taskDescription: "Здесь можно добавить список, характеризующий этапы выполнения задачи, помечать пункы как выполненные. Прогресс выполнения будет отображаться на главном экране, путём заполнения цветной линии под каждой задачей.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [
+            Task(id: 6, name: "Чеклист", backgroundColor: .clear, taskDescription: "Здесь можно добавить список, характеризующий этапы выполнения задачи, помечать пункты, как выполненные. Прогресс выполнения будет отображаться на главном экране, путём заполнения цветной линии под каждой задачей.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [
                 CheckMark(id: 1, title: "Первый элемент", isMarkSelected: true),
                 CheckMark(id: 2, title: "Второй элемент", isMarkSelected: true),
                 CheckMark(id: 3, title: "Третий элемент", isMarkSelected: false),
@@ -35,7 +35,7 @@ class MockDataFactory {
         
         
         SectionTask(sectionName: "3. Изменение задач", tasks: [
-            Task(id: 7, name: "Изменение данных", backgroundColor: .clear, taskDescription: "Вы можете редактировать название и описание задачи, задавать новую дату уведомления нажав на соответствующие разделы.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 1, isFavorite: false, isDone: false),
+            Task(id: 7, name: "Изменение данных", backgroundColor: .clear, taskDescription: "Вы можете редактировать название и описание задачи, задавать новую дату уведомления, нажав на соответствующие разделы.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [], markSelectedCount: 1, isFavorite: false, isDone: false),
             Task(id: 8, name: "Чек лист", backgroundColor: .clear, taskDescription: "Вы можете добавлять элементы чек листа нажав на 'Добавить элемент'. Нажав на галочку вы меняете статус выполнения подзадачи.", creationDate: Date(), notificationDate: "", notificationID: "", checkList: [CheckMark(id: 1, title: "Ваша выполненная задача", isMarkSelected: true), CheckMark(id: 2, title: "Задача, которую предстоит выполнить", isMarkSelected: false)], markSelectedCount: 1, isFavorite: false, isDone: false)
         ]),
         
