@@ -95,8 +95,8 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
-        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
+        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 30)
+        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -30)
         mainBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 + 300)
         minorBGLeadingConstraint.constant = -(view.frame.size.width * 1.4 + 300)
         changeTheme()
@@ -338,7 +338,7 @@ class NewTaskViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         blurView.layer.borderColor = UIColor.darkGray.cgColor
         
         mainBGWidthConstraint.constant = view.frame.width*3.2
-        mainBGHeightConstraint.constant = view.frame.width*1.8
+        mainBGHeightConstraint.constant = view.frame.width*2.2
         minorBGWidthConstraint.constant = view.frame.width*3.2
         minorBGHeightConstraint.constant = view.frame.width*1.8
 
