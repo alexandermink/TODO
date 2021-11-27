@@ -50,6 +50,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     var isFilteredDone: Bool = false
     let theme = Main.instance.themeService.getTheme()
     let dropsData = DropsData()
+    let vnavBGView = UIView()
     
     
     //MARK: - LIFE CYCLE
@@ -64,8 +65,8 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         router = BaseRouter(viewController: self)
         setViewScreen()
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "someHeaderViewIdentifier")
-        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 50)
-        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -50)
+        ParalaxEffect.paralaxEffect(view: mainBGImageView, magnitude: 30)
+        ParalaxEffect.paralaxEffect(view: minorBGImageView, magnitude: -30)
         try? Main.instance.getTasksFromRealm()
         self.realmTokenSections = realm.objects(SectionTaskRealm.self).observe({ (result) in
             switch result {
@@ -85,6 +86,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.addSubview(vnavBGView)
         tableView.bounds.size.height = view.bounds.size.height
         changeTheme()
         self.tableView.reloadData()
@@ -254,10 +256,23 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: - CHANGE STATE SETTINGS
     
+    fileprivate func makeNavBGView(_ color: UIColor) {
+        //        v.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 108)
+        vnavBGView.backgroundColor = color
+        NSLayoutConstraint.activate([
+            vnavBGView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -view.frame.size.width*4),
+            vnavBGView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: view.frame.size.width*4),
+            vnavBGView.heightAnchor.constraint(equalToConstant: 120),
+            vnavBGView.bottomAnchor.constraint(equalTo: navSeparatorView.topAnchor, constant: 0)
+        ])
+        vnavBGView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     func changeTheme() {
         let theme = Main.instance.themeService.getTheme()
         navigationController?.navigationBar.barTintColor = theme.backgroundColor
         navigationController?.navigationBar.tintColor = theme.interfaceColor
+        makeNavBGView(theme.backgroundColor)
         newTaskButton.setTitleTextAttributes(
             [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 18),
              NSAttributedString.Key.foregroundColor: theme.interfaceColor], for: .normal)
@@ -330,8 +345,7 @@ class GeneralTableViewController: UIViewController, UITableViewDelegate, UITable
         filterButton.menu = UIMenu(title: "Фильтры", children: [isFavorite, isDone, clearFilter])
         
         mainBGWidthConstraint.constant = view.frame.width*3.2
-//        mainBGHeightConstraint.constant = view.frame.width*1.8
-        mainBGHeightConstraint.constant = view.frame.width*2
+        mainBGHeightConstraint.constant = view.frame.width*2.2
         
         minorBGWidthConstraint.constant = view.frame.width*3.2
         minorBGHeightConstraint.constant = view.frame.width*1.8
